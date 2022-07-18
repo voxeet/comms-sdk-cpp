@@ -1,0 +1,46 @@
+.. _api_device_management:
+
+Device Management Service
+==========================
+
+.. note::
+  The Device Management Service is intended for Client Applications.
+
+Once the SDK is instantiated, applications have access to the device management service. Currently, this allows managing audio input and output devices. This service provides the ability to:
+
+ - Get the available audio devices
+ - Set the preferred input and output devices
+ - Check the currently set input and output device
+ - Receive events about audio devices that have been added, removed, or changed
+
+.. _devman_serv:
+
+Device Management Interface
+----------------------------
+#include <comms/device_management.h>
+
+.. doxygenclass:: dolbyio::comms::services::device_management
+
+Device Events
+-------------
+The :ref:`api_device_management` events that are emitted by the SDK. They can be subscribed to using the
+:cpp:func:`device_management::add_event_handler <dolbyio::comms::services::device_management::add_event_handler>` methods. 
+
+.. doxygenstruct:: dolbyio::comms::device_added
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::device_removed
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::device_changed
+        :project: C++ SDK
+
+
+.. _devman_models:
+
+Device Structs
+---------------
+Other structures used by the :ref:`api_device_management` that are not defined in the :ref:`devman_serv` interface.
+
+.. doxygenclass:: dolbyio::comms::dvc_device
+        :project: C++ SDK

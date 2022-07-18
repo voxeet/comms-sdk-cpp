@@ -1,0 +1,22 @@
+.. _api_media_recording:
+
+Media Recording API
+___________________
+
+.. note::
+   The Media Recording feature of the C++ SDK is intended for Server applications.
+
+The Media Recording API provides interfaces for writing modules that allow recording audio and video. These modules are responsible for passing frames from incoming WebRTC Media Streams and handling, processing, and storing the media data. The C++ SDK provides a default recording module. However, using the Media Recording API, users can create and connect their own audio/video recording module to handle, process, and store streams from conferences. The API for recording media streams uses a pattern of setting listener objects, which are C++ classes with pure virtual functions. The virtual functions are exposed through sink interfaces for each of the type of media, which is provided by the Media Engine. The video data is received as :ref:`Raw <api_record_raw>` YUV frames or in the :ref:`Encoded <api_record_encoded>` format. The :ref:`audio <api_record_audio>` data is received in the decoded format. Listeners set by the application are called whenever data is available; these methods are called on the dedicated WebRTC threads that produced the data.
+
+.. toctree::
+  :maxdepth: 2
+  :titlesonly:
+  :glob:
+
+  recording/media_sink_interface.rst
+  recording/audio.rst
+  recording/encoded_video.rst
+  recording/raw_video.rst
+  recording/events.rst
+  recording/example.rst
+

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Handling Interface &mdash; C++ SDK 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Media Recording API" href="../../media_recording.html" />
+    <link rel="prev" title="SDK Exceptions" href="exception.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sdk.html">Sdk Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session.html">Session Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device_management.html">Device Management Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recorder.html">Default Media Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../injector.html">Default Media Injector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="async_ops.html">Asynchronous Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_level.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exception.html">SDK Exceptions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Event Handling Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../media_recording.html">Media Recording API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../coresdk.html">CoreSDK API</a> &raquo;</li>
+      <li>Event Handling Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/api/sdk/common/event_handling.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="event-handling-interface">
+<span id="api-event-handling"></span><h1>Event Handling Interface<a class="headerlink" href="#event-handling-interface" title="Permalink to this heading"></a></h1>
+<p>#include &lt;comms/event_handling.h&gt;</p>
+<p>The event handler connection interface is used for handling subscriptions to events which can be emitted by the SDK. The user will utilize either
+<a class="reference internal" href="../sdk.html#_CPPv4N7dolbyio5comms3sdk17add_event_handlerERR13event_handlerI27signaling_channel_exceptionE" title="dolbyio::comms::sdk::add_event_handler"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::add_event_handler</span></code></a> or <a class="reference internal" href="../conference.html#_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI25conference_status_updatedE" title="dolbyio::comms::services::conference::add_event_handler"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::add_event_handler</span></code></a> to subscribe to an events.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>In order to subscribe to an event the user will provide a callback of type <a class="reference internal" href="#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">event_handler</span></code></a> to be invoked by the SDK when th event occurrs.</p></li>
+<li><p>The user will receive a <a class="reference internal" href="#_CPPv4N7dolbyio5comms24event_handler_connectionE" title="dolbyio::comms::event_handler_connection"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">event_handler_connection</span></code></a> for each event they subscribe to. This connection is to be used to disconnect a event listener.</p></li>
+<li><p>When subscription is finished the user will be returned an <a class="reference internal" href="#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">event_handler_id</span></code></a> which is a unique pointer to an <a class="reference internal" href="#_CPPv4N7dolbyio5comms24event_handler_connectionE" title="dolbyio::comms::event_handler_connection"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">event_handler_connection</span></code></a>.</p></li>
+</ul>
+</div></blockquote>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13event_handlerE">
+<span id="_CPPv3N7dolbyio5comms13event_handlerE"></span><span id="_CPPv2N7dolbyio5comms13event_handlerE"></span><span class="target" id="group__event__handling_1ga1a2a7afce69ea478b2f9a46f7bdf0330"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">event_handler</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">EventType</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13event_handlerE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The function object that handles subscribing to events and returns a void operator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>EventType</strong> – The selected event. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16event_handler_idE">
+<span id="_CPPv3N7dolbyio5comms16event_handler_idE"></span><span id="_CPPv2N7dolbyio5comms16event_handler_idE"></span><span class="target" id="group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">event_handler_id</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms24event_handler_connectionE" title="dolbyio::comms::event_handler_connection"><span class="n"><span class="pre">event_handler_connection</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16event_handler_idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Defines a type of the unique pointer to <a class="reference internal" href="#classdolbyio_1_1comms_1_1event__handler__connection"><span class="std std-ref">dolbyio::comms::event_handler_connection</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms24event_handler_connectionE">
+<span id="_CPPv3N7dolbyio5comms24event_handler_connectionE"></span><span id="_CPPv2N7dolbyio5comms24event_handler_connectionE"></span><span id="dolbyio::comms::event_handler_connection"></span><span class="target" id="classdolbyio_1_1comms_1_1event__handler__connection"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">event_handler_connection</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms24event_handler_connectionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface that exposes a connection to the handler. The interface is created for each subscribed event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms24event_handler_connectionD0Ev">
+<span id="_CPPv3N7dolbyio5comms24event_handler_connectionD0Ev"></span><span id="_CPPv2N7dolbyio5comms24event_handler_connectionD0Ev"></span><span id="dolbyio::comms::event_handler_connection::~event_handler_connection"></span><span class="target" id="classdolbyio_1_1comms_1_1event__handler__connection_1af746fc05317d6ee2f7990f6cf98b7927"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~event_handler_connection</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms24event_handler_connectionD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The destructor of the handler connection that does not disconnect the handler. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms24event_handler_connection10disconnectEv">
+<span id="_CPPv3N7dolbyio5comms24event_handler_connection10disconnectEv"></span><span id="_CPPv2N7dolbyio5comms24event_handler_connection10disconnectEv"></span><span id="dolbyio::comms::event_handler_connection::disconnect"></span><span class="target" id="classdolbyio_1_1comms_1_1event__handler__connection_1addfcbe2f78c555a1dede35be751e73cf"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disconnect</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms24event_handler_connection10disconnectEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disconnects a handler to unsubscribe from the subscribed event. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait for the operation to complete</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">handler</span><span class="o">-&gt;</span><span class="n">disconnect</span><span class="p">());</span><span class="w"></span>
+
+<span class="c1">// Continue in the `then` call</span>
+<span class="n">handler</span><span class="o">-&gt;</span><span class="n">disconnect</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// the handler is disconnected</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// handle the disconnect error</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ <dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This function is asynchronous and the operation is executed on the event loop of the SDK. You can either block the calling thread until the operation completes or chain consecutive operations that depend on the completion of this method using the <a class="reference internal" href="async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> call. The async_result chain operations need to be terminated with an <a class="reference internal" href="async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing the operation status asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exception.html" class="btn btn-neutral float-left" title="SDK Exceptions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../media_recording.html" class="btn btn-neutral float-right" title="Media Recording API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

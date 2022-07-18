@@ -1,0 +1,32 @@
+.. _injection_example:
+
+Example Injector Implementation
+===============================
+Below are the header and cpp files for a Media Injector Implementation. In order for this injector to be used by the C++ SDK, it must be passed to the conference service
+using the :cpp:func:`dolbyio::comms::services::conference::set_media_source` method. Now when a conference is joined and audio/video is started, this injector is part of the media injection
+pipeline.
+
+The interfaces inherited by this custom_injector example must be implemented by any custom injector intended to inject video and audio frames to a conference.
+
+If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the :ref:`getting_started_server` section with the sample below.
+The paths in this CMakeLists.txt are assuming that the file is located in the same place as in the Writing Application portion of the Getting Started.
+
+custom_injector.h
+_________________
+.. literalinclude:: ../../../src/public/comms/sample/custom_injector/custom_injector.h
+  :language: c++
+
+custom_injector.cc
+__________________
+.. literalinclude:: ../../../src/public/comms/sample/custom_injector/custom_injector.cc
+  :language: c++
+
+main.cc
+_______
+.. literalinclude:: ../../../src/public/comms/sample/custom_injector/main.cc
+  :language: c++
+
+Injector CMakeLists.txt
+_______________________
+.. literalinclude:: ../../../src/public/comms/sample/custom_injector/CMakeLists.txt
+  :language: console

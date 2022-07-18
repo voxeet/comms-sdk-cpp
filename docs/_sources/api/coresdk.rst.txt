@@ -1,0 +1,32 @@
+ .. _coresdk_api:
+
+CoreSDK API
+___________
+The main part of the Dolby.io Communications C++ SDK is the Core SDK that is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as
+creating sessions, joining conferences, receiving Websocket events, sending/receiving messages, receiving WebRTC media streams, managing audio devices and leaving conferences.
+The SDK also provides the ability to configure the default Audio/Video recorder to handle and store the incoming media streams in desired formats.
+The SDK provides the ability to create a default Audio/Video injector to which the application can provide raw media frames that will
+then be injected into the conference. The SDK also provides the ability to set spatial locations of participants' audio and participate in a shared spatial scene within a conference.
+The :ref:`api_sdk`, :ref:`api_session`, :ref:`api_conference`, :ref:`api_device_management`, :ref:`api_recorder`, :ref:`default_injector` sections are the core of the user interface to the CoreSDK.
+
+.. toctree::
+  :maxdepth: 2
+  :titlesonly:
+  :glob:
+
+  sdk/sdk.rst
+  sdk/session.rst
+  sdk/conference.rst
+  sdk/device_management.rst
+  sdk/recorder.rst
+  sdk/injector.rst
+  sdk/common/async_ops.rst
+  sdk/common/log_level.rst
+  sdk/common/exception.rst
+  sdk/common/event_handling.rst
+
+.. note::
+   The Core SDK API provides methods that are asynchronous in nature and return :ref:`async_result <api_async_result>`. This means that if
+   the result or the completion of operation is necessary for subsequent calls, you have to be careful. For more details, read the notes from the :cpp:class:`sdk <dolbyio::comms::sdk>`,
+   :cpp:class:`conference <dolbyio::comms::services::conference>`, :cpp:class:`session <dolbyio::comms::services::device_management>` or :cpp:class:`session <dolbyio::comms::services::session>` interfaces and refer
+   to the examples of each documented asynchronous method. 

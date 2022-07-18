@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio Source Interface &mdash; C++ SDK 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Video Source Interface" href="video.html" />
+    <link rel="prev" title="Media Source Interface" href="media_source_interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_injection.html">Media Injection API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="media_source_interface.html">Media Source Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Audio Source Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video.html">Video Source Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html">Example Injector Implementation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../media_injection.html">Media Injection API</a> &raquo;</li>
+      <li>Audio Source Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/injection/audio.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="audio-source-interface">
+<span id="api-inject-audio"></span><h1>Audio Source Interface<a class="headerlink" href="#audio-source-interface" title="Permalink to this heading"></a></h1>
+<p>#include &lt;comms/media/media_engine.h&gt;</p>
+<p>The interface through which raw audio frames are provided to the CoreSDK. This audio source must provide signed 16 bit PCM data in 10ms chunks at 10ms intervals. Application writers who want to
+implement this source must override the two virtual functions of <a class="reference internal" href="#_CPPv4N7dolbyio5comms12audio_source31register_audio_frame_rtc_sourceEP16rtc_audio_source" title="dolbyio::comms::audio_source::register_audio_frame_rtc_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">registering</span></code></a> and
+cpp:func:<cite>deregistering &lt;dolbyio::comms::audio_source::deregister_audio_frame_rtc_source&gt;</cite> the RTC Audio Source on the Injector. Attaching the RTC Audio source to the injector establishes the audio
+pipeline so that frames can be passed to the CoreSDK.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12audio_sourceE">
+<span id="_CPPv3N7dolbyio5comms12audio_sourceE"></span><span id="_CPPv2N7dolbyio5comms12audio_sourceE"></span><span id="dolbyio::comms::audio_source"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12audio_sourceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface for providing audio frames. </p>
+<p>This interface must be implemented by the injector, it shall serve as the source of audio frames passed to the <a class="reference internal" href="#classdolbyio_1_1comms_1_1rtc__audio__source"><span class="std std-ref">rtc_audio_source</span></a>. </p>
+<p>Subclassed by dolbyio::comms::plugin::injector</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12audio_source31register_audio_frame_rtc_sourceEP16rtc_audio_source">
+<span id="_CPPv3N7dolbyio5comms12audio_source31register_audio_frame_rtc_sourceEP16rtc_audio_source"></span><span id="_CPPv2N7dolbyio5comms12audio_source31register_audio_frame_rtc_sourceEP16rtc_audio_source"></span><span id="dolbyio::comms::audio_source::register_audio_frame_rtc_source__rtc_audio_sourceP"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__source_1aa38d04cb6a32ff78c7a0eded3232a656"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">register_audio_frame_rtc_source</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16rtc_audio_sourceE" title="dolbyio::comms::rtc_audio_source"><span class="n"><span class="pre">rtc_audio_source</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">source</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12audio_source31register_audio_frame_rtc_sourceEP16rtc_audio_source" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connects the RTC Audio Source to the audio source, in essence creating the audio injection pipeline. This method will be called by the media_engine when an Audio Track is attached to the active Peer Connection. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>source</strong> – The RTC Audio Source which will receive the injected audio frames. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12audio_source33deregister_audio_frame_rtc_sourceEv">
+<span id="_CPPv3N7dolbyio5comms12audio_source33deregister_audio_frame_rtc_sourceEv"></span><span id="_CPPv2N7dolbyio5comms12audio_source33deregister_audio_frame_rtc_sourceEv"></span><span id="dolbyio::comms::audio_source::deregister_audio_frame_rtc_source"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__source_1a32f3410fe9ed562bb55d29ccd5177684"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deregister_audio_frame_rtc_source</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12audio_source33deregister_audio_frame_rtc_sourceEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disconnects the RTC Audio Source from the Audio Source, in essence destructing the audio pipeline. This method is called by the media_engine whenever an Audio Track is to be detached from the active Peer Connection. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<p>The <a class="reference internal" href="#_CPPv4N7dolbyio5comms16rtc_audio_sourceE" title="dolbyio::comms::rtc_audio_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">RTC</span> <span class="pre">Audio</span> <span class="pre">Source</span></code></a> is NOT to be implemented by the application. This is the interface through which the injector can view its own Audio Sink. After
+receiving audio frames from some media source, the injector provides the raw audio frames to this RTC Audio Source. The provided audio is expected to be in 10ms chunks provided every 10ms.
+The RTC Audio Source then pushes the audio data further down the audio pipeline until it is injected into the conference. The RTC Audio Source expects <a class="reference internal" href="#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span> <span class="pre">frames</span></code></a>.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16rtc_audio_sourceE">
+<span id="_CPPv3N7dolbyio5comms16rtc_audio_sourceE"></span><span id="_CPPv2N7dolbyio5comms16rtc_audio_sourceE"></span><span id="dolbyio::comms::rtc_audio_source"></span><span class="target" id="classdolbyio_1_1comms_1_1rtc__audio__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">rtc_audio_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16rtc_audio_sourceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The adapter which is used for providing Audio frames into WebRTC. This interface is an Audio Sink from the perspective of the Injector. It is an Audio Source from the perspective of WebRTC Audio Tracks, thus it provides this connection in establishing the audio injection pipeline. </p>
+<p>This interface is NOT implemented by the injector, it is used to be the injector to provide audio frames. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t">
+<span id="_CPPv3N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t"></span><span id="_CPPv2N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t"></span><span id="dolbyio::comms::rtc_audio_source::on_data__voidCP.i.i.s.s"></span><span class="target" id="classdolbyio_1_1comms_1_1rtc__audio__source_1a985911b792b19676856af020262c9e22"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_data</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">audio_data</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bits_per_sample</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sample_rate</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">number_of_channels</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">number_of_frames</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The callback that is invoked when 10ms of audio data is ready to be passed to webrtc. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>audio_data</strong> – The pointer to the PCM data </p></li>
+<li><p><strong>bits_per_sample</strong> – Bits per sample. </p></li>
+<li><p><strong>sample_rate</strong> – The sample rate of the audio. </p></li>
+<li><p><strong>number_of_channels</strong> – The number of channels. </p></li>
+<li><p><strong>number_of_frames</strong> – The total number of samples (channels * sample_rate/100) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11audio_frameE">
+<span id="_CPPv3N7dolbyio5comms11audio_frameE"></span><span id="_CPPv2N7dolbyio5comms11audio_frameE"></span><span id="dolbyio::comms::audio_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_frame</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11audio_frameE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Interface that wraps decoded audio frames to be injected into WebRTC. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11audio_frameD0Ev">
+<span id="_CPPv3N7dolbyio5comms11audio_frameD0Ev"></span><span id="_CPPv2N7dolbyio5comms11audio_frameD0Ev"></span><span id="dolbyio::comms::audio_frame::~audio_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame_1a92b35b86c74b37ab25f18f8ea110bd54"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~audio_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11audio_frameD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11audio_frame4dataEv">
+<span id="_CPPv3NK7dolbyio5comms11audio_frame4dataEv"></span><span id="_CPPv2NK7dolbyio5comms11audio_frame4dataEv"></span><span id="dolbyio::comms::audio_frame::dataC"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame_1af14342f34423ebc8cbcda9bc178f0236"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11audio_frame4dataEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the underlying s16 raw PCM audio data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pointer to data. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11audio_frame11sample_rateEv">
+<span id="_CPPv3NK7dolbyio5comms11audio_frame11sample_rateEv"></span><span id="_CPPv2NK7dolbyio5comms11audio_frame11sample_rateEv"></span><span id="dolbyio::comms::audio_frame::sample_rateC"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame_1a3a8ef6d6e2408f8e141fc8f59612482b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sample_rate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11audio_frame11sample_rateEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the sample rate of the audio frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sample rate. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11audio_frame8channelsEv">
+<span id="_CPPv3NK7dolbyio5comms11audio_frame8channelsEv"></span><span id="_CPPv2NK7dolbyio5comms11audio_frame8channelsEv"></span><span id="dolbyio::comms::audio_frame::channelsC"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame_1a0b533e4b5776a1a2c19716533d7e56a8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">channels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11audio_frame8channelsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the number of channels in the audio frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Channels. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11audio_frame7samplesEv">
+<span id="_CPPv3NK7dolbyio5comms11audio_frame7samplesEv"></span><span id="_CPPv2NK7dolbyio5comms11audio_frame7samplesEv"></span><span id="dolbyio::comms::audio_frame::samplesC"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame_1aa4140956b8bb4ae870d20252438c0102"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">samples</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11audio_frame7samplesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the number of sample in the audio frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Samples. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<p>See <a class="reference internal" href="example.html#injection-example"><span class="std std-ref">Example Injector Implementation</span></a> for an example of child injection class for all possible media.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="media_source_interface.html" class="btn btn-neutral float-left" title="Media Source Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="video.html" class="btn btn-neutral float-right" title="Video Source Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

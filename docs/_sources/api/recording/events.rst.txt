@@ -1,0 +1,7 @@
+.. _recording_events:
+
+Media Recording Events
+======================
+The events which are of interest to record media can all be accessed and subscribed through the :ref:`api_conference`. These :ref:`conf_events` contain information about participants joining and leaving the conference as well as audio and video track events emitted by Webrtc necessary to configure the recording pipelines. These events
+will indicate when video or audio tracks have been added or removed from the peer connection and from which peers streams are coming via the same.
+The Media Recording Module should set handlers for all of these events via the :cpp:func:`dolbyio::comms::services::conference::add_event_handler` methods.

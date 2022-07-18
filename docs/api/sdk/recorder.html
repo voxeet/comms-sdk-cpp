@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Default Media Recorder &mdash; C++ SDK 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Default Media Injector" href="injector.html" />
+    <link rel="prev" title="Device Management Service" href="device_management.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk.html">Sdk Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="session.html">Session Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Default Media Recorder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-recorder-interface">Default Recorder Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/event_handling.html">Event Handling Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+      <li>Default Media Recorder</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/sdk/recorder.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="default-media-recorder">
+<span id="api-recorder"></span><h1>Default Media Recorder<a class="headerlink" href="#default-media-recorder" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Default Media Recorder is intended for Server applications.</p>
+</div>
+<p>The default recorder handles the incoming media streams and stores the streams in proper containers. The following table lists containers used for respective codecs:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Codec</p></th>
+<th class="head"><p>Container</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>H264</p></td>
+<td><p>MPEG-TS</p></td>
+</tr>
+<tr class="row-odd"><td><p>VP8</p></td>
+<td><p>Matroska</p></td>
+</tr>
+<tr class="row-even"><td><p>YUV</p></td>
+<td><p>Matroska</p></td>
+</tr>
+<tr class="row-odd"><td><p>PCM</p></td>
+<td><p>Matroska</p></td>
+</tr>
+<tr class="row-even"><td><p>AAC</p></td>
+<td><p>Matroska</p></td>
+</tr>
+</tbody>
+</table>
+<p>The recorded files are placed in a directory specified when the default recorder is created. The files are stored with the respective container extension:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>vid_X.mkv</p></li>
+<li><p>vid_X.mpegts</p></li>
+<li><p>audio_X.mkv</p></li>
+</ul>
+</div></blockquote>
+<p>Where X corresponds to a incrementing integer ID for the video/audio file. Information which file represents which streamer is available in the metadata.txt file in the same folder. When a new file is created, the video_first_data event occurs which contains the file name and
+the video track ID for the video in the file. This meta data file contains the processed scpp events and media pipeline events. The types of events logged and
+the structure of the corresponding lines for the events in the metadata.txt file are as follows:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p>Log Event</p></th>
+<th class="head"><p>Output File Line</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="2"><p>Audio Track Added</p></td>
+<td><p>&lt;timestamp&gt; +audio &lt;peer_id&gt; &lt;stream_id&gt; &lt;track_id&gt;</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Audio Track First Data</p></td>
+<td><p>&lt;timestamp&gt; track_first_data &lt;track_id&gt; &lt;file_name&gt;</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>Audio Track Removed</p></td>
+<td><p>&lt;timestamp&gt; -audio &lt;track_id&gt;</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Conference Ended</p></td>
+<td><p>&lt;timestamp&gt; conference_ended</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>Participant Added</p></td>
+<td><p>&lt;timestamp&gt; +peer &lt;peer_id&gt; &lt;peer_name&gt;</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Participant Removed</p></td>
+<td><p>&lt;timestamp&gt; -peer &lt;peer_id&gt;</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>Video Track Added</p></td>
+<td><p>&lt;timestamp&gt; +video &lt;peer_id&gt; &lt;stream_id&gt; &lt;track_id&gt; &lt;is_screenshare&gt;</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Video Track Removed</p></td>
+<td><p>&lt;timestamp&gt; -video &lt;stream_id&gt;</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>Video Track First Data</p></td>
+<td><p>&lt;timestamp&gt; track_first_data &lt;track_id&gt; &lt;file_name&gt;</p></td>
+</tr>
+</tbody>
+</table>
+<p>WebRTC may change the format in which RAW audio is presented to the audio track sinks. This may have severe impact on the raw (PCM) and transcoded (AAC) capture; when this situation occurs, a new file is created. The encoded video resolution change can be seamlessly muxed into the stream, but the raw (YUV) video resolution change can not. Therefore, selecting the YUV output causes the video frame size reconfigurations to open new files. In the case of encoded video capture, we could generate the file name for the stream at the time the stream is first discovered (the +video event), but for consistency the file name is also generated on the track first data event.</p>
+<section id="default-recorder-interface">
+<span id="recorder"></span><h2>Default Recorder Interface<a class="headerlink" href="#default-recorder-interface" title="Permalink to this heading"></a></h2>
+<p>#include &lt;comms/multimedia_streaming/recorder.h&gt;</p>
+<p>The Recorder interface is used for configuring the default recorder. The methods in the recorder interface are used to create and configure the recording module. This
+creates and configures the recording module that is provided as a part of the C++ SDK. The enums of the interface are used for setting the Video/Audio storage formats of the media. If you want to build your own recorder module, do not use this API.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorderE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorderE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorderE"></span><span id="dolbyio::comms::plugin::recorder"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">plugin</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">recorder</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../recording/media_sink_interface.html#_CPPv4N7dolbyio5comms20media_sink_interfaceE" title="dolbyio::comms::media_sink_interface"><span class="n"><span class="pre">media_sink_interface</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorderE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface for the Default Media Recorder. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22audio_recording_configE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22audio_recording_configE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1adac7b7cb66a3d4006310a8a12caef287"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_recording_config</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The available formats for capturing audio. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config4NONEE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22audio_recording_config4NONEE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22audio_recording_config4NONEE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1adac7b7cb66a3d4006310a8a12caef287ab50339a10e1de285ac99d4c3990b8693"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NONE</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config4NONEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disables audio capturing. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config3PCME">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22audio_recording_config3PCME"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22audio_recording_config3PCME"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1adac7b7cb66a3d4006310a8a12caef287a1088fbc901dc88b6c18085220cc33de9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PCM</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config3PCME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enables capturing audio and storing the audio in the PCM format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config3AACE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22audio_recording_config3AACE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22audio_recording_config3AACE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1adac7b7cb66a3d4006310a8a12caef287a6409dac0c80c79ddf61858be7f2c699b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AAC</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config3AACE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enables capturing audio and storing the audio in the AAC format. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22video_recording_configE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22video_recording_configE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a67f3983348be29bd7994ca2ab6b78412"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_recording_config</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The available configurations for capturing and storing video. The captured video frames are stored in corresponding containers. The encoded video is not transcoded during or after the recording, so the corresponding container depends on what is negotiated in the SDP. Video encoded via the H264 codec is stored in the MPEG-TS container and video encoded via VP8 is stored in Matroska. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config4NONEE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22video_recording_config4NONEE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22video_recording_config4NONEE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a67f3983348be29bd7994ca2ab6b78412ab50339a10e1de285ac99d4c3990b8693"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NONE</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config4NONEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disables video capturing. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config3YUVE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22video_recording_config3YUVE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22video_recording_config3YUVE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a67f3983348be29bd7994ca2ab6b78412ab915b1a658d4fc573f623f17b1434601"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">YUV</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config3YUVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enables capturing of raw video frames that are stored in the Matroska container. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config7ENCODEDE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22video_recording_config7ENCODEDE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22video_recording_config7ENCODEDE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a67f3983348be29bd7994ca2ab6b78412a66d947ae71c5dbd96e033b89a23924e2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ENCODED</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config7ENCODEDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enables capturing of the video frames that are encoded via the VP8 or H264 codec. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config17ENCODED_OPTIMIZEDE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22video_recording_config17ENCODED_OPTIMIZEDE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22video_recording_config17ENCODED_OPTIMIZEDE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a67f3983348be29bd7994ca2ab6b78412a66a2ee2ce38ce17652e2b7dee0a389c8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ENCODED_OPTIMIZED</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_config17ENCODED_OPTIMIZEDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enables capturing of the video frames that are encoded via the VP8 or H264 codec. Only the first frame of the incoming video track will be decoded. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorderD0Ev">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorderD0Ev"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorderD0Ev"></span><span id="dolbyio::comms::plugin::recorder::~recorder"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a764fb3f7bcfb88efd8f112ee33b0c565"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~recorder</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorderD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The destructor of the recorder. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder20set_recording_configE22audio_recording_config22video_recording_config">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder20set_recording_configE22audio_recording_config22video_recording_config"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder20set_recording_configE22audio_recording_config22video_recording_config"></span><span id="dolbyio::comms::plugin::recorder::set_recording_config__audio_recording_config.video_recording_config"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1adf9a05d75863bb3c4f69a3ef3fe7b8f9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_recording_config</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE" title="dolbyio::comms::plugin::recorder::audio_recording_config"><span class="n"><span class="pre">audio_recording_config</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">audio</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE" title="dolbyio::comms::plugin::recorder::video_recording_config"><span class="n"><span class="pre">video_recording_config</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">video</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder20set_recording_configE22audio_recording_config22video_recording_config" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets a configuration for capturing audio and video. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">recorder</span><span class="o">-&gt;</span><span class="n">set_capture_config</span><span class="p">(</span><span class="n">audio_recording_config</span><span class="o">::</span><span class="n">PCM</span><span class="p">,</span><span class="w"></span>
+<span class="w">                             </span><span class="n">video_recording_config</span><span class="o">::</span><span class="n">ENCODED_OPTIMIZED</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>audio</strong> – The audio format. </p></li>
+<li><p><strong>video</strong> – The video format.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE">
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE"></span><span id="dolbyio::comms::plugin::recorder::create__ssCR.dolbyio::comms::sdkR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1aac1ab6e7af3b320d5dad5fc7aa65b92b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorderE" title="dolbyio::comms::plugin::recorder"><span class="n"><span class="pre">recorder</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out_dir</span></span>, <span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="sdk.html#_CPPv4N7dolbyio5comms3sdkE" title="dolbyio::comms::sdk"><span class="n"><span class="pre">sdk</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sdk</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates the media recording module. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// When an output directory and the sdk instance are created</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">recorder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">plugin</span><span class="o">::</span><span class="n">recorder</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="n">sdk</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_dir</strong> – The location for storing the captured audio and video. </p></li>
+<li><p><strong>sdk</strong> – The reference to the SDK object. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">dolbyio</span><span class="p">::</span><span class="n">comms</span><span class="p">::</span><a class="reference internal" href="common/exception.html#_CPPv4N7dolbyio5comms12io_exceptionE" title="dolbyio::comms::io_exception"><span class="n">io_exception</span></a></span></span> – Occurs when a metadata file cannot be created. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">dolbyio</span><span class="p">::</span><span class="n">comms</span><span class="p">::</span><a class="reference internal" href="common/exception.html#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n">exception</span></a></span></span> – Occurs when an event handler cannot be connected. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">exception</span></span></span> – Occurs in the case of a file system issue.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to the recorder module object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="device_management.html" class="btn btn-neutral float-left" title="Device Management Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="injector.html" class="btn btn-neutral float-right" title="Default Media Injector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

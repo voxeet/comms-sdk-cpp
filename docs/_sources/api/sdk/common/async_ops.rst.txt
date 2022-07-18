@@ -1,0 +1,88 @@
+.. _api_async_result:
+
+Asynchronous Operations
+=======================
+
+The SDK provides a thread-safe, asynchronous, and reentrant public API. This means that these public API methods can return results produced asynchronously
+in the form of :cpp:type:`async_result <dolbyio::comms::async_result>`. The :cpp:type:`async_result <dolbyio::comms::async_result>` object represents
+an eventual completion or a failure of an asynchronous operation and its resulting value. All calls to the SDK are queued onto the SDKs event loop
+and processed in the FIFO (First In, First Out) order. After making a call, the SDK user application is responsible for either blocking the :cpp:func:`wait <dolbyio::comms::wait>`
+results or setting a function object execute when the asynchronous operation returns using the
+:cpp:class:`async_result and <dolbyio::comms::detail::async_result>` methods.
+
+When a user application invokes an asynchronous method of the SDK, the SDK creates two objects: :cpp:type:`solver <dolbyio::comms::solver>`,
+which is used by the asynchronous operation to notify about its completion, and :cpp:type:`async_result <dolbyio::comms::async_result>`, which is used by the application to get the completion notifications. Both of these objects share the same internal state. The user application must set function
+object callbacks to be executed when the operation succeeds or fails on the async_result. If the :cpp:func:`wait <dolbyio::comms::wait>` helper is used,
+this is done automatically. When the asynchronous operation completes the callbacks set by the user, it invokes the application.
+If the asynchronous operation ends before the callbacks are set by the user application, then the callbacks are invoked as soon as they are
+set, on the application's thread. Otherwise, the callbacks are invoked when the operation is finished on the SDK's event loop.
+
+.. _async_types:
+
+Thread Safe Types and Helper Methods
+------------------------------------
+#include <comms/async_result.h>
+
+The thread safe types which can be exposed by the user via the public API. They define thread safe versions of the Asynchronous Classes documented in the
+sections below. The helper method allows for synchronous usage of the asynchronous API when called from a different thread.
+
+.. doxygentypedef:: dolbyio::comms::async_result
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::thread_safe_solver_traits
+        :project: C++ SDK
+
+.. doxygentypedef:: dolbyio::comms::async_result_with_solver
+        :project: C++ SDK
+
+.. doxygentypedef:: dolbyio::comms::solver
+        :project: C++ SDK
+
+.. doxygentypedef:: dolbyio::comms::low_level_solver
+        :project: C++ SDK
+
+.. doxygentypedef:: dolbyio::comms::low_level_solver_ptr
+        :project: C++ SDK
+
+.. doxygenfunction:: dolbyio::comms::wait
+        :project: C++ SDK
+
+
+.. _async_resultt:
+
+Async Result Class
+------------------
+#include <comms/async_result_detail.h>
+
+The async_result is a result that is returned to the SDK by all asynchronous calls, except calls that create the SDK and set the log level. Asynchronous operations can be chained together using
+:cpp:func:`async_result::then <dolbyio::comms::detail::async_result::then>` calls and must be terminated with
+:cpp:func:`async_result::on_error <dolbyio::comms::detail::async_result::on_error>` calls.
+
+The solver class is used in the SDK internally and allows notifying the asynchronous operation end. The low_level_solver class
+defines a shared state used by the async_result and the solver. The solver class is not directly used by the SDK user. The
+solver class is used only by the asynchronous operation itself and the SDK interface does not require the user to create and
+manage the state of any asynchronous operation. The user only needs to consume the asynchronous work initiated by the SDK and
+react to its completion.
+
+The low_level_solver should almost never be used directly, even if the user chooses to use SDK's asynchronous operations framework
+to implement its own asynchronous operations. Using the async_result and solver pairs is easier and less error-prone. 
+We recommend creating and using low_level_solver directly only for optimization opportunities if the application
+needs to share the solver between multiple entities using std::shared_ptr.
+
+.. doxygenclass:: dolbyio::comms::detail::async_result
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::detail::async_result_with_solver
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::detail::solver
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::detail::low_level_solver
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::detail::low_level_solver< void, traits >
+        :project: C++ SDK
+
+.. doxygentypedef:: dolbyio::comms::detail::low_level_solver_ptr
+        :project: C++ SDK

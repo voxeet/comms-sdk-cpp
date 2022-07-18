@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asynchronous Operations &mdash; C++ SDK 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Logging" href="log_level.html" />
+    <link rel="prev" title="Default Media Injector" href="../injector.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sdk.html">Sdk Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session.html">Session Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device_management.html">Device Management Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recorder.html">Default Media Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../injector.html">Default Media Injector</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Asynchronous Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#thread-safe-types-and-helper-methods">Thread Safe Types and Helper Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#async-result-class">Async Result Class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="log_level.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exception.html">SDK Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_handling.html">Event Handling Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../media_recording.html">Media Recording API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../coresdk.html">CoreSDK API</a> &raquo;</li>
+      <li>Asynchronous Operations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/api/sdk/common/async_ops.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asynchronous-operations">
+<span id="api-async-result"></span><h1>Asynchronous Operations<a class="headerlink" href="#asynchronous-operations" title="Permalink to this heading"></a></h1>
+<p>The SDK provides a thread-safe, asynchronous, and reentrant public API. This means that these public API methods can return results produced asynchronously
+in the form of <a class="reference internal" href="#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_result</span></code></a>. The <a class="reference internal" href="#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_result</span></code></a> object represents
+an eventual completion or a failure of an asynchronous operation and its resulting value. All calls to the SDK are queued onto the SDKs event loop
+and processed in the FIFO (First In, First Out) order. After making a call, the SDK user application is responsible for either blocking the <a class="reference internal" href="#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="dolbyio::comms::wait"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">wait</span></code></a>
+results or setting a function object execute when the asynchronous operation returns using the
+<a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">async_result</span> <span class="pre">and</span></code></a> methods.</p>
+<p>When a user application invokes an asynchronous method of the SDK, the SDK creates two objects: <a class="reference internal" href="#_CPPv4N7dolbyio5comms6solverE" title="dolbyio::comms::solver"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">solver</span></code></a>,
+which is used by the asynchronous operation to notify about its completion, and <a class="reference internal" href="#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_result</span></code></a>, which is used by the application to get the completion notifications. Both of these objects share the same internal state. The user application must set function
+object callbacks to be executed when the operation succeeds or fails on the async_result. If the <a class="reference internal" href="#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="dolbyio::comms::wait"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">wait</span></code></a> helper is used,
+this is done automatically. When the asynchronous operation completes the callbacks set by the user, it invokes the application.
+If the asynchronous operation ends before the callbacks are set by the user application, then the callbacks are invoked as soon as they are
+set, on the application’s thread. Otherwise, the callbacks are invoked when the operation is finished on the SDK’s event loop.</p>
+<section id="thread-safe-types-and-helper-methods">
+<span id="async-types"></span><h2>Thread Safe Types and Helper Methods<a class="headerlink" href="#thread-safe-types-and-helper-methods" title="Permalink to this heading"></a></h2>
+<p>#include &lt;comms/async_result.h&gt;</p>
+<p>The thread safe types which can be exposed by the user via the public API. They define thread safe versions of the Asynchronous Classes documented in the
+sections below. The helper method allows for synchronous usage of the asynchronous API when called from a different thread.</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12async_resultE">
+<span id="_CPPv3N7dolbyio5comms12async_resultE"></span><span id="_CPPv2N7dolbyio5comms12async_resultE"></span><span class="target" id="group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">async_result</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traitsE" title="dolbyio::comms::thread_safe_solver_traits"><span class="n"><span class="pre">thread_safe_solver_traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12async_resultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The thread-safe version of <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">detail::async_result</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The result type that is wrapped by the underlying solver. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25thread_safe_solver_traitsE">
+<span id="_CPPv3N7dolbyio5comms25thread_safe_solver_traitsE"></span><span id="_CPPv2N7dolbyio5comms25thread_safe_solver_traitsE"></span><span id="dolbyio::comms::thread_safe_solver_traits"></span><span class="target" id="structdolbyio_1_1comms_1_1thread__safe__solver__traits"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">thread_safe_solver_traits</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Traits that allow for safe implementation of asynchronous classes. They allow public APIs to safely use the objects of these classes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25thread_safe_solver_traits9lock_typeE">
+<span id="_CPPv3N7dolbyio5comms25thread_safe_solver_traits9lock_typeE"></span><span id="_CPPv2N7dolbyio5comms25thread_safe_solver_traits9lock_typeE"></span><span class="target" id="structdolbyio_1_1comms_1_1thread__safe__solver__traits_1a18eb1d7fd745f52a6bf0d62aac8fdff0"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lock_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">mutex</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traits9lock_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The lock type of the solver, for the Public API this is a mutex. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25thread_safe_solver_traits15lock_guard_typeE">
+<span id="_CPPv3N7dolbyio5comms25thread_safe_solver_traits15lock_guard_typeE"></span><span id="_CPPv2N7dolbyio5comms25thread_safe_solver_traits15lock_guard_typeE"></span><span class="target" id="structdolbyio_1_1comms_1_1thread__safe__solver__traits_1a596a10203f0abb402cbec00283211086"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lock_guard_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">lock_guard</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">mutex</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traits15lock_guard_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The lock guard type of the solver, for the Pubcic API this is a lock_guard. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25thread_safe_solver_traits13callback_typeE">
+<span id="_CPPv3N7dolbyio5comms25thread_safe_solver_traits13callback_typeE"></span><span id="_CPPv2N7dolbyio5comms25thread_safe_solver_traits13callback_typeE"></span><span class="target" id="structdolbyio_1_1comms_1_1thread__safe__solver__traits_1a4f74ea4b46de6873ba24200d9b653fe3"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">callback_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traits13callback_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The callback type for the callbacks attached to the solver. For the Public API this is a std::function object. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms24async_result_with_solverE">
+<span id="_CPPv3N7dolbyio5comms24async_result_with_solverE"></span><span id="_CPPv2N7dolbyio5comms24async_result_with_solverE"></span><span class="target" id="group__async__ops_1ga06de5586fb08e882075ddd25cb5df3c0"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">async_result_with_solver</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver"><span class="n"><span class="pre">async_result_with_solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traitsE" title="dolbyio::comms::thread_safe_solver_traits"><span class="n"><span class="pre">thread_safe_solver_traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms24async_result_with_solverE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Partial specialization of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1solver"><span class="std std-ref">dolbyio::comms::detail::solver</span></a> template class, ensuring that the operations are thread-safe. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6solverE">
+<span id="_CPPv3N7dolbyio5comms6solverE"></span><span id="_CPPv2N7dolbyio5comms6solverE"></span><span class="target" id="group__async__ops_1gad842e65395899c4b966690d52b285ad2"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">solver</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver"><span class="n"><span class="pre">solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traitsE" title="dolbyio::comms::thread_safe_solver_traits"><span class="n"><span class="pre">thread_safe_solver_traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6solverE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Partial specialization of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1solver"><span class="std std-ref">dolbyio::comms::detail::solver</span></a> template class, ensuring that the operations are thread-safe. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16low_level_solverE">
+<span id="_CPPv3N7dolbyio5comms16low_level_solverE"></span><span id="_CPPv2N7dolbyio5comms16low_level_solverE"></span><span class="target" id="group__async__ops_1gaa43e615836d2d9e9d0a51102320d9c64"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">low_level_solver</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver"><span class="n"><span class="pre">low_level_solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traitsE" title="dolbyio::comms::thread_safe_solver_traits"><span class="n"><span class="pre">thread_safe_solver_traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16low_level_solverE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The thread-safe version of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1solver"><span class="std std-ref">detail::solver</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The result type that is wrapped by the underlying solver. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20low_level_solver_ptrE">
+<span id="_CPPv3N7dolbyio5comms20low_level_solver_ptrE"></span><span id="_CPPv2N7dolbyio5comms20low_level_solver_ptrE"></span><span class="target" id="group__async__ops_1gad4cd81a9cd7667c26d46a7dd3ee18577"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">low_level_solver_ptr</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail20low_level_solver_ptrE" title="dolbyio::comms::detail::low_level_solver_ptr"><span class="n"><span class="pre">low_level_solver_ptr</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25thread_safe_solver_traitsE" title="dolbyio::comms::thread_safe_solver_traits"><span class="n"><span class="pre">thread_safe_solver_traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20low_level_solver_ptrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The thread-safe version of detail::solver_ptr. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The result type that is wrapped by the underlying solver. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE">
+<span id="_CPPv3I0EN7dolbyio5comms4waitERR12async_resultI1TE"></span><span id="_CPPv2I0EN7dolbyio5comms4waitERR12async_resultI1TE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"></span><a class="reference internal" href="#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="dolbyio::comms::wait::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">wait</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="dolbyio::comms::wait::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">asyncop</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Waits for the asynchronous operation to complete and returns the T type when the operation finishes. This call is synchronous and blocks the calling thread until the result is available. The method either returns an object of type T or throws an exception if the <a class="reference internal" href="#group__async__ops_1gad842e65395899c4b966690d52b285ad2"><span class="std std-ref">solver</span></a> of <a class="reference internal" href="#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> fails. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">some_async_operation</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>asyncop</strong> – The async_result object that wraps a solver that contains the T return type. </p>
+</dd>
+<dt class="field-even">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>T</strong> – The type of object that is returned asynchronously. </p>
+</dd>
+<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">dolbyio</span><span class="p">::</span><span class="n">comms</span><span class="p">::</span><a class="reference internal" href="exception.html#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n">exception</span></a></span></span> – or any subclass of exceptions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The object of type T. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="async-result-class">
+<span id="async-resultt"></span><h2>Async Result Class<a class="headerlink" href="#async-result-class" title="Permalink to this heading"></a></h2>
+<p>#include &lt;comms/async_result_detail.h&gt;</p>
+<p>The async_result is a result that is returned to the SDK by all asynchronous calls, except calls that create the SDK and set the log level. Asynchronous operations can be chained together using
+<a class="reference internal" href="#_CPPv4I0ENO7dolbyio5comms6detail12async_result4thenEN6detail18return_type_helperIN6detail14cb_type_helperI1T1UE11cb_ret_typeE6traitsE17async_result_typeERR1URR11err_cb_type" title="dolbyio::comms::detail::async_result::then"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">async_result::then</span></code></a> calls and must be terminated with
+<a class="reference internal" href="#_CPPv4NO7dolbyio5comms6detail12async_result8on_errorERR11err_cb_type" title="dolbyio::comms::detail::async_result::on_error"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">async_result::on_error</span></code></a> calls.</p>
+<p>The solver class is used in the SDK internally and allows notifying the asynchronous operation end. The low_level_solver class
+defines a shared state used by the async_result and the solver. The solver class is not directly used by the SDK user. The
+solver class is used only by the asynchronous operation itself and the SDK interface does not require the user to create and
+manage the state of any asynchronous operation. The user only needs to consume the asynchronous work initiated by the SDK and
+react to its completion.</p>
+<p>The low_level_solver should almost never be used directly, even if the user chooses to use SDK’s asynchronous operations framework
+to implement its own asynchronous operations. Using the async_result and solver pairs is easier and less error-prone.
+We recommend creating and using low_level_solver directly only for optimization opportunities if the application
+needs to share the solver between multiple entities using std::shared_ptr.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN7dolbyio5comms6detail12async_resultE">
+<span id="_CPPv3I00EN7dolbyio5comms6detail12async_resultE"></span><span id="_CPPv2I00EN7dolbyio5comms6detail12async_resultE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">traits</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">async_result</span></span></span><a class="headerlink" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An object that represents the eventual completion or failure of an asynchronous operation and its resulting value. </p>
+<p>The asynchronous operation may be in one of these states:<ul class="simple">
+<li><p>Pending: when the asynchronous operation is pending</p></li>
+<li><p>Resolved: when the asynchronous operation is finished</p></li>
+</ul>
+</p>
+<p>The asynchronous operation may produce a resource, which can be passed to the application, or may not produce anything and only serve and mutate a state. The first template parameter of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object denotes the type of the resource produced by the async operation, with the void type used if the operation does not produce anything besides information about its completion. This type is called a value type of the async operation and the value type of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>.</p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object may be in one of these states:<ul class="simple">
+<li><p>Pending: The asynchronous operation is pending.</p></li>
+<li><p>Resolved: The asynchronous operation is resolved.</p></li>
+<li><p>Finalized: Introduced by a user of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object by doing operations which consume the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object, such as moving the object (move-construction or move-assignment) or setting any callbacks. This state is independent of the asynchronous operation state and means that the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object has served its purpose of setting callbacks and can not be used anymore.</p></li>
+</ul>
+</p>
+<p>A function that executes asynchronously can return the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> instance. The caller of the function may use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object to set the callbacks for a success and failure notification. When the asynchronous operation is resolved, the respective callbacks are invoked.</p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is resolved by the time the caller sets the callbacks, the callbacks are invoked immediately on the caller’s thread. Otherwise, the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is pending and the callbacks are invoked when the async operation finishes. It is forbidden to set callbacks on the finalized <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>.</p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> interface allows setting the value of the callback (also called the result callback) and the local error callback. The result callback is invoked when the asynchronous operation changes state from pending to resolved with success. If the async operation generates errors and fails, the local error callback is invoked instead.</p>
+<p>Setting the value callback constitutes chaining a new async operation. Even if the callback itself works fully synchronously, a new <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object is created. If the value callback returns another <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>, the async operation created by chaining is resolved when the async operation returned by the value callback is resolved. Otherwise, the async operation created by chaining is resolved immediately after the value callback returns.</p>
+<p>The consumer of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object can also set the consume errors callback which is mutually exclusive with the value and local error callbacks. If the previous async operation in the chain resolves with failure, the consume errors callback is invoked. It receives the produced error and must return a placeholder or a substitute value of the type of the failed async operation. This value is passed down the chain to the next async operation as if it was successfully generated by the async operation that generated the error. If the previous async operation does not fail, its generated value is passed down the chain and the consume errors callback is not invoked.</p>
+<p>If the async operation resolves with an error, the subsequent async operations get their local error callbacks invoked in the proper order, one by one, up to the async operation with the set consume errors callback or the final error callback. This mechanism is called error propagation. Note that the error propagation is synchronous and no error callbacks can return <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> types. There is also no backtracking; generating errors in the chain does not allow going back to the previous async operations and performing any rollback. These mechanisms, if needed, should be implemented by the user in terms of uni-directional chains of operations.</p>
+<p>The final error callback is the last of the callbacks which can be set on the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. If set, the error callback ends the operations chain. This callback is invoked when the error is generated by or propagated to the last async operation. In case of the successful resolution of the last async operation in the chain, the final error callback is not invoked.</p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> interface does not provide any possibility of aborting or cancelling the ongoing asynchronous operation. The interface also does not allow modifying the already constructed async operations chain. Such features, if needed, should be implemented by the user in terms of adding hooks in the value callbacks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> – The type of the value produced by the asynchronous operation. If non-void, the value is passed as an rvalue reference to the result callback. Otherwise, the result callback does not take any arguments. </p></li>
+<li><p><strong>traits</strong> – The type of traits for configuring internal types used by the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. The traits should be provided as a structure which contains definitions of the following types:<ul>
+<li><p>The lock_type and the lock_guard_type. The lock_type needs to be constructible, while the lock_guard_type must have the std::lock_guard&lt;lock_type&gt; semantics. By using lock_type = std::mutex and lock_guard_type = std::lock_guard&lt;std::mutex&gt; the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is made thread-safe and the resolution can occur on a different thread than the one which sets the callbacks.</p></li>
+<li><p>The callback_type that should be a template functor class constructible from a lambda. This type must support the bool() operator and move-assignment, but does not need to be copy-constructible and does not need a const operator. A simple implementation of the traits type would just define the callback_type using callback_type = std::function; </p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail12async_result12async_resultE20low_level_solver_ptrI1T6traitsEN17async_result_tags13low_level_tagE">
+<span id="_CPPv3N7dolbyio5comms6detail12async_result12async_resultE20low_level_solver_ptrI1T6traitsEN17async_result_tags13low_level_tagE"></span><span id="_CPPv2N7dolbyio5comms6detail12async_result12async_resultE20low_level_solver_ptrI1T6traitsEN17async_result_tags13low_level_tagE"></span><span id="dolbyio::comms::detail::async_result::async_result__low_level_solver_ptr:T.traits:.async_result_tags::low_level_tag"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a1f2ad08d7fb32f17c074fd01877f3608"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_result</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail20low_level_solver_ptrE" title="dolbyio::comms::detail::low_level_solver_ptr"><span class="n"><span class="pre">low_level_solver_ptr</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">on_result</span></span>, <span class="n"><span class="pre">async_result_tags</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">low_level_tag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail12async_result12async_resultE20low_level_solver_ptrI1T6traitsEN17async_result_tags13low_level_tagE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A constructor that is used by the asynchronous operation initiator. </p>
+<p>We do not recommend constructing the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> manually using this constructor. The recommended way is to use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result_1a5fd9d80022e5071734802cf4fa004a27"><span class="std std-ref">make()</span></a> static method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>on_result</strong> – The shared pointer to the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail12async_result12async_resultERR12async_resultI1T6traitsE">
+<span id="_CPPv3N7dolbyio5comms6detail12async_result12async_resultERR12async_resultI1T6traitsE"></span><span id="_CPPv2N7dolbyio5comms6detail12async_result12async_resultERR12async_resultI1T6traitsE"></span><span id="dolbyio::comms::detail::async_result::async_result__async_result:T.traits:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a42ad09ee4da5048c622b3fb4a72cacbc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_result</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail12async_result12async_resultERR12async_resultI1T6traitsE" title="dolbyio::comms::detail::async_result::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail12async_result12async_resultERR12async_resultI1T6traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The move constructor. </p>
+<p>Constructs the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> by moving the internal state from another <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. The result passed as an argument is left in the finalized state after the constructor returns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – A parameter moved from <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultERR2TTN17async_result_tags12resolved_tagE">
+<span id="_CPPv3I00EN7dolbyio5comms6detail12async_result12async_resultERR2TTN17async_result_tags12resolved_tagE"></span><span id="_CPPv2I00EN7dolbyio5comms6detail12async_result12async_resultERR2TTN17async_result_tags12resolved_tagE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">X</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_if_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="o"><span class="pre">!</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">is_same</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultERR2TTN17async_result_tags12resolved_tagE" title="dolbyio::comms::detail::async_result::async_result::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">value</span></span><span class="w"> </span><span class="o"><span class="pre">&amp;&amp;</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">is_convertible</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultERR2TTN17async_result_tags12resolved_tagE" title="dolbyio::comms::detail::async_result::async_result::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a9375d9842c34ac3bc00ed30d41d4db16"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_result</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultERR2TTN17async_result_tags12resolved_tagE" title="dolbyio::comms::detail::async_result::async_result::TT"><span class="n"><span class="pre">TT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span>, <span class="n"><span class="pre">async_result_tags</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">resolved_tag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">async_result_tags</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">resolved</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultERR2TTN17async_result_tags12resolved_tagE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs the resolved result. </p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is brought to the resolved state with the provided value at the moment of construction.</p>
+<p>The second argument, the async_result_tags::resolved_tag, has a default value and only a single value can be used. Therefore, the argument can be almost always omitted in code. The only scenario where providing the tag is required is constructing the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> carrying std::exception_ptr as the result of the operation to distinguish between the failed and resolved cases.</p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns already-resolved result, carrying value 1:</span>
+<span class="n">async_result</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">traits</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fun</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="c1">// Returs already-resolved result, carrying the exception pointer.</span>
+<span class="c1">// Note that the result is resolved with success, and the value callback</span>
+<span class="c1">// set in the then() method will be invoked:</span>
+<span class="n">async_result</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">exception_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">traits</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fun2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">make_exception_ptr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">          </span><span class="n">async_result_tags</span><span class="o">::</span><span class="n">resolved</span><span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – The result of the operation </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultEv">
+<span id="_CPPv3I00EN7dolbyio5comms6detail12async_result12async_resultEv"></span><span id="_CPPv2I00EN7dolbyio5comms6detail12async_result12async_resultEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">X</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_if_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">is_same_v</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultEv" title="dolbyio::comms::detail::async_result::async_result::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1ab6429c3a462607fc8e43013f5e283c25"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_result</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN7dolbyio5comms6detail12async_result12async_resultEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs the resolved result. </p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> changes state to <code class="docutils literal notranslate"><span class="pre">resolved</span></code> at the moment of the construction. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail12async_result12async_resultERRNSt13exception_ptrEN17async_result_tags10failed_tagE">
+<span id="_CPPv3N7dolbyio5comms6detail12async_result12async_resultERRNSt13exception_ptrEN17async_result_tags10failed_tagE"></span><span id="_CPPv2N7dolbyio5comms6detail12async_result12async_resultERRNSt13exception_ptrEN17async_result_tags10failed_tagE"></span><span id="dolbyio::comms::detail::async_result::async_result__std::exception_ptrRR.async_result_tags::failed_tag"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1aedc65743450a9b96e20ef87905300f63"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_result</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">exception_ptr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span>, <span class="n"><span class="pre">async_result_tags</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">failed_tag</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">async_result_tags</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">failed</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail12async_result12async_resultERRNSt13exception_ptrEN17async_result_tags10failed_tagE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs the failed result. </p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> changes state to <code class="docutils literal notranslate"><span class="pre">resolved</span></code> with failure at the moment of the construction.</p>
+<p>The second argument, the async_result_tags::failed_tag, has a default value and there’s only a single value which can be used, therefore the argument can almost always be omitted in the code. The only scenario where providing the tag is required is constructing the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> carrying the std::exception_ptr as the result of the operation, to distinguish between the failed and resolved cases.</p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Returns already-failed result:</span>
+<span class="n">async_result</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">traits</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fun</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_exception_ptr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// Returns already-failed result.</span>
+<span class="c1">// Note that the result is resolved with failure, and the local error</span>
+<span class="c1">// callback set in the then() method will be invoked. The error will be</span>
+<span class="c1">// propagated to the chained results, if any:</span>
+<span class="n">async_result</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">exception_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">traits</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fun2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">make_exception_ptr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">          </span><span class="n">async_result_tags</span><span class="o">::</span><span class="n">failed</span><span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail12async_resultD0Ev">
+<span id="_CPPv3N7dolbyio5comms6detail12async_resultD0Ev"></span><span id="_CPPv2N7dolbyio5comms6detail12async_resultD0Ev"></span><span id="dolbyio::comms::detail::async_result::~async_result"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1ad42edb65a8348eefa956d63b7a430a0e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~async_result</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail12async_resultD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The destructor. </p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object may be destroyed only after changing state to <code class="docutils literal notranslate"><span class="pre">finalized</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail12async_resultaSERR12async_resultI1T6traitsE">
+<span id="_CPPv3N7dolbyio5comms6detail12async_resultaSERR12async_resultI1T6traitsE"></span><span id="_CPPv2N7dolbyio5comms6detail12async_resultaSERR12async_resultI1T6traitsE"></span><span id="dolbyio::comms::detail::async_result::assign-operator__async_result:T.traits:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1aa38f1d4669de0a31acea38fe2b49294f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail12async_resultaSERR12async_resultI1T6traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The move assignment operator. </p>
+<p>Moves the argument to the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. The current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> must be in the finalized state. The move assignment operator leaves the argument in the finalized state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The parameter moved from <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reference to the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENO7dolbyio5comms6detail12async_result4thenEN6detail18return_type_helperIN6detail14cb_type_helperI1T1UE11cb_ret_typeE6traitsE17async_result_typeERR1URR11err_cb_type">
+<span id="_CPPv3I0ENO7dolbyio5comms6detail12async_result4thenERR1URR11err_cb_type"></span><span id="_CPPv2I0ENO7dolbyio5comms6detail12async_result4thenERR1URR11err_cb_type"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">then</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENO7dolbyio5comms6detail12async_result4thenEN6detail18return_type_helperIN6detail14cb_type_helperI1T1UE11cb_ret_typeE6traitsE17async_result_typeERR1URR11err_cb_type" title="dolbyio::comms::detail::async_result::then::U"><span class="n"><span class="pre">U</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cb</span></span>, <span class="n"><span class="pre">err_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">local_err_cb</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">return_type_helper</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cb_type_helper</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENO7dolbyio5comms6detail12async_result4thenEN6detail18return_type_helperIN6detail14cb_type_helperI1T1UE11cb_ret_typeE6traitsE17async_result_typeERR1URR11err_cb_type" title="dolbyio::comms::detail::async_result::then::U"><span class="n"><span class="pre">U</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cb_ret_type</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">async_result_type</span></span><a class="headerlink" href="#_CPPv4I0ENO7dolbyio5comms6detail12async_result4thenEN6detail18return_type_helperIN6detail14cb_type_helperI1T1UE11cb_ret_typeE6traitsE17async_result_typeERR1URR11err_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets function objects as callbacks on the asynchronous completion. </p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is in the pending state, then when the asynchronous operation finishes, depending on the result, one of the passed callbacks is invoked. If the async operation finishes successfully, then the result callback is invoked. If the async operation fails, the local error callback is invoked.</p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is already in the resolved state by the time this method is invoked, the result or error callback is executed immediately.</p>
+<p>This method consumes the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> and leaves the result in the finalized state.</p>
+<p>This method constructs a new <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. The type of the result depends on the return type of the provided result callback:<ul class="simple">
+<li><p>If the provided result callback returns async_result&lt;X, Y&gt;, then this method returns async_result&lt;X, Y&gt;. The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> returned from <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">then()</span></a> is resolved when the instance returned by the callback function is resolved.</p></li>
+<li><p>If the provided result callback returns any type Z (may be void), this method returns async_result&lt;Z, traits&gt;. The returned async result is resolved immediately when the callback function is invoked.</p></li>
+</ul>
+</p>
+<p>In any case, if the result callback is invoked and throws an exception, then the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> returned from <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">then()</span></a> is resolved with failure.</p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// On success the following code prints `123`.</span>
+<span class="w"> </span><span class="n">method_returns_async_result</span><span class="p">()</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="n">another_async_method</span><span class="p">()</span><span class="w"></span>
+<span class="w">              </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">){</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">});</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">                     </span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// rethrow and handle exception })</span>
+<span class="w">              </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">){</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;3&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">                    </span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// rethrow and handle exception });</span>
+<span class="w">     </span><span class="p">})</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// rethrow and handle exception });</span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cb</strong> – The result callback function object. </p></li>
+<li><p><strong>local_err_cb</strong> – The local error function object. This functor should not throw any exceptions. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> representing the result of the callback invocation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NO7dolbyio5comms6detail12async_result14consume_errorsERRN6traits13callback_typeIF1TRRNSt13exception_ptrEEEE">
+<span id="_CPPv3NO7dolbyio5comms6detail12async_result14consume_errorsERRN6traits13callback_typeIF1TRRNSt13exception_ptrEEEE"></span><span id="_CPPv2NO7dolbyio5comms6detail12async_result14consume_errorsERRN6traits13callback_typeIF1TRRNSt13exception_ptrEEEE"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a7892de3d365664d20695deb1d710c2d7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">consume_errors</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">::</span></span><span class="k"><span class="pre">template</span></span><span class="w"> </span><span class="n"><span class="pre">callback_type</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">exception_ptr</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">err_cb</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><span class="w"> </span><span class="o"><span class="pre">-&gt;</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4NO7dolbyio5comms6detail12async_result14consume_errorsERRN6traits13callback_typeIF1TRRNSt13exception_ptrEEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Consumes errors produced during an asynchronous operation to not propagate the errors further. </p>
+<p>The errors are consumed by the provided error callback function object. If the asynchronous operation is resolved with an error, the chained async operations cannot be executed and error callbacks are invoked. By using the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result_1a7892de3d365664d20695deb1d710c2d7"><span class="std std-ref">consume_errors()</span></a> call, the error propagation can be stopped. The caller captures the generated error and replaces the error with a result that is propagated to subsequent asynchronous operations. If the callback throws an error, that error is propagated to subsequent async results instead of the captured error. The callback function returns values of type T.</p>
+<p>This method consumes the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> and changes its state to <code class="docutils literal notranslate"><span class="pre">finalized</span></code>.</p>
+<p>This method constructs a new <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> of the same type as the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>’s type.</p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">method_returns_async_result</span><span class="p">().</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">){</span><span class="w"> </span><span class="c1">// handle success })</span>
+<span class="w">                              </span><span class="p">.</span><span class="n">consume_errors</span><span class="p">(([]</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// handle</span>
+<span class="n">exception</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">.</span><span class="n">then</span><span class="p">([](){</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">another_async_method</span><span class="p">();</span><span class="w"> </span><span class="p">})</span><span class="w"></span>
+<span class="w">                              </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// handle exception</span>
+<span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>err_cb</strong> – The consume errors function object. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> which is resolved with a value of this result or, in a case of errors, the value returned by the consume errors callback.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NO7dolbyio5comms6detail12async_result8on_errorERR11err_cb_type">
+<span id="_CPPv3NO7dolbyio5comms6detail12async_result8on_errorERR11err_cb_type"></span><span id="_CPPv2NO7dolbyio5comms6detail12async_result8on_errorERR11err_cb_type"></span><span id="dolbyio::comms::detail::async_result::on_error__err_cb_typeRRO"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_error</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">err_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">err_cb</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><a class="headerlink" href="#_CPPv4NO7dolbyio5comms6detail12async_result8on_errorERR11err_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the final error callback on the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. </p>
+<p>This callback is executed when the async operation resolves with failure. If the async operation resolves with a result, the final error callback is never invoked. If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is already in the resolved with failure state when this function is called, the final error callback is executed immediately.</p>
+<p>This method consumes the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> and changes its state to <code class="docutils literal notranslate"><span class="pre">finalized</span></code>.</p>
+<p>This method does not return anything and should be invoked to close the async operations chain. In order to handle errors in the middle of the async operations chain, use the local error callbacks or the consume errors callback.</p>
+<p>The final error callback is allowed to throw exceptions of its own, but these exceptions are caught and ignored.</p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">method_returns_async_result</span><span class="p">().</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">){</span><span class="w"> </span><span class="c1">// handle success })</span>
+<span class="w">                              </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// rethrow and</span>
+<span class="n">handle</span><span class="w"> </span><span class="n">exception</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>err_cb</strong> – The final error function object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms6detail12async_resultcvbEv">
+<span id="_CPPv3NK7dolbyio5comms6detail12async_resultcvbEv"></span><span id="_CPPv2NK7dolbyio5comms6detail12async_resultcvbEv"></span><span id="dolbyio::comms::detail::async_result::castto-b-operatorC"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a9a4631e29d6209a9bbc5cdec3332e803"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms6detail12async_resultcvbEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Checks if the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is not finalized. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>False if the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> is finalized, true otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail12async_result4makeEv">
+<span id="_CPPv3N7dolbyio5comms6detail12async_result4makeEv"></span><span id="_CPPv2N7dolbyio5comms6detail12async_result4makeEv"></span><span id="dolbyio::comms::detail::async_result::make"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result_1a5fd9d80022e5071734802cf4fa004a27"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver"><span class="n"><span class="pre">async_result_with_solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">make</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail12async_result4makeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructs an <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> paired with the solver. </p>
+<p>We recommend using this method for constructing a new <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> by the initiator of the asynchronous operation. The method returns a pair of objects: the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> and the associated solver. The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object should be returned to the caller, which is the consumer of the asynchronous operation’s result. The solver should be passed to the asynchronous code, which eventually resolves the solver when the operation is finished. Resolving the solver changes the state of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> to resolved.</p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="c1">// Enqueues a job on the async operations queue, and returns the</span>
+<span class="w"> </span><span class="c1">// async_result:</span>
+<span class="n">async_result</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span><span class="w"> </span><span class="n">do_something</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">solver</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="n">async_result</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;::</span><span class="n">make</span><span class="p">();</span><span class="w"></span>
+<span class="w">   </span><span class="n">async_operations_queue</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">solver</span><span class="p">));</span><span class="w"></span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">res</span><span class="p">);</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w"> </span><span class="c1">// Real implementation of the async operation, executed at some point:</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">do_something_impl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="c1">// do stuff</span>
+
+<span class="w">   </span><span class="c1">// Causes the async_result&lt;void&gt; returned from do_something() to resolve</span>
+<span class="w">   </span><span class="c1">// and invoke the callbacks:</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">async_operations_queue</span><span class="p">.</span><span class="n">front</span><span class="p">()).</span><span class="n">resolve</span><span class="p">();</span><span class="w"></span>
+<span class="w">   </span><span class="n">async_operations_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pair of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> and the associated solver.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE">
+<span id="_CPPv3I00EN7dolbyio5comms6detail24async_result_with_solverE"></span><span id="_CPPv2I00EN7dolbyio5comms6detail24async_result_with_solverE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">traits</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result__with__solver"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">async_result_with_solver</span></span></span><a class="headerlink" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The pair of the solver and the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>. </p>
+<p>A helper type used for initiating asynchronous operations. The recommended way of creating an <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> representing an asynchronous operation is to use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result_1a5fd9d80022e5071734802cf4fa004a27"><span class="std std-ref">async_result::make()</span></a> static method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> – The type of the result </p></li>
+<li><p><strong>traits</strong> – The traits type. For more information, see the <a class="reference internal" href="#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> documentation. </p></li>
+</ul>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail24async_result_with_solver24async_result_with_solverEv">
+<span id="_CPPv3N7dolbyio5comms6detail24async_result_with_solver24async_result_with_solverEv"></span><span id="_CPPv2N7dolbyio5comms6detail24async_result_with_solver24async_result_with_solverEv"></span><span id="dolbyio::comms::detail::async_result_with_solver::async_result_with_solver"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result__with__solver_1a9d0cb6ddc1c829bba91ee8fa6dd85fff"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_result_with_solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail24async_result_with_solver24async_result_with_solverEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail24async_result_with_solver10get_solverEv">
+<span id="_CPPv3N7dolbyio5comms6detail24async_result_with_solver10get_solverEv"></span><span id="_CPPv2N7dolbyio5comms6detail24async_result_with_solver10get_solverEv"></span><span id="dolbyio::comms::detail::async_result_with_solver::get_solver"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result__with__solver_1a8adf8a808f05f97d5b82b0d10df790f3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver"><span class="n"><span class="pre">solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail24async_result_with_solver10get_solverEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the solver. </p>
+<p>This function should be invoked only once, subsequent invocations yield an invalid solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The solver for notifying about the completion of the operation. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail24async_result_with_solver10get_resultEv">
+<span id="_CPPv3N7dolbyio5comms6detail24async_result_with_solver10get_resultEv"></span><span id="_CPPv2N7dolbyio5comms6detail24async_result_with_solver10get_resultEv"></span><span id="dolbyio::comms::detail::async_result_with_solver::get_result"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result__with__solver_1aec23b3e70382b2b2e591b9bbf9aa54a4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_result</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail24async_result_with_solver10get_resultEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the result. </p>
+<p>This function should be invoked only once, subsequent invocations yield a finalized <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> for connecting the completion callbacks. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail24async_result_with_solver7solver_E">
+<span id="_CPPv3N7dolbyio5comms6detail24async_result_with_solver7solver_E"></span><span id="_CPPv2N7dolbyio5comms6detail24async_result_with_solver7solver_E"></span><span id="dolbyio::comms::detail::async_result_with_solver::solver___solver:T.traits:"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result__with__solver_1afac5be900666917f8165bd294b91a8fc"></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver"><span class="n"><span class="pre">solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solver_</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail24async_result_with_solver7solver_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail24async_result_with_solver7result_E">
+<span id="_CPPv3N7dolbyio5comms6detail24async_result_with_solver7result_E"></span><span id="_CPPv2N7dolbyio5comms6detail24async_result_with_solver7result_E"></span><span id="dolbyio::comms::detail::async_result_with_solver::result___async_result:T.traits:"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1async__result__with__solver_1a5194b929d4a36f469518a9cfe4132782"></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail12async_resultE" title="dolbyio::comms::detail::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail24async_result_with_solverE" title="dolbyio::comms::detail::async_result_with_solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">result_</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail24async_result_with_solver7result_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN7dolbyio5comms6detail6solverE">
+<span id="_CPPv3I00EN7dolbyio5comms6detail6solverE"></span><span id="_CPPv2I00EN7dolbyio5comms6detail6solverE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">traits</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">solver</span></span></span><a class="headerlink" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An interface that notifies about the completion of asynchronous operations. </p>
+<p>When the asynchronous operation is finished, the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1solver_1a6974eda48aec419170454e6ebd86a089"><span class="std std-ref">fail()</span></a> or <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1solver_1ae81a799d2d954289a589f5fd71da7985"><span class="std std-ref">resolve()</span></a> method of the solver is invoked to bring the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> to the resolved state or invoke the callbacks if the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> has already been finalized. The solver class ensures that the resolution can happen only once, and that the destruction of the pending solver results in resolving the operation with failure.</p>
+<p>The solver class implements move semantics and should be always passed by move to the entity which eventually resolves it. The moved-from state of the solver is invalid and the only allowed operations on the invalid solver are the destruction, move-assignment, and validity check.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> – The type of the result produced by the asynchronous operation. </p></li>
+<li><p><strong>traits</strong> – The traits type. For more information, refer to the documentation of the <a class="reference internal" href="#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> class. </p></li>
+</ul>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail6solver6solverEv">
+<span id="_CPPv3N7dolbyio5comms6detail6solver6solverEv"></span><span id="_CPPv2N7dolbyio5comms6detail6solver6solverEv"></span><span id="dolbyio::comms::detail::solver::solver"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1ac4e89a9ef5e4e4886a24ae0f8fdc1fc4"></span><span class="sig-name descname"><span class="n"><span class="pre">solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail6solver6solverEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default constructor. </p>
+<p>Constructs an invalid solver. Invoking <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1solver_1ae81a799d2d954289a589f5fd71da7985"><span class="std std-ref">resolve()</span></a> or <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1solver_1a6974eda48aec419170454e6ebd86a089"><span class="std std-ref">fail()</span></a> on this solver instance results in assertion failures. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail6solver6solverE20low_level_solver_ptrI1T6traitsE">
+<span id="_CPPv3N7dolbyio5comms6detail6solver6solverE20low_level_solver_ptrI1T6traitsE"></span><span id="_CPPv2N7dolbyio5comms6detail6solver6solverE20low_level_solver_ptrI1T6traitsE"></span><span id="dolbyio::comms::detail::solver::solver__low_level_solver_ptr:T.traits:"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1a4b961b5082e8d47ff9653a28edcf050a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solver</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail20low_level_solver_ptrE" title="dolbyio::comms::detail::low_level_solver_ptr"><span class="n"><span class="pre">low_level_solver_ptr</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">slv</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail6solver6solverE20low_level_solver_ptrI1T6traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor. </p>
+<p>Constructs a solver. We do not recommend to invoke this constructor directly. The recommended way of creating solvers is to use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result_1a5fd9d80022e5071734802cf4fa004a27"><span class="std std-ref">async_result::make()</span></a> method which creates the solver and the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> in a safe way. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail6solverD0Ev">
+<span id="_CPPv3N7dolbyio5comms6detail6solverD0Ev"></span><span id="_CPPv2N7dolbyio5comms6detail6solverD0Ev"></span><span id="dolbyio::comms::detail::solver::~solver"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1a2beedada058252403d8441d7d591fbf4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail6solverD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The destructor. </p>
+<p>If the solver is valid and has not been resolved or failed, the destructor fails the solver with the <a class="reference internal" href="exception.html#classdolbyio_1_1comms_1_1async__operation__canceled"><span class="std std-ref">dolbyio::comms::async_operation_canceled</span></a> exception. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NO7dolbyio5comms6detail6solver4failERRNSt13exception_ptrE">
+<span id="_CPPv3NO7dolbyio5comms6detail6solver4failERRNSt13exception_ptrE"></span><span id="_CPPv2NO7dolbyio5comms6detail6solver4failERRNSt13exception_ptrE"></span><span id="dolbyio::comms::detail::solver::fail__std::exception_ptrRRO"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1a6974eda48aec419170454e6ebd86a089"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fail</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">exception_ptr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><a class="headerlink" href="#_CPPv4NO7dolbyio5comms6detail6solver4failERRNSt13exception_ptrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notifies about the failed async operation. </p>
+<p>This method causes the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> to change the state to <code class="docutils literal notranslate"><span class="pre">resolved</span> <span class="pre">with</span> <span class="pre">failure</span></code> or the method invokes the callbacks in the failure paths directly if the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object is already in the finalized state. This method consumes the solver object and changes its state to <code class="docutils literal notranslate"><span class="pre">invalid</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>e</strong> – the exception. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvv">
+<span id="_CPPv3I00ENO7dolbyio5comms6detail6solver7resolveEv"></span><span id="_CPPv2I00ENO7dolbyio5comms6detail6solver7resolveEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">X</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_if_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">is_same_v</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvv" title="dolbyio::comms::detail::solver::resolve::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvv" title="dolbyio::comms::detail::solver::resolve::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1ae81a799d2d954289a589f5fd71da7985"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">resolve</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><a class="headerlink" href="#_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notifies about the successful async operation. </p>
+<p>This method causes the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> to change the state to <code class="docutils literal notranslate"><span class="pre">resolved</span> <span class="pre">with</span> <span class="pre">success</span></code> or the method invokes the value callback directly if the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object is already in the finalized state. This method consumes the solver object and changes its state to <code class="docutils literal notranslate"><span class="pre">invalid</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvRR2TT">
+<span id="_CPPv3I00ENO7dolbyio5comms6detail6solver7resolveERR2TT"></span><span id="_CPPv2I00ENO7dolbyio5comms6detail6solver7resolveERR2TT"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">X</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_if_t</span></span><span class="p"><span class="pre">&lt;</span></span><span class="o"><span class="pre">!</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">is_same_v</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvRR2TT" title="dolbyio::comms::detail::solver::resolve::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvRR2TT" title="dolbyio::comms::detail::solver::resolve::TT"><span class="n"><span class="pre">TT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1a8eba701c94fb2bd54bc4d7c13d257ef8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">resolve</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvRR2TT" title="dolbyio::comms::detail::solver::resolve::TT"><span class="n"><span class="pre">TT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">&amp;&amp;</span></span><a class="headerlink" href="#_CPPv4I00ENO7dolbyio5comms6detail6solver7resolveEvRR2TT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notifies about the successful async operation. </p>
+<p>This method causes the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> to change the state to <code class="docutils literal notranslate"><span class="pre">resolved</span> <span class="pre">with</span> <span class="pre">success</span></code> or the method invokes the value callback directly if the associated <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> object is already in the finalized state. This method consumes the solver object and changes its state to <code class="docutils literal notranslate"><span class="pre">invalid</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – The value produced by the asynchronous operation. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms6detail6solvercvbEv">
+<span id="_CPPv3NK7dolbyio5comms6detail6solvercvbEv"></span><span id="_CPPv2NK7dolbyio5comms6detail6solvercvbEv"></span><span id="dolbyio::comms::detail::solver::castto-b-operatorC"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1afecbee3fab2da7a49eebee18ada6020d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms6detail6solvercvbEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Checks validity of the solver object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if the solver is valid, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail6solver6solverERR6solverI1T6traitsE">
+<span id="_CPPv3N7dolbyio5comms6detail6solver6solverERR6solverI1T6traitsE"></span><span id="_CPPv2N7dolbyio5comms6detail6solver6solverERR6solverI1T6traitsE"></span><span id="dolbyio::comms::detail::solver::solver__solver:T.traits:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1a33fb7aa1289342a1f6402f8e277726a2"></span><span class="sig-name descname"><span class="n"><span class="pre">solver</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail6solver6solverERR6solverI1T6traitsE" title="dolbyio::comms::detail::solver::solver"><span class="n"><span class="pre">solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail6solver6solverERR6solverI1T6traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default move constructor for solver. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail6solveraSERR6solverI1T6traitsE">
+<span id="_CPPv3N7dolbyio5comms6detail6solveraSERR6solverI1T6traitsE"></span><span id="_CPPv2N7dolbyio5comms6detail6solveraSERR6solverI1T6traitsE"></span><span id="dolbyio::comms::detail::solver::assign-operator__solver:T.traits:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1solver_1a832c3e528e676a39eb5b82795525606a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver"><span class="n"><span class="pre">solver</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver"><span class="n"><span class="pre">solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail6solverE" title="dolbyio::comms::detail::solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail6solveraSERR6solverI1T6traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Move assignment operator for solver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The solver to be moved from. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>solver Reference to the Solver which was moved too. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE">
+<span id="_CPPv3I00EN7dolbyio5comms6detail16low_level_solverE"></span><span id="_CPPv2I00EN7dolbyio5comms6detail16low_level_solverE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">traits</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">low_level_solver</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_shared_from_this</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver"><span class="n"><span class="pre">low_level_solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A shared state of the solver and <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> objects. </p>
+<p>The class that stores a low-level building block for code that executes asynchronously. The class allows the caller of the asynchronous function to set the callbacks for notification informing that the function has finished. The class also allows executing code asynchronously to notify that it is finished.</p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> is templated over two types: the type of the produced value and the traits type. Refer to the documentation of the <a class="reference internal" href="#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> class for the description of the traits type.</p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> provides a low-level API. The user of this class must adhere to the following rules:<ul class="simple">
+<li><p>Each <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> must be resolved with success or failure only once</p></li>
+<li><p>Each <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> can construct the <a class="reference internal" href="#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> value only once</p></li>
+<li><p>If any callbacks are set on the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a>, the solver must be resolved and then destroyed</p></li>
+<li><p>Each <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> must be created using the std::make_shared function</p></li>
+</ul>
+</p>
+<p>We do not recommend using the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> directly. This solver is used as a state object shared between the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1async__result"><span class="std std-ref">async_result</span></a> and the associated solver instance. Using these two types hides the complexity of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> and provides a more convenient interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> – The type of the result produced by the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a>. </p></li>
+<li><p><strong>traits</strong> – The traits type. </p></li>
+</ul>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solver16low_level_solverEN17async_result_tags13low_level_tagE">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solver16low_level_solverEN17async_result_tags13low_level_tagE"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solver16low_level_solverEN17async_result_tags13low_level_tagE"></span><span id="dolbyio::comms::detail::low_level_solver::low_level_solver__async_result_tags::low_level_tag"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1ac3aef840682cc49dbd8367bdd2450509"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">low_level_solver</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">async_result_tags</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">low_level_tag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solver16low_level_solverEN17async_result_tags13low_level_tagE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverD0Ev">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverD0Ev"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverD0Ev"></span><span id="dolbyio::comms::detail::low_level_solver::~low_level_solver"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1a7482cfef6bd3b76629d3cf890810f3ab"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~low_level_solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solver18set_callbacks_fromE20low_level_solver_ptrI1T6traitsE">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solver18set_callbacks_fromE20low_level_solver_ptrI1T6traitsE"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solver18set_callbacks_fromE20low_level_solver_ptrI1T6traitsE"></span><span id="dolbyio::comms::detail::low_level_solver::set_callbacks_from__low_level_solver_ptr:T.traits:"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1a33fb92b1fcef732b41e4c57fe8b67aa9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_callbacks_from</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail20low_level_solver_ptrE" title="dolbyio::comms::detail::low_level_solver_ptr"><span class="n"><span class="pre">low_level_solver_ptr</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solver18set_callbacks_fromE20low_level_solver_ptrI1T6traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Chains the current solver with another solver. </p>
+<p>Use this method only if the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> does not have any assigned callbacks, except for the local error callback. When the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> is resolved, the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1afbd3fd63609261d12e072c8ffe9bc99c"><span class="std std-ref">resolve()</span></a> or <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1aa24060a4814981f269bc32ce82e1fdd0"><span class="std std-ref">fail()</span></a> method of the chained solver is called. If the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> is already resolved, the result is propagated immediately to the chained solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The shared pointer to the next solver. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solver7resolveERR1T">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solver7resolveERR1T"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solver7resolveERR1T"></span><span id="dolbyio::comms::detail::low_level_solver::resolve__TRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1afbd3fd63609261d12e072c8ffe9bc99c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">resolve</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">res</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solver7resolveERR1T" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Resolves the solver. </p>
+<p>If there is a callback stored in the solver, the callback is executed immediately with the result. Otherwise, the result is stored for later consumption when the callback is set. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – The value to be moved to the callback function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solver4failERRNSt13exception_ptrE">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solver4failERRNSt13exception_ptrE"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solver4failERRNSt13exception_ptrE"></span><span id="dolbyio::comms::detail::low_level_solver::fail__std::exception_ptrRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1aa24060a4814981f269bc32ce82e1fdd0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fail</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">exception_ptr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">error</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solver4failERRNSt13exception_ptrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Fails the solver. </p>
+<p>If the error callback is set for the solver, the solver is invoked. If the current solver is chained with another solver, the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1aa24060a4814981f269bc32ce82e1fdd0"><span class="std std-ref">fail()</span></a> method of the chained solver is invoked. If the current solver is not chained with the next solver, the error is stored to be propagated later.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>error</strong> – The exception pointer that contains the exception. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solver12set_callbackERR14result_cb_type">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solver12set_callbackERR14result_cb_type"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solver12set_callbackERR14result_cb_type"></span><span id="dolbyio::comms::detail::low_level_solver::set_callback__result_cb_typeRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1ad68fd9892551c83ad2340e30abbf1953"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_callback</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">result_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solver12set_callbackERR14result_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets a result callback. </p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1afbd3fd63609261d12e072c8ffe9bc99c"><span class="std std-ref">resolve()</span></a> method has already been called, the callback is executed immediately. Otherwise, the callback is stored to be invoked if the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1afbd3fd63609261d12e072c8ffe9bc99c"><span class="std std-ref">resolve()</span></a> method is invoked on the solver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cb</strong> – The function object to call when the result is resolved. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the function object has been invoked immediately, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solver28set_propagate_error_callbackERR11err_cb_type">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solver28set_propagate_error_callbackERR11err_cb_type"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solver28set_propagate_error_callbackERR11err_cb_type"></span><span id="dolbyio::comms::detail::low_level_solver::set_propagate_error_callback__err_cb_typeRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1ae0bc31f40e0a553b1175696ba85ee660"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_propagate_error_callback</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">err_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solver28set_propagate_error_callbackERR11err_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets an error callback. </p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1aa24060a4814981f269bc32ce82e1fdd0"><span class="std std-ref">fail()</span></a> method has already been called, the error callback is executed immediately. Otherwise, the callback is stored to be executed when the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1aa24060a4814981f269bc32ce82e1fdd0"><span class="std std-ref">fail()</span></a> method is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cb</strong> – The function object to be called in the case of an error. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the function object has been invoked immediately, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solver18set_error_callbackERR11err_cb_type">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solver18set_error_callbackERR11err_cb_type"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solver18set_error_callbackERR11err_cb_type"></span><span id="dolbyio::comms::detail::low_level_solver::set_error_callback__err_cb_typeRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1ac40346683d689e2962931316b314a787"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_error_callback</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">err_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solver18set_error_callbackERR11err_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the local error callback. </p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1aa24060a4814981f269bc32ce82e1fdd0"><span class="std std-ref">fail()</span></a> method has already been called, the error callback is executed immediately. Otherwise, the callback is stored to be executed when the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1aa24060a4814981f269bc32ce82e1fdd0"><span class="std std-ref">fail()</span></a> method is called.</p>
+<p>The local error callback differs from the error callback that is set by the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1ae0bc31f40e0a553b1175696ba85ee660"><span class="std std-ref">set_propagate_error_callback()</span></a>, where the chaining solvers reset the propagated error callbacks and, in case of errors, only the callback of the last solver is invoked. The local error callbacks are invoked for each solver in the chain.</p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1ac40346683d689e2962931316b314a787"><span class="std std-ref">set_error_callback()</span></a> function must not be invoked after <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1ae0bc31f40e0a553b1175696ba85ee660"><span class="std std-ref">set_propagate_error_callback()</span></a> or <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_1a33fb92b1fcef732b41e4c57fe8b67aa9"><span class="std std-ref">set_callbacks_from()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cb</strong> – The function object to be called in the case of an error. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the function object has been invoked immediately, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN7dolbyio5comms6detail16low_level_solverIv6traitsEE">
+<span id="_CPPv3I0EN7dolbyio5comms6detail16low_level_solverIv6traitsEE"></span><span id="_CPPv2I0EN7dolbyio5comms6detail16low_level_solverIv6traitsEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">traits</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">low_level_solver</span></span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN7dolbyio5comms6detail16low_level_solverIv6traitsEE" title="dolbyio::comms::detail::low_level_solver&lt;void, traits&gt;::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_shared_from_this</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE16low_level_solverEN17async_result_tags13low_level_tagE" title="dolbyio::comms::detail::low_level_solver&lt;void, traits&gt;::low_level_solver"><span class="n"><span class="pre">low_level_solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN7dolbyio5comms6detail16low_level_solverIv6traitsEE" title="dolbyio::comms::detail::low_level_solver&lt;void, traits&gt;::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4I0EN7dolbyio5comms6detail16low_level_solverIv6traitsEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A specialized template of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> class that wraps void results. </p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> provides a low-level API. The user of this class must adhere to the following rules:<ul class="simple">
+<li><p>Each <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> must be resolved with success or failure only once</p></li>
+<li><p>Each <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> can construct the <a class="reference internal" href="#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> value only once</p></li>
+<li><p>If any callbacks are set on the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a>, the solver must be resolved and then destroyed</p></li>
+<li><p>Each <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> must be created using the std::make_shared function</p></li>
+</ul>
+</p>
+<p>We do not recommend using the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>traits</strong> – The traits type. </p>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE16low_level_solverEN17async_result_tags13low_level_tagE">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsE16low_level_solverEN17async_result_tags13low_level_tagE"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsE16low_level_solverEN17async_result_tags13low_level_tagE"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::low_level_solver__async_result_tags::low_level_tag"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1af51ff82b4ea4212457dd7fdfc543d930"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">low_level_solver</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">async_result_tags</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">low_level_tag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE16low_level_solverEN17async_result_tags13low_level_tagE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsED0Ev">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsED0Ev"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsED0Ev"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::~low_level_solver"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1af60d72c19c4a842d7b76da676e8d1e65"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~low_level_solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsED0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_callbacks_fromE20low_level_solver_ptrIv6traitsE">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_callbacks_fromE20low_level_solver_ptrIv6traitsE"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_callbacks_fromE20low_level_solver_ptrIv6traitsE"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::set_callbacks_from__low_level_solver_ptr:void.traits:"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1ae5064d7464605275ca59875a1da58e23"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_callbacks_from</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6detail20low_level_solver_ptrE" title="dolbyio::comms::detail::low_level_solver_ptr"><span class="n"><span class="pre">low_level_solver_ptr</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN7dolbyio5comms6detail16low_level_solverIv6traitsEE" title="dolbyio::comms::detail::low_level_solver&lt;void, traits&gt;::traits"><span class="n"><span class="pre">traits</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_callbacks_fromE20low_level_solver_ptrIv6traitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Chains the current solver with another solver. </p>
+<p>This method must be used only if the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> does not have any callbacks assigned, except for the local error callback. When the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> is resolved, the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1abe58fbb6ce72288b634b9b1b335c24ce"><span class="std std-ref">resolve()</span></a> or <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a734a2a2e6416eae4722497550ab4171e"><span class="std std-ref">fail()</span></a> method of the chained solver is called. If the current <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver"><span class="std std-ref">low_level_solver</span></a> is already resolved, the chained solver is resolved immediately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The shared pointer to the next solver. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE7resolveEv">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsE7resolveEv"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsE7resolveEv"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::resolve"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1abe58fbb6ce72288b634b9b1b335c24ce"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">resolve</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE7resolveEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Resolves the solver. </p>
+<p>If there is a callback stored in the solver, the callback is executed immediately. Otherwise, the callback is invoked when it is assigned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE4failERRNSt13exception_ptrE">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsE4failERRNSt13exception_ptrE"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsE4failERRNSt13exception_ptrE"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::fail__std::exception_ptrRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a734a2a2e6416eae4722497550ab4171e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fail</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">exception_ptr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">error</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE4failERRNSt13exception_ptrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Fails the solver. </p>
+<p>If the error callback is set for the solver, it is invoked. If the current solver is chained with another solver, the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a734a2a2e6416eae4722497550ab4171e"><span class="std std-ref">fail()</span></a> method of that chained solver is invoked. If the current solver is not chained with the next solver, the error is stored to be propagated later.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>error</strong> – The exception pointer that contains the exception. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE12set_callbackERR14result_cb_type">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsE12set_callbackERR14result_cb_type"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsE12set_callbackERR14result_cb_type"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::set_callback__result_cb_typeRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1ac4c25b8d5bb943fcb6bb2b068b64fa3c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_callback</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">result_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE12set_callbackERR14result_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets a result callback. </p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1abe58fbb6ce72288b634b9b1b335c24ce"><span class="std std-ref">resolve()</span></a> method has already been called, the callback is executed immediately. Otherwise, the callback is stored to be invoked when the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1abe58fbb6ce72288b634b9b1b335c24ce"><span class="std std-ref">resolve()</span></a> method is invoked on the solver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cb</strong> – The function object to call when the result is resolved. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the function object has been invoked immediately, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE28set_propagate_error_callbackERR11err_cb_type">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsE28set_propagate_error_callbackERR11err_cb_type"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsE28set_propagate_error_callbackERR11err_cb_type"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::set_propagate_error_callback__err_cb_typeRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a4833f2de3c02617581393669b6dceacb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_propagate_error_callback</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">err_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE28set_propagate_error_callbackERR11err_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets an error callback. </p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a734a2a2e6416eae4722497550ab4171e"><span class="std std-ref">fail()</span></a> method has already been called, the error callback is executed immediately. Otherwise, the callback is stored to be executed when the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a734a2a2e6416eae4722497550ab4171e"><span class="std std-ref">fail()</span></a> method is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cb</strong> – The function object to be called in the case of an error. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the function object has been invoked immediately, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_error_callbackERR11err_cb_type">
+<span id="_CPPv3N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_error_callbackERR11err_cb_type"></span><span id="_CPPv2N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_error_callbackERR11err_cb_type"></span><span id="dolbyio::comms::detail::low_level_solver:void.traits:::set_error_callback__err_cb_typeRR"></span><span class="target" id="classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a3b9d9e42dfbbb72578b2a7715d27340e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_error_callback</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">err_cb_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail16low_level_solverIv6traitsE18set_error_callbackERR11err_cb_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the local error callback. </p>
+<p>If the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a734a2a2e6416eae4722497550ab4171e"><span class="std std-ref">fail()</span></a> method has already been called, the error callback is executed immediately. Otherwise, the callback is stored to be executed when the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a734a2a2e6416eae4722497550ab4171e"><span class="std std-ref">fail()</span></a> method is called.</p>
+<p>The local error callback differs from the error callback that is set by the <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a4833f2de3c02617581393669b6dceacb"><span class="std std-ref">set_propagate_error_callback()</span></a>, where the chaining solvers reset the propagated error callbacks and, in case of errors, only the callback of the last solver is invoked. The local error callbacks are invoked for each solver in the chain.</p>
+<p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a3b9d9e42dfbbb72578b2a7715d27340e"><span class="std std-ref">set_error_callback()</span></a> function must not be invoked after <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1a4833f2de3c02617581393669b6dceacb"><span class="std std-ref">set_propagate_error_callback()</span></a> or <a class="reference internal" href="#classdolbyio_1_1comms_1_1detail_1_1low__level__solver_3_01void_00_01traits_01_4_1ae5064d7464605275ca59875a1da58e23"><span class="std std-ref">set_callbacks_from()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cb</strong> – The function object to be called in the case of an error. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the function object has been invoked immediately, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6detail20low_level_solver_ptrE">
+<span id="_CPPv3N7dolbyio5comms6detail20low_level_solver_ptrE"></span><span id="_CPPv2N7dolbyio5comms6detail20low_level_solver_ptrE"></span><span class="target" id="group__async__ops_1gafc483c409d0a64dc9e1c9915ab2f02d6"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">low_level_solver_ptr</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN7dolbyio5comms6detail16low_level_solverE" title="dolbyio::comms::detail::low_level_solver"><span class="n"><span class="pre">low_level_solver</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">T</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">U</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6detail20low_level_solver_ptrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A shared pointer to the <a class="reference internal" href="#group__async__ops_1gaa43e615836d2d9e9d0a51102320d9c64"><span class="std std-ref">low_level_solver</span></a> object. </p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../injector.html" class="btn btn-neutral float-left" title="Default Media Injector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="log_level.html" class="btn btn-neutral float-right" title="Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

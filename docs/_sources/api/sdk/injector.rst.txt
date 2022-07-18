@@ -1,0 +1,103 @@
+.. _default_injector:
+
+Default Media Injector
+==========================
+
+.. note::
+  The Default Media Injector is intended for Server applications.
+
+The Default Media Injector module provides two different types of injectors: 
+
+- A pass-through injector designed for streaming applications
+- A pacing injector designed for media file injecting applications
+
+Both types of injectors provide connections to :cpp:class:`audio <dolbyio::comms::rtc_audio_source>` and :cpp:class:`video <dolbyio::comms::rtc_video_source>` sinks for the media 
+frames to be passed on to. Each of the injectors accepts :cpp:class:`audio frames <dolbyio::comms::audio_frame>` and :cpp:class:`video frames <dolbyio::comms::video_frame>`.
+
+The main difference between the two injectors is that the paced injector provides a pacing logic, so that it can queue audio and video frames before injecting them into a conference. The passthrough injector accepts the raw audio and video frames and directly relays them to the CoreSDK. Thus, the application is responsible for invoking the frame injection 
+interface quickly.
+
+
+Media Source for Injector
+_________________________
+Neither of the default injectors provide infrastructure for capturing and decoding media. This is the application's responsibility; once it has decoded media frames, it can pass them to either of the
+aforementioned injectors. We have provided a sample library to showcase how to create a Media Injection Source. This sample library, called **media_source_file**, reads media from a mov/mp4 file 
+and using the Paced Injector injects the audio and video frames into the CoreSDK. This **media_source_file** library is utilized by the provided sample application to inject media files. The 
+:ref:`getting_started_server` page describes how to get media injection running with the sample application. A brief overview of the library is provided :ref:`below <media_source_file>`.
+
+The audio provided to the injector, contained by the :cpp:class:`audio frame <dolbyio::comms::audio_frame>`, should have the following specifications:
+
+.. table::
+
+  +-------+--------------+---------+
+  | Codec |    Size      | Format  |
+  +=======+==============+=========+
+  | PCM   | 10ms of data | s16_Int |
+  +-------+--------------+---------+
+
+The CoreSDK expects these 10ms chunks of PCM audio to be provided every 10ms. The video frames provided to the Injector, contained in :cpp:class:`video frames <dolbyio::comms::video_frame>`, must be YUV 
+pixels.
+
+Passthrough Injector
+____________________
+The Passthrough Injector acts as a proxy to the RTC Audio/Video sources. A Media Injection Source uses the :cpp:func:`audio <dolbyio::comms::plugin::injector_passthrough::inject_audio_frame>`
+and the :cpp:func:`video <dolbyio::comms::plugin::injector_passthrough::inject_video_frame>` methods to pass frames to the Passthrough Injector, which in turn relays these frames to the CoreSDK.
+
+.. doxygenclass:: dolbyio::comms::plugin::injector_passthrough
+        :project: C++ SDK
+
+Paced Injector
+______________
+The Paced Injector ensures that an application provides media frames to the CoreSDK at desired intervals. This is useful for applications that read from media files and produce frames quite quickly. The Paced Injector provides audio to 
+the CoreSDK in intervals of 10ms and has a configurable option for the video frame interval that specifies how quickly video frames should be provided. The injector
+provides frames at these intervals by temporarily storing audio and video in queues. These queues have a limited size; they can store up to 1 second of audio and 300-400ms of video. When the queues are filled, the thread 
+pushing to the queues is blocked until a free space is available. The Paced Injector also provides methods for managing the pace, such as starting and stopping the pacing threads, clearing the 
+queues, and setting the video frame interval. If media file injection is paused by the injection source, silence should be injected into the conference to avoid AV sync issues when resuming the injection.
+The Paced Injector also provides a method for injecting silent audio frames in 10ms chunks into the conference.
+
+.. doxygenclass:: dolbyio::comms::plugin::injector_paced
+        :project: C++ SDK
+
+
+Media Injection Status
+______________________
+The Media Injection Status is a structure that depicts the status of the injector. It is passed to the application when the status changes.
+
+.. doxygenstruct:: dolbyio::comms::plugin::media_injection_status
+        :project: C++ SDK
+
+.. _media_source_file:
+
+Media File Source Sample
+__________________________________
+The Media Source File sample library is a simple library that makes use of LibAV to read, demux, and decode audio and video frames. The top-level entity of this class is 
+**dolbyio::comms::sample::file_source** that takes an instance of the Paced Injector and creates a capture thread that parses and decodes media. When a media frame is decoded, this entity pushes the frame to the Paced Injector.
+
+The Media File Source sample library provides the ability to parse the following types of media files:
+
+  +-----------+
+  | Container |
+  +===========+
+  |    MP4    |
+  +-----------+
+  |    MOV    |
+  +-----------+
+
+The Media File Source sample is able to decode the following video and audio codecs:
+
+  +-------+--------------+---------------------+
+  | Codec |    Type      | Sample/Pixel Format |
+  +=======+==============+=====================+
+  | AAC   |    Audio     |   float, planar     |
+  +-------+--------------+---------------------+
+  | H264  |   Video      |      YUV            |
+  +-------+--------------+---------------------+
+
+The library is included along with proper CMake file in the package under **share/dolbyio/comms/sample/media_source/** directory. A sample of the top-level object
+of the Media Source File library is in the following files:
+
+.. literalinclude:: ../../../src/public/comms/sample/media_source/file/source_capture.h
+  :language: c++
+
+.. literalinclude:: ../../../src/public/comms/sample/media_source/file/source_capture.cc
+  :language: c++

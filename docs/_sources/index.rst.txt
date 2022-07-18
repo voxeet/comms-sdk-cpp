@@ -1,0 +1,56 @@
+C++ SDK |release| Documentation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This is the HTML documentation of the C++ SDK.
+
+Overview
+""""""""
+The Dolby.io Communications C++ SDK provides both Client and Server applications the ability to create HD voice and video for fully immersive real-time communications and streaming experiences. The C++SDK allows creating an application that can join Dolby.io conferences.
+
+The C++ SDK is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, as well as
+receiving and injecting WebRTC media streams.
+
+Currently, an instance of the C++ SDK can connect to only one conference at a time. Joining multiple conferences at a time requires running multiple instances of the application.
+
+Client Applications
+===================
+
+Using the Dolby.io Communications C++SDK Client applications have the ability to join Dolby Voice Conferences where they can send and receive HD voice streams, including spatial audio and shared scenes. This functionality is useful for integrating the HD Dolby Voice experience into your own game engine or virtual world experience.
+To offer this functionality, the C++ SDK provides applications the ability to capture and playback audio, manage input/output Audio Devices, add spatial placement for participants as well as partake in a shared spatial scene.
+
+Server Applications
+===================
+
+Using the Dolby.io Communications C++ SDK, Server applications have the ability to record and store high-quality voice and video calls on your server. This functionality is especially useful if you want full control over the audio and video recording. The C++ SDK also provides the ability to inject audio and video streams from the server into the conference. This functionality can be used to inject the audio and
+video stored in some media file on the server into the conference. After joining a Dolby.io conference, the C++ SDK offers the functionality to record the incoming audio and video streams for desired conference participants. This application runs in your infrastructure and not on Dolby.io.
+
+To record conferences, the C++ SDK uses a Media Recorder that allows the processing and storing of video frames from the incoming WebRTC media streams. The C++ SDK provides a default media recorder plugin and access to the Media Recorder API to create a custom Media Recorder.
+The default media recorder plugin is a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format.
+If you have specific recording requirements, use the Media Recorder API to create a custom recording module. To inject media into conferences the SDK uses a Media Injector that allows injecting raw audio and video
+frames into the WebRTC conference. The C++ SDK provides two default media injection plugins that are able to receive raw media frames and pass them to WebRTC. One of the default plugins is the
+Pacing Injector, which exposes an interface for an application to pass it decoded audio and video, it then provides these frames to WebRTC at specified intervals. This version of the plugin is suitable for
+injection of media files for instance. The second default injection plugin is the Passthrough Injector, which exposes the same interface to the application for injecting frames, but this plugin directly
+relays the frames it receives to WebRTC without any internal pacing. The media injection plugins do not provide the capturing of audio or video; instead they serve in constructing the respective media
+injection pipelines. It is the application's responsibility to perform the audio and video capture and provide the decoded frames to the injector plugin.
+
+
+
+Table of Contents
+-----------------
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   Overview <self>
+   other/getting_started
+   other/supported_platforms
+   other/run_time_deps
+   api/coresdk
+   api/media_recording
+   api/media_injection
+
+Indices and tables
+------------------
+* :ref:`genindex`
+* :ref:`search`

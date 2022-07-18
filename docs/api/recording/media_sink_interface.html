@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media Sink Interface &mdash; C++ SDK 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Audio Sink Interface" href="audio.html" />
+    <link rel="prev" title="Media Recording API" href="../media_recording.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_recording.html">Media Recording API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Media Sink Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Sink Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="encoded_video.html">Encoded Video Sink Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raw_video.html">Raw Video Sink Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Media Recording Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../media_recording.html">Media Recording API</a> &raquo;</li>
+      <li>Media Sink Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/recording/media_sink_interface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="media-sink-interface">
+<span id="api-media-capturer-interface"></span><h1>Media Sink Interface<a class="headerlink" href="#media-sink-interface" title="Permalink to this heading"></a></h1>
+<p>#include &lt;comms/media/media_engine.h&gt;</p>
+<p>Top level interface which exposes the underlying sink interfaces for receiving and handling audio, raw video and encoded video data. This abstract class just exposes
+the three possible sink interfaces: <a class="reference internal" href="raw_video.html#_CPPv4N7dolbyio5comms14video_sink_yuvE" title="dolbyio::comms::video_sink_yuv"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">raw</span> <span class="pre">video</span></code></a>, <a class="reference internal" href="encoded_video.html#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="dolbyio::comms::video_sink_encoded"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">encoded</span> <span class="pre">video</span></code></a>
+and <a class="reference internal" href="audio.html#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span></code></a>.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20media_sink_interfaceE">
+<span id="_CPPv3N7dolbyio5comms20media_sink_interfaceE"></span><span id="_CPPv2N7dolbyio5comms20media_sink_interfaceE"></span><span id="dolbyio::comms::media_sink_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1media__sink__interface"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">media_sink_interface</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20media_sink_interfaceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface that is a sink for the Conference Service, where audio and video data for a specific conference are stored. </p>
+<p>Subclassed by <a class="reference internal" href="../sdk/recorder.html#classdolbyio_1_1comms_1_1plugin_1_1recorder"><span class="std std-ref">dolbyio::comms::plugin::recorder</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20media_sink_interface5audioEv">
+<span id="_CPPv3N7dolbyio5comms20media_sink_interface5audioEv"></span><span id="_CPPv2N7dolbyio5comms20media_sink_interface5audioEv"></span><span id="dolbyio::comms::media_sink_interface::audio"></span><span class="target" id="classdolbyio_1_1comms_1_1media__sink__interface_1ae2aa9639c0303d154373da36ea70200c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="audio.html#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><span class="n"><span class="pre">audio_sink</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">audio</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20media_sink_interface5audioEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the raw audio sink interface. Override this method to provide access to the Audio Sink implementation. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Recording the audio in the conference is a server-side use-case. Using a <a class="reference internal" href="#classdolbyio_1_1comms_1_1media__sink__interface"><span class="std std-ref">media_sink_interface</span></a> which returns a non-null <a class="reference internal" href="audio.html#classdolbyio_1_1comms_1_1audio__sink"><span class="std std-ref">audio_sink</span></a> has severe implications for the media pipeline: the DVC codec is disabled, and the DVC-enabled conferences will use Opus; a fake audio device is used for handling conference audio - the real speakers and microphone will not be used. It is not possible to record the conference audio and have the input provided by the real microphone.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to the audio sink. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20media_sink_interface9video_yuvEv">
+<span id="_CPPv3N7dolbyio5comms20media_sink_interface9video_yuvEv"></span><span id="_CPPv2N7dolbyio5comms20media_sink_interface9video_yuvEv"></span><span id="dolbyio::comms::media_sink_interface::video_yuv"></span><span class="target" id="classdolbyio_1_1comms_1_1media__sink__interface_1af6166ea8aca81ca83521759a4f29d3f6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="raw_video.html#_CPPv4N7dolbyio5comms14video_sink_yuvE" title="dolbyio::comms::video_sink_yuv"><span class="n"><span class="pre">video_sink_yuv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">video_yuv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20media_sink_interface9video_yuvEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the raw video sink interface. Override this method to provide access to the Raw Video Sink custom implementation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to the YUV video sink. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20media_sink_interface9video_encEv">
+<span id="_CPPv3N7dolbyio5comms20media_sink_interface9video_encEv"></span><span id="_CPPv2N7dolbyio5comms20media_sink_interface9video_encEv"></span><span id="dolbyio::comms::media_sink_interface::video_enc"></span><span class="target" id="classdolbyio_1_1comms_1_1media__sink__interface_1aa50d048224dc53db0156a3c273a833fe"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="encoded_video.html#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="dolbyio::comms::video_sink_encoded"><span class="n"><span class="pre">video_sink_encoded</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">video_enc</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20media_sink_interface9video_encEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the encoded video sink interface. Override this method to provide access to the Encoded Video Sink implementation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to the encoded video sink. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../media_recording.html" class="btn btn-neutral float-left" title="Media Recording API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="audio.html" class="btn btn-neutral float-right" title="Audio Sink Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

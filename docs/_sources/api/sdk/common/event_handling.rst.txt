@@ -1,0 +1,22 @@
+.. _api_event_handling:
+
+Event Handling Interface 
+========================
+#include <comms/event_handling.h>
+
+The event handler connection interface is used for handling subscriptions to events which can be emitted by the SDK. The user will utilize either
+:cpp:func:`sdk::add_event_handler <dolbyio::comms::sdk::add_event_handler>` or :cpp:func:`conference::add_event_handler <dolbyio::comms::services::conference::add_event_handler>` to subscribe to an events.
+
+  - In order to subscribe to an event the user will provide a callback of type :cpp:type:`event_handler <dolbyio::comms::event_handler>` to be invoked by the SDK when th event occurrs.
+  - The user will receive a :cpp:class:`event_handler_connection <dolbyio::comms::event_handler_connection>` for each event they subscribe to. This connection is to be used to disconnect a event listener.
+  - When subscription is finished the user will be returned an :cpp:type:`event_handler_id <dolbyio::comms::event_handler_id>` which is a unique pointer to an :cpp:class:`event_handler_connection <dolbyio::comms::event_handler_connection>`.
+
+.. doxygentypedef:: dolbyio::comms::event_handler
+        :project: C++ SDK
+
+.. doxygentypedef:: dolbyio::comms::event_handler_id
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::event_handler_connection
+        :project: C++ SDK
+

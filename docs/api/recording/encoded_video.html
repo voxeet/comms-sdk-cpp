@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encoded Video Sink Interface &mdash; C++ SDK 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Raw Video Sink Interface" href="raw_video.html" />
+    <link rel="prev" title="Audio Sink Interface" href="audio.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_recording.html">Media Recording API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="media_sink_interface.html">Media Sink Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Sink Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Encoded Video Sink Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="raw_video.html">Raw Video Sink Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Media Recording Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../media_recording.html">Media Recording API</a> &raquo;</li>
+      <li>Encoded Video Sink Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/recording/encoded_video.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="encoded-video-sink-interface">
+<span id="api-record-encoded"></span><h1>Encoded Video Sink Interface<a class="headerlink" href="#encoded-video-sink-interface" title="Permalink to this heading"></a></h1>
+<p>#include &lt;comms/media/media_engine.h&gt;</p>
+<p>The interface for handling encoded video frames. Application must set listeners which override both of the virtual functions. The
+<a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE" title="dolbyio::comms::video_sink_encoded::handle_frame_encoded"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">handle_frame_encoded</span></code></a> function is called after the RTP data is depacktized and an encoded frame
+is constructed. This function will be executed on the Webrtc DecodingQueue thread created for the track to which the encoded frames belong.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encodedE">
+<span id="_CPPv3N7dolbyio5comms18video_sink_encodedE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encodedE"></span><span id="dolbyio::comms::video_sink_encoded"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">video_sink_encoded</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface for receiving the encoded video frames. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_configE">
+<span id="_CPPv3N7dolbyio5comms18video_sink_encoded14decoder_configE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded14decoder_configE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a1a12ed730277e07bdeb6b19b7d522c09"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">decoder_config</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_configE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The desired configuration of the decoder passing frames to this encoded sink. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE">
+<span id="_CPPv3N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a1a12ed730277e07bdeb6b19b7d522c09a59f0b5afe649ae9eaf8350d0af9ddb71"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">full_decoding</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The decoder will decode every single frame. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE">
+<span id="_CPPv3N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a1a12ed730277e07bdeb6b19b7d522c09a8d29e67aba1633407df2512468460548"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">optimized_decoding</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The decoder will only decode the first frame. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded22configure_encoded_sinkERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms18video_sink_encoded22configure_encoded_sinkERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded22configure_encoded_sinkERKNSt6stringERKNSt6stringE"></span><span id="dolbyio::comms::video_sink_encoded::configure_encoded_sink__ssCR.ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1ab07e55e44d6ceb471762465af0fa9b40"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_configE" title="dolbyio::comms::video_sink_encoded::decoder_config"><span class="n"><span class="pre">decoder_config</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configure_encoded_sink</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">codec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">track_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded22configure_encoded_sinkERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The callback that is invoked when a new video track is available. The callback allows setting the corresponding codec for the video track. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>codec</strong> – The codec of the video track. </p></li>
+<li><p><strong>track_id</strong> – The ID of the video track.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – The sink would like to use optimized decoding, meaning that all incoming video frames are discarded and not decoded after being passed to the handle_frame_encoded function. </p></li>
+<li><p><strong>false</strong> – The sink would like to use full decoding, meaning that all the incoming frames are decoded. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE">
+<span id="_CPPv3N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE"></span><span id="dolbyio::comms::video_sink_encoded::handle_frame_encoded__ssCR.std::unique_ptr:encoded_video_frame:"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a0d33ded11ce3737c8b4b48d44a4f1942"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_frame_encoded</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">track_id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">encoded_video_frame</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The callback that is invoked when a new encoded video frame is ready to be processed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>track_id</strong> – The ID of the video track. </p></li>
+<li><p><strong>frame</strong> – The encoded video frame. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<p>See <a class="reference internal" href="example.html#recording-example"><span class="std std-ref">Example Recorder Implementation</span></a> for a template for child recording class for all possible media.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="audio.html" class="btn btn-neutral float-left" title="Audio Sink Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="raw_video.html" class="btn btn-neutral float-right" title="Raw Video Sink Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

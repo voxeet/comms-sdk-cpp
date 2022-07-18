@@ -1,0 +1,27 @@
+.. _api_media_injection:
+
+Media Injection API
+___________________
+
+.. note::
+   The Media Injection feature of the C++SDK is intended for Server applications.
+
+
+The Media Injection API provides interfaces for writing modules that inject audio/video frames into the CoreSDK. The API provides the ability to create a module that accepts raw video/audio 
+frames from any media source and passes them to respective sinks: :cpp:class:`RTCAudio <dolbyio::comms::rtc_audio_source>` and :cpp:class:`RTCVideo <dolbyio::comms::rtc_video_source>`. A media sink from
+the perspective of the injector is a media source from the perspective of the CoreSDK. The media is then encoded and the streams are sent into the conference. The C++ SDK provides a 
+default injector module, explained in the :ref:`Default Injector <default_injector>` section, which the application can instantiate and provide raw frames to. This Default Injector module then takes 
+care of getting the frames to the CoreSDK. The API for injecting media streams uses a pattern of setting producer objects, which are C++ classes with pure virtual functions. The virtual functions for 
+connecting :cpp:class:`RTCAudioSource <dolbyio::comms::rtc_audio_source>` and :cpp:class:`RTCVideoSource <dolbyio::comms::rtc_video_source>` to an injector are exposed through the 
+:cpp:class:`audio <dolbyio::comms::audio_source>` and :cpp:class:`video <dolbyio::comms::video_source>` source interface. The injector provides media frames to these RTC sources. The custom injector 
+must also implement the :cpp:class:`dolbyio::comms::media_source_interface`, which is the interface through which the injector is provided to the Conference Service.
+
+.. toctree::
+  :maxdepth: 2
+  :titlesonly:
+  :glob:
+
+  injection/media_source_interface.rst
+  injection/audio.rst
+  injection/video.rst
+  injection/example.rst

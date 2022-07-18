@@ -1,0 +1,51 @@
+.. _api_exception:
+
+SDK Exceptions
+==============
+#include <comms/exception.h>
+
+Exception's which can be thrown by the SDK and caught by user. These have been left defined
+
+.. doxygenclass:: dolbyio::comms::exception
+        :project: C++ SDK
+        
+.. doxygenclass:: dolbyio::comms::async_operation_canceled
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::json_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::jwt_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::io_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::http_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::restapi_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::session_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::services::session::state_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::conference_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::conference_state_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::media_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::dvc_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::certificate_exception
+        :project: C++ SDK
+
+

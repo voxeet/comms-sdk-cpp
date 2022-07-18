@@ -1,0 +1,56 @@
+.. _api_session:
+
+Session Service
+===============
+The Session Service provides the ability to log in and out of the Dolby.io backend. Logging in to the backend is necessary to use any of the conferencing features
+provided by the SDK.
+
+The basic usage of the session service is:
+  1) Log in to the session using the :cpp:func:`session::open <dolbyio::comms::services::session::open>` command.
+  2) Listen to a conference and record it. For more information, see the :ref:`api_conference`.
+  3) Log out of the session using the :cpp:func:`session::close <dolbyio::comms::services::session::close>` method.
+
+.. _sess_serv:
+
+Session Interface
+-----------------
+#include <comms/session.h>
+
+The methods of the Session Interface provide the ability to connect to the Dolby.io
+backend. The session service methods are all asynchronous in nature. For more information, refer to :ref:`api_async_result`. The structures defined in the interface
+are used by and returned by methods of the interface.
+
+
+.. doxygenclass:: dolbyio::comms::services::session 
+        :project: C++ SDK
+
+Other Structures
+----------------
+Other structures used by the :ref:`api_session`, which are not defined in the :ref:`sess_serv` interface.
+
+.. doxygenenum:: dolbyio::comms::notification_subscription_type
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::notification_subscription
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::subscription_events::conference
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::subscription_events::participant_joined
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::subscription_events::participant_left
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::subscription_events::active_participants
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::subscription_events::conference_status
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::subscription_events::conference_created
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::subscription_events::conference_ended
+        :project: C++ SDK

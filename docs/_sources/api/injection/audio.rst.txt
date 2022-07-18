@@ -1,0 +1,25 @@
+.. _api_inject_audio:
+
+Audio Source Interface
+========================
+#include <comms/media/media_engine.h>
+
+The interface through which raw audio frames are provided to the CoreSDK. This audio source must provide signed 16 bit PCM data in 10ms chunks at 10ms intervals. Application writers who want to 
+implement this source must override the two virtual functions of :cpp:func:`registering <dolbyio::comms::audio_source::register_audio_frame_rtc_source>` and 
+cpp:func:`deregistering <dolbyio::comms::audio_source::deregister_audio_frame_rtc_source>` the RTC Audio Source on the Injector. Attaching the RTC Audio source to the injector establishes the audio
+pipeline so that frames can be passed to the CoreSDK.
+
+.. doxygenclass:: dolbyio::comms::audio_source
+        :project: C++ SDK
+
+The :cpp:class:`RTC Audio Source <dolbyio::comms::rtc_audio_source>` is NOT to be implemented by the application. This is the interface through which the injector can view its own Audio Sink. After 
+receiving audio frames from some media source, the injector provides the raw audio frames to this RTC Audio Source. The provided audio is expected to be in 10ms chunks provided every 10ms. 
+The RTC Audio Source then pushes the audio data further down the audio pipeline until it is injected into the conference. The RTC Audio Source expects :cpp:class:`audio frames <dolbyio::comms::audio_frame>`.
+
+.. doxygenclass:: dolbyio::comms::rtc_audio_source
+	:project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::audio_frame
+	:project: C++ SDK
+
+See :ref:`injection_example` for an example of child injection class for all possible media.

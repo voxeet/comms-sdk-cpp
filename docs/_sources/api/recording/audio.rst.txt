@@ -1,0 +1,14 @@
+.. _api_record_audio:
+
+Audio Sink Interface
+========================
+#include <comms/media/media_engine.h>
+
+The interface for handling incoming audio frames. Applications must set listener which override the virtual function. The 
+:cpp:func:`handle_audio <dolbyio::comms::audio_sink::handle_audio>` function is called with the decoded PCM audio data. When inside a conference the 
+C++ SDK will receive a single audio stream which contains the mixed audio of all unmuted participants within that conference. 
+
+.. doxygenclass:: dolbyio::comms::audio_sink
+        :project: C++ SDK
+
+See :ref:`recording_example` for a template for child recording class for all possible media.

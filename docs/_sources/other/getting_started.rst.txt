@@ -1,0 +1,387 @@
+.. _getting_started:
+
+Getting Started
+===============
+A comprehensive getting started guide can be found here: https://docs.dolby.io/communications-apis/docs/scpp-getting-started.
+
+Contents of the SDK package
+---------------------------
+The following table lists the contents of the C++ SDK package:
+
+ +---------------+-----------------------------------------------------------------------------------+
+ | Directory     |   Contents                                                                        |
+ +===============+===================================================================================+
+ | include       | Header files making up the Public API                                             |
+ +---------------+-----------------------------------------------------------------------------------+
+ | lib           | Shared libraries constituting the C++ SDK                                         |
+ +---------------+-----------------------------------------------------------------------------------+
+ | share         | Cmake files for building target, samples, docs, and licenses                      |
+ +---------------+-----------------------------------------------------------------------------------+
+
+CA certificates
+---------------
+The SDK uses Certificate Authority (CA) certificates to authenticate the identity of the remote servers during an SSL handshake. The SDK library provides two options for selecting CA Certificates:
+
+- The SDK library comes with built-in CA Certificates that are used by default. 
+- The SDK library checks the value of the **DOLBYIO_COMMS_CA_CERT_FILE** environment variable. If the ENV variable points to a proper certificate file, these certificates are loaded.
+
+The SDK does not try to use the system-installed CA cert files.
+
+Getting the Access Token
+------------------------
+Applications using the C++ SDK must provide an access token when creating the SDK. The sample applications provided as a part of the sdk-release package require the access token to be provided as a command line parameter when launching the executable. To get the access token from the Dolby.io dashboard, follow these instructions: https://docs.dolby.io/communications-apis/docs/overview-developer-tools 
+
+After getting the access token you are on your way to build and run the :ref:`Server <getting_started_server>` or :ref:`Client <getting_started_client>` Sample Applications.  
+
+Spatial Audio Conferences
+-------------------------
+If you join a Spatial Audio conference with either :ref:`getting_started_client` and :ref:`getting_started_server`, your Spatial Position must be set before you can hear or be heard by other participants in the conference. All sample applications set the default Spatial Position for local participant to (0,0,0). For more information on interactively changing the position plese refer the interactive commands section of the aforementioned sample applications.
+
+.. _getting_started_client:
+
+Client Sample Application
+-------------------------
+A basic Client C++ sample application allows joining a conference, using spatial audio configurations, sending the local participant's audio into the conference, and playing audio received from the conference. The application is available in the **sdk-release/share/dolbyio/comms/sample/client_app/** directory of the package. This directory contains C++ code for the application and the respective CMakeLists.txt file, which you can use to build the application.
+
+The steps performed by the sample application are:
+
+  1) Parse command line parameters (user access token, user name, and conference alias or conference ID must be provided).
+  2) :cpp:func:`Create and Initialize <dolbyio::comms::sdk::create>` the SDK.
+  3) :cpp:func:`Open <dolbyio::comms::services::session::open>` a Dolby.io session. The session::open call returns a :cpp:struct:`user_info <dolbyio::comms::services::session::user_info>` object which contains the participant ID.
+  4) :cpp:func:`Create <dolbyio::comms::services::conference::create>` and :cpp:func:`Join <dolbyio::comms::services::conference::join>` a specific conference.
+  5) Provide locally captured audio to the conference and playback received audio.
+  6) If joining a Spatial Audio Conference set the local participant's initial position in a spatial audio conference. This requires using the participant ID returned by the :cpp:func:`Open <dolbyio::comms::services::session::open>` method. A spatial position must be set for your participant before you can hear other participants and they can hear you.
+  7) Manage local audio devices using the :cpp:class:`device_management <dolbyio::comms::services::device_management>` interface.
+  8) :cpp:func:`Leave <dolbyio::comms::services::conference::leave>` the conference.
+  9) :cpp:func:`Close <dolbyio::comms::services::session::close>` the Dolby.io session.
+
+The sample application makes use of the :cpp:func:`dolbyio::comms::wait` call for all asynchronous operations. 
+
+Build and run the sample application
+_______________________________________
+
+1. Build the sample application in a few simple steps from the **sample/** directory.
+
+.. code-block:: console
+
+        $ cd sdk-release/share/dolbyio/comms/sample/
+        $ mkdir build
+        $ cd build/ && cmake ../
+        $ cmake --build .
+	[ 12%] Building CXX object utilities/CMakeFiles/interactor_utils.dir/commands_handler.cc.o
+	[ 25%] Building CXX object utilities/CMakeFiles/interactor_utils.dir/sdk/interactions.cc.o
+	[ 37%] Building CXX object utilities/CMakeFiles/interactor_utils.dir/sdk/events.cc.o
+	[ 50%] Linking CXX static library libinteractor_utils.a
+	[ 50%] Built target interactor_utils
+	[ 62%] Building CXX object utilities/CMakeFiles/client_utils.dir/sdk/device_manager/interactions.cc.o
+	[ 75%] Linking CXX static library libclient_utils.a
+	[ 75%] Built target client_utils
+	[ 87%] Building CXX object client_app/CMakeFiles/client_app.dir/client_app.cc.o
+	[100%] Linking CXX executable client_app
+	[100%] Built target client_app
+
+2. Run the created **client_app** executable using the following command line parameters
+
+ +--------------+--------------------------------------------+
+ | Argument     | Description                                |
+ +==============+============================================+
+ | -u           | The User Name                              |
+ +--------------+--------------------------------------------+
+ | -e           | The External ID                            |
+ +--------------+--------------------------------------------+
+ | -k           | The Access Token                           |
+ +--------------+--------------------------------------------+
+ | -c           | Conference Alias (DEMO to join demo conf)  |
+ +--------------+--------------------------------------------+
+ | -t           | Conference Access Token                    |
+ +--------------+--------------------------------------------+
+ | -i           | Conference ID                              |
+ +--------------+--------------------------------------------+
+ | -l           | Logging Level (0-5)                        |
+ +--------------+--------------------------------------------+
+ | -j           | User type (user or listener)               |
+ +--------------+--------------------------------------------+
+ | -s           | Send Only Mode                             |
+ +--------------+--------------------------------------------+
+ | -m           | Initial media to send                      |
+ +--------------+--------------------------------------------+
+ | -spatial     | Spatial Audio (shared|individual|disabled) |
+ +--------------+--------------------------------------------+
+ | -force_opus  | Force Opus Codec for Conference (yes|no)   |
+ +--------------+--------------------------------------------+
+ | -log_speaker | Log the Active Speaker changes  (yes|no)   |
+ +--------------+--------------------------------------------+
+
+For example:
+
+.. code-block:: console
+        
+        $ ./client_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -j user -m A -spatial shared
+
+.. note::
+	Providing **-i** command line parameter with Conference ID preceed all other options and the application will join the Conference with that ID (this conference must exist). Providing **-c** with alias will have the application join
+	a conference with Alias, if it does not exist already on the Dolby.io backend the application will create the conference and then join. Providing **-c** command line parameter with **DEMO** as the alias will have the application
+	create and join the demo conference.
+	If you do not provide **CONFERENCE_ID** nor **CONFERENCE_ALIAS** command line switches when joining the application will open a Session with the Dolby.io backend and wait for interactions listen below. In such scenario it is possible
+	to listen for Subscription/Invitation events, get Invited to conferences and Invite others to Conferences.
+
+
+3. Interact with the **client_app** executable using one of the following command line options which can be provided whilst the application is running. The application will prompt the user for input and
+explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well. 
+
+ +--------------------+--------------------------------------------------------------+
+ | Option             | Description                                                  |
+ +====================+==============================================================+
+ | q                  | Quit application                                             |
+ +--------------------+--------------------------------------------------------------+
+ | stop-audio         | Stop Local Audio                                             |
+ +--------------------+--------------------------------------------------------------+
+ | start-audio        | Start Local Audio                                            |
+ +--------------------+--------------------------------------------------------------+
+ | stop-audio-remote  | Stop Remote Audio (Only Dolby Voice Conferences)             |
+ +--------------------+--------------------------------------------------------------+
+ | start-audio-remote | Start Remote Audio (Only Dolby Voice Conferences)            |
+ +--------------------+--------------------------------------------------------------+
+ | m                  | Send message into conference                                 |
+ +--------------------+--------------------------------------------------------------+
+ | P                  | List conference participants                                 |
+ +--------------------+--------------------------------------------------------------+
+ | S                  | Set spatial audio configuration                              |
+ +--------------------+--------------------------------------------------------------+
+ | mute               | Mute Microphone                                              |
+ +--------------------+--------------------------------------------------------------+
+ | unmute             | Unmute Microphone                                            |
+ +--------------------+--------------------------------------------------------------+
+ | mute-remote        | Mute Remote Participant (Only Non-Dolby Voice Conferences)   |
+ +--------------------+--------------------------------------------------------------+
+ | unmute-remote      | Unmute Remote Participant (Only Non-Dolby Voice Conferences) |
+ +--------------------+--------------------------------------------------------------+
+ | k                  | Set output audio mute                                        |
+ +--------------------+--------------------------------------------------------------+
+ | K                  | Set output audio unmute                                      |
+ +--------------------+--------------------------------------------------------------+
+ | invite             | Invite participant to Conference                             |
+ +--------------------+--------------------------------------------------------------+
+ | subscribe          | Subscribe to all Conference events                           |
+ +--------------------+--------------------------------------------------------------+
+ | unsubscribe        | Unubscribe from all Conference events                        |
+ +--------------------+--------------------------------------------------------------+
+ | join               | Join a conference by providing ID                            |
+ +--------------------+--------------------------------------------------------------+
+ | create             | Create a Conference providing Alias                          |
+ +--------------------+--------------------------------------------------------------+
+ | accept             | Accept a Conference Invitation                               |
+ +--------------------+--------------------------------------------------------------+
+ | decline            | Decline a Conference Invitation                              |
+ +--------------------+--------------------------------------------------------------+
+
+
+.. note::
+	For an optimal experience with the client application, please use only the interactive options shown above. While running the application, the interactive options "V" and "v" are displayed as 
+	possible options. Do not use these as video is not supported for Client Applications yet.
+
+
+.. _getting_started_server:
+
+Server Sample Application
+--------------------------
+A basic Server C++ sample application allows joining a conference, recording streams using the default recorder, and injecting streams using the default injector and sample media source file library. 
+The application is available in the **sdk-release/share/dolbyio/comms/share/sample/server_app/** directory of the package. This directory contains C++ code for the application and the respective 
+CMakeLists.txt file, which can be used to build the application.
+
+The sample application can perform the following steps:
+
+  1) Parse command line parameters (user access token, user name, and conference alias or conference ID must be provided).
+  2) :cpp:func:`Create and Initialize <dolbyio::comms::sdk::create>` the SDK.
+  3) :cpp:func:`Create <dolbyio::comms::plugin::recorder::create>` an instance of the :ref:`Default Media Recorder <api_recorder>`.
+  4) :cpp:func:`Configure <dolbyio::comms::plugin::recorder::set_recording_config>` the instance of the Media Recorder to capture PCM audio and Encoded Video.
+  5) :cpp:func:`Set <dolbyio::comms::services::conference::set_media_sink>` the recorder instance as the media sink for the Conference Service.
+  6) :cpp:class:`Create <dolbyio::comms::plugin::injector_paced>` an instance of the :ref:`Default Media Injector <default_injector>`.
+  7) :ref:`Create <media_source_file>` an instance of the Media Source File module and provide it the previously created injector.
+  8) :cpp:func:`Set <dolbyio::comms::services::conference::set_media_source>` the injector instance as the media source for the Conference Service.
+  9) :cpp:func:`Open <dolbyio::comms::services::session::open>` a Dolby.io session.
+  10) :cpp:func:`Create <dolbyio::comms::services::conference::create>` and/or :cpp:func:`Join <dolbyio::comms::services::conference::join>` a specific conference.
+  11) After joining a conference with audio/video set to be injected to the conference, start capturing media using the Media Source File library.
+  12) If joining a Spatial Audio Conference set the local participant's initial position in a spatial audio conference. This requires using the participant ID returned by the :cpp:func:`Open <dolbyio::comms::services::session::open>` method. A spatial position must be set for your participant before you can hear other participants and they can hear you.
+  13) :cpp:func:`Leave <dolbyio::comms::services::conference::leave>` the respective conference.
+  14) Finally, :cpp:func:`close <dolbyio::comms::services::session::close>` the Dolby.io session.
+
+The sample application makes use of the :cpp:func:`dolbyio::comms::wait` call for all asynchronous operations. Additionally, the sample application makes use of the Default Media Recorder module. If you prefer to write your own Media Recorder, see the :ref:`recording_example` section. The sample application also uses the Default Media Injector module and the sample Media Source File
+library. If you would like to write your own Media Injector, see the :ref:`injection_example` section. If you would like to write your own Media Source for the injector, check the :ref:`Media Source File <media_source_file>` section, as well as the sample library itself.
+
+Build and run the sample server application
+___________________________________________
+1. Build the sample app in a few simple steps from the **sample/** directory.
+
+.. code-block:: console
+
+        $ cd sdk-release/share/dolbyio/comms/sample/
+        $ mkdir build
+        $ cd build/ && cmake ../
+        $ cmake --build .
+	[  7%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/source_capture.cc.o
+	[ 15%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/avcontext.cc.o
+	[ 23%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/decoder.cc.o
+	[ 30%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/frame.cc.o
+	[ 38%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/audio_buffer.cc.o
+	[ 46%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/media_frame.cc.o
+	[ 53%] Linking CXX static library libmedia_source_file.a
+	[ 53%] Built target media_source_file
+	[ 53%] Built target server_utils
+	[ 61%] Building CXX object server_app/CMakeFiles/server_app.dir/server_app.cc.o
+	[ 69%] Building CXX object server_app/CMakeFiles/server_app.dir/__/utilities/sdk/interactions.cc.o
+	[ 76%] Building CXX object server_app/CMakeFiles/server_app.dir/__/utilities/sdk/events.cc.o
+	[ 84%] Building CXX object server_app/CMakeFiles/server_app.dir/__/utilities/media/injection/interactions.cc.o
+	[ 92%] Building CXX object server_app/CMakeFiles/server_app.dir/__/utilities/media/recording/interactions.cc.o
+	[100%] Linking CXX executable server_app
+	[100%] Built target server_app
+
+
+2. Run the created **sample_app** executable using the following command line parameters
+
+ +--------------+--------------------------------------------+
+ | Argument     | Description                                |
+ +==============+============================================+
+ | -u           | The User Name                              |
+ +--------------+--------------------------------------------+
+ | -e           | The External ID                            |
+ +--------------+--------------------------------------------+
+ | -k           | The Access Token                           |
+ +--------------+--------------------------------------------+
+ | -c           | Conference Alias (DEMO to join demo conf)  |
+ +--------------+--------------------------------------------+
+ | -t           | Conference Access Token                    |
+ +--------------+--------------------------------------------+
+ | -i           | Conference ID                              |
+ +--------------+--------------------------------------------+
+ | -l           | Logging Level (0-5)                        |
+ +--------------+--------------------------------------------+
+ | -d           | Relative Path OutputDirectory              |
+ +--------------+--------------------------------------------+
+ | -v           | Video Format for recording                 |
+ +--------------+--------------------------------------------+
+ | -a           | Audio Format for recording                 |
+ +--------------+--------------------------------------------+
+ | -j           | User type (user or listener)               |
+ +--------------+--------------------------------------------+
+ | -m           | Initial Media to Inject                    |
+ +--------------+--------------------------------------------+
+ | -f           | Name of Media File to inject               |
+ +--------------+--------------------------------------------+
+ | -s           | Send Only Mode                             | 
+ +--------------+--------------------------------------------+
+ | -V           | Max Video Forwarding (0-25)                | 
+ +--------------+--------------------------------------------+
+ | -spatial     | Spatial Audio (shared|individual|disabled) |
+ +--------------+--------------------------------------------+
+ | -log_speaker | Log the Active Speaker changes  (yes|no)   |
+ +--------------+--------------------------------------------+
+
+For example:
+
+.. code-block:: console
+        
+        $ ./server_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -v ENCODED_OPTIMIZED -a PCM -l LOG_LEVEL -j user -m AV -f test_file.mp4 -spatial shared
+
+
+This example starts the application that:
+
+  - Dumps the recorder streams in the Encoded and PCM format respectively
+  - Joins a conference as a user
+  - Starts injecting audio and video from the **test_file.mp4** to the conference
+
+.. note::
+	Providing **-i** command line parameter with Conference ID preceed all other options and the application will join the Conference with that ID (this conference must exist). Providing **-c** with alias will have the application join
+	a conference with Alias, if it does not exist already on the Dolby.io backend the application will create the conference and then join. Providing **-c** command line parameter with **DEMO** as the alias will have the application
+	create and join the demo conference.
+	If you do not provide **CONFERENCE_ID** nor **CONFERENCE_ALIAS** command line switches when joining the application will open a Session with the Dolby.io backend and wait for interactions listen below. In such scenario it is possible
+	to listen for Subscription/Invitation events, get Invited to conferences and Invite others to Conferences.
+
+3. Interact with the **server_app** executable using one of the following command line options, which can be provided whilst the application is running. The application will prompt the user for input and
+explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well. Also, all options denoted with a * indicate that 
+application will directly interact with the :ref:`Media Source File <media_source_file>` library.
+
+ +--------------------+--------------------------------------------------------------+
+ | Option             | Description                                                  |
+ +====================+==============================================================+
+ | q                  | Quit application                                             |
+ +--------------------+--------------------------------------------------------------+
+ | f*                 | Set new media file to play                                   |
+ +--------------------+--------------------------------------------------------------+
+ | F*                 | Add new media file to playlist                               |
+ +--------------------+--------------------------------------------------------------+
+ | p*                 | Pause the file injection                                     |
+ +--------------------+--------------------------------------------------------------+
+ | r*                 | Resume paused file injection                                 |
+ +--------------------+--------------------------------------------------------------+
+ | s*                 | Seek to time in the file                                     |
+ +--------------------+--------------------------------------------------------------+
+ | stop-audio         | Stop Local Audio and Audio Injection                         |
+ +--------------------+--------------------------------------------------------------+
+ | start-audio        | Start Local Audio and Audio Injection                        |
+ +--------------------+--------------------------------------------------------------+
+ | stop-audio-remote  | Stop Remote Audio (Only Dolby Voice Conferences)             |
+ +--------------------+--------------------------------------------------------------+
+ | start-audio-remote | Start Remote Audio (Only Dolby Voice Conferences)            |
+ +--------------------+--------------------------------------------------------------+
+ | m                  | Send message into conference                                 |
+ +--------------------+--------------------------------------------------------------+
+ | P                  | List conference participants                                 |
+ +--------------------+--------------------------------------------------------------+
+ | S                  | Set spatial audio configuration                              |
+ +--------------------+--------------------------------------------------------------+
+ | mute               | Mute Microphone                                              |
+ +--------------------+--------------------------------------------------------------+
+ | unmute             | Unmute Microphone                                            |
+ +--------------------+--------------------------------------------------------------+
+ | mute-remote        | Mute Remote Participant (Only Non-Dolby Voice Conferences)   |
+ +--------------------+--------------------------------------------------------------+
+ | unmute-remote      | Unmute Remote Participant (Only Non-Dolby Voice Conferences) |
+ +--------------------+--------------------------------------------------------------+
+ | v                  | Stop Local Video and Video Injection                         |
+ +--------------------+--------------------------------------------------------------+
+ | V                  | Start Local Video and Video Injection                        |
+ +--------------------+--------------------------------------------------------------+
+ | invite             | Invite participant to Conference                             |
+ +--------------------+--------------------------------------------------------------+
+ | subscribe          | Subscribe to all Conference events                           |
+ +--------------------+--------------------------------------------------------------+
+ | unsubscribe        | Unubscribe from all Conference events                        |
+ +--------------------+--------------------------------------------------------------+
+ | join               | Join a conference by providing ID                            |
+ +--------------------+--------------------------------------------------------------+
+ | create             | Create a Conference providing Alias                          |
+ +--------------------+--------------------------------------------------------------+
+ | accept             | Accept a Conference Invitation                               |
+ +--------------------+--------------------------------------------------------------+
+ | decline            | Decline a Conference Invitation                              |
+ +--------------------+--------------------------------------------------------------+
+
+Please note that in the sample application the Start/Stop Video/Audio methods consist of two parts. For example, for starting video, the first step uses the 
+:cpp:func:`dolbyio::comms::services::conference::start_video` method, which attaches a Video Track to the active PeerConnection. This method resolves once the Video Track has been successfully
+added. Once this method is resolved, the injection of video from the Media Source is started. The entire procedure looks like:
+
+.. code-block:: c++
+
+	sdk->conference()
+        .start_video()
+        .then([injection_src]() {
+          std::cerr << "start video success" << std::endl;
+          if (injection_src)
+            injection_src->set_video_capture(true);
+        })
+        .on_error([](std::exception_ptr&& e) {
+          try {
+            std::rethrow_exception(e);
+          } catch (std::exception& e) {
+            std::cerr << "start video failed: " << e.what() << std::endl;
+          }
+        });
+
+Issues Linking?
+---------------
+If you have problems with running the application due to a not-found media library, set the **LD_LIBRARY_PATH** to the location of the **sdk-release/lib** directory. If you plan move the libraries to different locations, include these locations in the paths. The path can be set as follows:
+
+.. code-block:: console
+        
+        $ export LD_LIBRARY_PATH=/path/to/sdk-release/lib/:$LD_LIBRARY_PATH

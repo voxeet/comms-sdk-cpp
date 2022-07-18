@@ -1,0 +1,10 @@
+.. _api_log_level:
+
+Logging
+=========
+#include <comms/log_level.h>
+
+Enum describing the log levels of the SDK.
+
+.. doxygenenum:: dolbyio::comms::log_level
+        :project: C++ SDK

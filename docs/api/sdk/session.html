@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Session Service &mdash; C++ SDK 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Conference Service" href="conference.html" />
+    <link rel="prev" title="Sdk Interface" href="sdk.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk.html">Sdk Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Session Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#session-interface">Session Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-structures">Other Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/event_handling.html">Event Handling Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+      <li>Session Service</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/sdk/session.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="session-service">
+<span id="api-session"></span><h1>Session Service<a class="headerlink" href="#session-service" title="Permalink to this heading"></a></h1>
+<p>The Session Service provides the ability to log in and out of the Dolby.io backend. Logging in to the backend is necessary to use any of the conferencing features
+provided by the SDK.</p>
+<dl class="simple">
+<dt>The basic usage of the session service is:</dt><dd><ol class="arabic simple">
+<li><p>Log in to the session using the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">session::open</span></code></a> command.</p></li>
+<li><p>Listen to a conference and record it. For more information, see the <a class="reference internal" href="conference.html#api-conference"><span class="std std-ref">Conference Service</span></a>.</p></li>
+<li><p>Log out of the session using the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session5closeEv" title="dolbyio::comms::services::session::close"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">session::close</span></code></a> method.</p></li>
+</ol>
+</dd>
+</dl>
+<section id="session-interface">
+<span id="sess-serv"></span><h2>Session Interface<a class="headerlink" href="#session-interface" title="Permalink to this heading"></a></h2>
+<p>#include &lt;comms/session.h&gt;</p>
+<p>The methods of the Session Interface provide the ability to connect to the Dolby.io
+backend. The session service methods are all asynchronous in nature. For more information, refer to <a class="reference internal" href="common/async_ops.html#api-async-result"><span class="std std-ref">Asynchronous Operations</span></a>. The structures defined in the interface
+are used by and returned by methods of the interface.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7sessionE">
+<span id="_CPPv3N7dolbyio5comms8services7sessionE"></span><span id="_CPPv2N7dolbyio5comms8services7sessionE"></span><span id="dolbyio::comms::services::session"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">session</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7sessionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The session class. </p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>The session_service interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and executes operations on the SDK event loop. The caller can block the calling thread until the operation completes and can use the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations which depend on the completion of this method using <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. When you create an async_result chain, terminate it using <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session5stateE">
+<span id="_CPPv3N7dolbyio5comms8services7session5stateE"></span><span id="_CPPv2N7dolbyio5comms8services7session5stateE"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a5ef8c9e715799bdd18b7583b9e929ab4"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session5stateE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The current state of a session. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session5state12disconnectedE">
+<span id="_CPPv3N7dolbyio5comms8services7session5state12disconnectedE"></span><span id="_CPPv2N7dolbyio5comms8services7session5state12disconnectedE"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a5ef8c9e715799bdd18b7583b9e929ab4a3a561116f0c9675a3c83d21fa365050d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disconnected</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session5state12disconnectedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The session is disconnected, this is the initial state. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session5state10connectingE">
+<span id="_CPPv3N7dolbyio5comms8services7session5state10connectingE"></span><span id="_CPPv2N7dolbyio5comms8services7session5state10connectingE"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a5ef8c9e715799bdd18b7583b9e929ab4a9a27316fbc5ef38b2a19c202dbdc29b7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">connecting</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session5state10connectingE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The session is connecting. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session5state9connectedE">
+<span id="_CPPv3N7dolbyio5comms8services7session5state9connectedE"></span><span id="_CPPv2N7dolbyio5comms8services7session5state9connectedE"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a5ef8c9e715799bdd18b7583b9e929ab4a06aa6fa8bdc2078e7e1bd903e70c8f6a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">connected</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session5state9connectedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The session is connected. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session5state12reconnectingE">
+<span id="_CPPv3N7dolbyio5comms8services7session5state12reconnectingE"></span><span id="_CPPv2N7dolbyio5comms8services7session5state12reconnectingE"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a5ef8c9e715799bdd18b7583b9e929ab4abadf39aaf1865d3ccd2371c6c9d15af7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reconnecting</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session5state12reconnectingE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The session is reconnecting. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session4openERR9user_info">
+<span id="_CPPv3N7dolbyio5comms8services7session4openERR9user_info"></span><span id="_CPPv2N7dolbyio5comms8services7session4openERR9user_info"></span><span id="dolbyio::comms::services::session::open__user_infoRR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a578fbee3d4e3c4b9eb7ec2ec2b2d8558"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="dolbyio::comms::services::session::user_info"><span class="n"><span class="pre">user_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">open</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="dolbyio::comms::services::session::user_info"><span class="n"><span class="pre">user_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">identification</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Opens a new session for the specified participant. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait for a new session to open</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">().</span><span class="n">open</span><span class="p">(</span><span class="n">identification</span><span class="p">));</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">().</span><span class="n">open</span><span class="p">(</span><span class="n">identification</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// session is now opened and info available</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>identification</strong> – Information about the participant who tries to open a session.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="#structdolbyio_1_1comms_1_1services_1_1session_1_1user__info"><span class="std std-ref">user_info</span></a> about opened session asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session5closeEv">
+<span id="_CPPv3N7dolbyio5comms8services7session5closeEv"></span><span id="_CPPv2N7dolbyio5comms8services7session5closeEv"></span><span id="dolbyio::comms::services::session::close"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1ac4e0694e4188431d063428857e58a078"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">close</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session5closeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Closes the current session. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait for the session to close</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">().</span><span class="n">close</span><span class="p">());</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">().</span><span class="n">close</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// session is now closed</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing the operation status asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms8services7session12session_infoEv">
+<span id="_CPPv3NK7dolbyio5comms8services7session12session_infoEv"></span><span id="_CPPv2NK7dolbyio5comms8services7session12session_infoEv"></span><span id="dolbyio::comms::services::session::session_infoC"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1ab1a148e37c2e48167d97b58d3341aad0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="dolbyio::comms::services::session::user_info"><span class="n"><span class="pre">user_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">session_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms8services7session12session_infoEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the information about the current session. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait for the session to close</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">().</span><span class="n">session_info</span><span class="p">());</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session_info</span><span class="p">().</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// session info now available</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing the <a class="reference internal" href="#structdolbyio_1_1comms_1_1services_1_1session_1_1user__info"><span class="std std-ref">user_info</span></a> asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session9subscribeERKNSt6vectorI25notification_subscriptionEE">
+<span id="_CPPv3N7dolbyio5comms8services7session9subscribeERKNSt6vectorI25notification_subscriptionEE"></span><span id="_CPPv2N7dolbyio5comms8services7session9subscribeERKNSt6vectorI25notification_subscriptionEE"></span><span id="dolbyio::comms::services::session::subscribe__std::vector:notification_subscription:CR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1ad21f590699e359e3a7063d1b5ed467b9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">subscribe</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25notification_subscriptionE" title="dolbyio::comms::notification_subscription"><span class="n"><span class="pre">notification_subscription</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">subscriptions</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session9subscribeERKNSt6vectorI25notification_subscriptionEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribes to all status updates for a specified conference, such as added/removed participants and conference ended, within a notification and without joinning the conference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subscriptions</strong> – Turns on the subscription for the specified notifications.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session11unsubscribeERKNSt6vectorI25notification_subscriptionEE">
+<span id="_CPPv3N7dolbyio5comms8services7session11unsubscribeERKNSt6vectorI25notification_subscriptionEE"></span><span id="_CPPv2N7dolbyio5comms8services7session11unsubscribeERKNSt6vectorI25notification_subscriptionEE"></span><span id="dolbyio::comms::services::session::unsubscribe__std::vector:notification_subscription:CR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a86ef9565483568a138f05e442aebf60c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unsubscribe</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25notification_subscriptionE" title="dolbyio::comms::notification_subscription"><span class="n"><span class="pre">notification_subscription</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">subscriptions</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session11unsubscribeERKNSt6vectorI25notification_subscriptionEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unsubscribes from status updates notifications for the specified conference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subscriptions</strong> – Turns off the subscription for the specified notifications.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18participant_joinedEE">
+<span id="_CPPv3N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18participant_joinedEE"></span><span id="_CPPv2N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18participant_joinedEE"></span><span id="dolbyio::comms::services::session::add_event_handler__event_handler:subscription_events::participant_joined:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a8c3c57187d08ec186657b4f1e1ec81fc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events18participant_joinedE" title="dolbyio::comms::subscription_events::participant_joined"><span class="n"><span class="pre">participant_joined</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18participant_joinedEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1participant__joined"><span class="std std-ref">subscription_events::participant_joined</span></a> events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a participant joins the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa62181591d01225d852de3def9dcfa80"><span class="std std-ref">notification_subscription_type::participant_joined</span></a> subscription.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16participant_leftEE">
+<span id="_CPPv3N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16participant_leftEE"></span><span id="_CPPv2N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16participant_leftEE"></span><span id="dolbyio::comms::services::session::add_event_handler__event_handler:subscription_events::participant_left:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1afe5a2e21e0bed5836e6d57df8eea9fe7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events16participant_leftE" title="dolbyio::comms::subscription_events::participant_left"><span class="n"><span class="pre">participant_left</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16participant_leftEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1participant__left"><span class="std std-ref">subscription_events::participant_left</span></a> events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a participant leaves the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a516820bfa2d3060d574f5351c1996f24"><span class="std std-ref">notification_subscription_type::participant_left</span></a> subscription.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events19active_participantsEE">
+<span id="_CPPv3N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events19active_participantsEE"></span><span id="_CPPv2N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events19active_participantsEE"></span><span id="dolbyio::comms::services::session::add_event_handler__event_handler:subscription_events::active_participants:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a2fa3f04f97e743e1772ebeea95d180a1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events19active_participantsE" title="dolbyio::comms::subscription_events::active_participants"><span class="n"><span class="pre">active_participants</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events19active_participantsEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1active__participants"><span class="std std-ref">subscription_events::active_participants</span></a> events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked periodically passing the list of active participants for the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa81483f8deda677b8799eb2143fcd5ca"><span class="std std-ref">notification_subscription_type::active_participants</span></a> subscription.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events17conference_statusEE">
+<span id="_CPPv3N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events17conference_statusEE"></span><span id="_CPPv2N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events17conference_statusEE"></span><span id="dolbyio::comms::services::session::add_event_handler__event_handler:subscription_events::conference_status:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a6cc35a1e8d7a8d7bf05b8ba4ffd6df06"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events17conference_statusE" title="dolbyio::comms::subscription_events::conference_status"><span class="n"><span class="pre">conference_status</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events17conference_statusEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1conference__status"><span class="std std-ref">subscription_events::conference_status</span></a> events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked passing the status of the conference with the enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> subscription.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18conference_createdEE">
+<span id="_CPPv3N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18conference_createdEE"></span><span id="_CPPv2N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18conference_createdEE"></span><span id="dolbyio::comms::services::session::add_event_handler__event_handler:subscription_events::conference_created:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a505b38b6347ccb05265677cc358bc631"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events18conference_createdE" title="dolbyio::comms::subscription_events::conference_created"><span class="n"><span class="pre">conference_created</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events18conference_createdEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1conference__created"><span class="std std-ref">subscription_events::conference_created</span></a> events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> subscription is created.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16conference_endedEE">
+<span id="_CPPv3N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16conference_endedEE"></span><span id="_CPPv2N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16conference_endedEE"></span><span id="dolbyio::comms::services::session::add_event_handler__event_handler:subscription_events::conference_ended:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1af45bce01ce0be71ea3e7159d3a5aea1c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events16conference_endedE" title="dolbyio::comms::subscription_events::conference_ended"><span class="n"><span class="pre">conference_ended</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerIN19subscription_events16conference_endedEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1conference__ended"><span class="std std-ref">subscription_events::conference_ended</span></a> events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a9d89202b6908e6359fac5e7d0419b209"><span class="std std-ref">notification_subscription_type::conference_ended</span></a> subscription ends.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session15state_exceptionE">
+<span id="_CPPv3N7dolbyio5comms8services7session15state_exceptionE"></span><span id="_CPPv2N7dolbyio5comms8services7session15state_exceptionE"></span><span id="dolbyio::comms::services::session::state_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="common/exception.html#_CPPv4N7dolbyio5comms17session_exceptionE" title="dolbyio::comms::session_exception"><span class="n"><span class="pre">session_exception</span></span></a><br /></dt>
+<dd><p>The class that defines exceptions for invalid session states. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session15state_exception15state_exceptionE5state5state">
+<span id="_CPPv3N7dolbyio5comms8services7session15state_exception15state_exceptionE5state5state"></span><span id="_CPPv2N7dolbyio5comms8services7session15state_exception15state_exceptionE5state5state"></span><span id="dolbyio::comms::services::session::state_exception::state_exception__state.state"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception_1a67bcef454a0937c22bbb57a820b41210"></span><span class="sig-name descname"><span class="n"><span class="pre">state_exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">current</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">required</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>The constructor that takes the current and the required state of a session. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>current</strong> – The current state of the session. </p></li>
+<li><p><strong>required</strong> – The required state of the session. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms8services7session15state_exception13current_stateEv">
+<span id="_CPPv3NK7dolbyio5comms8services7session15state_exception13current_stateEv"></span><span id="_CPPv2NK7dolbyio5comms8services7session15state_exception13current_stateEv"></span><span id="dolbyio::comms::services::session::state_exception::current_stateC"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception_1aafe9ca3ce74f1b205244ebe1dce548df"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_state</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><br /></dt>
+<dd><p>Returns the current state of a session that is stored in the exception. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current state of the session. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms8services7session15state_exception14required_stateEv">
+<span id="_CPPv3NK7dolbyio5comms8services7session15state_exception14required_stateEv"></span><span id="_CPPv2NK7dolbyio5comms8services7session15state_exception14required_stateEv"></span><span id="dolbyio::comms::services::session::state_exception::required_stateC"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception_1a9bbd4a1bf7fb6f31cfc0b346a9794369"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">required_state</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><br /></dt>
+<dd><p>Returns the required state of a session that is stored in the exception. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A string that contains the required state of a session. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session9user_infoE">
+<span id="_CPPv3N7dolbyio5comms8services7session9user_infoE"></span><span id="_CPPv2N7dolbyio5comms8services7session9user_infoE"></span><span id="dolbyio::comms::services::session::user_info"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1session_1_1user__info"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_info</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that represents the participant who tries to open a session. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session9user_info4nameE">
+<span id="_CPPv3N7dolbyio5comms8services7session9user_info4nameE"></span><span id="_CPPv2N7dolbyio5comms8services7session9user_info4nameE"></span><span id="dolbyio::comms::services::session::user_info::name__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1session_1_1user__info_1a73905124227735b5014e0068fcaa9dcc"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session9user_info4nameE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The name of the participant. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session9user_info10externalIdE">
+<span id="_CPPv3N7dolbyio5comms8services7session9user_info10externalIdE"></span><span id="_CPPv2N7dolbyio5comms8services7session9user_info10externalIdE"></span><span id="dolbyio::comms::services::session::user_info::externalId__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1session_1_1user__info_1ad2642abb146dd6a4741fa8d12207db43"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">externalId</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session9user_info10externalIdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The external unique identifier that the customer’s application can add to the participant while opening a session. If a participant uses the same external ID in conferences, the participant’s ID also remains the same across all sessions. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session9user_info9avatarUrlE">
+<span id="_CPPv3N7dolbyio5comms8services7session9user_info9avatarUrlE"></span><span id="_CPPv2N7dolbyio5comms8services7session9user_info9avatarUrlE"></span><span id="dolbyio::comms::services::session::user_info::avatarUrl__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1session_1_1user__info_1a428fdd14945d31a70b75b936464c47e1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">avatarUrl</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session9user_info9avatarUrlE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The URL of the participant’s avatar. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session9user_info14participant_idE">
+<span id="_CPPv3N7dolbyio5comms8services7session9user_info14participant_idE"></span><span id="_CPPv2N7dolbyio5comms8services7session9user_info14participant_idE"></span><span id="dolbyio::comms::services::session::user_info::participant_id__std::optional:ss:"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1session_1_1user__info_1afec870fd86723be2774229c560b7d3ee"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participant_id</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session9user_info14participant_idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The unique ID for the participant opening the session, this field is provided by the backend when session is opened </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="other-structures">
+<h2>Other Structures<a class="headerlink" href="#other-structures" title="Permalink to this heading"></a></h2>
+<p>Other structures used by the <a class="reference internal" href="#api-session"><span class="std std-ref">Session Service</span></a>, which are not defined in the <a class="reference internal" href="#sess-serv"><span class="std std-ref">Session Interface</span></a> interface.</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms30notification_subscription_typeE">
+<span id="_CPPv3N7dolbyio5comms30notification_subscription_typeE"></span><span id="_CPPv2N7dolbyio5comms30notification_subscription_typeE"></span><span class="target" id="namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">notification_subscription_type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms30notification_subscription_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The subscription type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms30notification_subscription_type18conference_createdE">
+<span id="_CPPv3N7dolbyio5comms30notification_subscription_type18conference_createdE"></span><span id="_CPPv2N7dolbyio5comms30notification_subscription_type18conference_createdE"></span><span class="target" id="namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference_created</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms30notification_subscription_type18conference_createdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe to conference created events. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms30notification_subscription_type16conference_endedE">
+<span id="_CPPv3N7dolbyio5comms30notification_subscription_type16conference_endedE"></span><span id="_CPPv2N7dolbyio5comms30notification_subscription_type16conference_endedE"></span><span class="target" id="namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a9d89202b6908e6359fac5e7d0419b209"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference_ended</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms30notification_subscription_type16conference_endedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe to conference ended events. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms30notification_subscription_type18participant_joinedE">
+<span id="_CPPv3N7dolbyio5comms30notification_subscription_type18participant_joinedE"></span><span id="_CPPv2N7dolbyio5comms30notification_subscription_type18participant_joinedE"></span><span class="target" id="namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa62181591d01225d852de3def9dcfa80"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participant_joined</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms30notification_subscription_type18participant_joinedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe to participant joining the conference. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms30notification_subscription_type16participant_leftE">
+<span id="_CPPv3N7dolbyio5comms30notification_subscription_type16participant_leftE"></span><span id="_CPPv2N7dolbyio5comms30notification_subscription_type16participant_leftE"></span><span class="target" id="namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a516820bfa2d3060d574f5351c1996f24"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participant_left</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms30notification_subscription_type16participant_leftE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe to participant leaving the conference. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms30notification_subscription_type19active_participantsE">
+<span id="_CPPv3N7dolbyio5comms30notification_subscription_type19active_participantsE"></span><span id="_CPPv2N7dolbyio5comms30notification_subscription_type19active_participantsE"></span><span class="target" id="namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa81483f8deda677b8799eb2143fcd5ca"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">active_participants</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms30notification_subscription_type19active_participantsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe to periodic notifications about the active participants in the conference. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25notification_subscriptionE">
+<span id="_CPPv3N7dolbyio5comms25notification_subscriptionE"></span><span id="_CPPv2N7dolbyio5comms25notification_subscriptionE"></span><span id="dolbyio::comms::notification_subscription"></span><span class="target" id="structdolbyio_1_1comms_1_1notification__subscription"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">notification_subscription</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25notification_subscriptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscription information.</p>
+<p>Applications wishing to receive events about the conferences which are not joined should use this structure in the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1session_1ad21f590699e359e3a7063d1b5ed467b9"><span class="std std-ref">services::session::subscribe()</span></a> and the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1session_1a86ef9565483568a138f05e442aebf60c"><span class="std std-ref">services::session::unsubscribe()</span></a> APIs to select the types of events and the conference aliases of interest. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25notification_subscription25notification_subscriptionERKNSt6stringE30notification_subscription_type">
+<span id="_CPPv3N7dolbyio5comms25notification_subscription25notification_subscriptionERKNSt6stringE30notification_subscription_type"></span><span id="_CPPv2N7dolbyio5comms25notification_subscription25notification_subscriptionERKNSt6stringE30notification_subscription_type"></span><span id="dolbyio::comms::notification_subscription::notification_subscription__ssCR.notification_subscription_type"></span><span class="target" id="structdolbyio_1_1comms_1_1notification__subscription_1af499eafcb9c2e81cb0605cddc266ae23"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">notification_subscription</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">conference_alias</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms30notification_subscription_typeE" title="dolbyio::comms::notification_subscription_type"><span class="n"><span class="pre">notification_subscription_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25notification_subscription25notification_subscriptionERKNSt6stringE30notification_subscription_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conference_alias</strong> – The alias of the conference. </p></li>
+<li><p><strong>type</strong> – Type of subscription event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25notification_subscription16conference_aliasE">
+<span id="_CPPv3N7dolbyio5comms25notification_subscription16conference_aliasE"></span><span id="_CPPv2N7dolbyio5comms25notification_subscription16conference_aliasE"></span><span id="dolbyio::comms::notification_subscription::conference_alias__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1notification__subscription_1a9b6a89f9741603204c3b339a362b600c"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference_alias</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25notification_subscription16conference_aliasE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The alias of the conference. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25notification_subscription4typeE">
+<span id="_CPPv3N7dolbyio5comms25notification_subscription4typeE"></span><span id="_CPPv2N7dolbyio5comms25notification_subscription4typeE"></span><span id="dolbyio::comms::notification_subscription::type__notification_subscription_type"></span><span class="target" id="structdolbyio_1_1comms_1_1notification__subscription_1ae32c560f4bf2a11352dc7c662fd67f96"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms30notification_subscription_typeE" title="dolbyio::comms::notification_subscription_type"><span class="n"><span class="pre">notification_subscription_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25notification_subscription4typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The event type. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events10conferenceE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events10conferenceE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events10conferenceE"></span><span id="dolbyio::comms::subscription_events::conference"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">conference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events10conferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference struct used in all subscription events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events10conference13conference_idE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events10conference13conference_idE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events10conference13conference_idE"></span><span id="dolbyio::comms::subscription_events::conference::conference_id__std::optional:ss:"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference_1a48bdf498152fc14f76f7bb6ebae0fed1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events10conference13conference_idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference ID. May have no value if the conference with given alias has not been created. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events10conference16conference_aliasE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events10conference16conference_aliasE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events10conference16conference_aliasE"></span><span id="dolbyio::comms::subscription_events::conference::conference_alias__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference_1a128f51e1fe1da6f0527f1f39d82cf261"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference_alias</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events10conference16conference_aliasE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference alias. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events18participant_joinedE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events18participant_joinedE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events18participant_joinedE"></span><span id="dolbyio::comms::subscription_events::participant_joined"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1participant__joined"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">participant_joined</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events18participant_joinedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event notifying about participant joined to the conference.</p>
+<p>The application must use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1session_1ad21f590699e359e3a7063d1b5ed467b9"><span class="std std-ref">services::session::subscribe()</span></a> method to subscribe on the <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa62181591d01225d852de3def9dcfa80"><span class="std std-ref">notification_subscription_type::participant_joined</span></a> event for given conference in order to receive these events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events18participant_joined10conferenceE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events18participant_joined10conferenceE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events18participant_joined10conferenceE"></span><span id="dolbyio::comms::subscription_events::participant_joined::conference__subscription_events::conference"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1participant__joined_1a325cc3f862e757be878ee42698bbd4ca"></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events10conferenceE" title="dolbyio::comms::subscription_events::conference"><span class="n"><span class="pre">conference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events18participant_joined10conferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference into which the participant joined. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events18participant_joined11participantE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events18participant_joined11participantE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events18participant_joined11participantE"></span><span id="dolbyio::comms::subscription_events::participant_joined::participant__participant_info"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1participant__joined_1aab832ccf8338549f03d3e3681fc62884"></span><a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms16participant_infoE" title="dolbyio::comms::participant_info"><span class="n"><span class="pre">participant_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participant</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events18participant_joined11participantE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The joined participant info. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events16participant_leftE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events16participant_leftE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events16participant_leftE"></span><span id="dolbyio::comms::subscription_events::participant_left"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1participant__left"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">participant_left</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events16participant_leftE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event notifying about participant left the conference.</p>
+<p>The application must use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1session_1ad21f590699e359e3a7063d1b5ed467b9"><span class="std std-ref">services::session::subscribe()</span></a> method to subscribe on the <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a516820bfa2d3060d574f5351c1996f24"><span class="std std-ref">notification_subscription_type::participant_left</span></a> event for given conference in order to receive these events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events16participant_left10conferenceE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events16participant_left10conferenceE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events16participant_left10conferenceE"></span><span id="dolbyio::comms::subscription_events::participant_left::conference__subscription_events::conference"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1participant__left_1a75b2aa05a9881bc2e0bc285ad6d3b282"></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events10conferenceE" title="dolbyio::comms::subscription_events::conference"><span class="n"><span class="pre">conference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events16participant_left10conferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference from which the participant left. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events16participant_left11participantE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events16participant_left11participantE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events16participant_left11participantE"></span><span id="dolbyio::comms::subscription_events::participant_left::participant__participant_info"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1participant__left_1a2d72817329d76122d3f7a860b0062c4e"></span><a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms16participant_infoE" title="dolbyio::comms::participant_info"><span class="n"><span class="pre">participant_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participant</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events16participant_left11participantE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The left participant info. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events19active_participantsE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events19active_participantsE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events19active_participantsE"></span><span id="dolbyio::comms::subscription_events::active_participants"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1active__participants"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">active_participants</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events19active_participantsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event notifying about list of active conference participants.</p>
+<p>The application must use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1session_1ad21f590699e359e3a7063d1b5ed467b9"><span class="std std-ref">services::session::subscribe()</span></a> method to subscribe on the <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa81483f8deda677b8799eb2143fcd5ca"><span class="std std-ref">notification_subscription_type::active_participants</span></a> event for given conference in order to receive these events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events19active_participants10conferenceE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events19active_participants10conferenceE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events19active_participants10conferenceE"></span><span id="dolbyio::comms::subscription_events::active_participants::conference__subscription_events::conference"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1active__participants_1a66528ed5132478c54ea95030741f3799"></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events10conferenceE" title="dolbyio::comms::subscription_events::conference"><span class="n"><span class="pre">conference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events19active_participants10conferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference from which the participant left. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events19active_participants18participants_countE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events19active_participants18participants_countE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events19active_participants18participants_countE"></span><span id="dolbyio::comms::subscription_events::active_participants::participants_count__i"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1active__participants_1af0d55129cbeaca228d44fd4c866d5c4b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participants_count</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events19active_participants18participants_countE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of all participants, active and listeners. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events19active_participants12participantsE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events19active_participants12participantsE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events19active_participants12participantsE"></span><span id="dolbyio::comms::subscription_events::active_participants::participants__std::vector:participant_info:"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1active__participants_1ac76ed569ba0d550961dc663d6a0599e6"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms16participant_infoE" title="dolbyio::comms::participant_info"><span class="n"><span class="pre">participant_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participants</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events19active_participants12participantsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The collection of active participants. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events17conference_statusE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events17conference_statusE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events17conference_statusE"></span><span id="dolbyio::comms::subscription_events::conference_status"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__status"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">conference_status</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events17conference_statusE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event notifying about the conference status.</p>
+<p>This event is sent once when the application subscribes to the <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> event and notifies about the current status of the conference (which may or may not be created at this point). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events17conference_status10conferenceE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events17conference_status10conferenceE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events17conference_status10conferenceE"></span><span id="dolbyio::comms::subscription_events::conference_status::conference__subscription_events::conference"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__status_1af7e1b32f95ea966a390c4124c59b23f1"></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events10conferenceE" title="dolbyio::comms::subscription_events::conference"><span class="n"><span class="pre">conference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events17conference_status10conferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference for which the status is reported. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events17conference_status4liveE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events17conference_status4liveE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events17conference_status4liveE"></span><span id="dolbyio::comms::subscription_events::conference_status::live__b"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__status_1a592b74d6e93d3d0c61a675694f110962"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">live</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events17conference_status4liveE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if the conference is live. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events17conference_status15start_timestampE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events17conference_status15start_timestampE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events17conference_status15start_timestampE"></span><span id="dolbyio::comms::subscription_events::conference_status::start_timestamp__i"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__status_1a1973c65bf5e75335542ded8cc68b43dd"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start_timestamp</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events17conference_status15start_timestampE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Timestamp of the conference start; this field is valid only if the conference is live. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events17conference_status12participantsE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events17conference_status12participantsE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events17conference_status12participantsE"></span><span id="dolbyio::comms::subscription_events::conference_status::participants__std::vector:participant_info:"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__status_1aa0abf64b9452d8ab55124622942c17c4"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms16participant_infoE" title="dolbyio::comms::participant_info"><span class="n"><span class="pre">participant_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">participants</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events17conference_status12participantsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The list of conference participants. Empty if the conference is not live. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events18conference_createdE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events18conference_createdE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events18conference_createdE"></span><span id="dolbyio::comms::subscription_events::conference_created"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__created"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">conference_created</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events18conference_createdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event notifying about the conference being created.</p>
+<p>The application must use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1session_1ad21f590699e359e3a7063d1b5ed467b9"><span class="std std-ref">services::session::subscribe()</span></a> method to subscribe on the <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> event for given conference in order to receive these events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events18conference_created10conferenceE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events18conference_created10conferenceE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events18conference_created10conferenceE"></span><span id="dolbyio::comms::subscription_events::conference_created::conference__subscription_events::conference"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__created_1a1a7ce90691e73ae4cd24812d2373052b"></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events10conferenceE" title="dolbyio::comms::subscription_events::conference"><span class="n"><span class="pre">conference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events18conference_created10conferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference being created. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events16conference_endedE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events16conference_endedE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events16conference_endedE"></span><span id="dolbyio::comms::subscription_events::conference_ended"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__ended"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">conference_ended</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events16conference_endedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event notifying about the conference ended.</p>
+<p>The application must use the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1session_1ad21f590699e359e3a7063d1b5ed467b9"><span class="std std-ref">services::session::subscribe()</span></a> method to subscribe on the <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a9d89202b6908e6359fac5e7d0419b209"><span class="std std-ref">notification_subscription_type::conference_ended</span></a> event for given conference in order to receive these events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19subscription_events16conference_ended10conferenceE">
+<span id="_CPPv3N7dolbyio5comms19subscription_events16conference_ended10conferenceE"></span><span id="_CPPv2N7dolbyio5comms19subscription_events16conference_ended10conferenceE"></span><span id="dolbyio::comms::subscription_events::conference_ended::conference__subscription_events::conference"></span><span class="target" id="structdolbyio_1_1comms_1_1subscription__events_1_1conference__ended_1ab5b60cb63976877ba10397e85aa27b36"></span><span class="n"><span class="pre">subscription_events</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19subscription_events10conferenceE" title="dolbyio::comms::subscription_events::conference"><span class="n"><span class="pre">conference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19subscription_events16conference_ended10conferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The conference that ended. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sdk.html" class="btn btn-neutral float-left" title="Sdk Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="conference.html" class="btn btn-neutral float-right" title="Conference Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
