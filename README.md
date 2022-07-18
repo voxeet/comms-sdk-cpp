@@ -1,9 +1,20 @@
-# Dolby.io Communications Server C++ SDK
+# Dolby.io Communications C++ SDK
 
-The Dolby.io Communications Server C++ SDK provides the ability to record and store high-quality voice and video calls on your server. This functionality is especially useful if you want full control over the audio and video recording.
+The Dolby.io Communications C++ SDK provides both Client and Server applications the ability to create HD voice and video for fully immersive real-time communications and streaming experiences. The C++SDK allows creating an application that can join Dolby.io conferences.
 
-The Server C++ SDK allows creating an application that joins Dolby.io conferences and records the incoming audio and video streams for desired conference participants. This application runs in your infrastructure, not on Dolby.io.
+The C++ SDK is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, as well as
+receiving and injecting WebRTC media streams.
 
-The Server C++ SDK is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, and receiving WebRTC media streams. To record conferences, the SDK uses a Media Recorder that allows processing and storing video frames from the incoming WebRTC media streams. The Server C++ SDK provides a default media recorder plugin and access to the Media Recorder API to create a custom Media Recorder. The default media recorder plugin is a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format. If you have specific recording requirements, use the Media Recorder API to create a custom recording module.
+Currently, an instance of the C++ SDK can connect to only one conference at a time. Joining multiple conferences at a time requires running multiple instances of the application.
 
-For information about building a basic application using the Server C++ SDK, see the [Getting Started](https://docs.dolby.io/communications-apis/docs/scpp-getting-started) guide.
+## Client Applications
+
+Using the Dolby.io Communications C++SDK Client applications have the ability to join Dolby Voice Conferences where they can send and receive HD voice streams, including spatial audio and shared scenes. This functionality is useful for integrating the HD Dolby Voice experience into your own game engine or virtual world experience.
+To offer this functionality, the C++ SDK provides applications the ability to capture and playback audio, manage input/output Audio Devices, add spatial placement for participants as well as partake in a shared spatial scene.
+
+## Server Applications
+
+Using the Dolby.io Communications C++ SDK, Server applications have the ability to record and store high-quality voice and video calls on your server. This functionality is especially useful if you want full control over the audio and video recording. The C++ SDK also provides the ability to inject audio and video streams from the server into the conference. This functionality can be used to inject the audio and
+video stored in some media file on the server into the conference. After joining a Dolby.io conference, the C++ SDK offers the functionality to record the incoming audio and video streams for desired conference participants. This application runs in your infrastructure and not on Dolby.io.
+
+For information about building basic applications using the C++ SDK, see the [Getting Started](https://dolbyio.github.io/comms-sdk-cpp/other/getting_started.html) guide.
