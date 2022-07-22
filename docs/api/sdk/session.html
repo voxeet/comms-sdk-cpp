@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -93,8 +94,9 @@
              
   <section id="session-service">
 <span id="api-session"></span><h1>Session Service<a class="headerlink" href="#session-service" title="Permalink to this heading"></a></h1>
-<p>The Session Service provides the ability to log in and out of the Dolby.io backend. Logging in to the backend is necessary to use any of the conferencing features
-provided by the SDK.</p>
+<p>The Session Service allows logging in and out of the Dolby.io backend. Logging into the backend is essential for the SDK to receive backend
+notifications in and out of a conference; the Session Service provides APIs for the application to manage subscriptions to various types
+of the backend notifications.</p>
 <dl class="simple">
 <dt>The basic usage of the session service is:</dt><dd><ol class="arabic simple">
 <li><p>Log in to the session using the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">session::open</span></code></a> command.</p></li>
@@ -105,7 +107,7 @@ provided by the SDK.</p>
 </dl>
 <section id="session-interface">
 <span id="sess-serv"></span><h2>Session Interface<a class="headerlink" href="#session-interface" title="Permalink to this heading"></a></h2>
-<p>#include &lt;comms/session.h&gt;</p>
+<p>#include &lt;dolbyio/comms/session.h&gt;</p>
 <p>The methods of the Session Interface provide the ability to connect to the Dolby.io
 backend. The session service methods are all asynchronous in nature. For more information, refer to <a class="reference internal" href="common/async_ops.html#api-async-result"><span class="std std-ref">Asynchronous Operations</span></a>. The structures defined in the interface
 are used by and returned by methods of the interface.</p>

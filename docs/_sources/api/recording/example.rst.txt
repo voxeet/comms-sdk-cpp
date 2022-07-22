@@ -15,15 +15,15 @@ This paths in this CMakeLists.txt are assuming that the file is located in the s
 
 custom_recorder.h
 _________________
-.. literalinclude:: ../../../src/public/comms/sample/custom_recorder/custom_recorder.h
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_recorder/custom_recorder.h
   :language: c++
 
 custom_recorder.cc
 __________________
-.. literalinclude:: ../../../src/public/comms/sample/custom_recorder/custom_recorder.cc
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_recorder/custom_recorder.cc
   :language: c++
 
 Recorder CMakeLists.txt
 _______________________
-.. literalinclude:: ../../../src/public/comms/sample/custom_recorder/CMakeLists.txt
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_recorder/CMakeLists.txt
   :language: console

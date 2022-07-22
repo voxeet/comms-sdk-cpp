@@ -2,8 +2,9 @@
 
 Session Service
 ===============
-The Session Service provides the ability to log in and out of the Dolby.io backend. Logging in to the backend is necessary to use any of the conferencing features
-provided by the SDK.
+The Session Service allows logging in and out of the Dolby.io backend. Logging into the backend is essential for the SDK to receive backend
+notifications in and out of a conference; the Session Service provides APIs for the application to manage subscriptions to various types
+of the backend notifications.
 
 The basic usage of the session service is:
   1) Log in to the session using the :cpp:func:`session::open <dolbyio::comms::services::session::open>` command.
@@ -14,7 +15,7 @@ The basic usage of the session service is:
 
 Session Interface
 -----------------
-#include <comms/session.h>
+#include <dolbyio/comms/session.h>
 
 The methods of the Session Interface provide the ability to connect to the Dolby.io
 backend. The session service methods are all asynchronous in nature. For more information, refer to :ref:`api_async_result`. The structures defined in the interface

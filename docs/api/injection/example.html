@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -92,7 +93,7 @@
 using the <a class="reference internal" href="../sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference16set_media_sourceEP22media_source_interface" title="dolbyio::comms::services::conference::set_media_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::conference::set_media_source()</span></code></a> method. Now when a conference is joined and audio/video is started, this injector is part of the media injection
 pipeline.</p>
 <p>The interfaces inherited by this custom_injector example must be implemented by any custom injector intended to inject video and audio frames to a conference.</p>
-<p>If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the <a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server Sample Application</span></a> section with the sample below.
+<p>If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the <a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server sample application</span></a> section with the sample below.
 The paths in this CMakeLists.txt are assuming that the file is located in the same place as in the Writing Application portion of the Getting Started.</p>
 <section id="custom-injector-h">
 <h2>custom_injector.h<a class="headerlink" href="#custom-injector-h" title="Permalink to this heading"></a></h2>
@@ -105,7 +106,7 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
 <span class="cm"> *                Copyright (C) 2022 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span><span class="w"></span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;comms/media_engine/media_engine.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/media_engine/media_engine.h&gt;</span><span class="cp"></span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mutex&gt;</span><span class="cp"></span>
@@ -219,7 +220,7 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
 <span class="cm"> *                Copyright (C) 2022 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span><span class="w"></span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;comms/sdk.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/sdk.h&gt;</span><span class="cp"></span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;custom_injector.h&quot;</span><span class="cp"></span>
 

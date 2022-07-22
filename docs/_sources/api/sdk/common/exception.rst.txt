@@ -2,7 +2,7 @@
 
 SDK Exceptions
 ==============
-#include <comms/exception.h>
+#include <dolbyio/comms/exception.h>
 
 Exception's which can be thrown by the SDK and caught by user. These have been left defined
 

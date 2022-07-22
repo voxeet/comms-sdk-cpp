@@ -2,7 +2,7 @@
 
 Media Source Interface
 =========================
-#include <comms/media/media_engine.h>
+#include <dolbyio/comms/media/media_engine.h>
 
 Top level interface that exposes the underlying source interfaces for injecting raw video and raw audio. This abstract class exposes
 the two possible source interfaces: :cpp:class:`video <dolbyio::comms::video_source>`, :cpp:class:`audio <dolbyio::comms::audio_source>`. These two source interfaces essentially serve as input for the RTC Audio and Video sources created by the Media Engine.

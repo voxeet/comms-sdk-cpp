@@ -2,7 +2,7 @@
 
 Media Sink Interface
 =========================
-#include <comms/media/media_engine.h>
+#include <dolbyio/comms/media/media_engine.h>
 
 Top level interface which exposes the underlying sink interfaces for receiving and handling audio, raw video and encoded video data. This abstract class just exposes
 the three possible sink interfaces: :cpp:class:`raw video <dolbyio::comms::video_sink_yuv>`, :cpp:class:`encoded video <dolbyio::comms::video_sink_encoded>` 

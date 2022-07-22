@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -95,7 +96,7 @@ using the <a class="reference internal" href="../sdk/conference.html#_CPPv4N7dol
 <p>The recorder should be configured appropriately to be used for handling encoded or raw video and PCM/AAC audio. The application should set this configuration before passing the recorder implementation
 to the conference service.</p>
 <p>The interfaces inheritted from by this custom_recorder example must be implemented by any custom recorder which wishes to receive video and audio frames.</p>
-<p>At the bottom of the page there is sample CMakeLists.txt which can replace the one shown in the <a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server Sample Application</span></a> section if you want to use a custom recording module instead of our default one.
+<p>At the bottom of the page there is sample CMakeLists.txt which can replace the one shown in the <a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server sample application</span></a> section if you want to use a custom recording module instead of our default one.
 This paths in this CMakeLists.txt are assuming that the file is located in the same place as in the Writing Application portion of Getting Started.</p>
 <section id="custom-recorder-h">
 <h2>custom_recorder.h<a class="headerlink" href="#custom-recorder-h" title="Permalink to this heading"></a></h2>
@@ -108,8 +109,8 @@ This paths in this CMakeLists.txt are assuming that the file is located in the s
 <span class="cm"> *                Copyright (C) 2022 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span><span class="w"></span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;comms/media_engine/media_engine.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;comms/sdk.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/media_engine/media_engine.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/sdk.h&gt;</span><span class="cp"></span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>

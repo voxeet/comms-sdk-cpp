@@ -1,8 +1,6 @@
 C++ SDK |release| Documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is the HTML documentation of the C++ SDK.
-
 Overview
 """"""""
 The Dolby.io Communications C++ SDK provides both Client and Server applications the ability to create HD voice and video for fully immersive real-time communications and streaming experiences. The C++SDK allows creating an application that can join Dolby.io conferences.

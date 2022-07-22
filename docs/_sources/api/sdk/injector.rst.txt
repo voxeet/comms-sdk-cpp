@@ -96,8 +96,8 @@ The Media File Source sample is able to decode the following video and audio cod
 The library is included along with proper CMake file in the package under **share/dolbyio/comms/sample/media_source/** directory. A sample of the top-level object
 of the Media Source File library is in the following files:
 
-.. literalinclude:: ../../../src/public/comms/sample/media_source/file/source_capture.h
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/media_source/file/source_capture.h
   :language: c++
 
-.. literalinclude:: ../../../src/public/comms/sample/media_source/file/source_capture.cc
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/media_source/file/source_capture.cc
   :language: c++

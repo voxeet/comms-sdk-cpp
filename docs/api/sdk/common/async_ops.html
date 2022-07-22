@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -107,7 +108,7 @@ If the asynchronous operation ends before the callbacks are set by the user appl
 set, on the application’s thread. Otherwise, the callbacks are invoked when the operation is finished on the SDK’s event loop.</p>
 <section id="thread-safe-types-and-helper-methods">
 <span id="async-types"></span><h2>Thread Safe Types and Helper Methods<a class="headerlink" href="#thread-safe-types-and-helper-methods" title="Permalink to this heading"></a></h2>
-<p>#include &lt;comms/async_result.h&gt;</p>
+<p>#include &lt;dolbyio/comms/async_result.h&gt;</p>
 <p>The thread safe types which can be exposed by the user via the public API. They define thread safe versions of the Asynchronous Classes documented in the
 sections below. The helper method allows for synchronous usage of the asynchronous API when called from a different thread.</p>
 <dl class="cpp type">
@@ -214,7 +215,7 @@ sections below. The helper method allows for synchronous usage of the asynchrono
 </section>
 <section id="async-result-class">
 <span id="async-resultt"></span><h2>Async Result Class<a class="headerlink" href="#async-result-class" title="Permalink to this heading"></a></h2>
-<p>#include &lt;comms/async_result_detail.h&gt;</p>
+<p>#include &lt;dolbyio/comms/async_result_detail.h&gt;</p>
 <p>The async_result is a result that is returned to the SDK by all asynchronous calls, except calls that create the SDK and set the log level. Asynchronous operations can be chained together using
 <a class="reference internal" href="#_CPPv4I0ENO7dolbyio5comms6detail12async_result4thenEN6detail18return_type_helperIN6detail14cb_type_helperI1T1UE11cb_ret_typeE6traitsE17async_result_typeERR1URR11err_cb_type" title="dolbyio::comms::detail::async_result::then"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">async_result::then</span></code></a> calls and must be terminated with
 <a class="reference internal" href="#_CPPv4NO7dolbyio5comms6detail12async_result8on_errorERR11err_cb_type" title="dolbyio::comms::detail::async_result::on_error"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">async_result::on_error</span></code></a> calls.</p>

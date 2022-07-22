@@ -2,7 +2,7 @@
 
 Logging
 =========
-#include <comms/log_level.h>
+#include <dolbyio/comms/log_level.h>
 
 Enum describing the log levels of the SDK.
 

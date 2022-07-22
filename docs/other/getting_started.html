@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -45,13 +46,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#contents-of-the-sdk-package">Contents of the SDK package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ca-certificates">CA certificates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-the-access-token">Getting the Access Token</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#spatial-audio-conferences">Spatial Audio Conferences</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#client-sample-application">Client Sample Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-the-access-token">Getting the access token</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spatial-audio-conferences">Spatial audio conferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#client-sample-application">Client sample application</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#build-and-run-the-sample-application">Build and run the sample application</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#server-sample-application">Server Sample Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#server-sample-application">Server sample application</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#build-and-run-the-sample-server-application">Build and run the sample server application</a></li>
 </ul>
 </li>
@@ -91,9 +92,10 @@
              
   <section id="getting-started">
 <span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
-<p>A comprehensive getting started guide can be found here: <a class="reference external" href="https://docs.dolby.io/communications-apis/docs/scpp-getting-started">https://docs.dolby.io/communications-apis/docs/scpp-getting-started</a>.</p>
+<p>This guide will help you create a simple conference application.</p>
 <section id="contents-of-the-sdk-package">
 <h2>Contents of the SDK package<a class="headerlink" href="#contents-of-the-sdk-package" title="Permalink to this heading"></a></h2>
+<p>All C++ SDK packages are available on GitHub: <a class="reference external" href="https://github.com/DolbyIO/comms-sdk-cpp/releases">https://github.com/DolbyIO/comms-sdk-cpp/releases</a>.</p>
 <p>The following table lists the contents of the C++ SDK package:</p>
 <blockquote>
 <div><table class="docutils align-default">
@@ -104,7 +106,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>include</p></td>
-<td><p>Header files making up the Public API</p></td>
+<td><p>Header files that create the public API</p></td>
 </tr>
 <tr class="row-odd"><td><p>lib</p></td>
 <td><p>Shared libraries constituting the C++ SDK</p></td>
@@ -112,50 +114,58 @@
 <tr class="row-even"><td><p>share</p></td>
 <td><p>Cmake files for building target, samples, docs, and licenses</p></td>
 </tr>
+<tr class="row-odd"><td><p>bin</p></td>
+<td><p>Prebuilt sample application binaries</p></td>
+</tr>
 </tbody>
 </table>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do it via terminal and the macOS attribute stripping command line tool:</p>
+<p><strong>xattr -d -r com.apple.quarantine sdk-release/</strong></p>
+</div>
 </section>
 <section id="ca-certificates">
 <h2>CA certificates<a class="headerlink" href="#ca-certificates" title="Permalink to this heading"></a></h2>
-<p>The SDK uses Certificate Authority (CA) certificates to authenticate the identity of the remote servers during an SSL handshake. The SDK library provides two options for selecting CA Certificates:</p>
+<p>The SDK uses Certificate Authority (CA) certificates to authenticate the identity of remote servers during an SSL handshake. The SDK library provides two options for selecting CA certificates:</p>
 <ul class="simple">
-<li><p>The SDK library comes with built-in CA Certificates that are used by default.</p></li>
+<li><p>The SDK library contains built-in CA certificates that are used by default.</p></li>
 <li><p>The SDK library checks the value of the <strong>DOLBYIO_COMMS_CA_CERT_FILE</strong> environment variable. If the ENV variable points to a proper certificate file, these certificates are loaded.</p></li>
 </ul>
 <p>The SDK does not try to use the system-installed CA cert files.</p>
 </section>
 <section id="getting-the-access-token">
-<h2>Getting the Access Token<a class="headerlink" href="#getting-the-access-token" title="Permalink to this heading"></a></h2>
+<h2>Getting the access token<a class="headerlink" href="#getting-the-access-token" title="Permalink to this heading"></a></h2>
 <p>Applications using the C++ SDK must provide an access token when creating the SDK. The sample applications provided as a part of the sdk-release package require the access token to be provided as a command line parameter when launching the executable. To get the access token from the Dolby.io dashboard, follow these instructions: <a class="reference external" href="https://docs.dolby.io/communications-apis/docs/overview-developer-tools">https://docs.dolby.io/communications-apis/docs/overview-developer-tools</a></p>
-<p>After getting the access token you are on your way to build and run the <a class="reference internal" href="#getting-started-server"><span class="std std-ref">Server</span></a> or <a class="reference internal" href="#getting-started-client"><span class="std std-ref">Client</span></a> Sample Applications.</p>
+<p>After getting the access token, you can build and run the <a class="reference internal" href="#getting-started-server"><span class="std std-ref">Server</span></a> and <a class="reference internal" href="#getting-started-client"><span class="std std-ref">Client</span></a> sample applications.</p>
 </section>
 <section id="spatial-audio-conferences">
-<h2>Spatial Audio Conferences<a class="headerlink" href="#spatial-audio-conferences" title="Permalink to this heading"></a></h2>
-<p>If you join a Spatial Audio conference with either <a class="reference internal" href="#getting-started-client"><span class="std std-ref">Client Sample Application</span></a> and <a class="reference internal" href="#getting-started-server"><span class="std std-ref">Server Sample Application</span></a>, your Spatial Position must be set before you can hear or be heard by other participants in the conference. All sample applications set the default Spatial Position for local participant to (0,0,0). For more information on interactively changing the position plese refer the interactive commands section of the aforementioned sample applications.</p>
+<h2>Spatial audio conferences<a class="headerlink" href="#spatial-audio-conferences" title="Permalink to this heading"></a></h2>
+<p>If you join a spatial audio conference using either <a class="reference internal" href="#getting-started-client"><span class="std std-ref">Client sample application</span></a> or <a class="reference internal" href="#getting-started-server"><span class="std std-ref">Server sample application</span></a>, you need to set your spatial position. All sample applications set the default spatial position for local participant to (0,0,0). For more information on interactively changing the position, please refer the interactive commands section of the aforementioned sample applications.</p>
 </section>
 <section id="client-sample-application">
-<span id="getting-started-client"></span><h2>Client Sample Application<a class="headerlink" href="#client-sample-application" title="Permalink to this heading"></a></h2>
-<p>A basic Client C++ sample application allows joining a conference, using spatial audio configurations, sending the local participant’s audio into the conference, and playing audio received from the conference. The application is available in the <strong>sdk-release/share/dolbyio/comms/sample/client_app/</strong> directory of the package. This directory contains C++ code for the application and the respective CMakeLists.txt file, which you can use to build the application.</p>
+<span id="getting-started-client"></span><h2>Client sample application<a class="headerlink" href="#client-sample-application" title="Permalink to this heading"></a></h2>
+<p>A basic Client C++ sample application allows joining a conference, using spatial audio configurations, sending the local participant’s audio to the conference, and playing audio received from the conference. The application is available in the <strong>sdk-release/share/dolbyio/comms/sample/client_app/</strong> directory of the package. This directory contains C++ code for the application and the respective CMakeLists.txt file, which you can use to build the application.</p>
 <p>The steps performed by the sample application are:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Parse command line parameters (user access token, user name, and conference alias or conference ID must be provided).</p></li>
-<li><p><a class="reference internal" href="../api/sdk/sdk.html#_CPPv4N7dolbyio5comms3sdk6createERKNSt6stringERRNSt8functionIFvNSt10unique_ptrI13refresh_tokenEEEEE" title="dolbyio::comms::sdk::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Create</span> <span class="pre">and</span> <span class="pre">Initialize</span></code></a> the SDK.</p></li>
-<li><p><a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Open</span></code></a> a Dolby.io session. The session::open call returns a <a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="dolbyio::comms::services::session::user_info"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">user_info</span></code></a> object which contains the participant ID.</p></li>
-<li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference6createERK18conference_options" title="dolbyio::comms::services::conference::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Create</span></code></a> and <a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="dolbyio::comms::services::conference::join"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Join</span></code></a> a specific conference.</p></li>
-<li><p>Provide locally captured audio to the conference and playback received audio.</p></li>
-<li><p>If joining a Spatial Audio Conference set the local participant’s initial position in a spatial audio conference. This requires using the participant ID returned by the <a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Open</span></code></a> method. A spatial position must be set for your participant before you can hear other participants and they can hear you.</p></li>
-<li><p>Manage local audio devices using the <a class="reference internal" href="../api/sdk/device_management.html#_CPPv4N7dolbyio5comms8services17device_managementE" title="dolbyio::comms::services::device_management"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">device_management</span></code></a> interface.</p></li>
-<li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference5leaveEv" title="dolbyio::comms::services::conference::leave"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Leave</span></code></a> the conference.</p></li>
-<li><p><a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session5closeEv" title="dolbyio::comms::services::session::close"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Close</span></code></a> the Dolby.io session.</p></li>
+<li><p>Parses command line parameters. The required parameters are: user access token, user name, and conference alias or conference ID.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/sdk.html#_CPPv4N7dolbyio5comms3sdk6createERKNSt6stringERRNSt8functionIFvNSt10unique_ptrI13refresh_tokenEEEEE" title="dolbyio::comms::sdk::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Creates</span> <span class="pre">and</span> <span class="pre">initializes</span></code></a> the SDK.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Opens</span></code></a> a Dolby.io session. The session::open call returns a <a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="dolbyio::comms::services::session::user_info"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">user_info</span></code></a> object which contains the participant ID.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference6createERK18conference_options" title="dolbyio::comms::services::conference::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Creates</span></code></a> and <a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="dolbyio::comms::services::conference::join"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">joins</span></code></a> a specific conference.</p></li>
+<li><p>Provides locally captured audio to the conference and plays received audio.</p></li>
+<li><p>Sets the local participant’s initial position if the joined conference uses spatial audio. This requires using the participant ID returned by the <a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">open</span></code></a> method. A spatial position must be set for the local participant before the conference, to allow remote participants to hear the local participant.</p></li>
+<li><p>Manages local audio devices using the <a class="reference internal" href="../api/sdk/device_management.html#_CPPv4N7dolbyio5comms8services17device_managementE" title="dolbyio::comms::services::device_management"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">device_management</span></code></a> interface.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference5leaveEv" title="dolbyio::comms::services::conference::leave"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Leaves</span></code></a> the conference.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session5closeEv" title="dolbyio::comms::services::session::close"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Closes</span></code></a> the Dolby.io session.</p></li>
 </ol>
 </div></blockquote>
 <p>The sample application makes use of the <a class="reference internal" href="../api/sdk/common/async_ops.html#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="dolbyio::comms::wait"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::wait()</span></code></a> call for all asynchronous operations.</p>
 <section id="build-and-run-the-sample-application">
 <h3>Build and run the sample application<a class="headerlink" href="#build-and-run-the-sample-application" title="Permalink to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p>Build the sample application in a few simple steps from the <strong>sample/</strong> directory.</p></li>
+<li><p>Build the sample application in a few simple steps from the <strong>sample/</strong> directory:</p></li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> sdk-release/share/dolbyio/comms/sample/
 <span class="gp">$ </span>mkdir build
@@ -186,43 +196,43 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>-u</p></td>
-<td><p>The User Name</p></td>
+<td><p>The participant’s name.</p></td>
 </tr>
 <tr class="row-odd"><td><p>-e</p></td>
-<td><p>The External ID</p></td>
+<td><p>The external ID</p></td>
 </tr>
 <tr class="row-even"><td><p>-k</p></td>
-<td><p>The Access Token</p></td>
+<td><p>The access token</p></td>
 </tr>
 <tr class="row-odd"><td><p>-c</p></td>
-<td><p>Conference Alias (DEMO to join demo conf)</p></td>
+<td><p>The conference alias (DEMO to join a demo conference)</p></td>
 </tr>
 <tr class="row-even"><td><p>-t</p></td>
-<td><p>Conference Access Token</p></td>
+<td><p>The conference access token</p></td>
 </tr>
 <tr class="row-odd"><td><p>-i</p></td>
-<td><p>Conference ID</p></td>
+<td><p>The conference ID</p></td>
 </tr>
 <tr class="row-even"><td><p>-l</p></td>
-<td><p>Logging Level (0-5)</p></td>
+<td><p>The logging level (0-5)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-j</p></td>
-<td><p>User type (user or listener)</p></td>
+<td><p>The user type (user or listener)</p></td>
 </tr>
 <tr class="row-even"><td><p>-s</p></td>
-<td><p>Send Only Mode</p></td>
+<td><p>The send-only mode</p></td>
 </tr>
 <tr class="row-odd"><td><p>-m</p></td>
-<td><p>Initial media to send</p></td>
+<td><p>The initial media to send</p></td>
 </tr>
 <tr class="row-even"><td><p>-spatial</p></td>
-<td><p>Spatial Audio (shared|individual|disabled)</p></td>
+<td><p>Spatial audio (shared|individual|disabled)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-force_opus</p></td>
-<td><p>Force Opus Codec for Conference (yes|no)</p></td>
+<td><p>Forces the Opus codec usage (yes|no)</p></td>
 </tr>
 <tr class="row-even"><td><p>-log_speaker</p></td>
-<td><p>Log the Active Speaker changes  (yes|no)</p></td>
+<td><p>Logs the active speaker changes  (yes|no)</p></td>
 </tr>
 </tbody>
 </table>
@@ -233,11 +243,11 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Providing <strong>-i</strong> command line parameter with Conference ID preceed all other options and the application will join the Conference with that ID (this conference must exist). Providing <strong>-c</strong> with alias will have the application join
-a conference with Alias, if it does not exist already on the Dolby.io backend the application will create the conference and then join. Providing <strong>-c</strong> command line parameter with <strong>DEMO</strong> as the alias will have the application
-create and join the demo conference.
-If you do not provide <strong>CONFERENCE_ID</strong> nor <strong>CONFERENCE_ALIAS</strong> command line switches when joining the application will open a Session with the Dolby.io backend and wait for interactions listen below. In such scenario it is possible
-to listen for Subscription/Invitation events, get Invited to conferences and Invite others to Conferences.</p>
+<p>Providing the <strong>-i</strong> command line parameter causes that the application joins the specific conference if the conference with the provided ID already exists. Providing <strong>-c</strong> causes that the application joins the specific conference. If the requested conference does not exist on the Dolby.io backend,
+the application creates and joins the conference. Providing a <strong>DEMO</strong> value of the <strong>-c</strong> parameter causes that the application
+creates and joins a demo conference.
+If you do not provide <strong>CONFERENCE_ID</strong> nor <strong>CONFERENCE_ALIAS</strong> when joining, the application will open a session with the Dolby.io backend and wait for interactions. In this scenario, it is possible
+to listen for subscription or invitation events, get invited to conferences and invite others.</p>
 </div>
 <p>3. Interact with the <strong>client_app</strong> executable using one of the following command line options which can be provided whilst the application is running. The application will prompt the user for input and
 explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well.</p>
@@ -250,100 +260,106 @@ explain each of the options. If the chosen option requires more input, the user 
 </thead>
 <tbody>
 <tr class="row-even"><td><p>q</p></td>
-<td><p>Quit application</p></td>
+<td><p>Quits the application</p></td>
 </tr>
 <tr class="row-odd"><td><p>stop-audio</p></td>
-<td><p>Stop Local Audio</p></td>
+<td><p>Stops the local audio</p></td>
 </tr>
 <tr class="row-even"><td><p>start-audio</p></td>
-<td><p>Start Local Audio</p></td>
+<td><p>Starts the local audio</p></td>
 </tr>
 <tr class="row-odd"><td><p>stop-audio-remote</p></td>
-<td><p>Stop Remote Audio (Only Dolby Voice Conferences)</p></td>
+<td><p>Stops remote audio in a Dolby Voice conference</p></td>
 </tr>
 <tr class="row-even"><td><p>start-audio-remote</p></td>
-<td><p>Start Remote Audio (Only Dolby Voice Conferences)</p></td>
+<td><p>Starts remote audio in a Dolby Voice conference</p></td>
 </tr>
 <tr class="row-odd"><td><p>m</p></td>
-<td><p>Send message into conference</p></td>
+<td><p>Sends a message to a conference</p></td>
 </tr>
 <tr class="row-even"><td><p>P</p></td>
-<td><p>List conference participants</p></td>
+<td><p>Lists conference participants</p></td>
 </tr>
 <tr class="row-odd"><td><p>S</p></td>
-<td><p>Set spatial audio configuration</p></td>
+<td><p>Sets a spatial audio configuration</p></td>
 </tr>
 <tr class="row-even"><td><p>mute</p></td>
-<td><p>Mute Microphone</p></td>
+<td><p>Mutes the local participant’s microphone</p></td>
 </tr>
 <tr class="row-odd"><td><p>unmute</p></td>
-<td><p>Unmute Microphone</p></td>
+<td><p>Un-mutes the local participant’s microphone</p></td>
 </tr>
 <tr class="row-even"><td><p>mute-remote</p></td>
-<td><p>Mute Remote Participant (Only Non-Dolby Voice Conferences)</p></td>
+<td><p>Mutes a remote participant in a non-Dolby Voice conference</p></td>
 </tr>
 <tr class="row-odd"><td><p>unmute-remote</p></td>
-<td><p>Unmute Remote Participant (Only Non-Dolby Voice Conferences)</p></td>
+<td><p>Un-mutes a remote participant in a non-Dolby Voice conference</p></td>
 </tr>
 <tr class="row-even"><td><p>k</p></td>
-<td><p>Set output audio mute</p></td>
+<td><p>Sets output audio mute</p></td>
 </tr>
 <tr class="row-odd"><td><p>K</p></td>
-<td><p>Set output audio unmute</p></td>
+<td><p>Sets output audio un-mute</p></td>
 </tr>
 <tr class="row-even"><td><p>invite</p></td>
-<td><p>Invite participant to Conference</p></td>
+<td><p>Invites a participant to a conference</p></td>
 </tr>
 <tr class="row-odd"><td><p>subscribe</p></td>
-<td><p>Subscribe to all Conference events</p></td>
+<td><p>Subscribes to all conference events</p></td>
 </tr>
 <tr class="row-even"><td><p>unsubscribe</p></td>
-<td><p>Unubscribe from all Conference events</p></td>
+<td><p>Unsubscribes from all conference events</p></td>
 </tr>
 <tr class="row-odd"><td><p>join</p></td>
-<td><p>Join a conference by providing ID</p></td>
+<td><p>Joins a conference by providing ID</p></td>
 </tr>
 <tr class="row-even"><td><p>create</p></td>
-<td><p>Create a Conference providing Alias</p></td>
+<td><p>Creates a conference by providing alias</p></td>
 </tr>
 <tr class="row-odd"><td><p>accept</p></td>
-<td><p>Accept a Conference Invitation</p></td>
+<td><p>Accepts a conference invitation</p></td>
 </tr>
 <tr class="row-even"><td><p>decline</p></td>
-<td><p>Decline a Conference Invitation</p></td>
+<td><p>Declines a conference invitation</p></td>
+</tr>
+<tr class="row-odd"><td><p>audio-level</p></td>
+<td><p>Get audio level for a single participant</p></td>
+</tr>
+<tr class="row-even"><td><p>audio-levels</p></td>
+<td><p>Get audio levels for all participants in a conference</p></td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For an optimal experience with the client application, please use only the interactive options shown above. While running the application, the interactive options “V” and “v” are displayed as
-possible options. Do not use these as video is not supported for Client Applications yet.</p>
+<p>For an optimal experience with the client application, please use only the interactive options listed above. While running the application, the interactive options “V” and “v” are displayed as
+possible options. Do not use these as video is not supported for client applications yet.</p>
 </div>
 </section>
 </section>
 <section id="server-sample-application">
-<span id="getting-started-server"></span><h2>Server Sample Application<a class="headerlink" href="#server-sample-application" title="Permalink to this heading"></a></h2>
+<span id="getting-started-server"></span><h2>Server sample application<a class="headerlink" href="#server-sample-application" title="Permalink to this heading"></a></h2>
 <p>A basic Server C++ sample application allows joining a conference, recording streams using the default recorder, and injecting streams using the default injector and sample media source file library.
 The application is available in the <strong>sdk-release/share/dolbyio/comms/share/sample/server_app/</strong> directory of the package. This directory contains C++ code for the application and the respective
 CMakeLists.txt file, which can be used to build the application.</p>
 <p>The sample application can perform the following steps:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Parse command line parameters (user access token, user name, and conference alias or conference ID must be provided).</p></li>
-<li><p><a class="reference internal" href="../api/sdk/sdk.html#_CPPv4N7dolbyio5comms3sdk6createERKNSt6stringERRNSt8functionIFvNSt10unique_ptrI13refresh_tokenEEEEE" title="dolbyio::comms::sdk::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Create</span> <span class="pre">and</span> <span class="pre">Initialize</span></code></a> the SDK.</p></li>
+<li><p>Parse command line parameters. The required parameters are: user access token, user name, and conference alias or conference ID.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/sdk.html#_CPPv4N7dolbyio5comms3sdk6createERKNSt6stringERRNSt8functionIFvNSt10unique_ptrI13refresh_tokenEEEEE" title="dolbyio::comms::sdk::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Create</span> <span class="pre">and</span> <span class="pre">initialize</span></code></a> the SDK.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE" title="dolbyio::comms::plugin::recorder::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Create</span></code></a> an instance of the <a class="reference internal" href="../api/sdk/recorder.html#api-recorder"><span class="std std-ref">Default Media Recorder</span></a>.</p></li>
-<li><p><a class="reference internal" href="../api/sdk/recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder20set_recording_configE22audio_recording_config22video_recording_config" title="dolbyio::comms::plugin::recorder::set_recording_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Configure</span></code></a> the instance of the Media Recorder to capture PCM audio and Encoded Video.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder20set_recording_configE22audio_recording_config22video_recording_config" title="dolbyio::comms::plugin::recorder::set_recording_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Configure</span></code></a> the instance of the Media Recorder to capture PCM audio and encoded video.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference14set_media_sinkEP20media_sink_interface" title="dolbyio::comms::services::conference::set_media_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span></code></a> the recorder instance as the media sink for the Conference Service.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/injector.html#_CPPv4N7dolbyio5comms6plugin14injector_pacedE" title="dolbyio::comms::plugin::injector_paced"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Create</span></code></a> an instance of the <a class="reference internal" href="../api/sdk/injector.html#default-injector"><span class="std std-ref">Default Media Injector</span></a>.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/injector.html#media-source-file"><span class="std std-ref">Create</span></a> an instance of the Media Source File module and provide it the previously created injector.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference16set_media_sourceEP22media_source_interface" title="dolbyio::comms::services::conference::set_media_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span></code></a> the injector instance as the media source for the Conference Service.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Open</span></code></a> a Dolby.io session.</p></li>
-<li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference6createERK18conference_options" title="dolbyio::comms::services::conference::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Create</span></code></a> and/or <a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="dolbyio::comms::services::conference::join"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Join</span></code></a> a specific conference.</p></li>
-<li><p>After joining a conference with audio/video set to be injected to the conference, start capturing media using the Media Source File library.</p></li>
-<li><p>If joining a Spatial Audio Conference set the local participant’s initial position in a spatial audio conference. This requires using the participant ID returned by the <a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Open</span></code></a> method. A spatial position must be set for your participant before you can hear other participants and they can hear you.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference6createERK18conference_options" title="dolbyio::comms::services::conference::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Create</span></code></a> and <a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="dolbyio::comms::services::conference::join"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">join</span></code></a> a specific conference.</p></li>
+<li><p>After joining a conference with audio and video set to be injected to the conference, start capturing media using the Media Source File library.</p></li>
+<li><p>Set the local participant’s initial position if the joined conference uses spatial audio. This requires using the participant ID returned by the <a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session4openERR9user_info" title="dolbyio::comms::services::session::open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">open</span></code></a> method. A spatial position must be set for the local participant before the conference, to allow remote participants to hear the local participant.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference5leaveEv" title="dolbyio::comms::services::conference::leave"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Leave</span></code></a> the respective conference.</p></li>
-<li><p>Finally, <a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session5closeEv" title="dolbyio::comms::services::session::close"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">close</span></code></a> the Dolby.io session.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session5closeEv" title="dolbyio::comms::services::session::close"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Close</span></code></a> the Dolby.io session.</p></li>
 </ol>
 </div></blockquote>
 <p>The sample application makes use of the <a class="reference internal" href="../api/sdk/common/async_ops.html#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="dolbyio::comms::wait"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::wait()</span></code></a> call for all asynchronous operations. Additionally, the sample application makes use of the Default Media Recorder module. If you prefer to write your own Media Recorder, see the <a class="reference internal" href="../api/recording/example.html#recording-example"><span class="std std-ref">Example Recorder Implementation</span></a> section. The sample application also uses the Default Media Injector module and the sample Media Source File
@@ -351,7 +367,7 @@ library. If you would like to write your own Media Injector, see the <a class="r
 <section id="build-and-run-the-sample-server-application">
 <h3>Build and run the sample server application<a class="headerlink" href="#build-and-run-the-sample-server-application" title="Permalink to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p>Build the sample app in a few simple steps from the <strong>sample/</strong> directory.</p></li>
+<li><p>Build the sample application from the <strong>sample/</strong> directory in a few simple steps:</p></li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> sdk-release/share/dolbyio/comms/sample/
 <span class="gp">$ </span>mkdir build
@@ -387,55 +403,55 @@ library. If you would like to write your own Media Injector, see the <a class="r
 </thead>
 <tbody>
 <tr class="row-even"><td><p>-u</p></td>
-<td><p>The User Name</p></td>
+<td><p>The user name</p></td>
 </tr>
 <tr class="row-odd"><td><p>-e</p></td>
-<td><p>The External ID</p></td>
+<td><p>The external ID</p></td>
 </tr>
 <tr class="row-even"><td><p>-k</p></td>
-<td><p>The Access Token</p></td>
+<td><p>The access token</p></td>
 </tr>
 <tr class="row-odd"><td><p>-c</p></td>
-<td><p>Conference Alias (DEMO to join demo conf)</p></td>
+<td><p>The conference alias (DEMO to join demo conference)</p></td>
 </tr>
 <tr class="row-even"><td><p>-t</p></td>
-<td><p>Conference Access Token</p></td>
+<td><p>The conference access token</p></td>
 </tr>
 <tr class="row-odd"><td><p>-i</p></td>
-<td><p>Conference ID</p></td>
+<td><p>The conference ID</p></td>
 </tr>
 <tr class="row-even"><td><p>-l</p></td>
-<td><p>Logging Level (0-5)</p></td>
+<td><p>The logging level (0-5)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-d</p></td>
-<td><p>Relative Path OutputDirectory</p></td>
+<td><p>The relative path to OutputDirectory</p></td>
 </tr>
 <tr class="row-even"><td><p>-v</p></td>
-<td><p>Video Format for recording</p></td>
+<td><p>The video format for recording</p></td>
 </tr>
 <tr class="row-odd"><td><p>-a</p></td>
-<td><p>Audio Format for recording</p></td>
+<td><p>The audio format for recording</p></td>
 </tr>
 <tr class="row-even"><td><p>-j</p></td>
-<td><p>User type (user or listener)</p></td>
+<td><p>The user type (user or listener)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-m</p></td>
-<td><p>Initial Media to Inject</p></td>
+<td><p>The initial media to inject</p></td>
 </tr>
 <tr class="row-even"><td><p>-f</p></td>
-<td><p>Name of Media File to inject</p></td>
+<td><p>The name of a media file to inject</p></td>
 </tr>
 <tr class="row-odd"><td><p>-s</p></td>
-<td><p>Send Only Mode</p></td>
+<td><p>The send-only mode</p></td>
 </tr>
 <tr class="row-even"><td><p>-V</p></td>
-<td><p>Max Video Forwarding (0-25)</p></td>
+<td><p>The maximum Video Forwarding value (0-25)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-spatial</p></td>
-<td><p>Spatial Audio (shared|individual|disabled)</p></td>
+<td><p>Spatial audio (shared|individual|disabled)</p></td>
 </tr>
 <tr class="row-even"><td><p>-log_speaker</p></td>
-<td><p>Log the Active Speaker changes  (yes|no)</p></td>
+<td><p>Logs the active speaker changes  (yes|no)</p></td>
 </tr>
 </tbody>
 </table>
@@ -447,18 +463,18 @@ library. If you would like to write your own Media Injector, see the <a class="r
 <p>This example starts the application that:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Dumps the recorder streams in the Encoded and PCM format respectively</p></li>
+<li><p>Dumps the recorder streams in the encoded and PCM format respectively</p></li>
 <li><p>Joins a conference as a user</p></li>
 <li><p>Starts injecting audio and video from the <strong>test_file.mp4</strong> to the conference</p></li>
 </ul>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Providing <strong>-i</strong> command line parameter with Conference ID preceed all other options and the application will join the Conference with that ID (this conference must exist). Providing <strong>-c</strong> with alias will have the application join
-a conference with Alias, if it does not exist already on the Dolby.io backend the application will create the conference and then join. Providing <strong>-c</strong> command line parameter with <strong>DEMO</strong> as the alias will have the application
-create and join the demo conference.
-If you do not provide <strong>CONFERENCE_ID</strong> nor <strong>CONFERENCE_ALIAS</strong> command line switches when joining the application will open a Session with the Dolby.io backend and wait for interactions listen below. In such scenario it is possible
-to listen for Subscription/Invitation events, get Invited to conferences and Invite others to Conferences.</p>
+<p>Providing the <strong>-i</strong> command line parameter causes that the application joins the specific conference if the conference with the provided ID already exists. Providing <strong>-c</strong> causes that the application joins the specific conference. If the requested conference does not exist on the Dolby.io backend,
+the application creates and joins the conference. Providing a <strong>DEMO</strong> value of the <strong>-c</strong> parameter causes that the application
+creates and joins a demo conference.
+If you do not provide <strong>CONFERENCE_ID</strong> nor <strong>CONFERENCE_ALIAS</strong> when joining, the application will open a session with the Dolby.io backend and wait for interactions. In this scenario, it is possible
+to listen for subscription or invitation events, get invited to conferences and invite others.</p>
 </div>
 <p>3. Interact with the <strong>server_app</strong> executable using one of the following command line options, which can be provided whilst the application is running. The application will prompt the user for input and
 explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well. Also, all options denoted with a * indicate that
@@ -472,89 +488,95 @@ application will directly interact with the <a class="reference internal" href="
 </thead>
 <tbody>
 <tr class="row-even"><td><p>q</p></td>
-<td><p>Quit application</p></td>
+<td><p>Quits the application</p></td>
 </tr>
 <tr class="row-odd"><td><p>f*</p></td>
-<td><p>Set new media file to play</p></td>
+<td><p>Sets a new media file to play</p></td>
 </tr>
 <tr class="row-even"><td><p>F*</p></td>
-<td><p>Add new media file to playlist</p></td>
+<td><p>Adds a new media file to a playlist</p></td>
 </tr>
 <tr class="row-odd"><td><p>p*</p></td>
-<td><p>Pause the file injection</p></td>
+<td><p>Pauses the file injection</p></td>
 </tr>
 <tr class="row-even"><td><p>r*</p></td>
-<td><p>Resume paused file injection</p></td>
+<td><p>Resumes the paused file injection</p></td>
 </tr>
 <tr class="row-odd"><td><p>s*</p></td>
-<td><p>Seek to time in the file</p></td>
+<td><p>Seeks to time in the file</p></td>
 </tr>
 <tr class="row-even"><td><p>stop-audio</p></td>
-<td><p>Stop Local Audio and Audio Injection</p></td>
+<td><p>Stops the local audio and audio injection</p></td>
 </tr>
 <tr class="row-odd"><td><p>start-audio</p></td>
-<td><p>Start Local Audio and Audio Injection</p></td>
+<td><p>Start the local audio and audio injection</p></td>
 </tr>
 <tr class="row-even"><td><p>stop-audio-remote</p></td>
-<td><p>Stop Remote Audio (Only Dolby Voice Conferences)</p></td>
+<td><p>Stops remote audio in a Dolby Voice conference</p></td>
 </tr>
 <tr class="row-odd"><td><p>start-audio-remote</p></td>
-<td><p>Start Remote Audio (Only Dolby Voice Conferences)</p></td>
+<td><p>Starts remote audio in a Dolby Voice conference</p></td>
 </tr>
 <tr class="row-even"><td><p>m</p></td>
-<td><p>Send message into conference</p></td>
+<td><p>Sends a message to the conference</p></td>
 </tr>
 <tr class="row-odd"><td><p>P</p></td>
-<td><p>List conference participants</p></td>
+<td><p>Lists conference participants</p></td>
 </tr>
 <tr class="row-even"><td><p>S</p></td>
-<td><p>Set spatial audio configuration</p></td>
+<td><p>Sets a spatial audio configuration</p></td>
 </tr>
 <tr class="row-odd"><td><p>mute</p></td>
-<td><p>Mute Microphone</p></td>
+<td><p>Mutes the local participant’s microphone</p></td>
 </tr>
 <tr class="row-even"><td><p>unmute</p></td>
-<td><p>Unmute Microphone</p></td>
+<td><p>Un-mutes the local participant’s microphone</p></td>
 </tr>
 <tr class="row-odd"><td><p>mute-remote</p></td>
-<td><p>Mute Remote Participant (Only Non-Dolby Voice Conferences)</p></td>
+<td><p>Mutes remote participant in a non-Dolby Voice conference</p></td>
 </tr>
 <tr class="row-even"><td><p>unmute-remote</p></td>
-<td><p>Unmute Remote Participant (Only Non-Dolby Voice Conferences)</p></td>
+<td><p>Un-mutes remote participant in a non-Dolby Voice conference</p></td>
 </tr>
 <tr class="row-odd"><td><p>v</p></td>
-<td><p>Stop Local Video and Video Injection</p></td>
+<td><p>Stops the local video and video injection</p></td>
 </tr>
 <tr class="row-even"><td><p>V</p></td>
-<td><p>Start Local Video and Video Injection</p></td>
+<td><p>Starts the local video and video injection</p></td>
 </tr>
 <tr class="row-odd"><td><p>invite</p></td>
-<td><p>Invite participant to Conference</p></td>
+<td><p>Invites a participant to a conference</p></td>
 </tr>
 <tr class="row-even"><td><p>subscribe</p></td>
-<td><p>Subscribe to all Conference events</p></td>
+<td><p>Subscribes to all conference events</p></td>
 </tr>
 <tr class="row-odd"><td><p>unsubscribe</p></td>
-<td><p>Unubscribe from all Conference events</p></td>
+<td><p>Un-subscribes from all conference events</p></td>
 </tr>
 <tr class="row-even"><td><p>join</p></td>
-<td><p>Join a conference by providing ID</p></td>
+<td><p>Joins a conference by providing ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>create</p></td>
-<td><p>Create a Conference providing Alias</p></td>
+<td><p>Creates a conference by providing alias</p></td>
 </tr>
 <tr class="row-even"><td><p>accept</p></td>
-<td><p>Accept a Conference Invitation</p></td>
+<td><p>Accepts a conference invitation</p></td>
 </tr>
 <tr class="row-odd"><td><p>decline</p></td>
-<td><p>Decline a Conference Invitation</p></td>
+<td><p>Declines a conference invitation</p></td>
+</tr>
+<tr class="row-even"><td><p>audio-level</p></td>
+<td><p>Get audio level for a single participant</p></td>
+</tr>
+<tr class="row-odd"><td><p>audio-levels</p></td>
+<td><p>Get audio levels for all participants in a conference</p></td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
-<p>Please note that in the sample application the Start/Stop Video/Audio methods consist of two parts. For example, for starting video, the first step uses the
-<a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference11start_videoEv" title="dolbyio::comms::services::conference::start_video"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::conference::start_video()</span></code></a> method, which attaches a Video Track to the active PeerConnection. This method resolves once the Video Track has been successfully
-added. Once this method is resolved, the injection of video from the Media Source is started. The entire procedure looks like:</p>
+<p>Please note that in the sample application methods that start and stop audio and video consist of two parts. For example, for starting video, the first step uses the
+<a class="reference internal" href="../api/sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference11start_videoEv" title="dolbyio::comms::services::conference::start_video"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::conference::start_video()</span></code></a> method, which attaches a video track to the active PeerConnection. This method resolves once the video track has been successfully
+added. Once this method is resolved, the injection of video from the Media Source starts. The following code block presents the entire procedure:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">()</span><span class="w"></span>
 <span class="p">.</span><span class="n">start_video</span><span class="p">()</span><span class="w"></span>
 <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="n">injection_src</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -575,7 +597,7 @@ added. Once this method is resolved, the injection of video from the Media Sourc
 </section>
 <section id="issues-linking">
 <h2>Issues Linking?<a class="headerlink" href="#issues-linking" title="Permalink to this heading"></a></h2>
-<p>If you have problems with running the application due to a not-found media library, set the <strong>LD_LIBRARY_PATH</strong> to the location of the <strong>sdk-release/lib</strong> directory. If you plan move the libraries to different locations, include these locations in the paths. The path can be set as follows:</p>
+<p>If you have problems with running the application due to a not-found media library, set the <strong>LD_LIBRARY_PATH</strong> to the location of the <strong>sdk-release/lib</strong> directory. If you plan to move the libraries to different locations, include these locations in the paths. The path can be set as follows:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/path/to/sdk-release/lib/:<span class="nv">$LD_LIBRARY_PATH</span>
 </pre></div>
 </div>

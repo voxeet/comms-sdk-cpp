@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -114,7 +115,7 @@ interface quickly.</p>
 <p>Neither of the default injectors provide infrastructure for capturing and decoding media. This is the application’s responsibility; once it has decoded media frames, it can pass them to either of the
 aforementioned injectors. We have provided a sample library to showcase how to create a Media Injection Source. This sample library, called <strong>media_source_file</strong>, reads media from a mov/mp4 file
 and using the Paced Injector injects the audio and video frames into the CoreSDK. This <strong>media_source_file</strong> library is utilized by the provided sample application to inject media files. The
-<a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server Sample Application</span></a> page describes how to get media injection running with the sample application. A brief overview of the library is provided <a class="reference internal" href="#media-source-file"><span class="std std-ref">below</span></a>.</p>
+<a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server sample application</span></a> page describes how to get media injection running with the sample application. A brief overview of the library is provided <a class="reference internal" href="#media-source-file"><span class="std std-ref">below</span></a>.</p>
 <p>The audio provided to the injector, contained by the <a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span> <span class="pre">frame</span></code></a>, should have the following specifications:</p>
 <table class="docutils align-default">
 <thead>
@@ -508,8 +509,8 @@ of the Media Source File library is in the following files:</p>
 <span class="cm"> *                Copyright (C) 2022 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span><span class="w"></span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;comms/exports.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;comms/multimedia_streaming/injector.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/exports.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/multimedia_streaming/injector.h&gt;</span><span class="cp"></span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/media_source/file/libav_wrapper/avcontext.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/media_source/file/source_context.h&quot;</span><span class="cp"></span>

@@ -2,7 +2,7 @@
 
 Audio Sink Interface
 ========================
-#include <comms/media/media_engine.h>
+#include <dolbyio/comms/media/media_engine.h>
 
 The interface for handling incoming audio frames. Applications must set listener which override the virtual function. The 
 :cpp:func:`handle_audio <dolbyio::comms::audio_sink::handle_audio>` function is called with the decoded PCM audio data. When inside a conference the 

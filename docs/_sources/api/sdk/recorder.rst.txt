@@ -65,7 +65,7 @@ WebRTC may change the format in which RAW audio is presented to the audio track 
 
 Default Recorder Interface
 --------------------------
-#include <comms/multimedia_streaming/recorder.h>
+#include <dolbyio/comms/multimedia_streaming/recorder.h>
 
 The Recorder interface is used for configuring the default recorder. The methods in the recorder interface are used to create and configure the recording module. This
 creates and configures the recording module that is provided as a part of the C++ SDK. The enums of the interface are used for setting the Video/Audio storage formats of the media. If you want to build your own recorder module, do not use this API.

@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -95,51 +96,39 @@
              
   <section id="conference-service">
 <span id="api-conference"></span><h1>Conference Service<a class="headerlink" href="#conference-service" title="Permalink to this heading"></a></h1>
-<p>During a conference, the SDK receives:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Features, such as recording and injecting media are only available for server applications.</p>
+</div>
+<p>The Conference Service allows the application to manage the conference life-cycle and interact with the conference. During a conference, the SDK may receive:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>A single audio stream that contains mixed audio of all un-muted participants</p></li>
 <li><p>Video streams from all participants who joined the conference with their cameras enabled</p></li>
-<li><p>One screen share stream, if any participant shares a screen</p></li>
+<li><p>One screen-share stream</p></li>
 </ul>
 </div></blockquote>
-<dl>
-<dt>The basic usage of the Conference Service is as follows:</dt><dd><ol class="arabic">
+<dl class="simple">
+<dt>The basic usage of the Conference Service is as follows:</dt><dd><ol class="arabic simple">
 <li><p>Log in to <a class="reference internal" href="session.html#sess-serv"><span class="std std-ref">Session Interface</span></a>.</p></li>
 <li><p>Create the media recording module instance. If you want to use the Default Recorder, use the <a class="reference internal" href="recorder.html#recorder"><span class="std std-ref">Default Recorder Interface</span></a> API, specifically the
-<a class="reference internal" href="recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE" title="dolbyio::comms::plugin::recorder::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">recorder::create</span></code></a> method.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>Please note that Recorder is only applicable for Server SDK applications.</strong></p></li>
-</ul>
-</div></blockquote>
-</li>
+<a class="reference internal" href="recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE" title="dolbyio::comms::plugin::recorder::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">recorder::create</span></code></a> method.</p></li>
 <li><p>Provide the output directory location for the recorder module.</p></li>
-<li><p>Set the media recording module as the Media Sink for the Conference Service, this allows passing the service a pointer to the created recorder instance. After this step, the recorder module should be set with the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference14set_media_sinkEP20media_sink_interface" title="dolbyio::comms::services::conference::set_media_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::set_media_sink</span></code></a>.</p></li>
+<li><p>Set the media recording module as the Media Sink for the Conference Service. This allows passing the service a pointer to the created recorder instance. After this step, the recorder module should be set with the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference14set_media_sinkEP20media_sink_interface" title="dolbyio::comms::services::conference::set_media_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::set_media_sink</span></code></a>.</p></li>
 <li><p>Create the Media Injector Module instance using the Default Injector provided through the <a class="reference internal" href="injector.html#default-injector"><span class="std std-ref">Default Media Injector</span></a> API. Specifically the <a class="reference internal" href="injector.html#_CPPv4N7dolbyio5comms6plugin14injector_pacedE" title="dolbyio::comms::plugin::injector_paced"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">injetor_paced</span></code></a> or the <a class="reference internal" href="injector.html#_CPPv4N7dolbyio5comms6plugin20injector_passthroughE" title="dolbyio::comms::plugin::injector_passthrough"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">injetor_passthrough</span></code></a> constructors.</p></li>
 <li><p>Create a Media Injection Source that adds the ability to provide raw frames to the Media Injector Module. This can be an application which reads from a file, gets remote stream, and provides the media frames to the injector. This Media Injection Source should be passed as a reference to the Media Injector Module on creation.</p></li>
-<li><p>Set the Injector Module instance as the Media Source for the Conference Service via the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference16set_media_sourceEP22media_source_interface" title="dolbyio::comms::services::conference::set_media_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::set_media_source</span></code></a> method.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>Please note the Injector is only applicable for Server SDK applications.</strong></p></li>
-</ul>
-</div></blockquote>
-</li>
+<li><p>Set the Injector Module instance as the Media Source for the Conference Service via the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference16set_media_sourceEP22media_source_interface" title="dolbyio::comms::services::conference::set_media_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::set_media_source</span></code></a> method.</p></li>
 <li><p>Subscribe to any of the available <a class="reference internal" href="#conf-events"><span class="std std-ref">Conference Events</span></a> using the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI25conference_status_updatedE" title="dolbyio::comms::services::conference::add_event_handler"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::add_event_handler</span></code></a> method.</p></li>
 <li><p>Create a conference using a conference alias <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference6createERK18conference_options" title="dolbyio::comms::services::conference::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::create</span></code></a>. You can omit this step if you want to join an existing conference.</p></li>
-<li><p>Join a conference using the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="dolbyio::comms::services::conference::join"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::join</span></code></a> or <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference6listenERK15conference_infoRK14listen_options" title="dolbyio::comms::services::conference::listen"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::listen</span></code></a> method. This method should return the conference_info struct (see <a class="reference internal" href="#conf-models"><span class="std std-ref">Other Structures</span></a>) describing the conference. In the case of failure, you will receive an exception returned in the async_result.</p>
-<ul class="simple">
-<li><p>By default, Dolby Voice Conference Server audio processing is disabled.</p></li>
-<li><p>You can enable the processing by setting audio_processing flag to true in <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference17media_constraintsE" title="dolbyio::comms::services::conference::media_constraints"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">dolbyio::comms::services::conference::media_constraints</span></code></a>.</p></li>
-</ul>
-</li>
+<li><p>Join a conference using the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="dolbyio::comms::services::conference::join"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::join</span></code></a> or <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference6listenERK15conference_infoRK14listen_options" title="dolbyio::comms::services::conference::listen"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::listen</span></code></a> method. This method returns the conference_info structure (see <a class="reference internal" href="#conf-models"><span class="std std-ref">Other Structures</span></a>) describing the conference. In the case of failure, you will receive an exception returned in the async_result.</p></li>
 <li><p>To leave the conference, call the <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference5leaveEv" title="dolbyio::comms::services::conference::leave"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">conference::leave</span></code></a> method.</p></li>
 </ol>
 </dd>
 </dl>
+<p>By default, Dolby Voice Conference Server audio processing is disabled. You can enable the processing by setting the audio_processing flag to true in <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference17media_constraintsE" title="dolbyio::comms::services::conference::media_constraints"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">dolbyio::comms::services::conference::media_constraints</span></code></a>.</p>
 <section id="conference-interface">
 <span id="conf-serv"></span><h2>Conference Interface<a class="headerlink" href="#conference-interface" title="Permalink to this heading"></a></h2>
-<p>#include &lt;comms/conference.h&gt;</p>
+<p>#include &lt;dolbyio/comms/conference.h&gt;</p>
 <p>The interface for the <a class="reference internal" href="#api-conference"><span class="std std-ref">Conference Service</span></a>. Methods of this interface provide the ability to create, join, and leave conferences and subscribe to
 events. The conference service methods are all asynchronous in nature, refer to <a class="reference internal" href="common/async_ops.html#api-async-result"><span class="std std-ref">Asynchronous Operations</span></a> for more information. Structures which are part of the
 interface can be passed to and returned by the service.</p>
@@ -334,7 +323,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference4muteEb">
 <span id="_CPPv3N7dolbyio5comms8services10conference4muteEb"></span><span id="_CPPv2N7dolbyio5comms8services10conference4muteEb"></span><span id="dolbyio::comms::services::conference::mute__b"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1ae4120062332b504eefae08010fcd4ad8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mute</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">muted</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference4muteEb" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Mutes or unmutes the microphone. </p>
+<dd><p>Mutes and un-mutes the local participant’s microphone. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">mute</span><span class="p">(</span><span class="nb">true</span><span class="p">));</span><span class="w"></span>
 
@@ -352,7 +341,7 @@ interface can be passed to and returned by the service.</p>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>muted</strong> – A boolean value that indicates the required mute state. True mutes the microphone, false unmutes the microphone.</p>
+<dd class="field-odd"><p><strong>muted</strong> – A boolean value that indicates the required mute state. True mutes the microphone, false un-mutes the microphone.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
@@ -363,7 +352,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference11remote_muteEbRKNSt6stringE">
 <span id="_CPPv3N7dolbyio5comms8services10conference11remote_muteEbRKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference11remote_muteEbRKNSt6stringE"></span><span id="dolbyio::comms::services::conference::remote_mute__b.ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a31f58b577ae8b9ea75d338c64b1aee04"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remote_mute</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">muted</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference11remote_muteEbRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Locally Mutes or Unmutes the Audio Track received from specified participant. </p>
+<dd><p>Mutes and un-mutes a specified remote participant. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">remote_mute</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">participant_id</span><span class="p">));</span><span class="w"></span>
 
@@ -379,19 +368,19 @@ interface can be passed to and returned by the service.</p>
 </pre></div>
 </div>
  <dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>THis method is only available for NON-Dolby Voice Conferences.</p>
+<dt><strong>Attention</strong></dt><dd><p>This method is only available for non-Dolby Voice conferences.</p>
 </dd>
 </dl>
 </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>muted</strong> – A boolean value that indicates the required mute state. True mutes the remote participant, false unmutes the remote participant.</p></li>
+<li><p><strong>muted</strong> – A boolean value that indicates the required mute state. True mutes the remote participant, false un-mutes the remote participant.</p></li>
 <li><p><strong>participant_id</strong> – The ID of the remote participant to be muted.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The result object producing the operation status asynchronously. If attempted for a Dolby Voice Conference the async_result will fail.</p>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. If attempted for a Dolby Voice Conference, the async_result will fail.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -399,7 +388,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference11mute_outputEb">
 <span id="_CPPv3N7dolbyio5comms8services10conference11mute_outputEb"></span><span id="_CPPv2N7dolbyio5comms8services10conference11mute_outputEb"></span><span id="dolbyio::comms::services::conference::mute_output__b"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a8d91040c80436440ab56cce98b42305c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mute_output</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">muted</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference11mute_outputEb" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Mutes or unmutes the output audio device. </p>
+<dd><p>Mutes and un-mutes the output audio device. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">mute_output</span><span class="p">(</span><span class="nb">true</span><span class="p">));</span><span class="w"></span>
 
@@ -414,10 +403,14 @@ interface can be passed to and returned by the service.</p>
 <span class="w"> </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
- </p>
+ <dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This method is only available in Dolby Voice conferences.</p>
+</dd>
+</dl>
+</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>muted</strong> – A boolean value that indicates the required mute state. True mutes the output device, false unmutes the output device.</p>
+<dd class="field-odd"><p><strong>muted</strong> – A boolean value that indicates the required mute state. True mutes the output device, false un-mutes the output device.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
@@ -784,7 +777,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference18start_remote_audioERKNSt6stringE">
 <span id="_CPPv3N7dolbyio5comms8services10conference18start_remote_audioERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference18start_remote_audioERKNSt6stringE"></span><span id="dolbyio::comms::services::conference::start_remote_audio__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a83e0bc233068b46cd2908cb575fe7350"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start_remote_audio</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference18start_remote_audioERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Starts Audio for remote participant if it was previously Stopped locally. This method essentially just allows for the Audio Track from the desired remote participant to be mixed into the Dolby Voice Audio Stream receieved by the SDK. If the participant does not have their Audio enabled this method does not enable their Audio Track. </p>
+<dd><p>Allows the local participant, who used the stop_remote_audio method on a selected remote participant, to start receiving the remote participant’s audio track. This method allows an audio track from the desired remote participant to be mixed into the Dolby Voice audio stream received by the SDK. If the participant does not have their audio enabled, this method does not enable their audio track. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">start_remote_audio</span><span class="p">(</span><span class="n">participant_id</span><span class="p">));</span><span class="w"></span>
 
@@ -808,7 +801,7 @@ interface can be passed to and returned by the service.</p>
 </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the Participant whose Audio Track you would like to hear.</p>
+<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the participant whose audio track you would like to hear.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
@@ -819,7 +812,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference17stop_remote_audioERKNSt6stringE">
 <span id="_CPPv3N7dolbyio5comms8services10conference17stop_remote_audioERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference17stop_remote_audioERKNSt6stringE"></span><span id="dolbyio::comms::services::conference::stop_remote_audio__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a447e13ec3b519f1bda298f3dd73de4dd"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stop_remote_audio</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference17stop_remote_audioERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Stops Audio for remote participant. Others in the Conference will still hear the Participant’s audio but their Audio Track will no longer be mixed into the Dolby Voice Audio Stream which the SDK receives. </p>
+<dd><p>Allows the local participant to not receive an audio track from a selected remote participant. This method only impacts the local participant; the rest of conference participants will still hear the participant’s audio. This method does not allow the audio track of the selected remote participant to be mixed into the Dolby Voice audio stream that the SDK receives. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">stop_remote_audio</span><span class="p">(</span><span class="n">participant_id</span><span class="p">));</span><span class="w"></span>
 
@@ -843,7 +836,7 @@ interface can be passed to and returned by the service.</p>
 </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the Participant whose Audio Track you would like to stop.</p>
+<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the participant whose audio track you would like to stop.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
@@ -884,7 +877,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference18decline_invitationERKNSt6stringE">
 <span id="_CPPv3N7dolbyio5comms8services10conference18decline_invitationERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference18decline_invitationERKNSt6stringE"></span><span id="dolbyio::comms::services::conference::decline_invitation__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1af2b79b4c078ff3f4b7b9b51c6351991e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">decline_invitation</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">conf_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference18decline_invitationERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Decline invitation to a conference. </p>
+<dd><p>Declines a conference invitation. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">decline_invitation</span><span class="p">(</span><span class="n">conf_id</span><span class="p">));</span><span class="w"></span>
 
@@ -902,7 +895,7 @@ interface can be passed to and returned by the service.</p>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>conf_id</strong> – Id of the conference invited too.</p>
+<dd class="field-odd"><p><strong>conf_id</strong> – The conference ID.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
@@ -911,41 +904,9 @@ interface can be passed to and returned by the service.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference6inviteERKNSt6stringERRNSt6vectorI26conference_invitation_sendEE">
-<span id="_CPPv3N7dolbyio5comms8services10conference6inviteERKNSt6stringERRNSt6vectorI26conference_invitation_sendEE"></span><span id="_CPPv2N7dolbyio5comms8services10conference6inviteERKNSt6stringERRNSt6vectorI26conference_invitation_sendEE"></span><span id="dolbyio::comms::services::conference::invite__ssCR.std::vector:conference_invitation_send:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a85a5a3dd91eacc9636aba81d750beb23"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invite</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">conf_id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">conference_invitation_send</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">invitations</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference6inviteERKNSt6stringERRNSt6vectorI26conference_invitation_sendEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Invite participants to a conference. </p>
-<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">invite</span><span class="p">(</span><span class="n">conf_id</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">invitations</span><span class="p">));</span><span class="w"></span>
-
-<span class="c1">// Invoking the method directly requires chaining successive operations</span>
-<span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">invite</span><span class="p">(</span><span class="n">conf_id</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">invitations</span><span class="p">))</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// invited successfully</span>
-<span class="w">  </span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// inviting failed</span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
-</pre></div>
-</div>
- </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>conf_id</strong> – Id of the conference to invite participant too. </p></li>
-<li><p><strong>invitations</strong> – List of conference invitations containing data about the conference as well as information about particpant to invite.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference11audio_levelERKNSt6stringE">
-<span id="_CPPv3N7dolbyio5comms8services10conference11audio_levelERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference11audio_levelERKNSt6stringE"></span><span id="dolbyio::comms::services::conference::audio_level__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a3b39bab066a60296b854bd081b855290"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">float</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_level</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference11audio_levelERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets audio level for a given participant. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE"></span><span id="dolbyio::comms::services::conference::get_audio_level__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a7d6144fe9a93dacedd2ddc267098ea18"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">float</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_audio_level</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets a specific participant’s audio level. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">audio_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">audio_level</span><span class="p">(</span><span class="n">participant_id</span><span class="p">));</span><span class="w"></span>
 
@@ -963,7 +924,7 @@ interface can be passed to and returned by the service.</p>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>participant_id</strong> – The id of the participant for which audio level is requested.</p>
+<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the participant.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The object producing the audio level (between 0.0 and 1.0) asynchronously.</p>
@@ -974,7 +935,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference20get_all_audio_levelsEv">
 <span id="_CPPv3N7dolbyio5comms8services10conference20get_all_audio_levelsEv"></span><span id="_CPPv2N7dolbyio5comms8services10conference20get_all_audio_levelsEv"></span><span id="dolbyio::comms::services::conference::get_all_audio_levels"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a5fa4b144742bb2951a95ea8b8c110258"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">audio_level</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_all_audio_levels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference20get_all_audio_levelsEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets audio levels for all participants with level not less than 0.05. </p>
+<dd><p>Gets audio levels for all participants whose audio level is greater than or equal to 0.05. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="k">auto</span><span class="w"> </span><span class="n">audio_levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">get_all_audio_levels</span><span class="p">());</span><span class="w"></span>
 
@@ -1589,7 +1550,7 @@ interface can be passed to and returned by the service.</p>
 </section>
 <section id="spatial-audio">
 <h2>Spatial Audio<a class="headerlink" href="#spatial-audio" title="Permalink to this heading"></a></h2>
-<p>#include &lt;comms/spatial_audio_types.h&gt;</p>
+<p>#include &lt;dolbyio/comms/spatial_audio_types.h&gt;</p>
 <p>The spatial audio methods that allow placing conference participants spatially in a 3D rendered audio scene and hear the audio from the participants rendered at the given locations.</p>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16spatial_positionE">
@@ -1775,6 +1736,7 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms26spatial_audio_batch_updateE">
 <span id="_CPPv3N7dolbyio5comms26spatial_audio_batch_updateE"></span><span id="_CPPv2N7dolbyio5comms26spatial_audio_batch_updateE"></span><span id="dolbyio::comms::spatial_audio_batch_update"></span><span class="target" id="classdolbyio_1_1comms_1_1spatial__audio__batch__update"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">spatial_audio_batch_update</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms26spatial_audio_batch_updateE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Batched spatial audio updates that can be passed to the conference service. </p>
+<p>This class contains the ordered list of spatial audio updates which will be performed atomically in the conference. If you wish to update multiple spatial audio parameters, for example multiple spatial positions in the individual mode, use this method to batch all relevant updates in a single batch update object. This approach prevents delays between the application of the provided parameters. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
 <dl class="cpp type">
@@ -1815,6 +1777,11 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms26spatial_audio_batch_update23set_spatial_environmentERK13spatial_scaleRK16spatial_positionRK16spatial_positionRK16spatial_position">
 <span id="_CPPv3N7dolbyio5comms26spatial_audio_batch_update23set_spatial_environmentERK13spatial_scaleRK16spatial_positionRK16spatial_positionRK16spatial_position"></span><span id="_CPPv2N7dolbyio5comms26spatial_audio_batch_update23set_spatial_environmentERK13spatial_scaleRK16spatial_positionRK16spatial_positionRK16spatial_position"></span><span id="dolbyio::comms::spatial_audio_batch_update::set_spatial_environment__spatial_scaleCR.spatial_positionCR.spatial_positionCR.spatial_positionCR"></span><span class="target" id="classdolbyio_1_1comms_1_1spatial__audio__batch__update_1addf829aab5b73c464f9b983bfc3dd4d8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_spatial_environment</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13spatial_scaleE" title="dolbyio::comms::spatial_scale"><span class="n"><span class="pre">spatial_scale</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scale</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16spatial_positionE" title="dolbyio::comms::spatial_position"><span class="n"><span class="pre">spatial_position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">forward</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16spatial_positionE" title="dolbyio::comms::spatial_position"><span class="n"><span class="pre">spatial_position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">up</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16spatial_positionE" title="dolbyio::comms::spatial_position"><span class="n"><span class="pre">spatial_position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">right</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms26spatial_audio_batch_update23set_spatial_environmentERK13spatial_scaleRK16spatial_positionRK16spatial_positionRK16spatial_position" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance. </p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>Setting spatial environment causes invalidating all participants’ positions and the local participant’s direction. If no new values for positions, local participant’s position in the shared more, or local direction are provided, the previously supplied values are reused and translated against the new environment. This is not the desired behaviour, because the original values provided by the application were intended to be used with the previously set environment, not the new one. If the environment update is required, it should be the first operation in the batch that should be followed with the update of local participant’s direction and participants’ positions in the same batch object.</p>
+</dd>
+</dl>
+</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1938,6 +1905,31 @@ interface can be passed to and returned by the service.</p>
 </dd></dl>
 
 </div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19spatial_audio_styleE">
+<span id="_CPPv3N7dolbyio5comms19spatial_audio_styleE"></span><span id="_CPPv2N7dolbyio5comms19spatial_audio_styleE"></span><span class="target" id="namespacedolbyio_1_1comms_1afba2339719d2d7ab8d7528d4042dd7fc"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">spatial_audio_style</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19spatial_audio_styleE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The possible spatial audio styles of the conference. Setting spatial_audio_style is possible only if the dolby_voice flag is set to true. You can either use the individual or shared option. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19spatial_audio_style8disabledE">
+<span id="_CPPv3N7dolbyio5comms19spatial_audio_style8disabledE"></span><span id="_CPPv2N7dolbyio5comms19spatial_audio_style8disabledE"></span><span class="target" id="namespacedolbyio_1_1comms_1afba2339719d2d7ab8d7528d4042dd7fca075ae3d2fc31640504f814f60e5ef713"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disabled</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19spatial_audio_style8disabledE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Spatial audio is disabled. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19spatial_audio_style10individualE">
+<span id="_CPPv3N7dolbyio5comms19spatial_audio_style10individualE"></span><span id="_CPPv2N7dolbyio5comms19spatial_audio_style10individualE"></span><span class="target" id="namespacedolbyio_1_1comms_1afba2339719d2d7ab8d7528d4042dd7fca23b79ae0fc0f07a3669598dd23c694cc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">individual</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19spatial_audio_style10individualE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The individual option sets the spatial location that is based on the spatial scene, local participant’s position, and remote participants’ positions. This allows a client to control the position using the local, self-contained logic. However, the client has to communicate a large set of requests constantly to the server, which increases network traffic, log subsystem pressure, and complexity of the client-side application. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19spatial_audio_style6sharedE">
+<span id="_CPPv3N7dolbyio5comms19spatial_audio_style6sharedE"></span><span id="_CPPv2N7dolbyio5comms19spatial_audio_style6sharedE"></span><span class="target" id="namespacedolbyio_1_1comms_1afba2339719d2d7ab8d7528d4042dd7fca9e81e7b963c71363e2fb3eefcfecfc0e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shared</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19spatial_audio_style6sharedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Spatial audio for shared scenes, The shared option sets the spatial location that is based on the spatial scene and the local participant’s position, while the relative positions among participants are calculated by the Dolby.io server. This way, the spatial scene is shared by all participants, so that each client can set its own position and participate in the shared scene. This approach simplifies communication between the client and the server and decreases network traffic. </p>
 </dd></dl>
 
 </dd></dl>

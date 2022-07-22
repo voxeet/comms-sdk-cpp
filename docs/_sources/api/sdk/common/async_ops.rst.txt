@@ -21,7 +21,7 @@ set, on the application's thread. Otherwise, the callbacks are invoked when the 
 
 Thread Safe Types and Helper Methods
 ------------------------------------
-#include <comms/async_result.h>
+#include <dolbyio/comms/async_result.h>
 
 The thread safe types which can be exposed by the user via the public API. They define thread safe versions of the Asynchronous Classes documented in the
 sections below. The helper method allows for synchronous usage of the asynchronous API when called from a different thread.
@@ -52,7 +52,7 @@ sections below. The helper method allows for synchronous usage of the asynchrono
 
 Async Result Class
 ------------------
-#include <comms/async_result_detail.h>
+#include <dolbyio/comms/async_result_detail.h>
 
 The async_result is a result that is returned to the SDK by all asynchronous calls, except calls that create the SDK and set the log level. Asynchronous operations can be chained together using
 :cpp:func:`async_result::then <dolbyio::comms::detail::async_result::then>` calls and must be terminated with

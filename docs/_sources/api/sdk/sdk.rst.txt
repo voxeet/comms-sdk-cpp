@@ -2,7 +2,7 @@
 
 Sdk Interface
 =============
-#include <comms/sdk.h>
+#include <dolbyio/comms/sdk.h>
 
 This interface is the starting point for the SDK. It exposes methods that allow initializing the SDK and accessing the underlying services. The basic steps to use the SDK are:
   1) Acquire the necessary Access Token from the application server. This is a mandatory step that allows using the SDK.

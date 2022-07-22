@@ -13,20 +13,20 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
 
 custom_injector.h
 _________________
-.. literalinclude:: ../../../src/public/comms/sample/custom_injector/custom_injector.h
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_injector/custom_injector.h
   :language: c++
 
 custom_injector.cc
 __________________
-.. literalinclude:: ../../../src/public/comms/sample/custom_injector/custom_injector.cc
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_injector/custom_injector.cc
   :language: c++
 
 main.cc
 _______
-.. literalinclude:: ../../../src/public/comms/sample/custom_injector/main.cc
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_injector/main.cc
   :language: c++
 
 Injector CMakeLists.txt
 _______________________
-.. literalinclude:: ../../../src/public/comms/sample/custom_injector/CMakeLists.txt
+.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_injector/CMakeLists.txt
   :language: console

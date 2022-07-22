@@ -3,9 +3,12 @@
 Supported Platforms
 ====================================
 
-The  C++ SDK is compatible with the following operating systems:
+The  C++ SDK for server applications is compatible with the following operating systems:
 
 * Ubuntu 18 LTS (gcc-7) (x86/64)
 * Ubuntu 20 LTS (gcc-9) (x86/64)
+
+The  C++ SDK for client applications is compatible with the following operating systems:
+
 * MacOS 10.14+
 * Windows 10 (x86/64) 

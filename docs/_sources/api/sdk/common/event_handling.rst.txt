@@ -2,7 +2,7 @@
 
 Event Handling Interface 
 ========================
-#include <comms/event_handling.h>
+#include <dolbyio/comms/event_handling.h>
 
 The event handler connection interface is used for handling subscriptions to events which can be emitted by the SDK. The user will utilize either
 :cpp:func:`sdk::add_event_handler <dolbyio::comms::sdk::add_event_handler>` or :cpp:func:`conference::add_event_handler <dolbyio::comms::services::conference::add_event_handler>` to subscribe to an events.

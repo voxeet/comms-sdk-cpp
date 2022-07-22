@@ -2,41 +2,36 @@
 
 Conference Service
 ==================
-During a conference, the SDK receives:
+.. note::
+  Features, such as recording and injecting media are only available for server applications.
+  
+The Conference Service allows the application to manage the conference life-cycle and interact with the conference. During a conference, the SDK may receive:
 
  - A single audio stream that contains mixed audio of all un-muted participants
  - Video streams from all participants who joined the conference with their cameras enabled
- - One screen share stream, if any participant shares a screen
+ - One screen-share stream
 
 The basic usage of the Conference Service is as follows:
   1) Log in to :ref:`sess_serv`.
   2) Create the media recording module instance. If you want to use the Default Recorder, use the :ref:`recorder` API, specifically the
      :cpp:func:`recorder::create <dolbyio::comms::plugin::recorder::create>` method.
-
-      - **Please note that Recorder is only applicable for Server SDK applications.**
-
   3) Provide the output directory location for the recorder module.
-  4) Set the media recording module as the Media Sink for the Conference Service, this allows passing the service a pointer to the created recorder instance. After this step, the recorder module should be set with the :cpp:func:`conference::set_media_sink <dolbyio::comms::services::conference::set_media_sink>`.
+  4) Set the media recording module as the Media Sink for the Conference Service. This allows passing the service a pointer to the created recorder instance. After this step, the recorder module should be set with the :cpp:func:`conference::set_media_sink <dolbyio::comms::services::conference::set_media_sink>`.
   5) Create the Media Injector Module instance using the Default Injector provided through the :ref:`default_injector` API. Specifically the :cpp:class:`injetor_paced <dolbyio::comms::plugin::injector_paced>` or the :cpp:class:`injetor_passthrough <dolbyio::comms::plugin::injector_passthrough>` constructors.
   6) Create a Media Injection Source that adds the ability to provide raw frames to the Media Injector Module. This can be an application which reads from a file, gets remote stream, and provides the media frames to the injector. This Media Injection Source should be passed as a reference to the Media Injector Module on creation.
   7) Set the Injector Module instance as the Media Source for the Conference Service via the :cpp:func:`conference::set_media_source <dolbyio::comms::services::conference::set_media_source>` method.
-
-      - **Please note the Injector is only applicable for Server SDK applications.**
-
   8) Subscribe to any of the available :ref:`conf_events` using the :cpp:func:`conference::add_event_handler <dolbyio::comms::services::conference::add_event_handler>` method.
   9) Create a conference using a conference alias :cpp:func:`conference::create <dolbyio::comms::services::conference::create>`. You can omit this step if you want to join an existing conference.
-  10) Join a conference using the :cpp:func:`conference::join <dolbyio::comms::services::conference::join>` or :cpp:func:`conference::listen <dolbyio::comms::services::conference::listen>` method. This method should return the conference_info struct (see :ref:`conf_models`) describing the conference. In the case of failure, you will receive an exception returned in the async_result.
-
-      - By default, Dolby Voice Conference Server audio processing is disabled.
-      - You can enable the processing by setting audio_processing flag to true in :cpp:struct:`dolbyio::comms::services::conference::media_constraints`.
-
+  10) Join a conference using the :cpp:func:`conference::join <dolbyio::comms::services::conference::join>` or :cpp:func:`conference::listen <dolbyio::comms::services::conference::listen>` method. This method returns the conference_info structure (see :ref:`conf_models`) describing the conference. In the case of failure, you will receive an exception returned in the async_result.
   11) To leave the conference, call the :cpp:func:`conference::leave <dolbyio::comms::services::conference::leave>` method.
+  
+By default, Dolby Voice Conference Server audio processing is disabled. You can enable the processing by setting the audio_processing flag to true in :cpp:struct:`dolbyio::comms::services::conference::media_constraints`.
 
 .. _conf_serv:
 
 Conference Interface
 --------------------------
-#include <comms/conference.h>
+#include <dolbyio/comms/conference.h>
 
 The interface for the :ref:`api_conference`. Methods of this interface provide the ability to create, join, and leave conferences and subscribe to
 events. The conference service methods are all asynchronous in nature, refer to :ref:`api_async_result` for more information. Structures which are part of the
@@ -46,7 +41,7 @@ interface can be passed to and returned by the service.
 
 Spatial Audio
 -------------
-#include <comms/spatial_audio_types.h>
+#include <dolbyio/comms/spatial_audio_types.h>
 
 The spatial audio methods that allow placing conference participants spatially in a 3D rendered audio scene and hear the audio from the participants rendered at the given locations.
 
@@ -59,6 +54,8 @@ The spatial audio methods that allow placing conference participants spatially i
 .. doxygenstruct:: dolbyio::comms::spatial_scale
 
 .. doxygenclass:: dolbyio::comms::spatial_audio_batch_update
+
+.. doxygenenum:: dolbyio::comms::spatial_audio_style
 
 .. _conf_events:
 
