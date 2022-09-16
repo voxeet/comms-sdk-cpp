@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Logging &mdash; C++ SDK 2.0.0 documentation</title>
+  <title>Logging &mdash; C++ SDK 2.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -50,6 +50,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../sdk.html">Sdk Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session.html">Session Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../audio.html">Audio Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../video.html">Video Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../device_management.html">Device Management Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../injector.html">Default Media Injector</a></li>
@@ -57,6 +59,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exception.html">SDK Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="event_handling.html">Event Handling Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../media_recording.html">Media Recording API</a></li>
@@ -131,6 +134,12 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9log_level7VERBOSEE">
 <span id="_CPPv3N7dolbyio5comms9log_level7VERBOSEE"></span><span id="_CPPv2N7dolbyio5comms9log_level7VERBOSEE"></span><span class="target" id="group__loglevel_1gga074a8251538e9a6e56485dc34059642eaec1f06e9fb39c4ef0729b3c7c9c8e8cc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VERBOSE</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms9log_level7VERBOSEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The verbose level logging generates the highest number of logs, including even the HTTP requests. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9log_level19DOLBYIO_COMMS_DEBUGE">
+<span id="_CPPv3N7dolbyio5comms9log_level19DOLBYIO_COMMS_DEBUGE"></span><span id="_CPPv2N7dolbyio5comms9log_level19DOLBYIO_COMMS_DEBUGE"></span><span class="target" id="group__loglevel_1gga074a8251538e9a6e56485dc34059642eae024b789a6e09016e361859c31e456a2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DOLBYIO_COMMS_DEBUG</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms9log_level19DOLBYIO_COMMS_DEBUGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The debug level. Use this enumerator if the DEBUG enumerator conflicts with compiler’s / toolkit’s preprocessor macro. </p>
 </dd></dl>
 
 </dd></dl>

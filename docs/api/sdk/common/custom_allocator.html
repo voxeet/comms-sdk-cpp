@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overriding new/delete operators &mdash; C++ SDK 2.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Media Recording API" href="../../media_recording.html" />
+    <link rel="prev" title="Event Handling Interface" href="event_handling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sdk.html">Sdk Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session.html">Session Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../audio.html">Audio Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../video.html">Video Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device_management.html">Device Management Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../recorder.html">Default Media Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../injector.html">Default Media Injector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="async_ops.html">Asynchronous Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_level.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exception.html">SDK Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_handling.html">Event Handling Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overriding new/delete operators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../media_recording.html">Media Recording API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../coresdk.html">CoreSDK API</a> &raquo;</li>
+      <li>Overriding new/delete operators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/api/sdk/common/custom_allocator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overriding-new-delete-operators">
+<span id="api-custom-allocator"></span><h1>Overriding new/delete operators<a class="headerlink" href="#overriding-new-delete-operators" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Custom Allocator functionality for overriding new/delete operators is only available on Windows. It is not required on Linux or MacOS.</p>
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocatorE">
+<span id="_CPPv3N7dolbyio5comms13app_allocatorE"></span><span id="_CPPv2N7dolbyio5comms13app_allocatorE"></span><span id="dolbyio::comms::app_allocator"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">app_allocator</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocatorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>
+The custom allocator that allows applications to override operators new and delete.<dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This is only available on Windows.</p>
+</dd>
+</dl>
+</p>
+<p>This struct should be used by applications that define their own global operators new and delete. The SDK passes some memory ownership to the application, and it must use the same allocator that the application uses, otherwise memory corruption occurs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator8alloc_fnE">
+<span id="_CPPv3N7dolbyio5comms13app_allocator8alloc_fnE"></span><span id="_CPPv2N7dolbyio5comms13app_allocator8alloc_fnE"></span><span id="dolbyio::comms::app_allocator::alloc_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1ab7977465bdcc5f4f7bab5f31dc26cd8b"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">alloc_fn</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator8alloc_fnE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The memory allocation function.</p>
+<p>The allocation function must satisfy the following requirements:<ul class="simple">
+<li><p>The allocated memory must have alignment suitable for holding object of given size</p></li>
+<li><p>The inability to allocate memory should result in returning the null pointer, or throwing the std::bad_alloc{} exception</p></li>
+</ul>
+</p>
+<p>If this function throws an exception, the std::new_handler will not be invoked by the caller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The non-zero requested memory size. </p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>The pointer to allocated memory, or nullptr. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator16alloc_aligned_fnE">
+<span id="_CPPv3N7dolbyio5comms13app_allocator16alloc_aligned_fnE"></span><span id="_CPPv2N7dolbyio5comms13app_allocator16alloc_aligned_fnE"></span><span id="dolbyio::comms::app_allocator::alloc_aligned_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1af117f036f14a067fe10b6dec45d6af44"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">alloc_aligned_fn</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">alignment</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator16alloc_aligned_fnE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The aligned memory allocation function.</p>
+<p>The allocation function must satisfy the following requirements:<ul class="simple">
+<li><p>The allocated memory must be aligned to the provided alignment value</p></li>
+<li><p>The inability to allocate memory should result in returning the null pointer, or throwing the std::bad_alloc{} exception</p></li>
+</ul>
+</p>
+<p>If this function throws an exception, the std::new_handler will not be invoked by the caller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The non-zero requested memory size. </p>
+</dd>
+<dt class="field-even">Param alignment<span class="colon">:</span></dt>
+<dd class="field-even"><p>The alignment of the memory. </p>
+</dd>
+<dt class="field-odd">Return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to allocated memory, or nullptr. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator10dealloc_fnE">
+<span id="_CPPv3N7dolbyio5comms13app_allocator10dealloc_fnE"></span><span id="_CPPv2N7dolbyio5comms13app_allocator10dealloc_fnE"></span><span id="dolbyio::comms::app_allocator::dealloc_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1adce005289cc3aac9c4b306e2d78195f2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dealloc_fn</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ptr</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator10dealloc_fnE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The memory deallocation function.</p>
+<p>The following guarantees are provided by the SDK:<ul class="simple">
+<li><p>Only the pointers obtained from alloc_fn will be passed to this function</p></li>
+<li><p>Null pointers will not be passed to this function</p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ptr<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The valid pointer to the deallocated memory. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator18dealloc_aligned_fnE">
+<span id="_CPPv3N7dolbyio5comms13app_allocator18dealloc_aligned_fnE"></span><span id="_CPPv2N7dolbyio5comms13app_allocator18dealloc_aligned_fnE"></span><span id="dolbyio::comms::app_allocator::dealloc_aligned_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1aa163c570a35464a4fad64eb34d582e46"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dealloc_aligned_fn</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ptr</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">alignment</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator18dealloc_aligned_fnE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The aligned memory deallocation function.</p>
+<p>The following guarantees are provided by the SDK:<ul class="simple">
+<li><p>Only the pointers obtained from alloc_aligned_fn will be passed to this function</p></li>
+<li><p>For each passed memory pointer, the value of the alignment argument will be the same as the one used for allocating that memory in alloc_aligned_fn</p></li>
+<li><p>Null pointers will not be passed to this function</p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ptr<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The valid pointer to the deallocated memory. </p>
+</dd>
+<dt class="field-even">Param alignment<span class="colon">:</span></dt>
+<dd class="field-even"><p>The alignments value matching the value provided to the <a class="reference internal" href="#structdolbyio_1_1comms_1_1app__allocator_1af117f036f14a067fe10b6dec45d6af44"><span class="std std-ref">alloc_aligned_fn()</span></a> call that caused allocation of the memory. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator13app_allocatorE8alloc_fn16alloc_aligned_fn10dealloc_fn18dealloc_aligned_fn">
+<span id="_CPPv3N7dolbyio5comms13app_allocator13app_allocatorE8alloc_fn16alloc_aligned_fn10dealloc_fn18dealloc_aligned_fn"></span><span id="_CPPv2N7dolbyio5comms13app_allocator13app_allocatorE8alloc_fn16alloc_aligned_fn10dealloc_fn18dealloc_aligned_fn"></span><span id="dolbyio::comms::app_allocator::app_allocator__alloc_fn.alloc_aligned_fn.dealloc_fn.dealloc_aligned_fnCE"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1a102ac36cd8b5f0f24754facd98aaa00a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">app_allocator</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator8alloc_fnE" title="dolbyio::comms::app_allocator::alloc_fn"><span class="n"><span class="pre">alloc_fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">alloc</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator16alloc_aligned_fnE" title="dolbyio::comms::app_allocator::alloc_aligned_fn"><span class="n"><span class="pre">alloc_aligned_fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">aligned_alloc</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator10dealloc_fnE" title="dolbyio::comms::app_allocator::dealloc_fn"><span class="n"><span class="pre">dealloc_fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dealloc</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator18dealloc_aligned_fnE" title="dolbyio::comms::app_allocator::dealloc_aligned_fn"><span class="n"><span class="pre">dealloc_aligned_fn</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">aligned_dealloc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator13app_allocatorE8alloc_fn16alloc_aligned_fn10dealloc_fn18dealloc_aligned_fn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor.</p>
+<p>This constructor constructs the allocator that uses application-provided functions for memory management. All provided function pointers must be valid and non-null. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms13app_allocatoreqERK13app_allocator">
+<span id="_CPPv3NK7dolbyio5comms13app_allocatoreqERK13app_allocator"></span><span id="_CPPv2NK7dolbyio5comms13app_allocatoreqERK13app_allocator"></span><span id="dolbyio::comms::app_allocator::eq-operator__app_allocatorCRC"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1a0a9e6a99be123124a5ec186a4624c28b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocatorE" title="dolbyio::comms::app_allocator"><span class="n"><span class="pre">app_allocator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms13app_allocatoreqERK13app_allocator" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator9alloc_fn_E">
+<span id="_CPPv3N7dolbyio5comms13app_allocator9alloc_fn_E"></span><span id="_CPPv2N7dolbyio5comms13app_allocator9alloc_fn_E"></span><span id="dolbyio::comms::app_allocator::alloc_fn___alloc_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1afb93c6cb4bc2e50af7969a661ee73f4c"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator8alloc_fnE" title="dolbyio::comms::app_allocator::alloc_fn"><span class="n"><span class="pre">alloc_fn</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alloc_fn_</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator9alloc_fn_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator17aligned_alloc_fn_E">
+<span id="_CPPv3N7dolbyio5comms13app_allocator17aligned_alloc_fn_E"></span><span id="_CPPv2N7dolbyio5comms13app_allocator17aligned_alloc_fn_E"></span><span id="dolbyio::comms::app_allocator::aligned_alloc_fn___alloc_aligned_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1a7e5012119d9b1568e690df38f2b7cebe"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator16alloc_aligned_fnE" title="dolbyio::comms::app_allocator::alloc_aligned_fn"><span class="n"><span class="pre">alloc_aligned_fn</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aligned_alloc_fn_</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator17aligned_alloc_fn_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator11dealloc_fn_E">
+<span id="_CPPv3N7dolbyio5comms13app_allocator11dealloc_fn_E"></span><span id="_CPPv2N7dolbyio5comms13app_allocator11dealloc_fn_E"></span><span id="dolbyio::comms::app_allocator::dealloc_fn___dealloc_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1ad212e53805bfaa56ba4d53a9a9e8f5a4"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator10dealloc_fnE" title="dolbyio::comms::app_allocator::dealloc_fn"><span class="n"><span class="pre">dealloc_fn</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dealloc_fn_</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator11dealloc_fn_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13app_allocator19aligned_dealloc_fn_E">
+<span id="_CPPv3N7dolbyio5comms13app_allocator19aligned_dealloc_fn_E"></span><span id="_CPPv2N7dolbyio5comms13app_allocator19aligned_dealloc_fn_E"></span><span id="dolbyio::comms::app_allocator::aligned_dealloc_fn___dealloc_aligned_fn"></span><span class="target" id="structdolbyio_1_1comms_1_1app__allocator_1ac82e68c3744d4cf04a9e0acb9c399aec"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13app_allocator18dealloc_aligned_fnE" title="dolbyio::comms::app_allocator::dealloc_aligned_fn"><span class="n"><span class="pre">dealloc_aligned_fn</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aligned_dealloc_fn_</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13app_allocator19aligned_dealloc_fn_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="event_handling.html" class="btn btn-neutral float-left" title="Event Handling Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../media_recording.html" class="btn btn-neutral float-right" title="Media Recording API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

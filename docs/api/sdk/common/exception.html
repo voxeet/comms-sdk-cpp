@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SDK Exceptions &mdash; C++ SDK 2.0.0 documentation</title>
+  <title>SDK Exceptions &mdash; C++ SDK 2.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -50,6 +50,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../sdk.html">Sdk Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../session.html">Session Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../audio.html">Audio Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../video.html">Video Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../device_management.html">Device Management Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../injector.html">Default Media Injector</a></li>
@@ -57,6 +59,7 @@
 <li class="toctree-l2"><a class="reference internal" href="log_level.html">Logging</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">SDK Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="event_handling.html">Event Handling Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../media_recording.html">Media Recording API</a></li>
@@ -112,7 +115,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms9exception4whatEv">
-<span id="_CPPv3NK7dolbyio5comms9exception4whatEv"></span><span id="_CPPv2NK7dolbyio5comms9exception4whatEv"></span><span id="dolbyio::comms::exception::whatC"></span><span class="target" id="classdolbyio_1_1comms_1_1exception_1af190b0057f8bde7a3e188ead175fbe46"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">what</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms9exception4whatEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK7dolbyio5comms9exception4whatEv"></span><span id="_CPPv2NK7dolbyio5comms9exception4whatEv"></span><span id="dolbyio::comms::exception::whatC"></span><span class="target" id="classdolbyio_1_1comms_1_1exception_1a2c75f2642c4a2e9938cf3ad885847701"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">what</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms9exception4whatEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Overrides to std::exception that returns a description of the exception. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>

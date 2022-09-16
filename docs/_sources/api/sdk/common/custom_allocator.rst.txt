@@ -1,0 +1,10 @@
+.. _api_custom_allocator:
+
+Overriding new/delete operators
+===============================
+
+.. note::
+  The Custom Allocator functionality for overriding new/delete operators is only available on Windows. It is not required on Linux or MacOS.
+
+.. doxygenstruct:: dolbyio::comms::app_allocator
+        :project: C++ SDK

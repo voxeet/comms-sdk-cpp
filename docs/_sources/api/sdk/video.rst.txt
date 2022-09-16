@@ -1,0 +1,18 @@
+.. _api_video_service:
+
+Video Service
+=============
+.. note::
+  The Video Service is available in SDK versions 2.1.0 and later. Prior to 2.1.0 the methods were part of the :cpp:func:`Conference Service <dolbyio::comms::services::conference::start_video>`. 
+
+The Video Service allows managing the local participant's video stream.
+
+Video Interface
+---------------
+#include <dolbyio/comms/video.h>
+
+.. doxygenclass:: dolbyio::comms::services::video
+
+Local Video
+-----------
+.. doxygenclass:: dolbyio::comms::services::local_video

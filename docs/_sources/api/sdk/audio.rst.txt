@@ -1,0 +1,34 @@
+.. _api_audio_service:
+
+Audio Service
+==============
+.. note::
+  The Audio Service is available in SDK versions 2.1.0 and later. Prior to 2.1.0 the methods were part of the :cpp:func:`Conference Service<dolbyio::comms::services::conference::start_audio>`. 
+
+The Audio Service allows enabling and disabling audio for the local and remote participants, as well as configuring audio capture modes.
+
+Audio Interface
+---------------
+#include <dolbyio/comms/audio.h>
+
+Provides access to the local and remote audio services.
+
+.. doxygenclass:: dolbyio::comms::services::audio
+
+Local Audio
+-----------
+.. doxygenclass:: dolbyio::comms::services::local_audio
+
+Remote Audio
+------------
+.. doxygenclass:: dolbyio::comms::services::remote_audio
+
+Audio Processing
+----------------
+.. doxygenenum:: dolbyio::comms::noise_reduction
+
+.. doxygenstruct:: dolbyio::comms::audio_capture_mode::unprocessed
+
+.. doxygenstruct:: dolbyio::comms::audio_capture_mode::standard
+
+.. doxygentypedef:: dolbyio::comms::audio_capture_mode::variant

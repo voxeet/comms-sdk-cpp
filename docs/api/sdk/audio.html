@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio Service &mdash; C++ SDK 2.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Video Service" href="video.html" />
+    <link rel="prev" title="Conference Service" href="conference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sdk.html">Sdk Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="session.html">Session Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Audio Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#audio-interface">Audio Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-audio">Local Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remote-audio">Remote Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#audio-processing">Audio Processing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="video.html">Video Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/event_handling.html">Event Handling Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/custom_allocator.html">Overriding new/delete operators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+      <li>Audio Service</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/sdk/audio.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="audio-service">
+<span id="api-audio-service"></span><h1>Audio Service<a class="headerlink" href="#audio-service" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Audio Service is available in SDK versions 2.1.0 and later. Prior to 2.1.0 the methods were part of the <a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms8services10conference11start_audioEv" title="dolbyio::comms::services::conference::start_audio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Conference</span> <span class="pre">Service</span></code></a>.</p>
+</div>
+<p>The Audio Service allows enabling and disabling audio for the local and remote participants, as well as configuring audio capture modes.</p>
+<section id="audio-interface">
+<h2>Audio Interface<a class="headerlink" href="#audio-interface" title="Permalink to this heading"></a></h2>
+<p>#include &lt;dolbyio/comms/audio.h&gt;</p>
+<p>Provides access to the local and remote audio services.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services5audioE">
+<span id="_CPPv3N7dolbyio5comms8services5audioE"></span><span id="_CPPv2N7dolbyio5comms8services5audioE"></span><span id="dolbyio::comms::services::audio"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1audio"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services5audioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The audio service. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services5audio5localEv">
+<span id="_CPPv3N7dolbyio5comms8services5audio5localEv"></span><span id="_CPPv2N7dolbyio5comms8services5audio5localEv"></span><span id="dolbyio::comms::services::audio::local"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1audio_1a19dafc98acc7f18ce6bab647c9a4d7ea"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services11local_audioE" title="dolbyio::comms::services::local_audio"><span class="n"><span class="pre">local_audio</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">local</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services5audio5localEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the local audio service instance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the local audio service. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services5audio6remoteEv">
+<span id="_CPPv3N7dolbyio5comms8services5audio6remoteEv"></span><span id="_CPPv2N7dolbyio5comms8services5audio6remoteEv"></span><span id="dolbyio::comms::services::audio::remote"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1audio_1a5feb4f9e8c61e9f1788ff5b610e5cbe5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services12remote_audioE" title="dolbyio::comms::services::remote_audio"><span class="n"><span class="pre">remote_audio</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">remote</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services5audio6remoteEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the remote audio service instance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the remote audio service. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="local-audio">
+<h2>Local Audio<a class="headerlink" href="#local-audio" title="Permalink to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audioE">
+<span id="_CPPv3N7dolbyio5comms8services11local_audioE"></span><span id="_CPPv2N7dolbyio5comms8services11local_audioE"></span><span id="dolbyio::comms::services::local_audio"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">local_audio</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The local audio service. </p>
+<p>This service is used to control local participant’s input audio properties, and enabling or disabling audio capture and sending into conference.</p>
+<p>The start and stop audio methods of the local audio service should only be used when the conference is active.</p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1local__audio"><span class="std std-ref">local_audio</span></a> interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audio5startEv">
+<span id="_CPPv3N7dolbyio5comms8services11local_audio5startEv"></span><span id="_CPPv2N7dolbyio5comms8services11local_audio5startEv"></span><span id="dolbyio::comms::services::local_audio::start"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio_1ae9c751ccca288db724656536559f5b84"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audio5startEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Opens the input audio device and starts processing audio. </p>
+<p>This method creates a WebRTC AudioTrack and attaches the AudioTrack to an active Peer Connection. This method also connects the Audio Sink of the <a class="reference internal" href="../injection/media_source_interface.html#classdolbyio_1_1comms_1_1media__source__interface"><span class="std std-ref">media_source_interface</span></a> with the WebRTC Audio Source, creating the audio delivery pipeline. When the async_result of this method resolves, the application can start an audio stream from any media source it chooses, pass the raw audio PCM data to the injector module from this source, and inject the audio data into a conference.</p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This method does not start the capturing from a media source; this action needs to be performed separately, when the async_result of this method is resolved.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audio4stopEv">
+<span id="_CPPv3N7dolbyio5comms8services11local_audio4stopEv"></span><span id="_CPPv2N7dolbyio5comms8services11local_audio4stopEv"></span><span id="dolbyio::comms::services::local_audio::stop"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio_1abe3ef6cae934673e9fc9b2733d822bf7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audio4stopEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Closes the input audio device and stops processing audio. </p>
+<p>This method destructs a WebRTC AudioTrack and detaches it from an active Peer Connection. This method also disconnects the Audio Sink of the <a class="reference internal" href="../injection/media_source_interface.html#classdolbyio_1_1comms_1_1media__source__interface"><span class="std std-ref">media_source_interface</span></a> from the WebRTC Audio Source, which deconstructs the audio delivery pipeline. All frames captured after the return of stop_audio are discarded, so an application should stop capturing audio from the local media source when async_result of this method resolves.</p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This method does not stop the capturing from a media source; this action needs to be performed separately by an application before or after calling stop_audio.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode11unprocessedE">
+<span id="_CPPv3N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode11unprocessedE"></span><span id="_CPPv2N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode11unprocessedE"></span><span id="dolbyio::comms::services::local_audio::set_capture_mode__audio_capture_mode::unprocessedCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio_1a254700d599e3c5f082a90bf191427604"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_capture_mode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">audio_capture_mode</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_capture_mode11unprocessedE" title="dolbyio::comms::audio_capture_mode::unprocessed"><span class="n"><span class="pre">unprocessed</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode11unprocessedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the unprocessed audio capture mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> – The audio capture mode. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode8standardE">
+<span id="_CPPv3N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode8standardE"></span><span id="_CPPv2N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode8standardE"></span><span id="dolbyio::comms::services::local_audio::set_capture_mode__audio_capture_mode::standardCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio_1abd7e09fe1c0beff8770545217aa72da0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_capture_mode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">audio_capture_mode</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standardE" title="dolbyio::comms::audio_capture_mode::standard"><span class="n"><span class="pre">standard</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mode</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode8standardE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the standard audio capture mode. </p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>The Standard capture mode with low noise reduction is not supported in server-side use-cases or non-Dolby Voice conferences. Trying to set standard capture mode in the aforementioned cases will result in actual setting of Default capture mode.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> – The audio capture mode. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audio16get_capture_modeEv">
+<span id="_CPPv3N7dolbyio5comms8services11local_audio16get_capture_modeEv"></span><span id="_CPPv2N7dolbyio5comms8services11local_audio16get_capture_modeEv"></span><span id="dolbyio::comms::services::local_audio::get_capture_mode"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio_1a6488e35345233e0dd71e9a60288dd51d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">audio_capture_mode</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_capture_mode7variantE" title="dolbyio::comms::audio_capture_mode::variant"><span class="n"><span class="pre">variant</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_capture_mode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audio16get_capture_modeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reads the current audio capture mode. </p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This method is only available for Dolby Voice Conferences.</p>
+</dd>
+<dt><strong>Attention</strong></dt><dd><p>This method is not supported in server-side use-cases.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing the variant holding audio capture mode asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="remote-audio">
+<h2>Remote Audio<a class="headerlink" href="#remote-audio" title="Permalink to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services12remote_audioE">
+<span id="_CPPv3N7dolbyio5comms8services12remote_audioE"></span><span id="_CPPv2N7dolbyio5comms8services12remote_audioE"></span><span id="dolbyio::comms::services::remote_audio"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1remote__audio"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">remote_audio</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services12remote_audioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The remote audio service. </p>
+<p>This service is used to control the local properties of the remote participants’ audio, that is the audio which is played in the conference on the current client’s endpoint.</p>
+<p>All methods of the remote audio service should only be used when the conference is active.</p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1remote__audio"><span class="std std-ref">remote_audio</span></a> interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services12remote_audio5startERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms8services12remote_audio5startERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services12remote_audio5startERKNSt6stringE"></span><span id="dolbyio::comms::services::remote_audio::start__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1remote__audio_1a43792f933a1ddddc60f7f472bbca02a5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services12remote_audio5startERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enables the participant’s audio to be played locally. </p>
+<p>This method resumes the reception of audio coming from the remote participant, whose audio has been previously stopped locally. By default, remote participants’ audio tracks are enabled, and attempting to start their audio locally will do nothing. This method allows an audio track from the desired remote participant to be mixed into the Dolby Voice audio stream received by the SDK. If the participant does not have their audio enabled, this method does not enable their audio track.</p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This method is only available for Dolby Voice Conferences.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the participant whose audio track you would like to hear. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services12remote_audio4stopERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms8services12remote_audio4stopERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services12remote_audio4stopERKNSt6stringE"></span><span id="dolbyio::comms::services::remote_audio::stop__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1remote__audio_1a8cefd5da8c61c55ab111b779349d1490"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stop</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services12remote_audio4stopERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disables the local playback of the remote participant’s audio. </p>
+<p>This method allows the local participant to not receive an audio track from a selected remote participant. This method only impacts the local participant; the rest of conference participants will still hear the participant’s audio. This method does not allow the audio track of the selected remote participant to be mixed into the Dolby Voice audio stream that the SDK receives.</p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This method is only available for Dolby Voice Conferences.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the participant whose audio track you would like to stop.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="audio-processing">
+<h2>Audio Processing<a class="headerlink" href="#audio-processing" title="Permalink to this heading"></a></h2>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15noise_reductionE">
+<span id="_CPPv3N7dolbyio5comms15noise_reductionE"></span><span id="_CPPv2N7dolbyio5comms15noise_reductionE"></span><span class="target" id="namespacedolbyio_1_1comms_1a33b6229b520079453ab582c5e1de4d31"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">noise_reduction</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15noise_reductionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The audio noise reduction level. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15noise_reduction4highE">
+<span id="_CPPv3N7dolbyio5comms15noise_reduction4highE"></span><span id="_CPPv2N7dolbyio5comms15noise_reduction4highE"></span><span class="target" id="namespacedolbyio_1_1comms_1a33b6229b520079453ab582c5e1de4d31a8d966b2253a917086c8604959e152243"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">high</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15noise_reduction4highE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reduce all noise and isolate voice. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15noise_reduction3lowE">
+<span id="_CPPv3N7dolbyio5comms15noise_reduction3lowE"></span><span id="_CPPv2N7dolbyio5comms15noise_reduction3lowE"></span><span class="target" id="namespacedolbyio_1_1comms_1a33b6229b520079453ab582c5e1de4d31a53cced8d281a1a0ace3cb6594daaa4f7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">low</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15noise_reduction3lowE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove steady/stationary background noise. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode11unprocessedE">
+<span id="_CPPv3N7dolbyio5comms18audio_capture_mode11unprocessedE"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode11unprocessedE"></span><span id="dolbyio::comms::audio_capture_mode::unprocessed"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1unprocessed"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unprocessed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode11unprocessedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Capture background noise and non-voice sounds. </p>
+<p>This mode uses echo suppression. No noise suppression is applied, and so a low end microphone or a noisy environment may introduce the noise into the conference. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode8standardE">
+<span id="_CPPv3N7dolbyio5comms18audio_capture_mode8standardE"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode8standardE"></span><span id="dolbyio::comms::audio_capture_mode::standard"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">audio_capture_mode</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">standard</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standardE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Capture the voice and reduce non-voice sounds. </p>
+<p>This mode focuses on best voice quality. Echo suppression is always enabled when using this mode. Additionally, it offers a tunable setting for the level of voice isolation and non-voice noise reduction, and supports the following settings:</p>
+<p><ul class="simple">
+<li><p>when using <a class="reference internal" href="#namespacedolbyio_1_1comms_1a33b6229b520079453ab582c5e1de4d31a8d966b2253a917086c8604959e152243"><span class="std std-ref">noise_reduction::high</span></a>, provides a strong voice isolation and attempts to remove all non-voice sound from input.</p></li>
+<li><p>when using <a class="reference internal" href="#namespacedolbyio_1_1comms_1a33b6229b520079453ab582c5e1de4d31a53cced8d281a1a0ace3cb6594daaa4f7"><span class="std std-ref">noise_reduction::low</span></a>, removes only steady background noise from the input. </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction">
+<span id="_CPPv3N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction"></span><span id="dolbyio::comms::audio_capture_mode::standard::standard__noise_reductionCE"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard_1a75f76375d9461df363679131bbdce29b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">standard</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15noise_reductionE" title="dolbyio::comms::noise_reduction"><span class="n"><span class="pre">noise_reduction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">reduce_noise</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reduce_noise</strong> – the noise reduction level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE">
+<span id="_CPPv3N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE"></span><span id="dolbyio::comms::audio_capture_mode::standard::reduce_noise__noise_reduction"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard_1a857ccd3f886082a9e3d183a381d2a0ea"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15noise_reductionE" title="dolbyio::comms::noise_reduction"><span class="n"><span class="pre">noise_reduction</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reduce_noise</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The noise reduction level. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode7variantE">
+<span id="_CPPv3N7dolbyio5comms18audio_capture_mode7variantE"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode7variantE"></span><span class="target" id="namespacedolbyio_1_1comms_1_1audio__capture__mode_1a0eb0c5d4d755d387d43c488a367dceb7"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">audio_capture_mode</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">variant</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">variant</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_capture_mode11unprocessedE" title="dolbyio::comms::audio_capture_mode::unprocessed"><span class="n"><span class="pre">unprocessed</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standardE" title="dolbyio::comms::audio_capture_mode::standard"><span class="n"><span class="pre">standard</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode7variantE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A type-safe tagged union capable of holding any of the supported audio capture modes. </p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="conference.html" class="btn btn-neutral float-left" title="Conference Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="video.html" class="btn btn-neutral float-right" title="Video Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -10,9 +10,11 @@ This interface is the starting point for the SDK. It exposes methods that allow 
   3) Create the SDK using :cpp:func:`sdk::create <dolbyio::comms::sdk::create>`. The create call needs to pass a valid access token in order to initialize the SDK. Wait for the return of the create call.
   4) Log in to the Dolby.io backend. For more information, see the :ref:`api_session`.
   5) Retrieve a reference to :ref:`sess_serv` through :cpp:func:`sdk::session <dolbyio::comms::sdk::session>`.
-  6) Create and join a conference. A reference to the :ref:`conf_serv` can be retrieved through the
-     :cpp:func:`sdk::conference <dolbyio::comms::sdk::conference>`. 
-     After these steps, the destructor for the SDK performs necessary cleanups when the SDK instance goes out of scope. This means that you do not need to perform any cleanup.
+  6) Create and join a conference. A reference to the :ref:`conf_serv` can be retrieved through the :cpp:func:`sdk::conference <dolbyio::comms::sdk::conference>`. 
+  7) Manage Audio Devices using the :ref:`devman_serv`. A reference to this service can be retrieved through :cpp:func:`sdk::device_management <dolbyio::comms::sdk::device_management>`.
+  8) Manage local and remote Audio streams using the :ref:`api_audio_service`. A reference to this service can be retrieved through :cpp:func:`sdk::audio <dolbyio::comms::sdk::audio>`.
+  9) Manage local Video stream using the :ref:`api_video_service`. A reference to this service can be retrieved through :cpp:func:`sdk::video <dolbyio::comms::sdk::video>`.
+  10) The destructor for the SDK performs necessary cleanups when the SDK instance goes out of scope. This means that you do not need to perform any cleanup.
 
 .. _sdk_class:
 

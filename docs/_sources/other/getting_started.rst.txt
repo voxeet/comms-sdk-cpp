@@ -96,6 +96,8 @@ _______________________________________
  +--------------+--------------------------------------------------------+
  | Argument     | Description                                            |
  +==============+========================================================+
+ | -h           | Print the help menu.                                   |
+ +--------------+--------------------------------------------------------+
  | -u           | The participant's name.                                |
  +--------------+--------------------------------------------------------+
  | -e           | The external ID                                        |
@@ -108,9 +110,11 @@ _______________________________________
  +--------------+--------------------------------------------------------+
  | -i           | The conference ID                                      |
  +--------------+--------------------------------------------------------+
- | -l           | The logging level (0-5)                                |
+ | -l           | The SDK logging level (0-5)                            |
  +--------------+--------------------------------------------------------+
- | -j           | The user type (user or listener)                       |
+ | -ml          | The Media Engine logging level (0-5)                   |
+ +--------------+--------------------------------------------------------+
+ | -p           | The user type (user or listener)                       |
  +--------------+--------------------------------------------------------+
  | -s           | The send-only mode                                     |
  +--------------+--------------------------------------------------------+
@@ -118,16 +122,16 @@ _______________________________________
  +--------------+--------------------------------------------------------+
  | -spatial     | Spatial audio (shared|individual|disabled)             |
  +--------------+--------------------------------------------------------+
- | -force_opus  | Forces the Opus codec usage (yes|no)                   |
- +--------------+--------------------------------------------------------+
  | -log_speaker | Logs the active speaker changes  (yes|no)              |
+ +--------------+--------------------------------------------------------+
+ | -simulcast   | Join with simulcast enabled                            |
  +--------------+--------------------------------------------------------+
 
 For example:
 
 .. code-block:: console
         
-        $ ./client_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -j user -m A -spatial shared
+        $ ./client_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -ml LOG_LEVEL_MEDIA -p user -m A -spatial shared
 
 .. note::
 	Providing the **-i** command line parameter causes that the application joins the specific conference if the conference with the provided ID already exists. Providing **-c** causes that the application joins the specific conference. If the requested conference does not exist on the Dolby.io backend,
@@ -140,55 +144,61 @@ For example:
 3. Interact with the **client_app** executable using one of the following command line options which can be provided whilst the application is running. The application will prompt the user for input and
 explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well. 
 
- +--------------------+----------------------------------------------------------------+
- | Option             | Description                                                    |
- +====================+================================================================+
- | q                  | Quits the application                                          |
- +--------------------+----------------------------------------------------------------+
- | stop-audio         | Stops the local audio                                          |
- +--------------------+----------------------------------------------------------------+
- | start-audio        | Starts the local audio                                         |
- +--------------------+----------------------------------------------------------------+
- | stop-audio-remote  | Stops remote audio in a Dolby Voice conference                 |
- +--------------------+----------------------------------------------------------------+
- | start-audio-remote | Starts remote audio in a Dolby Voice conference                |
- +--------------------+----------------------------------------------------------------+
- | m                  | Sends a message to a conference                                |
- +--------------------+----------------------------------------------------------------+
- | P                  | Lists conference participants                                  |
- +--------------------+----------------------------------------------------------------+
- | S                  | Sets a spatial audio configuration                             |
- +--------------------+----------------------------------------------------------------+
- | mute               | Mutes the local participant's microphone                       |
- +--------------------+----------------------------------------------------------------+
- | unmute             | Un-mutes the local participant's microphone                    |
- +--------------------+----------------------------------------------------------------+
- | mute-remote        | Mutes a remote participant in a non-Dolby Voice conference     |
- +--------------------+----------------------------------------------------------------+
- | unmute-remote      | Un-mutes a remote participant in a non-Dolby Voice conference  |
- +--------------------+----------------------------------------------------------------+
- | k                  | Sets output audio mute                                         |
- +--------------------+----------------------------------------------------------------+
- | K                  | Sets output audio un-mute                                      |
- +--------------------+----------------------------------------------------------------+
- | invite             | Invites a participant to a conference                          |
- +--------------------+----------------------------------------------------------------+
- | subscribe          | Subscribes to all conference events                            |
- +--------------------+----------------------------------------------------------------+
- | unsubscribe        | Unsubscribes from all conference events                        |
- +--------------------+----------------------------------------------------------------+
- | join               | Joins a conference by providing ID                             |
- +--------------------+----------------------------------------------------------------+
- | create             | Creates a conference by providing alias                        |
- +--------------------+----------------------------------------------------------------+
- | accept             | Accepts a conference invitation                                |
- +--------------------+----------------------------------------------------------------+
- | decline            | Declines a conference invitation                               |
- +--------------------+----------------------------------------------------------------+
- | audio-level        | Get audio level for a single participant                       |
- +--------------------+----------------------------------------------------------------+
- | audio-levels       | Get audio levels for all participants in a conference          |
- +--------------------+----------------------------------------------------------------+
+ +--------------------------+----------------------------------------------------------------+
+ | Option                   | Description                                                    |
+ +==========================+================================================================+
+ | q                        | Quits the application                                          |
+ +--------------------------+----------------------------------------------------------------+
+ | stop-audio               | Stops the local audio                                          |
+ +--------------------------+----------------------------------------------------------------+
+ | start-audio              | Starts the local audio                                         |
+ +--------------------------+----------------------------------------------------------------+
+ | stop-audio-remote        | Stops remote audio in a Dolby Voice conference                 |
+ +--------------------------+----------------------------------------------------------------+
+ | start-audio-remote       | Starts remote audio in a Dolby Voice conference                |
+ +--------------------------+----------------------------------------------------------------+
+ | m                        | Sends a message to a conference                                |
+ +--------------------------+----------------------------------------------------------------+
+ | P                        | Lists conference participants                                  |
+ +--------------------------+----------------------------------------------------------------+
+ | S                        | Sets a spatial audio configuration                             |
+ +--------------------------+----------------------------------------------------------------+
+ | mute                     | Mutes the local participant's microphone                       |
+ +--------------------------+----------------------------------------------------------------+
+ | unmute                   | Un-mutes the local participant's microphone                    |
+ +--------------------------+----------------------------------------------------------------+
+ | mute-remote              | Mutes a remote participant in a non-Dolby Voice conference     |
+ +--------------------------+----------------------------------------------------------------+
+ | unmute-remote            | Un-mutes a remote participant in a non-Dolby Voice conference  |
+ +--------------------------+----------------------------------------------------------------+
+ | k                        | Sets output audio mute                                         |
+ +--------------------------+----------------------------------------------------------------+
+ | K                        | Sets output audio un-mute                                      |
+ +--------------------------+----------------------------------------------------------------+
+ | invite                   | Invites a participant to a conference                          |
+ +--------------------------+----------------------------------------------------------------+
+ | subscribe                | Subscribes to all conference events                            |
+ +--------------------------+----------------------------------------------------------------+
+ | unsubscribe              | Unsubscribes from all conference events                        |
+ +--------------------------+----------------------------------------------------------------+
+ | join                     | Joins a conference by providing ID                             |
+ +--------------------------+----------------------------------------------------------------+
+ | create                   | Creates a conference by providing alias                        |
+ +--------------------------+----------------------------------------------------------------+
+ | accept                   | Accepts a conference invitation                                |
+ +--------------------------+----------------------------------------------------------------+
+ | decline                  | Declines a conference invitation                               |
+ +--------------------------+----------------------------------------------------------------+
+ | audio-level              | Get audio level for a single participant                       |
+ +--------------------------+----------------------------------------------------------------+
+ | audio-levels             | Get audio levels for all participants in a conference          |
+ +--------------------------+----------------------------------------------------------------+
+ | set-audio-capture-mode   | Set the audio capture mode.                                    |
+ +--------------------------+----------------------------------------------------------------+
+ | get-audio-capture-mode   | Get the current audio capture mode.                            |
+ +--------------------------+----------------------------------------------------------------+
+ | audio-levels             | Get audio levels for all participants in a conference          |
+ +--------------------------+----------------------------------------------------------------+
 
 .. note::
 	For an optimal experience with the client application, please use only the interactive options listed above. While running the application, the interactive options "V" and "v" are displayed as 
@@ -253,49 +263,55 @@ ___________________________________________
 
 2. Run the created **sample_app** executable using the following command line parameters
 
- +--------------+-----------------------------------------------------+
- | Argument     | Description                                         |
- +==============+=====================================================+
- | -u           | The user name                                       |
- +--------------+-----------------------------------------------------+
- | -e           | The external ID                                     |
- +--------------+-----------------------------------------------------+
- | -k           | The access token                                    |
- +--------------+-----------------------------------------------------+
- | -c           | The conference alias (DEMO to join demo conference) |
- +--------------+-----------------------------------------------------+
- | -t           | The conference access token                         |
- +--------------+-----------------------------------------------------+
- | -i           | The conference ID                                   |
- +--------------+-----------------------------------------------------+
- | -l           | The logging level (0-5)                             |
- +--------------+-----------------------------------------------------+
- | -d           | The relative path to OutputDirectory                |
- +--------------+-----------------------------------------------------+
- | -v           | The video format for recording                      |
- +--------------+-----------------------------------------------------+
- | -a           | The audio format for recording                      |
- +--------------+-----------------------------------------------------+
- | -j           | The user type (user or listener)                    |
- +--------------+-----------------------------------------------------+
- | -m           | The initial media to inject                         |
- +--------------+-----------------------------------------------------+
- | -f           | The name of a media file to inject                  |
- +--------------+-----------------------------------------------------+
- | -s           | The send-only mode                                  | 
- +--------------+-----------------------------------------------------+
- | -V           | The maximum Video Forwarding value (0-25)           | 
- +--------------+-----------------------------------------------------+
- | -spatial     | Spatial audio (shared|individual|disabled)          |
- +--------------+-----------------------------------------------------+
- | -log_speaker | Logs the active speaker changes  (yes|no)           |
- +--------------+-----------------------------------------------------+
+ +--------------+--------------------------------------------------------+
+ | Argument     | Description                                            |
+ +==============+========================================================+
+ | -h           | Print the help menu.                                   |
+ +--------------+--------------------------------------------------------+
+ | -u           | The participant's name.                                |
+ +--------------+--------------------------------------------------------+
+ | -e           | The external ID                                        |
+ +--------------+--------------------------------------------------------+
+ | -k           | The access token                                       |
+ +--------------+--------------------------------------------------------+
+ | -c           | The conference alias (DEMO to join a demo conference)  |
+ +--------------+--------------------------------------------------------+
+ | -t           | The conference access token                            |
+ +--------------+--------------------------------------------------------+
+ | -i           | The conference ID                                      |
+ +--------------+--------------------------------------------------------+
+ | -l           | The SDK logging level (0-5)                            |
+ +--------------+--------------------------------------------------------+
+ | -ml          | The Media Engine logging level (0-5)                   |
+ +--------------+--------------------------------------------------------+
+ | -d           | The relative path to OutputDirectory                   |
+ +--------------+--------------------------------------------------------+
+ | -v           | The video format for recording                         |
+ +--------------+--------------------------------------------------------+
+ | -a           | The audio format for recording                         |
+ +--------------+--------------------------------------------------------+
+ | -p           | The user type (user or listener)                       |
+ +--------------+--------------------------------------------------------+
+ | -m           | The initial media to inject                            |
+ +--------------+--------------------------------------------------------+
+ | -f           | The name of a media file to inject                     |
+ +--------------+--------------------------------------------------------+
+ | -s           | The send-only mode                                     | 
+ +--------------+--------------------------------------------------------+
+ | -V, -max_vfs | Max video forwarding strategy                          |
+ +--------------+--------------------------------------------------------+
+ | -spatial     | Spatial audio (shared|individual|disabled)             |
+ +--------------+--------------------------------------------------------+
+ | -log_speaker | Logs the active speaker changes  (yes|no)              |
+ +--------------+--------------------------------------------------------+
+ | -simulcast   | Join with simulcast enabled                            |
+ +--------------+--------------------------------------------------------+
 
 For example:
 
 .. code-block:: console
         
-        $ ./server_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -v ENCODED_OPTIMIZED -a PCM -l LOG_LEVEL -j user -m AV -f test_file.mp4 -spatial shared
+        $ ./server_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -v ENCODED_OPTIMIZED -a PCM -l LOG_LEVEL -ml LOG_LEVEL_MEDIA -p user -m AV -f test_file.mp4 -spatial shared
 
 
 This example starts the application that:
@@ -315,65 +331,71 @@ This example starts the application that:
 explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well. Also, all options denoted with a * indicate that 
 application will directly interact with the :ref:`Media Source File <media_source_file>` library.
 
- +--------------------+--------------------------------------------------------------+
- | Option             | Description                                                  |
- +====================+==============================================================+
- | q                  | Quits the application                                        |
- +--------------------+--------------------------------------------------------------+
- | f*                 | Sets a new media file to play                                |
- +--------------------+--------------------------------------------------------------+
- | F*                 | Adds a new media file to a playlist                          |
- +--------------------+--------------------------------------------------------------+
- | p*                 | Pauses the file injection                                    |
- +--------------------+--------------------------------------------------------------+
- | r*                 | Resumes the paused file injection                            |
- +--------------------+--------------------------------------------------------------+
- | s*                 | Seeks to time in the file                                    |
- +--------------------+--------------------------------------------------------------+
- | stop-audio         | Stops the local audio and audio injection                    |
- +--------------------+--------------------------------------------------------------+
- | start-audio        | Start the local audio and audio injection                    |
- +--------------------+--------------------------------------------------------------+
- | stop-audio-remote  | Stops remote audio in a Dolby Voice conference               |
- +--------------------+--------------------------------------------------------------+
- | start-audio-remote | Starts remote audio in a Dolby Voice conference              |
- +--------------------+--------------------------------------------------------------+
- | m                  | Sends a message to the conference                            |
- +--------------------+--------------------------------------------------------------+
- | P                  | Lists conference participants                                |
- +--------------------+--------------------------------------------------------------+
- | S                  | Sets a spatial audio configuration                           |
- +--------------------+--------------------------------------------------------------+
- | mute               | Mutes the local participant's microphone                     |
- +--------------------+--------------------------------------------------------------+
- | unmute             | Un-mutes the local participant's microphone                  |
- +--------------------+--------------------------------------------------------------+
- | mute-remote        | Mutes remote participant in a non-Dolby Voice conference     |
- +--------------------+--------------------------------------------------------------+
- | unmute-remote      | Un-mutes remote participant in a non-Dolby Voice conference  |
- +--------------------+--------------------------------------------------------------+
- | v                  | Stops the local video and video injection                    |
- +--------------------+--------------------------------------------------------------+
- | V                  | Starts the local video and video injection                   |
- +--------------------+--------------------------------------------------------------+
- | invite             | Invites a participant to a conference                        |
- +--------------------+--------------------------------------------------------------+
- | subscribe          | Subscribes to all conference events                          |
- +--------------------+--------------------------------------------------------------+
- | unsubscribe        | Un-subscribes from all conference events                     |
- +--------------------+--------------------------------------------------------------+
- | join               | Joins a conference by providing ID                           |
- +--------------------+--------------------------------------------------------------+
- | create             | Creates a conference by providing alias                      |
- +--------------------+--------------------------------------------------------------+
- | accept             | Accepts a conference invitation                              |
- +--------------------+--------------------------------------------------------------+
- | decline            | Declines a conference invitation                             |
- +--------------------+--------------------------------------------------------------+
- | audio-level        | Get audio level for a single participant                     |
- +--------------------+--------------------------------------------------------------+
- | audio-levels       | Get audio levels for all participants in a conference        |
- +--------------------+--------------------------------------------------------------+
+ +--------------------------+----------------------------------------------------------------+
+ | Option                   | Description                                                    |
+ +==========================+================================================================+
+ | q                        | Quits the application                                          |
+ +--------------------------+----------------------------------------------------------------+
+ | f*                       | Sets a new media file to play                                  |
+ +--------------------------+----------------------------------------------------------------+
+ | F*                       | Adds a new media file to a playlist                            |
+ +--------------------------+----------------------------------------------------------------+
+ | p*                       | Pauses the file injection                                      |
+ +--------------------------+----------------------------------------------------------------+
+ | r*                       | Resumes the paused file injection                              |
+ +--------------------------+----------------------------------------------------------------+
+ | s*                       | Seeks to time in the file                                      |
+ +--------------------------+----------------------------------------------------------------+
+ | stop-audio               | Stops the local audio                                          |
+ +--------------------------+----------------------------------------------------------------+
+ | start-audio              | Starts the local audio                                         |
+ +--------------------------+----------------------------------------------------------------+
+ | stop-audio-remote        | Stops remote audio in a Dolby Voice conference                 |
+ +--------------------------+----------------------------------------------------------------+
+ | start-audio-remote       | Starts remote audio in a Dolby Voice conference                |
+ +--------------------------+----------------------------------------------------------------+
+ | m                        | Sends a message to a conference                                |
+ +--------------------------+----------------------------------------------------------------+
+ | P                        | Lists conference participants                                  |
+ +--------------------------+----------------------------------------------------------------+
+ | S                        | Sets a spatial audio configuration                             |
+ +--------------------------+----------------------------------------------------------------+
+ | mute                     | Mutes the local participant's microphone                       |
+ +--------------------------+----------------------------------------------------------------+
+ | unmute                   | Un-mutes the local participant's microphone                    |
+ +--------------------------+----------------------------------------------------------------+
+ | mute-remote              | Mutes a remote participant in a non-Dolby Voice conference     |
+ +--------------------------+----------------------------------------------------------------+
+ | unmute-remote            | Un-mutes a remote participant in a non-Dolby Voice conference  |
+ +--------------------------+----------------------------------------------------------------+
+ | v                        | Stops the local video and video injection                      |
+ +--------------------------+----------------------------------------------------------------+
+ | V                        | Starts the local video and video injection                     |
+ +--------------------------+----------------------------------------------------------------+
+ | invite                   | Invites a participant to a conference                          |
+ +--------------------------+----------------------------------------------------------------+
+ | subscribe                | Subscribes to all conference events                            |
+ +--------------------------+----------------------------------------------------------------+
+ | unsubscribe              | Unsubscribes from all conference events                        |
+ +--------------------------+----------------------------------------------------------------+
+ | join                     | Joins a conference by providing ID                             |
+ +--------------------------+----------------------------------------------------------------+
+ | create                   | Creates a conference by providing alias                        |
+ +--------------------------+----------------------------------------------------------------+
+ | accept                   | Accepts a conference invitation                                |
+ +--------------------------+----------------------------------------------------------------+
+ | decline                  | Declines a conference invitation                               |
+ +--------------------------+----------------------------------------------------------------+
+ | audio-level              | Get audio level for a single participant                       |
+ +--------------------------+----------------------------------------------------------------+
+ | audio-levels             | Get audio levels for all participants in a conference          |
+ +--------------------------+----------------------------------------------------------------+
+ | set-audio-capture-mode   | Set the audio capture mode.                                    |
+ +--------------------------+----------------------------------------------------------------+
+ | get-audio-capture-mode   | Get the current audio capture mode.                            |
+ +--------------------------+----------------------------------------------------------------+
+ | audio-levels             | Get audio levels for all participants in a conference          |
+ +--------------------------+----------------------------------------------------------------+
 
 Please note that in the sample application methods that start and stop audio and video consist of two parts. For example, for starting video, the first step uses the 
 :cpp:func:`dolbyio::comms::services::conference::start_video` method, which attaches a video track to the active PeerConnection. This method resolves once the video track has been successfully

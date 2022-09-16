@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CoreSDK API &mdash; C++ SDK 2.0.0 documentation</title>
+  <title>CoreSDK API &mdash; C++ SDK 2.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -50,6 +50,8 @@
 <li class="toctree-l2"><a class="reference internal" href="sdk/sdk.html">Sdk Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/session.html">Session Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk/audio.html">Audio Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk/video.html">Video Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/device_management.html">Device Management Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/injector.html">Default Media Injector</a></li>
@@ -57,6 +59,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sdk/common/log_level.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/common/exception.html">SDK Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/common/event_handling.html">Event Handling Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk/common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="media_recording.html">Media Recording API</a></li>
@@ -96,12 +99,15 @@ creating sessions, joining conferences, receiving Websocket events, sending/rece
 The SDK also provides the ability to configure the default Audio/Video recorder to handle and store the incoming media streams in desired formats.
 The SDK provides the ability to create a default Audio/Video injector to which the application can provide raw media frames that will
 then be injected into the conference. The SDK also provides the ability to set spatial locations of participants’ audio and participate in a shared spatial scene within a conference.
-The <a class="reference internal" href="sdk/sdk.html#api-sdk"><span class="std std-ref">Sdk Interface</span></a>, <a class="reference internal" href="sdk/session.html#api-session"><span class="std std-ref">Session Service</span></a>, <a class="reference internal" href="sdk/conference.html#api-conference"><span class="std std-ref">Conference Service</span></a>, <a class="reference internal" href="sdk/device_management.html#api-device-management"><span class="std std-ref">Device Management Service</span></a>, <a class="reference internal" href="sdk/recorder.html#api-recorder"><span class="std std-ref">Default Media Recorder</span></a>, <a class="reference internal" href="sdk/injector.html#default-injector"><span class="std std-ref">Default Media Injector</span></a> sections are the core of the user interface to the CoreSDK.</p>
+The <a class="reference internal" href="sdk/sdk.html#api-sdk"><span class="std std-ref">Sdk Interface</span></a>, <a class="reference internal" href="sdk/session.html#api-session"><span class="std std-ref">Session Service</span></a>, <a class="reference internal" href="sdk/conference.html#api-conference"><span class="std std-ref">Conference Service</span></a>, <a class="reference internal" href="sdk/device_management.html#api-device-management"><span class="std std-ref">Device Management Service</span></a>, <a class="reference internal" href="sdk/audio.html#api-audio-service"><span class="std std-ref">Audio Service</span></a>, <a class="reference internal" href="sdk/video.html#api-video-service"><span class="std std-ref">Video Service</span></a>, <a class="reference internal" href="sdk/recorder.html#api-recorder"><span class="std std-ref">Default Media Recorder</span></a>, <a class="reference internal" href="sdk/injector.html#default-injector"><span class="std std-ref">Default Media Injector</span></a>
+sections are the core of the user interface to the CoreSDK.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="sdk/sdk.html">Sdk Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/session.html">Session Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/conference.html">Conference Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdk/audio.html">Audio Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdk/video.html">Video Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/device_management.html">Device Management Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/injector.html">Default Media Injector</a></li>
@@ -109,14 +115,16 @@ The <a class="reference internal" href="sdk/sdk.html#api-sdk"><span class="std s
 <li class="toctree-l1"><a class="reference internal" href="sdk/common/log_level.html">Logging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/common/exception.html">SDK Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/common/event_handling.html">Event Handling Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdk/common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The Core SDK API provides methods that are asynchronous in nature and return <a class="reference internal" href="sdk/common/async_ops.html#api-async-result"><span class="std std-ref">async_result</span></a>. This means that if
-the result or the completion of operation is necessary for subsequent calls, you have to be careful. For more details, read the notes from the <a class="reference internal" href="sdk/sdk.html#_CPPv4N7dolbyio5comms3sdkE" title="dolbyio::comms::sdk"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">sdk</span></code></a>,
-<a class="reference internal" href="sdk/conference.html#_CPPv4N7dolbyio5comms8services10conferenceE" title="dolbyio::comms::services::conference"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">conference</span></code></a>, <a class="reference internal" href="sdk/device_management.html#_CPPv4N7dolbyio5comms8services17device_managementE" title="dolbyio::comms::services::device_management"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">session</span></code></a> or <a class="reference internal" href="sdk/session.html#_CPPv4N7dolbyio5comms8services7sessionE" title="dolbyio::comms::services::session"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">session</span></code></a> interfaces and refer
-to the examples of each documented asynchronous method.</p>
+the result or the completion of operation is necessary for subsequent calls, you have to be careful. For more details refer to the <a class="reference internal" href="sdk/common/async_ops.html#api-async-result"><span class="std std-ref">Asynchronous Operations</span></a> page or read the notes from the;
+<a class="reference internal" href="sdk/sdk.html#_CPPv4N7dolbyio5comms3sdkE" title="dolbyio::comms::sdk"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">sdk</span></code></a>, <a class="reference internal" href="sdk/conference.html#_CPPv4N7dolbyio5comms8services10conferenceE" title="dolbyio::comms::services::conference"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">conference</span></code></a>, <a class="reference internal" href="sdk/session.html#_CPPv4N7dolbyio5comms8services7sessionE" title="dolbyio::comms::services::session"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">session</span></code></a>,
+<a class="reference internal" href="sdk/device_management.html#_CPPv4N7dolbyio5comms8services17device_managementE" title="dolbyio::comms::services::device_management"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">device_management</span></code></a>, <a class="reference internal" href="sdk/audio.html#_CPPv4N7dolbyio5comms8services11local_audioE" title="dolbyio::comms::services::local_audio"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span></code></a>, <a class="reference internal" href="sdk/audio.html#_CPPv4N7dolbyio5comms8services12remote_audioE" title="dolbyio::comms::services::remote_audio"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span></code></a>,
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span></code> interfaces and refer to the examples of each documented asynchronous method.</p>
 </div>
 </section>
 

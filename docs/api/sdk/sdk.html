@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sdk Interface &mdash; C++ SDK 2.0.0 documentation</title>
+  <title>Sdk Interface &mdash; C++ SDK 2.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -50,6 +50,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Sdk Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="session.html">Session Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video.html">Video Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
@@ -57,6 +59,7 @@
 <li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/event_handling.html">Event Handling Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
@@ -98,9 +101,11 @@
 <li><p>Create the SDK using <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk6createERKNSt6stringERRNSt8functionIFvNSt10unique_ptrI13refresh_tokenEEEEE" title="dolbyio::comms::sdk::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::create</span></code></a>. The create call needs to pass a valid access token in order to initialize the SDK. Wait for the return of the create call.</p></li>
 <li><p>Log in to the Dolby.io backend. For more information, see the <a class="reference internal" href="session.html#api-session"><span class="std std-ref">Session Service</span></a>.</p></li>
 <li><p>Retrieve a reference to <a class="reference internal" href="session.html#sess-serv"><span class="std std-ref">Session Interface</span></a> through <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk7sessionEv" title="dolbyio::comms::sdk::session"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::session</span></code></a>.</p></li>
-<li><p>Create and join a conference. A reference to the <a class="reference internal" href="conference.html#conf-serv"><span class="std std-ref">Conference Interface</span></a> can be retrieved through the
-<a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk10conferenceEv" title="dolbyio::comms::sdk::conference"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::conference</span></code></a>.
-After these steps, the destructor for the SDK performs necessary cleanups when the SDK instance goes out of scope. This means that you do not need to perform any cleanup.</p></li>
+<li><p>Create and join a conference. A reference to the <a class="reference internal" href="conference.html#conf-serv"><span class="std std-ref">Conference Interface</span></a> can be retrieved through the <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk10conferenceEv" title="dolbyio::comms::sdk::conference"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::conference</span></code></a>.</p></li>
+<li><p>Manage Audio Devices using the <a class="reference internal" href="device_management.html#devman-serv"><span class="std std-ref">Device Management Interface</span></a>. A reference to this service can be retrieved through <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk17device_managementEv" title="dolbyio::comms::sdk::device_management"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::device_management</span></code></a>.</p></li>
+<li><p>Manage local and remote Audio streams using the <a class="reference internal" href="audio.html#api-audio-service"><span class="std std-ref">Audio Service</span></a>. A reference to this service can be retrieved through <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk5audioEv" title="dolbyio::comms::sdk::audio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::audio</span></code></a>.</p></li>
+<li><p>Manage local Video stream using the <a class="reference internal" href="video.html#api-video-service"><span class="std std-ref">Video Service</span></a>. A reference to this service can be retrieved through <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk5videoEv" title="dolbyio::comms::sdk::video"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::video</span></code></a>.</p></li>
+<li><p>The destructor for the SDK performs necessary cleanups when the SDK instance goes out of scope. This means that you do not need to perform any cleanup.</p></li>
 </ol>
 </dd>
 </dl>
@@ -119,6 +124,28 @@ After these steps, the destructor for the SDK performs necessary cleanups when t
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdkD0Ev">
 <span id="_CPPv3N7dolbyio5comms3sdkD0Ev"></span><span id="_CPPv2N7dolbyio5comms3sdkD0Ev"></span><span id="dolbyio::comms::sdk::~sdk"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a40c484173d2252b9921d94d0b8a7cece"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~sdk</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdkD0Ev" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The destructor that shuts down the SDK. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk5audioEv">
+<span id="_CPPv3N7dolbyio5comms3sdk5audioEv"></span><span id="_CPPv2N7dolbyio5comms3sdk5audioEv"></span><span id="dolbyio::comms::sdk::audio"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a25ad1309a0be0af941092f6a976fbbdf"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="audio.html#_CPPv4N7dolbyio5comms8services5audioE" title="dolbyio::comms::services::audio"><span class="n"><span class="pre">audio</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">audio</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk5audioEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Audio Service accessor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reference to the <a class="reference internal" href="audio.html#classdolbyio_1_1comms_1_1services_1_1audio"><span class="std std-ref">services::audio</span></a> service. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk5videoEv">
+<span id="_CPPv3N7dolbyio5comms3sdk5videoEv"></span><span id="_CPPv2N7dolbyio5comms3sdk5videoEv"></span><span id="dolbyio::comms::sdk::video"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a81778486497610faf57a81a7a2313841"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms8services5videoE" title="dolbyio::comms::services::video"><span class="n"><span class="pre">video</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">video</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk5videoEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Video Service accessor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reference to the <a class="reference internal" href="video.html#classdolbyio_1_1comms_1_1services_1_1video"><span class="std std-ref">services::video</span></a> service. </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
@@ -240,16 +267,69 @@ After these steps, the destructor for the SDK performs necessary cleanups when t
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk17set_app_allocatorERK13app_allocator">
+<span id="_CPPv3N7dolbyio5comms3sdk17set_app_allocatorERK13app_allocator"></span><span id="_CPPv2N7dolbyio5comms3sdk17set_app_allocatorERK13app_allocator"></span><span id="dolbyio::comms::sdk::set_app_allocator__app_allocatorCR"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a5b7cac943c7d2b09420c34b5cd24b7e4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_app_allocator</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="common/custom_allocator.html#_CPPv4N7dolbyio5comms13app_allocatorE" title="dolbyio::comms::app_allocator"><span class="n"><span class="pre">app_allocator</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">allocator</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk17set_app_allocatorERK13app_allocator" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the instance of <a class="reference internal" href="common/custom_allocator.html#structdolbyio_1_1comms_1_1app__allocator"><span class="std std-ref">app_allocator</span></a>.</p>
+<p>
+This method causes the global operators new and delete in the SDK to use the application-provided allocator. If the application wishes to override the SDK’s memory allocator, it must do so prior to calling any other SDK APIs, otherwise there is a risk of overriding memory deallocation functions and using the overriden functions to free memory that has been allocated using the default memory allocator. The SDK restores the default allocator upon application exit (not the SDK destruction) to allow freeing memory allocated in global objects using the system allocator.<dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>This is only available on Windows.</p>
+</dd>
+</dl>
+</p>
+<p>If the allocator has already been overridden, and the new one uses different memory management functions, this method will throw. If the allocator does not contain all four memory allocation functions, this method will also throw. The application should not attempt to restore the default allocator before shutdown; the SDK does it automatically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>allocator</strong> – the allocator to be used in the SDK. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk13set_log_levelE9log_level">
 <span id="_CPPv3N7dolbyio5comms3sdk13set_log_levelE9log_level"></span><span id="_CPPv2N7dolbyio5comms3sdk13set_log_levelE9log_level"></span><span id="dolbyio::comms::sdk::set_log_level__log_level"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1ac6944a2463ab09bc337fca286719158f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_log_level</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk13set_log_levelE9log_level" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Sets the logging level. </p>
-<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">::</span><span class="n">set_log_level</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">log_level</span><span class="o">::</span><span class="n">INFO</span><span class="p">);</span><span class="w"></span>
+<p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use set_log_settings instead. </p>
+</dd></dl>
+
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">::</span><span class="n">set_log_level</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">log_level</span><span class="o">::</span><span class="n">INFO</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>level</strong> – The log level to set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk16set_log_settingsERK12log_settings">
+<span id="_CPPv3N7dolbyio5comms3sdk16set_log_settingsERK12log_settings"></span><span id="_CPPv2N7dolbyio5comms3sdk16set_log_settingsERK12log_settings"></span><span id="dolbyio::comms::sdk::set_log_settings__log_settingsCR"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a40667a7021536ac0609b8e4cc1b2ba35"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_log_settings</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk12log_settingsE" title="dolbyio::comms::sdk::log_settings"><span class="n"><span class="pre">log_settings</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">settings</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk16set_log_settingsERK12log_settings" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets what and how to log. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">::</span><span class="n">log_settings</span><span class="w"> </span><span class="n">log_settings</span><span class="p">;</span><span class="w"></span>
+<span class="n">log_settings</span><span class="p">.</span><span class="n">sdk_log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">log_level</span><span class="o">::</span><span class="n">INFO</span><span class="p">;</span><span class="w"></span>
+<span class="n">log_settings</span><span class="p">.</span><span class="n">media_log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">log_level</span><span class="o">::</span><span class="n">OFF</span><span class="p">;</span><span class="w"></span>
+<span class="n">log_settings</span><span class="p">.</span><span class="n">log_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">::</span><span class="n">set_log_settings</span><span class="p">(</span><span class="n">log_settings</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+ <dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>Calling more than once has no effect. </p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>settings</strong> – Structure of type <a class="reference internal" href="#structdolbyio_1_1comms_1_1sdk_1_1log__settings"><span class="std std-ref">log_settings</span></a>. </p>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">dolbyio</span><span class="p">::</span><span class="n">comms</span><span class="p">::</span><a class="reference internal" href="common/exception.html#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n">exception</span></a></span></span> – Thrown when:<ul class="simple">
+<li><p>provided invalid log directory</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -292,6 +372,38 @@ After these steps, the destructor for the SDK performs necessary cleanups when t
 </dd></dl>
 
 </div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settingsE">
+<span id="_CPPv3N7dolbyio5comms3sdk12log_settingsE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settingsE"></span><span id="dolbyio::comms::sdk::log_settings"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_settings</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settingsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Settings describing what and how to log. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settings13sdk_log_levelE">
+<span id="_CPPv3N7dolbyio5comms3sdk12log_settings13sdk_log_levelE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settings13sdk_log_levelE"></span><span id="dolbyio::comms::sdk::log_settings::sdk_log_level__log_level"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings_1af740bd6c81736abe361df66a35bfe8d9"></span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sdk_log_level</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_level4INFOE" title="dolbyio::comms::log_level::INFO"><span class="n"><span class="pre">INFO</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settings13sdk_log_levelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Log level for SDK logs. Default is INFO. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settings15media_log_levelE">
+<span id="_CPPv3N7dolbyio5comms3sdk12log_settings15media_log_levelE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settings15media_log_levelE"></span><span id="dolbyio::comms::sdk::log_settings::media_log_level__log_level"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings_1a93966edbfd7e415deccd3594499d5b62"></span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">media_log_level</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_level3OFFE" title="dolbyio::comms::log_level::OFF"><span class="n"><span class="pre">OFF</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settings15media_log_levelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Log level for Media Engine logs. It is recommended to keep the Media Engine log level at OFF, ERROR or WARNING to avoid spam and only enable more detailed logs when necessary. Default is OFF. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settings13log_directoryE">
+<span id="_CPPv3N7dolbyio5comms3sdk12log_settings13log_directoryE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settings13log_directoryE"></span><span id="dolbyio::comms::sdk::log_settings::log_directory__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings_1a134ae6683f37f1883d1a461480ba8943"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_directory</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settings13log_directoryE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Directory to which SDK logs should be saved. The application must have write access to the directory or it must be able to create such a directory. Providing a valid directory implies starting logging to a timestamped file. Providing no value or an empty string has no effect. Default is an empty string. </p>
+<p><dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>SDK logs are always also output to stdout regardless of this setting. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="cpp class">

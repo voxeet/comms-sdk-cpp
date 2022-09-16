@@ -11,7 +11,7 @@ Once the SDK is instantiated, applications have access to the device management 
  - Get the available audio devices
  - Set the preferred input and output devices
  - Check the currently set input and output device
- - Receive events about audio devices that have been added, removed, or changed
+ - Receive events about audio devices that have been added, removed, or changed as well as device failures
 
 .. _devman_serv:
 

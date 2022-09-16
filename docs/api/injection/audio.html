@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Audio Source Interface &mdash; C++ SDK 2.0.0 documentation</title>
+  <title>Audio Source Interface &mdash; C++ SDK 2.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -87,7 +87,7 @@
 <p>#include &lt;dolbyio/comms/media/media_engine.h&gt;</p>
 <p>The interface through which raw audio frames are provided to the CoreSDK. This audio source must provide signed 16 bit PCM data in 10ms chunks at 10ms intervals. Application writers who want to
 implement this source must override the two virtual functions of <a class="reference internal" href="#_CPPv4N7dolbyio5comms12audio_source31register_audio_frame_rtc_sourceEP16rtc_audio_source" title="dolbyio::comms::audio_source::register_audio_frame_rtc_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">registering</span></code></a> and
-cpp:func:<cite>deregistering &lt;dolbyio::comms::audio_source::deregister_audio_frame_rtc_source&gt;</cite> the RTC Audio Source on the Injector. Attaching the RTC Audio source to the injector establishes the audio
+<a class="reference internal" href="#_CPPv4N7dolbyio5comms12audio_source33deregister_audio_frame_rtc_sourceEv" title="dolbyio::comms::audio_source::deregister_audio_frame_rtc_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">deregistering</span></code></a> the RTC Audio Source on the Injector. Attaching the RTC Audio source to the injector establishes the audio
 pipeline so that frames can be passed to the CoreSDK.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12audio_sourceE">
