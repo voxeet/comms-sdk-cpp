@@ -4,7 +4,7 @@ Default Media Injector
 ==========================
 
 .. note::
-  The Default Media Injector is intended for Server applications.
+  The Default Media Injector is considered to be in Beta phase on MacOS and Windows systems.
 
 The Default Media Injector module provides two different types of injectors: 
 
@@ -23,7 +23,7 @@ _________________________
 Neither of the default injectors provide infrastructure for capturing and decoding media. This is the application's responsibility; once it has decoded media frames, it can pass them to either of the
 aforementioned injectors. We have provided a sample library to showcase how to create a Media Injection Source. This sample library, called **media_source_file**, reads media from a mov/mp4 file 
 and using the Paced Injector injects the audio and video frames into the CoreSDK. This **media_source_file** library is utilized by the provided sample application to inject media files. The 
-:ref:`getting_started_server` page describes how to get media injection running with the sample application. A brief overview of the library is provided :ref:`below <media_source_file>`.
+:ref:`getting_started_sample` page describes how to get media injection running with the sample application. A brief overview of the library is provided :ref:`below <media_source_file>`.
 
 The audio provided to the injector, contained by the :cpp:class:`audio frame <dolbyio::comms::audio_frame>`, should have the following specifications:
 

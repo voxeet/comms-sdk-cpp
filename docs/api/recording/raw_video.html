@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raw Video Sink Interface &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Raw Video &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Media Recording Events" href="events.html" />
-    <link rel="prev" title="Encoded Video Sink Interface" href="encoded_video.html" /> 
+    <link rel="next" title="Encoded Video" href="encoded_video.html" />
+    <link rel="prev" title="Example Injector Implementation" href="../injection/example.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,17 +46,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../media_recording.html">Media Recording API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="media_sink_interface.html">Media Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="encoded_video.html">Encoded Video Sink Interface</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Raw Video Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="events.html">Media Recording Events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_io.html">Media IO API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../media_io.html#injection">Injection</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../media_io.html#recording">Recording</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Raw Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="encoded_video.html">Encoded Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Media Recording Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -73,8 +76,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_recording.html">Media Recording API</a> &raquo;</li>
-      <li>Raw Video Sink Interface</li>
+          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
+      <li>Raw Video</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/recording/raw_video.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -84,190 +87,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="raw-video-sink-interface">
-<span id="api-record-raw"></span><h1>Raw Video Sink Interface<a class="headerlink" href="#raw-video-sink-interface" title="Permalink to this heading"></a></h1>
-<p>#include &lt;dolbyio/comms/media/media_engine.h&gt;</p>
-<p>The interface for handling decoded video frames. Application must set listener which overrides the virtual function. The
-<a class="reference internal" href="#_CPPv4N7dolbyio5comms14video_sink_yuv12handle_frameERKNSt6stringERKNSt6stringENSt10unique_ptrI11video_frameEE" title="dolbyio::comms::video_sink_yuv::handle_frame"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">handle_frame</span></code></a> function is called after the Webrtc Decoder has decoded the frame and will provide the
-decoded data wrapped in the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">frame</span></code> object. The frame class wraps the decoded video frame and essentailly just provides interface
-to extract the underlying YUV data.</p>
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14video_sink_yuvE">
-<span id="_CPPv3N7dolbyio5comms14video_sink_yuvE"></span><span id="_CPPv2N7dolbyio5comms14video_sink_yuvE"></span><span id="dolbyio::comms::video_sink_yuv"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__yuv"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">video_sink_yuv</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14video_sink_yuvE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The interface for receiving the raw video frames. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14video_sink_yuv12handle_frameERKNSt6stringERKNSt6stringENSt10unique_ptrI11video_frameEE">
-<span id="_CPPv3N7dolbyio5comms14video_sink_yuv12handle_frameERKNSt6stringERKNSt6stringENSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms14video_sink_yuv12handle_frameERKNSt6stringERKNSt6stringENSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::video_sink_yuv::handle_frame__ssCR.ssCR.std::unique_ptr:video_frame:"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__yuv_1a6d9e04b45a7965f071b82ffc7e6a0d7c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_frame</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">track_id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14video_sink_yuv12handle_frameERKNSt6stringERKNSt6stringENSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The callback that is invoked when a video frame is decoded and ready to be processed. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>stream_id</strong> – The ID of the media stream to which the video track belongs. </p></li>
-<li><p><strong>track_id</strong> – The ID of the video track to which the frame belongs. </p></li>
-<li><p><strong>frame</strong> – The pointer to the video frame. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frameE">
-<span id="_CPPv3N7dolbyio5comms11video_frameE"></span><span id="_CPPv2N7dolbyio5comms11video_frameE"></span><span id="dolbyio::comms::video_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">video_frame</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frameE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The interface that wraps decoded video frames received from and to be injected into WebRTC. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
-<dl class="cpp enum">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame14picture_formatE">
-<span id="_CPPv3N7dolbyio5comms11video_frame14picture_formatE"></span><span id="_CPPv2N7dolbyio5comms11video_frame14picture_formatE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ab468a41bb863abdda7a9d1ae559e4a0f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">picture_format</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame14picture_formatE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The available raw video formats. </p>
-<p><em>Values:</em></p>
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame14picture_format6nativeE">
-<span id="_CPPv3N7dolbyio5comms11video_frame14picture_format6nativeE"></span><span id="_CPPv2N7dolbyio5comms11video_frame14picture_format6nativeE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ab468a41bb863abdda7a9d1ae559e4a0faa92d75f2fbf2a2e4fe850d50b6566993"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">native</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame14picture_format6nativeE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The native format. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame14picture_format4i420E">
-<span id="_CPPv3N7dolbyio5comms11video_frame14picture_format4i420E"></span><span id="_CPPv2N7dolbyio5comms11video_frame14picture_format4i420E"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ab468a41bb863abdda7a9d1ae559e4a0fa05d0c42eb111b665c37ac4243b1aff4b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">i420</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame14picture_format4i420E" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The I420 format. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame14picture_format5i420aE">
-<span id="_CPPv3N7dolbyio5comms11video_frame14picture_format5i420aE"></span><span id="_CPPv2N7dolbyio5comms11video_frame14picture_format5i420aE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ab468a41bb863abdda7a9d1ae559e4a0fafc0168fd7173512457b4e28a2ab1d85e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">i420a</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame14picture_format5i420aE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The I420A format. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame14picture_format4i444E">
-<span id="_CPPv3N7dolbyio5comms11video_frame14picture_format4i444E"></span><span id="_CPPv2N7dolbyio5comms11video_frame14picture_format4i444E"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ab468a41bb863abdda7a9d1ae559e4a0facd558f916db9bba5880c5986baa9073d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">i444</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame14picture_format4i444E" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The I444 format. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame14picture_format4i010E">
-<span id="_CPPv3N7dolbyio5comms11video_frame14picture_format4i010E"></span><span id="_CPPv2N7dolbyio5comms11video_frame14picture_format4i010E"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ab468a41bb863abdda7a9d1ae559e4a0fa04f6b33e13eccf287632f02e18299cf7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">i010</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame14picture_format4i010E" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The I010 format. </p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frameD0Ev">
-<span id="_CPPv3N7dolbyio5comms11video_frameD0Ev"></span><span id="_CPPv2N7dolbyio5comms11video_frameD0Ev"></span><span id="dolbyio::comms::video_frame::~video_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a2cdc6d8b403e1bcbb003c230af57f6c0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frameD0Ev" title="Permalink to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame5widthEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame5widthEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame5widthEv"></span><span id="dolbyio::comms::video_frame::widthC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a34bf865ae5f3cb4dd7921b4f8c20e938"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame5widthEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the width of the frame. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The width of the frame. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame6heightEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame6heightEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame6heightEv"></span><span id="dolbyio::comms::video_frame::heightC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a08c10018cc712c73d1dcacddf57b7b57"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame6heightEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the height of the video frame. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The height of the frame. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame6formatEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame6formatEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame6formatEv"></span><span id="dolbyio::comms::video_frame::formatC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a0f61c26e395c7c112959a34a417a22ab"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frame14picture_formatE" title="dolbyio::comms::video_frame::picture_format"><span class="n"><span class="pre">picture_format</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">format</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame6formatEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the frame format. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The frame format. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame5get_yEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame5get_yEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame5get_yEv"></span><span id="dolbyio::comms::video_frame::get_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a807270ed7e10cac901bfcb08181f0b12"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame5get_yEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the Y component. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The pointer to the Y data buffer. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame5get_uEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame5get_uEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame5get_uEv"></span><span id="dolbyio::comms::video_frame::get_uC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a467fc6a923a8eaf721a584b70d098932"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_u</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame5get_uEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the U component. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The pointer to the U data buffer. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame5get_vEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame5get_vEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame5get_vEv"></span><span id="dolbyio::comms::video_frame::get_vC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a40566675c9f4d2007a825faac5290264"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_v</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame5get_vEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the V component for YUV. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The pointer to the V data buffer. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame8stride_yEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame8stride_yEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame8stride_yEv"></span><span id="dolbyio::comms::video_frame::stride_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1acb72d3c99cc51f157eb0b78516679428"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame8stride_yEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Returns the Y component stride. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An integer representing the Y component stride. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame8stride_uEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame8stride_uEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame8stride_uEv"></span><span id="dolbyio::comms::video_frame::stride_uC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a06278aa041c47f6cef9469b76a630ffe"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_u</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame8stride_uEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Returns the U component stride. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An integer representing the U component stride. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame8stride_vEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame8stride_vEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame8stride_vEv"></span><span id="dolbyio::comms::video_frame::stride_vC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a9eb141985360c873ea43bca9e734253c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_v</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame8stride_vEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Returns the V component stride. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An integer representing the V component stride. </p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-</dd></dl>
-
+  <section id="raw-video">
+<span id="api-record-raw"></span><h1>Raw Video<a class="headerlink" href="#raw-video" title="Permalink to this heading"></a></h1>
+<p>#include &lt;dolbyio/comms/media_engine/media_engine.h&gt;</p>
+<p>For details about Raw Video Recording an application must implement a <a class="reference internal" href="../sdk/video.html#_CPPv4N7dolbyio5comms10video_sinkE" title="dolbyio::comms::video_sink"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Sink</span></code></a> to receive the frames and provide this Video Sink to the SDK using the <a class="reference internal" href="../sdk/video.html#_CPPv4N7dolbyio5comms8services12remote_videoE" title="dolbyio::comms::services::remote_video"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Remote</span> <span class="pre">Video</span> <span class="pre">Service</span></code></a>.</p>
 <p>See <a class="reference internal" href="example.html#recording-example"><span class="std std-ref">Example Recorder Implementation</span></a> for a template for child recording class for all possible media.</p>
 </section>
 
@@ -275,8 +98,8 @@ to extract the underlying YUV data.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="encoded_video.html" class="btn btn-neutral float-left" title="Encoded Video Sink Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="events.html" class="btn btn-neutral float-right" title="Media Recording Events" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../injection/example.html" class="btn btn-neutral float-left" title="Example Injector Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="encoded_video.html" class="btn btn-neutral float-right" title="Encoded Video" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

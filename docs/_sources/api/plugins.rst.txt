@@ -1,0 +1,19 @@
+ .. _plugins_api:
+
+Plugins
+=======
+The Plugins are provided as part of the **dolbyio_multimedia_streaming_addon** library. Applications that would like to use our Default Injector/Recorder modules should link against this library.
+
+To record conferences, the C++ SDK uses a Media Recorder that allows processing and storing video frames from the incoming WebRTC media streams. The library provides a default media recorder plugin. The default media recorder plugin is 
+a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format.
+
+The library also provides two flavors of Media Injectors as plugins. One of the default plugins is the Pacing Injector. The injector exposes an interface for an application and allows passing decoded audio and video. Then, the injector provides these frames to WebRTC at specified intervals. This version of the plugin is suitable for injecting media files. The second default injection plugin is the Passthrough Injector, which exposes the application the same interface 
+for injecting frames, but this plugin directly relays the frames it receives to WebRTC without any internal pacing. The media injection plugins do not provide capturing of audio or video; instead, they serve in constructing the respective media injection pipelines. The application is responsible for performing the audio and video capture and providing the decoded frames to the injector plugin.
+
+.. toctree::
+  :maxdepth: 2
+  :titlesonly:
+  :glob:
+
+  sdk/recorder.rst
+  sdk/injector.rst

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Video Source Interface &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Video &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Example Injector Implementation" href="example.html" />
-    <link rel="prev" title="Audio Source Interface" href="audio.html" /> 
+    <link rel="prev" title="Audio" href="audio.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,15 +46,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../media_injection.html">Media Injection API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="media_source_interface.html">Media Source Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Source Interface</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Video Source Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html">Example Injector Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_io.html">Media IO API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../media_io.html#injection">Injection</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example.html">Example Injector Implementation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../media_io.html#recording">Recording</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -71,8 +74,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_injection.html">Media Injection API</a> &raquo;</li>
-      <li>Video Source Interface</li>
+          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
+      <li>Video</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/injection/video.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,64 +85,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="video-source-interface">
-<span id="api-inject-video"></span><h1>Video Source Interface<a class="headerlink" href="#video-source-interface" title="Permalink to this heading"></a></h1>
-<p>#include &lt;dolbyio/comms/media/media_engine.h&gt;</p>
-<p>The interface through which raw video frames are provided to the CoreSDK. Application writers who want to implement this source must override the two virtual functions of <a class="reference internal" href="#_CPPv4N7dolbyio5comms12video_source31register_video_frame_rtc_sourceEP16rtc_video_source" title="dolbyio::comms::video_source::register_video_frame_rtc_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">registering</span></code></a> and cpp:func:<cite>deregistering &lt;dolbyio::comms::video_source::deregister_video_frame_rtc_source&gt;</cite> the RTC Video Source on the Injector. When a
-VideoTrack is successfully added to an active PeerConnection, these virtual functions are invoked to provide/remove the reference to the RTC Video Source. Attaching the RTC Video source to the
-injector establishes the video pipeline so that frames can be passed to Webrtc.</p>
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12video_sourceE">
-<span id="_CPPv3N7dolbyio5comms12video_sourceE"></span><span id="_CPPv2N7dolbyio5comms12video_sourceE"></span><span id="dolbyio::comms::video_source"></span><span class="target" id="classdolbyio_1_1comms_1_1video__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">video_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12video_sourceE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The interface for providing video frames. </p>
-<p>This interface must be implemented by the injector, it shall serve as the source of video frames passed to the <a class="reference internal" href="#classdolbyio_1_1comms_1_1rtc__video__source"><span class="std std-ref">rtc_video_source</span></a>. </p>
-<p>Subclassed by dolbyio::comms::plugin::injector</p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12video_source31register_video_frame_rtc_sourceEP16rtc_video_source">
-<span id="_CPPv3N7dolbyio5comms12video_source31register_video_frame_rtc_sourceEP16rtc_video_source"></span><span id="_CPPv2N7dolbyio5comms12video_source31register_video_frame_rtc_sourceEP16rtc_video_source"></span><span id="dolbyio::comms::video_source::register_video_frame_rtc_source__rtc_video_sourceP"></span><span class="target" id="classdolbyio_1_1comms_1_1video__source_1afe762fb4edf84d1a2dbaecf8aa107df0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">register_video_frame_rtc_source</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16rtc_video_sourceE" title="dolbyio::comms::rtc_video_source"><span class="n"><span class="pre">rtc_video_source</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">source</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12video_source31register_video_frame_rtc_sourceEP16rtc_video_source" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Connects the <a class="reference internal" href="#classdolbyio_1_1comms_1_1rtc__video__source"><span class="std std-ref">rtc_video_source</span></a> to the video source, in essence creating the video injection pipeline. This method will be called by the media_engine when a Video Track is attached to the active Peer Connection. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>source</strong> – The RTC Video Source which will receive the injected video frames. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12video_source33deregister_video_frame_rtc_sourceEv">
-<span id="_CPPv3N7dolbyio5comms12video_source33deregister_video_frame_rtc_sourceEv"></span><span id="_CPPv2N7dolbyio5comms12video_source33deregister_video_frame_rtc_sourceEv"></span><span id="dolbyio::comms::video_source::deregister_video_frame_rtc_source"></span><span class="target" id="classdolbyio_1_1comms_1_1video__source_1aa14defac508c894f8607da40e2d7a3c9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">deregister_video_frame_rtc_source</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12video_source33deregister_video_frame_rtc_sourceEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Disconnects the RTC Video Source from the Video Source, in essence destructing the video pipeline. This method is called by the media_engine whenever a Video Track is to be detached from the active Peer Connection. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<p>The RTC Video Source is NOT to be implemented by the application. This is the interface through which the injector can view its own Video Sink. After receiving video frames from some media source, the
-injector provides the raw video frames to this RTC Video Source. The RTC Video Source then pushes the frame buffers along the video pipeline until they are injected into the conference. The
-raw video frame is deleted once it has been encoded. The RTC Video Source expects <a class="reference internal" href="../recording/raw_video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frames</span></code></a>.</p>
-<dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16rtc_video_sourceE">
-<span id="_CPPv3N7dolbyio5comms16rtc_video_sourceE"></span><span id="_CPPv2N7dolbyio5comms16rtc_video_sourceE"></span><span id="dolbyio::comms::rtc_video_source"></span><span class="target" id="classdolbyio_1_1comms_1_1rtc__video__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">rtc_video_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16rtc_video_sourceE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The adapter which is used for providing video frames into WebRTC. This interface is a video sink from the perspective of the Injector. It is a video source from the perspective of WebRTC Video Tracks, thus it provides this connection in establishing the video injection pipeline. </p>
-<p>This interface is NOT implemented by the injector, it is used to be the injector to provide video frames. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16rtc_video_source12handle_frameENSt10unique_ptrI11video_frameEE">
-<span id="_CPPv3N7dolbyio5comms16rtc_video_source12handle_frameENSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms16rtc_video_source12handle_frameENSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::rtc_video_source::handle_frame__std::unique_ptr:video_frame:"></span><span class="target" id="classdolbyio_1_1comms_1_1rtc__video__source_1af6e915658e4be7102b58c16ae5c82b05"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../recording/raw_video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16rtc_video_source12handle_frameENSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The callback that is invoked when a video frame is decoded and ready to be passed to WebRTC. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>frame</strong> – The pointer to the video frame. </p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-</dd></dl>
-
+  <section id="video">
+<span id="api-inject-video"></span><h1>Video<a class="headerlink" href="#video" title="Permalink to this heading"></a></h1>
+<p>For details about Video Injection please refer to <a class="reference internal" href="../sdk/video.html#vid-frame-handle"><span class="std std-ref">Video frame handling</span></a>. The application must create a <a class="reference internal" href="../sdk/video.html#_CPPv4N7dolbyio5comms12video_sourceE" title="dolbyio::comms::video_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code></a> and then provide it to the SDK using the
+<a class="reference internal" href="../sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Local</span> <span class="pre">Video</span> <span class="pre">Service</span> <span class="pre">Start</span></code></a> method.</p>
 <p>See <a class="reference internal" href="example.html#injection-example"><span class="std std-ref">Example Injector Implementation</span></a> for an example of child injection class for all possible media.</p>
 </section>
 
@@ -147,7 +96,7 @@ raw video frame is deleted once it has been encoded. The RTC Video Source expect
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="audio.html" class="btn btn-neutral float-left" title="Audio Source Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="audio.html" class="btn btn-neutral float-left" title="Audio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="example.html" class="btn btn-neutral float-right" title="Example Injector Implementation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

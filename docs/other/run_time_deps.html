@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Run Time Dependencies &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Run Time Dependencies &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -22,7 +22,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CoreSDK API" href="../api/coresdk.html" />
+    <link rel="next" title="Core API" href="../api/coresdk.html" />
     <link rel="prev" title="Supported Platforms" href="supported_platforms.html" /> 
 </head>
 
@@ -46,16 +46,24 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Run Time Dependencies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#macos-systems">MacOS Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#macos-systems">MacOS Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-event-loop">System Event Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#microphone-camera-permission">Microphone/Camera Permission</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#windows-systems">Windows Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Microphone/Camera Permission</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#linux-systems">Linux Systems</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pulseaudio-sound-server">PulseAudio Sound Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pulseaudio">PulseAudio</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../api/coresdk.html">CoreSDK API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/media_injection.html">Media Injection API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/coresdk.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/media_io.html">Media IO API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -86,25 +94,57 @@
 <span id="run-time-deps"></span><h1>Run Time Dependencies<a class="headerlink" href="#run-time-dependencies" title="Permalink to this heading"></a></h1>
 <section id="macos-systems">
 <h2>MacOS Systems<a class="headerlink" href="#macos-systems" title="Permalink to this heading"></a></h2>
-<p>Ensure that terminal has access to microphone.</p>
+<section id="system-event-loop">
+<h3>System Event Loop<a class="headerlink" href="#system-event-loop" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Ensure that the application has started its mainQueue. This must be done as any UI Rendering of Video Frames or receiving of AVCaptureDevice events relies on the existence of an active mainQueue.</p></li>
+<li><p>In our samples we enable the mainQueue to start processing events as follows (refer to <strong>share/dolbyio/comms/sample/utilities/ui_loop/macos_ui.mm</strong> for more details):</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">NSApp</span><span class="w"> </span><span class="n">run</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="microphone-camera-permission">
+<h3>Microphone/Camera Permission<a class="headerlink" href="#microphone-camera-permission" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Ensure that terminal has access to a microphone and a camera.</p></li>
+<li><p>If not provided, the SDK will request access when launching application; then make sure to grant permission.</p></li>
+<li><p>Failure to grant permissions will not allow the SDK to capture audio/video and send it into the conference.</p></li>
+</ul>
+</section>
+</section>
+<section id="windows-systems">
+<h2>Windows Systems<a class="headerlink" href="#windows-systems" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>Microphone/Camera Permission<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Ensure that terminal has access to a microphone and a camera.</p></li>
+<li><p>If not provided, the SDK will request access when launching application; then make sure to grant permission.</p></li>
+<li><p>Failure to grant permissions will not allow the SDK to capture audio/video and send it into the conference.</p></li>
+</ul>
+</section>
 </section>
 <section id="linux-systems">
 <h2>Linux Systems<a class="headerlink" href="#linux-systems" title="Permalink to this heading"></a></h2>
-<section id="pulseaudio-sound-server">
-<h3>PulseAudio Sound Server<a class="headerlink" href="#pulseaudio-sound-server" title="Permalink to this heading"></a></h3>
-<p>On Linux systems the C++ SDK needs access to the PulseAudio Sound Server in order to successfully initialize. Therefore prior to running the
-<a class="reference internal" href="getting_started.html#getting-started-server"><span class="std std-ref">Sample Application</span></a> make sure that the server has either system wide PulseAudio running or that an instance of PulseAudio is started by
-the same user who will run the sample application. Allowing the library access to the sound server.</p>
-<p>To check if you have pulseaudio installed you can run:</p>
+<section id="pulseaudio">
+<h3>PulseAudio<a class="headerlink" href="#pulseaudio" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>On Linux systems the C++ SDK needs access to the PulseAudio Sound Server in order to successfully initialize.</p></li>
+<li><p>Make sure that the Ubuntu has either system wide PulseAudio running or that an instance of PulseAudio is started by the same user who will run the application.</p></li>
+<li><p>To check if you have pulseaudio installed you can run:</p></li>
+</ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pulseaudio --version
 </pre></div>
 </div>
-<p>The Ubuntu server should already have pulseaudio installed, but if it accidentally does not run the following command. Note to use package manager you need to be super
-user.</p>
+<ul class="simple">
+<li><p>The Ubuntu machine should already have pulseaudio installed, but if it does not, run the following command. Please note, to use package manager you need to be super user.</p></li>
+</ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install pulseaudio
 </pre></div>
 </div>
-<p>When it is installed, starting pulseaudio for your user is done as follows:</p>
+<ul class="simple">
+<li><p>When it is installed, start pulseaudio for your user as follows:</p></li>
+</ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pulseaudio
 </pre></div>
 </div>
@@ -117,7 +157,7 @@ user.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="supported_platforms.html" class="btn btn-neutral float-left" title="Supported Platforms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api/coresdk.html" class="btn btn-neutral float-right" title="CoreSDK API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../api/coresdk.html" class="btn btn-neutral float-right" title="Core API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Device Management Service &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Device Management Service &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -22,7 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Default Media Recorder" href="recorder.html" />
+    <link rel="next" title="Asynchronous Operations" href="common/async_ops.html" />
     <link rel="prev" title="Video Service" href="video.html" /> 
 </head>
 
@@ -46,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">Core API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="sdk.html">Sdk Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="session.html">Session Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
@@ -58,8 +58,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#device-structs">Device Structs</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
@@ -67,8 +65,8 @@
 <li class="toctree-l2"><a class="reference internal" href="common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_io.html">Media IO API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -85,7 +83,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+          <li><a href="../coresdk.html">Core API</a> &raquo;</li>
       <li>Device Management Service</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/sdk/device_management.rst.txt" rel="nofollow"> View page source</a>
@@ -98,10 +96,6 @@
              
   <section id="device-management-service">
 <span id="api-device-management"></span><h1>Device Management Service<a class="headerlink" href="#device-management-service" title="Permalink to this heading"></a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The Device Management Service is intended for Client Applications.</p>
-</div>
 <p>Once the SDK is instantiated, applications have access to the device management service. Currently, this allows managing audio input and output devices. This service provides the ability to:</p>
 <blockquote>
 <div><ul class="simple">
@@ -125,7 +119,7 @@
 </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Device Management service is intended for Client applications.</p>
+<p>The Device Management service is not intended to be used when <a class="reference internal" href="../media_io.html#classdolbyio_1_1comms_1_1services_1_1media__io"><span class="std std-ref">media_io</span></a> service is being used as the Media IO Service implies using external media sources..</p>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
@@ -148,7 +142,7 @@
 <span class="w">    </span><span class="c1">// device is now set</span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
@@ -173,10 +167,10 @@
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">set_preferred_output_audio_device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// device is now set</span>
+<span class="w">    </span><span class="c1">// Device is now set</span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
@@ -191,8 +185,7 @@
 <dd><p>Gets a list of the currently available audio devices in the system. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The result object producing a vector containing the audio devices asynchronously. <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait device to be set</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_audio_devices</span><span class="p">());</span><span class="w"></span>
+<dd class="field-odd"><p>The result object producing a vector containing the audio devices asynchronously. <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_audio_devices</span><span class="p">());</span><span class="w"></span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
@@ -201,7 +194,7 @@
 <span class="w">    </span><span class="c1">// devices are now available</span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
@@ -224,10 +217,10 @@
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_audio_input_device</span><span class="p">()</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">dvc_device</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// devices are now available</span>
+<span class="w">    </span><span class="c1">// Devices are now available</span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// currently no audio input device set</span>
+<span class="w">    </span><span class="c1">// Currently no audio input device set</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
@@ -250,10 +243,10 @@
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_audio_output_device</span><span class="p">()</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">dvc_device</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// current output device now available</span>
+<span class="w">    </span><span class="c1">// Current output device now available</span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// currently no audio input device set</span>
+<span class="w">    </span><span class="c1">// Currently no audio input device set</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
@@ -263,33 +256,83 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI12device_addedE">
-<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI12device_addedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI12device_addedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:device_added:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1aa83dd1e7ef54f75faf0c769eed1f140b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms12device_addedE" title="dolbyio::comms::device_added"><span class="n"><span class="pre">device_added</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI12device_addedE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1device__added"><span class="std std-ref">device_added</span></a> events. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17get_video_devicesEv">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17get_video_devicesEv"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17get_video_devicesEv"></span><span id="dolbyio::comms::services::device_management::get_video_devices"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a60159570be788091bc16223c4c330778"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">camera_device</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_video_devices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17get_video_devicesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets a list of the currently available video devices in the system. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing a vector containing the audio devices asynchronously. <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_video_devices</span><span class="p">());</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_video_devices</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">camera_device</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Devices are now available</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management24get_current_video_deviceEv">
+<span id="_CPPv3N7dolbyio5comms8services17device_management24get_current_video_deviceEv"></span><span id="_CPPv2N7dolbyio5comms8services17device_management24get_current_video_deviceEv"></span><span id="dolbyio::comms::services::device_management::get_current_video_device"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1ab730d617aabb32970500e625bd8d7c33"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">camera_device</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_current_video_device</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management24get_current_video_deviceEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the video device currently used by the system. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result object producing the audio device asynchronously. <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> fails if no audio output device is set. <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait device to be set</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_video_device</span><span class="p">());</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_video_device</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">camera_device</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Current output device now available</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Currently no audio input device set</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18audio_device_addedE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18audio_device_addedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18audio_device_addedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:audio_device_added:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1aae85f55dcb100acafad73bc1a3991a5d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_device_addedE" title="dolbyio::comms::audio_device_added"><span class="n"><span class="pre">audio_device_added</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18audio_device_addedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__added"><span class="std std-ref">audio_device_added</span></a> events. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">})));</span><span class="w"></span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">}))</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span><span class="w"></span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when an audio device is added to the system.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when an audio device is added to the system.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
@@ -298,33 +341,33 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_removedE">
-<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_removedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_removedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:device_removed:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a968c4584e3e2ad3b244710a63a7cae76"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms14device_removedE" title="dolbyio::comms::device_removed"><span class="n"><span class="pre">device_removed</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_removedE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1device__removed"><span class="std std-ref">device_removed</span></a> events. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_removedE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_removedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_removedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:audio_device_removed:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1ad12383e8e4886df30aeb11e7bd1864c8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms20audio_device_removedE" title="dolbyio::comms::audio_device_removed"><span class="n"><span class="pre">audio_device_removed</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_removedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__removed"><span class="std std-ref">audio_device_removed</span></a> events. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">})));</span><span class="w"></span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">}))</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span><span class="w"></span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when an audio device is removed from the system.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when an audio device is removed from the system.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
@@ -333,33 +376,33 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_changedE">
-<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_changedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_changedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:device_changed:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a92eb8c8344e06a66798432627b25b018"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms14device_changedE" title="dolbyio::comms::device_changed"><span class="n"><span class="pre">device_changed</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI14device_changedE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1device__changed"><span class="std std-ref">device_changed</span></a> events. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_changedE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_changedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_changedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:audio_device_changed:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a6db9e30b84bbc7dee608810b4f01ce18"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms20audio_device_changedE" title="dolbyio::comms::audio_device_changed"><span class="n"><span class="pre">audio_device_changed</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20audio_device_changedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__changed"><span class="std std-ref">audio_device_changed</span></a> events. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">})));</span><span class="w"></span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">}))</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span><span class="w"></span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a <a class="reference internal" href="#structdolbyio_1_1comms_1_1device__changed"><span class="std std-ref">device_changed</span></a> event occurs.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when a <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__changed"><span class="std std-ref">audio_device_changed</span></a> event occurs.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
@@ -368,33 +411,117 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI22device_timeout_failureE">
-<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI22device_timeout_failureE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI22device_timeout_failureE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:device_timeout_failure:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a03fa176c8cda0dc492eaa64f58aa5563"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">device_timeout_failure</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI22device_timeout_failureE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Adds a listener for the device_timeout_failure events. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18video_device_addedE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18video_device_addedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18video_device_addedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:video_device_added:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1af6bc390eed4f253a7cd1a3cf90f383d6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">video_device_added</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18video_device_addedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the video_device_added events. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_timeout_failure</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">})));</span><span class="w"></span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">device_timeout_failure</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">}))</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span><span class="w"></span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a device_timeout_failure event occurs.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when an video device is added to the system.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_removedE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_removedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_removedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:video_device_removed:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a10748b9461960ee4cf6517f086820ec4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">video_device_removed</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_removedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the video_device_removed events. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+<span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
+<span class="w">  </span><span class="p">})));</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
+<span class="w">  </span><span class="p">}))</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when an video device is removed from the system.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_changedE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_changedE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_changedE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:video_device_changed:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a105e18f01362fc7bf007e54aa6c30420"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">video_device_changed</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI20video_device_changedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the video_device_changed events. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when an video device is removed from the system.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:audio_device_timeout_failure:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a1b87e0d26e1a0707c31e4e566f1dc956"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">audio_device_timeout_failure</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the audio_device_timeout_failure events. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+<span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_timeout_failure</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
+<span class="w">  </span><span class="p">})));</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_timeout_failure</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Process the event</span>
+<span class="w">  </span><span class="p">}))</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when a audio_device_timeout_failure event occurs.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
@@ -409,16 +536,16 @@
 <section id="device-events">
 <h2>Device Events<a class="headerlink" href="#device-events" title="Permalink to this heading"></a></h2>
 <p>The <a class="reference internal" href="#api-device-management"><span class="std std-ref">Device Management Service</span></a> events that are emitted by the SDK. They can be subscribed to using the
-<a class="reference internal" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI12device_addedE" title="dolbyio::comms::services::device_management::add_event_handler"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">device_management::add_event_handler</span></code></a> methods.</p>
+<a class="reference internal" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18audio_device_addedE" title="dolbyio::comms::services::device_management::add_event_handler"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">device_management::add_event_handler</span></code></a> methods.</p>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12device_addedE">
-<span id="_CPPv3N7dolbyio5comms12device_addedE"></span><span id="_CPPv2N7dolbyio5comms12device_addedE"></span><span id="dolbyio::comms::device_added"></span><span class="target" id="structdolbyio_1_1comms_1_1device__added"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">device_added</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12device_addedE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_device_addedE">
+<span id="_CPPv3N7dolbyio5comms18audio_device_addedE"></span><span id="_CPPv2N7dolbyio5comms18audio_device_addedE"></span><span id="dolbyio::comms::audio_device_added"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__added"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_device_added</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_device_addedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Emitted when a new audio device is added to the system. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12device_added6deviceE">
-<span id="_CPPv3N7dolbyio5comms12device_added6deviceE"></span><span id="_CPPv2N7dolbyio5comms12device_added6deviceE"></span><span id="dolbyio::comms::device_added::device__dvc_device"></span><span class="target" id="structdolbyio_1_1comms_1_1device__added_1ac0596f56d67cd1ae95085bd4b0a3f648"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_deviceE" title="dolbyio::comms::dvc_device"><span class="n"><span class="pre">dvc_device</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12device_added6deviceE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_device_added6deviceE">
+<span id="_CPPv3N7dolbyio5comms18audio_device_added6deviceE"></span><span id="_CPPv2N7dolbyio5comms18audio_device_added6deviceE"></span><span id="dolbyio::comms::audio_device_added::device__dvc_device"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__added_1a29212e7cdb478afb6f03b7abae0be5ca"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_deviceE" title="dolbyio::comms::dvc_device"><span class="n"><span class="pre">dvc_device</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_device_added6deviceE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The device that was added. </p>
 </dd></dl>
 
@@ -426,14 +553,14 @@
 </dd></dl>
 
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14device_removedE">
-<span id="_CPPv3N7dolbyio5comms14device_removedE"></span><span id="_CPPv2N7dolbyio5comms14device_removedE"></span><span id="dolbyio::comms::device_removed"></span><span class="target" id="structdolbyio_1_1comms_1_1device__removed"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">device_removed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14device_removedE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20audio_device_removedE">
+<span id="_CPPv3N7dolbyio5comms20audio_device_removedE"></span><span id="_CPPv2N7dolbyio5comms20audio_device_removedE"></span><span id="dolbyio::comms::audio_device_removed"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__removed"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_device_removed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20audio_device_removedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Emitted when an audio device is removed from the system. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14device_removed3uidE">
-<span id="_CPPv3N7dolbyio5comms14device_removed3uidE"></span><span id="_CPPv2N7dolbyio5comms14device_removed3uidE"></span><span id="dolbyio::comms::device_removed::uid__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1device__removed_1ab6c6bead8617deef6bb6b8faf98baffb"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uid</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14device_removed3uidE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20audio_device_removed3uidE">
+<span id="_CPPv3N7dolbyio5comms20audio_device_removed3uidE"></span><span id="_CPPv2N7dolbyio5comms20audio_device_removed3uidE"></span><span id="dolbyio::comms::audio_device_removed::uid__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__removed_1a0a98c7980c216e735421b29a160354c0"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uid</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20audio_device_removed3uidE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Unique id belonging to the removed device. </p>
 </dd></dl>
 
@@ -441,26 +568,26 @@
 </dd></dl>
 
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14device_changedE">
-<span id="_CPPv3N7dolbyio5comms14device_changedE"></span><span id="_CPPv2N7dolbyio5comms14device_changedE"></span><span id="dolbyio::comms::device_changed"></span><span class="target" id="structdolbyio_1_1comms_1_1device__changed"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">device_changed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14device_changedE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20audio_device_changedE">
+<span id="_CPPv3N7dolbyio5comms20audio_device_changedE"></span><span id="_CPPv2N7dolbyio5comms20audio_device_changedE"></span><span id="dolbyio::comms::audio_device_changed"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__changed"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_device_changed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20audio_device_changedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Emitted when the current audio device has changed. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14device_changed6deviceE">
-<span id="_CPPv3N7dolbyio5comms14device_changed6deviceE"></span><span id="_CPPv2N7dolbyio5comms14device_changed6deviceE"></span><span id="dolbyio::comms::device_changed::device__dvc_device"></span><span class="target" id="structdolbyio_1_1comms_1_1device__changed_1a4a54205a8e858eae9b96e862fb7dae5b"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_deviceE" title="dolbyio::comms::dvc_device"><span class="n"><span class="pre">dvc_device</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14device_changed6deviceE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20audio_device_changed6deviceE">
+<span id="_CPPv3N7dolbyio5comms20audio_device_changed6deviceE"></span><span id="_CPPv2N7dolbyio5comms20audio_device_changed6deviceE"></span><span id="dolbyio::comms::audio_device_changed::device__dvc_device"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__changed_1a0912a94b1b2447e8c9b3988e98b7803d"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_deviceE" title="dolbyio::comms::dvc_device"><span class="n"><span class="pre">dvc_device</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20audio_device_changed6deviceE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The new current device if no device is false. </p>
 </dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14device_changed9no_deviceE">
-<span id="_CPPv3N7dolbyio5comms14device_changed9no_deviceE"></span><span id="_CPPv2N7dolbyio5comms14device_changed9no_deviceE"></span><span id="dolbyio::comms::device_changed::no_device__b"></span><span class="target" id="structdolbyio_1_1comms_1_1device__changed_1a1bcf886bc43c1ad26961e351ad560e9b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">no_device</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14device_changed9no_deviceE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20audio_device_changed9no_deviceE">
+<span id="_CPPv3N7dolbyio5comms20audio_device_changed9no_deviceE"></span><span id="_CPPv2N7dolbyio5comms20audio_device_changed9no_deviceE"></span><span id="dolbyio::comms::audio_device_changed::no_device__b"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__changed_1a97d4f7ebd4e2141454cdd2e27276e1fb"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">no_device</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20audio_device_changed9no_deviceE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Flag indicating whether there is a device in use for the current direction. True means no device currently in use, false means device available. </p>
 </dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms14device_changed18utilized_directionE">
-<span id="_CPPv3N7dolbyio5comms14device_changed18utilized_directionE"></span><span id="_CPPv2N7dolbyio5comms14device_changed18utilized_directionE"></span><span id="dolbyio::comms::device_changed::utilized_direction__dvc_device::direction"></span><span class="target" id="structdolbyio_1_1comms_1_1device__changed_1a03588cff7a6b60771c052f6c2c7cdbf0"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_deviceE" title="dolbyio::comms::dvc_device"><span class="n"><span class="pre">dvc_device</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_device9directionE" title="dolbyio::comms::dvc_device::direction"><span class="n"><span class="pre">direction</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">utilized_direction</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms14device_changed18utilized_directionE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20audio_device_changed18utilized_directionE">
+<span id="_CPPv3N7dolbyio5comms20audio_device_changed18utilized_directionE"></span><span id="_CPPv2N7dolbyio5comms20audio_device_changed18utilized_directionE"></span><span id="dolbyio::comms::audio_device_changed::utilized_direction__dvc_device::direction"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__device__changed_1a5e8ac4089f3909a25aa834d47f592534"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_deviceE" title="dolbyio::comms::dvc_device"><span class="n"><span class="pre">dvc_device</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10dvc_device9directionE" title="dolbyio::comms::dvc_device::direction"><span class="n"><span class="pre">direction</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">utilized_direction</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms20audio_device_changed18utilized_directionE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>If the new device has the capability to be both an input and output device, this field indicates the direction (input or output) for which the device is being used. </p>
 </dd></dl>
 
@@ -725,7 +852,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="video.html" class="btn btn-neutral float-left" title="Video Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="recorder.html" class="btn btn-neutral float-right" title="Default Media Recorder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="common/async_ops.html" class="btn btn-neutral float-right" title="Asynchronous Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

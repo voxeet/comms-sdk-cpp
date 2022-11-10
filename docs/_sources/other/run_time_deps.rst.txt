@@ -5,34 +5,51 @@ Run Time Dependencies
 
 MacOS Systems
 -------------
-Ensure that terminal has access to microphone.
 
+System Event Loop
+_________________
+- Ensure that the application has started its mainQueue. This must be done as any UI Rendering of Video Frames or receiving of AVCaptureDevice events relies on the existence of an active mainQueue.
+- In our samples we enable the mainQueue to start processing events as follows (refer to **share/dolbyio/comms/sample/utilities/ui_loop/macos_ui.mm** for more details): 
+
+.. code-block:: c++
+
+	[NSApp run]
+
+Microphone/Camera Permission
+_____________________________
+- Ensure that terminal has access to a microphone and a camera.
+- If not provided, the SDK will request access when launching application; then make sure to grant permission.
+- Failure to grant permissions will not allow the SDK to capture audio/video and send it into the conference.
+
+Windows Systems
+---------------
+
+Microphone/Camera Permission
+_____________________________
+- Ensure that terminal has access to a microphone and a camera.
+- If not provided, the SDK will request access when launching application; then make sure to grant permission.
+- Failure to grant permissions will not allow the SDK to capture audio/video and send it into the conference.
 
 Linux Systems
 -------------
 
-PulseAudio Sound Server
-_______________________
-On Linux systems the C++ SDK needs access to the PulseAudio Sound Server in order to successfully initialize. Therefore prior to running the
-:ref:`Sample Application <getting_started_server>` make sure that the server has either system wide PulseAudio running or that an instance of PulseAudio is started by 
-the same user who will run the sample application. Allowing the library access to the sound server.
-
-To check if you have pulseaudio installed you can run:
+PulseAudio 
+__________
+- On Linux systems the C++ SDK needs access to the PulseAudio Sound Server in order to successfully initialize. 
+- Make sure that the Ubuntu has either system wide PulseAudio running or that an instance of PulseAudio is started by the same user who will run the application.
+- To check if you have pulseaudio installed you can run:
 
 .. code-block:: console
 
         $ pulseaudio --version
 
-
-The Ubuntu server should already have pulseaudio installed, but if it accidentally does not run the following command. Note to use package manager you need to be super
-user.
+- The Ubuntu machine should already have pulseaudio installed, but if it does not, run the following command. Please note, to use package manager you need to be super user.
 
 .. code-block:: console
 
         $ sudo apt-get install pulseaudio
 
-
-When it is installed, starting pulseaudio for your user is done as follows:
+- When it is installed, start pulseaudio for your user as follows:
 
 .. code-block:: console
 

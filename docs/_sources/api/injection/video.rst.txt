@@ -1,22 +1,8 @@
 .. _api_inject_video:
 
-Video Source Interface
-========================
-#include <dolbyio/comms/media/media_engine.h>
-
-The interface through which raw video frames are provided to the CoreSDK. Application writers who want to implement this source must override the two virtual functions of :cpp:func:`registering <dolbyio::comms::video_source::register_video_frame_rtc_source>` and cpp:func:`deregistering <dolbyio::comms::video_source::deregister_video_frame_rtc_source>` the RTC Video Source on the Injector. When a 
-VideoTrack is successfully added to an active PeerConnection, these virtual functions are invoked to provide/remove the reference to the RTC Video Source. Attaching the RTC Video source to the 
-injector establishes the video pipeline so that frames can be passed to Webrtc.
-
-.. doxygenclass:: dolbyio::comms::video_source
-        :project: C++ SDK
-
-
-The RTC Video Source is NOT to be implemented by the application. This is the interface through which the injector can view its own Video Sink. After receiving video frames from some media source, the
-injector provides the raw video frames to this RTC Video Source. The RTC Video Source then pushes the frame buffers along the video pipeline until they are injected into the conference. The 
-raw video frame is deleted once it has been encoded. The RTC Video Source expects :cpp:class:`video frames <dolbyio::comms::video_frame>`.
-
-.. doxygenclass:: dolbyio::comms::rtc_video_source
-	:project: C++ SDK
+Video
+=====
+For details about Video Injection please refer to :ref:`vid_frame_handle`. The application must create a :cpp:class:`Video Source <dolbyio::comms::video_source>` and then provide it to the SDK using the 
+:cpp:func:`Local Video Service Start <dolbyio::comms::services::local_video::start>` method.
 
 See :ref:`injection_example` for an example of child injection class for all possible media.

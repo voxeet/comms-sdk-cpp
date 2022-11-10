@@ -1,13 +1,14 @@
 .. _api_inject_audio:
 
-Audio Source Interface
-========================
+Audio
+=====
 #include <dolbyio/comms/media/media_engine.h>
 
 The interface through which raw audio frames are provided to the CoreSDK. This audio source must provide signed 16 bit PCM data in 10ms chunks at 10ms intervals. Application writers who want to 
 implement this source must override the two virtual functions of :cpp:func:`registering <dolbyio::comms::audio_source::register_audio_frame_rtc_source>` and 
 :cpp:func:`deregistering <dolbyio::comms::audio_source::deregister_audio_frame_rtc_source>` the RTC Audio Source on the Injector. Attaching the RTC Audio source to the injector establishes the audio
-pipeline so that frames can be passed to the CoreSDK.
+pipeline so that frames can be passed to the CoreSDK. The :cpp:class:`Audio Source <dolbyio::comms::audio_source>` must be provided to the SDK using the :cpp:func:`Set Audio Source <dolbyio::comms::services::media_io::set_audio_source>` method and this
+must be done before starting a Conference.
 
 .. doxygenclass:: dolbyio::comms::audio_source
         :project: C++ SDK

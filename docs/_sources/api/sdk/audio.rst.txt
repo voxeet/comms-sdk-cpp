@@ -2,8 +2,9 @@
 
 Audio Service
 ==============
+
 .. note::
-  The Audio Service is available in SDK versions 2.1.0 and later. Prior to 2.1.0 the methods were part of the :cpp:func:`Conference Service<dolbyio::comms::services::conference::start_audio>`. 
+  The Audio Service is considered to be in Beta phase on Linux systems.
 
 The Audio Service allows enabling and disabling audio for the local and remote participants, as well as configuring audio capture modes.
 

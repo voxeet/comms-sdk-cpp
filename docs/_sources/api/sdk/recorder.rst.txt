@@ -4,7 +4,7 @@ Default Media Recorder
 ============================
 
 .. note::
-  The Default Media Recorder is intended for Server applications.
+  The Default Media Recorder is considered to be in Beta phase on MacOS and Windows systems.
 
 The default recorder handles the incoming media streams and stores the streams in proper containers. The following table lists containers used for respective codecs:
 
@@ -24,14 +24,18 @@ The default recorder handles the incoming media streams and stores the streams i
   | AAC   | Matroska |
   +-------+----------+
 
+.. note::
+
+	Recording of YUV frames is not supported on MacOS when the H264 codec is used in the conference. MacOS only supports dumping of Encoded Frames for H264. This restriction does not apply for VP8.
+
 The recorded files are placed in a directory specified when the default recorder is created. The files are stored with the respective container extension:
 
   * vid_X.mkv
   * vid_X.mpegts
   * audio_X.mkv
 
-Where X corresponds to a incrementing integer ID for the video/audio file. Information which file represents which streamer is available in the metadata.txt file in the same folder. When a new file is created, the video_first_data event occurs which contains the file name and
-the video track ID for the video in the file. This meta data file contains the processed scpp events and media pipeline events. The types of events logged and
+Where X corresponds to a incrementing integer ID for the video/audio file. Information regarding which file represents which streamer is available in the metadata.txt file in the same folder. When a new file is created, the video_first_data event occurs that contains the file name and
+the video track ID for the video in the file. This metadata file contains the processed scpp events and media pipeline events. The types of events logged and
 the structure of the corresponding lines for the events in the metadata.txt file are as follows:
 
 .. table::
@@ -58,7 +62,7 @@ the structure of the corresponding lines for the events in the metadata.txt file
   | Video Track First Data        |  <timestamp> track_first_data <track_id> <file_name>                   |
   +-------------------------------+------------------------------------------------------------------------+
 
-WebRTC may change the format in which RAW audio is presented to the audio track sinks. This may have severe impact on the raw (PCM) and transcoded (AAC) capture; when this situation occurs, a new file is created. The encoded video resolution change can be seamlessly muxed into the stream, but the raw (YUV) video resolution change can not. Therefore, selecting the YUV output causes the video frame size reconfigurations to open new files. In the case of encoded video capture, we could generate the file name for the stream at the time the stream is first discovered (the +video event), but for consistency the file name is also generated on the track first data event.
+WebRTC may change the format in which RAW audio is presented to the audio track sinks. This may have severe impact on the raw (PCM) and transcoded (AAC) capture; when this situation occurs, a new file is created. The encoded video resolution change can be seamlessly muxed into the stream, but the raw (YUV) video resolution change cannot. Therefore, selecting the YUV output causes the video frame size reconfigurations to open new files. In the case of encoded video capture, we could generate the file name for the stream at the time the stream is first discovered (the +video event), but for consistency the file name is also generated on the track first data event.
 
 
 .. _recorder:
@@ -67,7 +71,7 @@ Default Recorder Interface
 --------------------------
 #include <dolbyio/comms/multimedia_streaming/recorder.h>
 
-The Recorder interface is used for configuring the default recorder. The methods in the recorder interface are used to create and configure the recording module. This
+The recorder interface is used for configuring the default recorder. The methods in the recorder interface are used to create and configure the recording module. This
 creates and configures the recording module that is provided as a part of the C++ SDK. The enums of the interface are used for setting the Video/Audio storage formats of the media. If you want to build your own recorder module, do not use this API.
 
 .. doxygenclass:: dolbyio::comms::plugin::recorder

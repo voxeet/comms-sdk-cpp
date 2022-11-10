@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Audio Source Interface &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Audio &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Video Source Interface" href="video.html" />
-    <link rel="prev" title="Media Source Interface" href="media_source_interface.html" /> 
+    <link rel="next" title="Video" href="video.html" />
+    <link rel="prev" title="Media IO API" href="../media_io.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,15 +46,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../media_injection.html">Media Injection API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="media_source_interface.html">Media Source Interface</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Audio Source Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="video.html">Video Source Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html">Example Injector Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_io.html">Media IO API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../media_io.html#injection">Injection</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="video.html">Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example.html">Example Injector Implementation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../media_io.html#recording">Recording</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -71,8 +74,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_injection.html">Media Injection API</a> &raquo;</li>
-      <li>Audio Source Interface</li>
+          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
+      <li>Audio</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/injection/audio.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,13 +85,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="audio-source-interface">
-<span id="api-inject-audio"></span><h1>Audio Source Interface<a class="headerlink" href="#audio-source-interface" title="Permalink to this heading"></a></h1>
+  <section id="audio">
+<span id="api-inject-audio"></span><h1>Audio<a class="headerlink" href="#audio" title="Permalink to this heading"></a></h1>
 <p>#include &lt;dolbyio/comms/media/media_engine.h&gt;</p>
 <p>The interface through which raw audio frames are provided to the CoreSDK. This audio source must provide signed 16 bit PCM data in 10ms chunks at 10ms intervals. Application writers who want to
 implement this source must override the two virtual functions of <a class="reference internal" href="#_CPPv4N7dolbyio5comms12audio_source31register_audio_frame_rtc_sourceEP16rtc_audio_source" title="dolbyio::comms::audio_source::register_audio_frame_rtc_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">registering</span></code></a> and
 <a class="reference internal" href="#_CPPv4N7dolbyio5comms12audio_source33deregister_audio_frame_rtc_sourceEv" title="dolbyio::comms::audio_source::deregister_audio_frame_rtc_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">deregistering</span></code></a> the RTC Audio Source on the Injector. Attaching the RTC Audio source to the injector establishes the audio
-pipeline so that frames can be passed to the CoreSDK.</p>
+pipeline so that frames can be passed to the CoreSDK. The <a class="reference internal" href="#_CPPv4N7dolbyio5comms12audio_sourceE" title="dolbyio::comms::audio_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Audio</span> <span class="pre">Source</span></code></a> must be provided to the SDK using the <a class="reference internal" href="../media_io.html#_CPPv4N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source" title="dolbyio::comms::services::media_io::set_audio_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Audio</span> <span class="pre">Source</span></code></a> method and this
+must be done before starting a Conference.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12audio_sourceE">
 <span id="_CPPv3N7dolbyio5comms12audio_sourceE"></span><span id="_CPPv2N7dolbyio5comms12audio_sourceE"></span><span id="dolbyio::comms::audio_source"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12audio_sourceE" title="Permalink to this definition"></a><br /></dt>
@@ -130,7 +134,7 @@ The RTC Audio Source then pushes the audio data further down the audio pipeline 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t">
 <span id="_CPPv3N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t"></span><span id="_CPPv2N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t"></span><span id="dolbyio::comms::rtc_audio_source::on_data__voidCP.i.i.s.s"></span><span class="target" id="classdolbyio_1_1comms_1_1rtc__audio__source_1a985911b792b19676856af020262c9e22"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_data</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">audio_data</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bits_per_sample</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sample_rate</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">number_of_channels</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">number_of_frames</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16rtc_audio_source7on_dataEPKvii6size_t6size_t" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The callback that is invoked when 10ms of audio data is ready to be passed to webrtc. </p>
+<dd><p>The callback that is invoked when 10ms of audio data is ready to be passed to WebRTC. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -213,8 +217,8 @@ The RTC Audio Source then pushes the audio data further down the audio pipeline 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="media_source_interface.html" class="btn btn-neutral float-left" title="Media Source Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="video.html" class="btn btn-neutral float-right" title="Video Source Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../media_io.html" class="btn btn-neutral float-left" title="Media IO API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="video.html" class="btn btn-neutral float-right" title="Video" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

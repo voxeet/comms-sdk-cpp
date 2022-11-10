@@ -8,7 +8,7 @@ pipeline.
 
 The interfaces inherited by this custom_injector example must be implemented by any custom injector intended to inject video and audio frames to a conference.
 
-If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the :ref:`getting_started_server` section with the sample below.
+If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the :ref:`getting_started_sample` section with the sample below.
 The paths in this CMakeLists.txt are assuming that the file is located in the same place as in the Writing Application portion of the Getting Started.
 
 custom_injector.h

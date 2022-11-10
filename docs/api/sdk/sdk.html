@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sdk Interface &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Sdk Interface &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Session Service" href="session.html" />
-    <link rel="prev" title="CoreSDK API" href="../coresdk.html" /> 
+    <link rel="prev" title="Core API" href="../coresdk.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,15 +46,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">Core API</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Sdk Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="session.html">Session Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video.html">Video Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
@@ -62,8 +60,8 @@
 <li class="toctree-l2"><a class="reference internal" href="common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_io.html">Media IO API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -80,7 +78,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+          <li><a href="../coresdk.html">Core API</a> &raquo;</li>
       <li>Sdk Interface</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/sdk/sdk.rst.txt" rel="nofollow"> View page source</a>
@@ -97,7 +95,7 @@
 <dl class="simple">
 <dt>This interface is the starting point for the SDK. It exposes methods that allow initializing the SDK and accessing the underlying services. The basic steps to use the SDK are:</dt><dd><ol class="arabic simple">
 <li><p>Acquire the necessary Access Token from the application server. This is a mandatory step that allows using the SDK.</p></li>
-<li><p>Set a log level for the SDK <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk13set_log_levelE9log_level" title="dolbyio::comms::sdk::set_log_level"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::set_log_level</span></code></a>. For the possible log levels, see the <a class="reference internal" href="common/log_level.html#logging"><span class="std std-ref">Logging</span></a> enum.</p></li>
+<li><p>Set a log level for the SDK <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::set_log_level</span></code>. For the possible log levels, see the <a class="reference internal" href="common/log_level.html#api-log-level"><span class="std std-ref">Logging</span></a> enum.</p></li>
 <li><p>Create the SDK using <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk6createERKNSt6stringERRNSt8functionIFvNSt10unique_ptrI13refresh_tokenEEEEE" title="dolbyio::comms::sdk::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::create</span></code></a>. The create call needs to pass a valid access token in order to initialize the SDK. Wait for the return of the create call.</p></li>
 <li><p>Log in to the Dolby.io backend. For more information, see the <a class="reference internal" href="session.html#api-session"><span class="std std-ref">Session Service</span></a>.</p></li>
 <li><p>Retrieve a reference to <a class="reference internal" href="session.html#sess-serv"><span class="std std-ref">Session Interface</span></a> through <a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk7sessionEv" title="dolbyio::comms::sdk::session"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::session</span></code></a>.</p></li>
@@ -124,6 +122,21 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdkD0Ev">
 <span id="_CPPv3N7dolbyio5comms3sdkD0Ev"></span><span id="_CPPv2N7dolbyio5comms3sdkD0Ev"></span><span id="dolbyio::comms::sdk::~sdk"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a40c484173d2252b9921d94d0b8a7cece"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~sdk</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdkD0Ev" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The destructor that shuts down the SDK. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk8media_ioEv">
+<span id="_CPPv3N7dolbyio5comms3sdk8media_ioEv"></span><span id="_CPPv2N7dolbyio5comms3sdk8media_ioEv"></span><span id="dolbyio::comms::sdk::media_io"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a8ede82171b0f1547e47f683016d50422"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../media_io.html#_CPPv4N7dolbyio5comms8services8media_ioE" title="dolbyio::comms::services::media_io"><span class="n"><span class="pre">media_io</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">media_io</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk8media_ioEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Media IO Service accessor. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">conference_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>References to the servies::media_io service.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="cpp function">
@@ -200,27 +213,27 @@
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// The method invokes via wait blocks until it succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
 <span class="w">    </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">signalling_channel_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="p">})));</span><span class="w"></span>
 
 <span class="w"> </span><span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="w"> </span><span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
 <span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">signalling_channel_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when the WebSocket responsible for signaling detects a failure.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when the WebSocket responsible for signaling detects a failure.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
@@ -235,27 +248,27 @@
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// The method invokes via wait blocks until it succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
 <span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">invalid_token_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">})));</span><span class="w"></span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">add_event_handler</span><span class="p">(</span><span class="w"></span>
 <span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">invalid_token_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// process the event</span>
+<span class="w">    </span><span class="c1">// Process the event</span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">})</span><span class="w"></span>
 <span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
 <span class="w">  </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked in the case of using an invalid token.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked in the case of using an invalid token.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously.</p>
@@ -280,27 +293,6 @@ This method causes the global operators new and delete in the SDK to use the app
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>allocator</strong> – the allocator to be used in the SDK. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk13set_log_levelE9log_level">
-<span id="_CPPv3N7dolbyio5comms3sdk13set_log_levelE9log_level"></span><span id="_CPPv2N7dolbyio5comms3sdk13set_log_levelE9log_level"></span><span id="dolbyio::comms::sdk::set_log_level__log_level"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1ac6944a2463ab09bc337fca286719158f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_log_level</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk13set_log_levelE9log_level" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Sets the logging level. </p>
-<p><dl>
-<dt class="sig sig-object cpp">
-<em><span class="pre">Deprecated:</span></em></dt>
-<dd><p>Use set_log_settings instead. </p>
-</dd></dl>
-
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">::</span><span class="n">set_log_level</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">log_level</span><span class="o">::</span><span class="n">INFO</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
- </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>level</strong> – The log level to set.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -438,7 +430,7 @@ This method causes the global operators new and delete in the SDK to use the app
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../coresdk.html" class="btn btn-neutral float-left" title="CoreSDK API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../coresdk.html" class="btn btn-neutral float-left" title="Core API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="session.html" class="btn btn-neutral float-right" title="Session Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Encoded Video Sink Interface &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Encoded Video &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Raw Video Sink Interface" href="raw_video.html" />
-    <link rel="prev" title="Audio Sink Interface" href="audio.html" /> 
+    <link rel="next" title="Audio" href="audio.html" />
+    <link rel="prev" title="Raw Video" href="raw_video.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,17 +46,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../media_recording.html">Media Recording API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="media_sink_interface.html">Media Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Sink Interface</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Encoded Video Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="raw_video.html">Raw Video Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="events.html">Media Recording Events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_io.html">Media IO API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../media_io.html#injection">Injection</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../media_io.html#recording">Recording</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="raw_video.html">Raw Video</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Encoded Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Media Recording Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -73,8 +76,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_recording.html">Media Recording API</a> &raquo;</li>
-      <li>Encoded Video Sink Interface</li>
+          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
+      <li>Encoded Video</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/recording/encoded_video.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -84,16 +87,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="encoded-video-sink-interface">
-<span id="api-record-encoded"></span><h1>Encoded Video Sink Interface<a class="headerlink" href="#encoded-video-sink-interface" title="Permalink to this heading"></a></h1>
-<p>#include &lt;dolbyio/comms/media/media_engine.h&gt;</p>
+  <section id="encoded-video">
+<span id="api-record-encoded"></span><h1>Encoded Video<a class="headerlink" href="#encoded-video" title="Permalink to this heading"></a></h1>
+<p>#include &lt;dolbyio/comms/media_engine/media_engine.h&gt;</p>
 <p>The interface for handling encoded video frames. Application must set listeners which override both of the virtual functions. The
 <a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE" title="dolbyio::comms::video_sink_encoded::handle_frame_encoded"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">handle_frame_encoded</span></code></a> function is called after the RTP data is depacktized and an encoded frame
-is constructed. This function will be executed on the Webrtc DecodingQueue thread created for the track to which the encoded frames belong.</p>
+is constructed. This function will be executed on the Webrtc DecodingQueue thread created for the track to which the encoded frames belong. The Encoded Video Sink must be provided to the SDK using the
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Encoded</span> <span class="pre">Sink</span></code> function.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encodedE">
 <span id="_CPPv3N7dolbyio5comms18video_sink_encodedE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encodedE"></span><span id="dolbyio::comms::video_sink_encoded"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">video_sink_encoded</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The interface for receiving the encoded video frames. </p>
+<p>Subclassed by <a class="reference internal" href="../sdk/recorder.html#classdolbyio_1_1comms_1_1plugin_1_1recorder"><span class="std std-ref">dolbyio::comms::plugin::recorder</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
 <dl class="cpp enum">
@@ -104,13 +109,13 @@ is constructed. This function will be executed on the Webrtc DecodingQueue threa
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE">
 <span id="_CPPv3N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a1a12ed730277e07bdeb6b19b7d522c09a59f0b5afe649ae9eaf8350d0af9ddb71"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">full_decoding</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config13full_decodingE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The decoder will decode every single frame. </p>
+<dd><p>The decoder will decode every single frame. In this case applications can connect both a <a class="reference internal" href="../sdk/video.html#classdolbyio_1_1comms_1_1video__sink"><span class="std std-ref">video_sink</span></a> and a <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__sink__encoded"><span class="std std-ref">video_sink_encoded</span></a> to recieve video streams. This allows them to both dump video to file and render it on screen for instance. </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE">
 <span id="_CPPv3N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a1a12ed730277e07bdeb6b19b7d522c09a8d29e67aba1633407df2512468460548"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">optimized_decoding</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_config18optimized_decodingE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The decoder will only decode the first frame. </p>
+<dd><p>The decoder will only decode the first frame. In this case applications will not receive any decoded video frames if they set a <a class="reference internal" href="../sdk/video.html#classdolbyio_1_1comms_1_1video__sink"><span class="std std-ref">video_sink</span></a>. This decoder configuration greatly optimized CPU load by not decoding every frame but is useful for applications which only want to dump encoded video to file. </p>
 </dd></dl>
 
 </dd></dl>
@@ -139,8 +144,19 @@ is constructed. This function will be executed on the Webrtc DecodingQueue threa
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_sink_encoded21decoder_configurationEv">
+<span id="_CPPv3NK7dolbyio5comms18video_sink_encoded21decoder_configurationEv"></span><span id="_CPPv2NK7dolbyio5comms18video_sink_encoded21decoder_configurationEv"></span><span id="dolbyio::comms::video_sink_encoded::decoder_configurationC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a4b3c08a7622d867e3c4c0bd26c0da330"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_sink_encoded14decoder_configE" title="dolbyio::comms::video_sink_encoded::decoder_config"><span class="n"><span class="pre">decoder_config</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">decoder_configuration</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18video_sink_encoded21decoder_configurationEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The callback that is invoked to check the set decoder configuration. This allows the SDK to check if optimized decoding has been configured, if optimized decoding is set then the decoder will only decode the first frame. This means that applications can only connect an encoded video sink. When using full_decoding an application can connect a <a class="reference internal" href="../sdk/video.html#classdolbyio_1_1comms_1_1video__sink"><span class="std std-ref">video_sink</span></a> and an <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__sink__encoded"><span class="std std-ref">video_sink_encoded</span></a> so it can render video frames and also dump them to file for instance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The desired decoder configuration for the Encoded Video Sink. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE">
-<span id="_CPPv3N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE"></span><span id="dolbyio::comms::video_sink_encoded::handle_frame_encoded__ssCR.std::unique_ptr:encoded_video_frame:"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a0d33ded11ce3737c8b4b48d44a4f1942"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_frame_encoded</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">track_id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">encoded_video_frame</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE"></span><span id="_CPPv2N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE"></span><span id="dolbyio::comms::video_sink_encoded::handle_frame_encoded__ssCR.std::unique_ptr:encoded_video_frame:"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink__encoded_1a0d33ded11ce3737c8b4b48d44a4f1942"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_frame_encoded</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">track_id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19encoded_video_frameE" title="dolbyio::comms::encoded_video_frame"><span class="n"><span class="pre">encoded_video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_sink_encoded20handle_frame_encodedERKNSt6stringENSt10unique_ptrI19encoded_video_frameEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The callback that is invoked when a new encoded video frame is ready to be processed. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -155,6 +171,75 @@ is constructed. This function will be executed on the Webrtc DecodingQueue threa
 </div>
 </dd></dl>
 
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19encoded_video_frameE">
+<span id="_CPPv3N7dolbyio5comms19encoded_video_frameE"></span><span id="_CPPv2N7dolbyio5comms19encoded_video_frameE"></span><span id="dolbyio::comms::encoded_video_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1encoded__video__frame"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">encoded_video_frame</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19encoded_video_frameE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface that wraps encoded video frames received from the conference. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19encoded_video_frameD0Ev">
+<span id="_CPPv3N7dolbyio5comms19encoded_video_frameD0Ev"></span><span id="_CPPv2N7dolbyio5comms19encoded_video_frameD0Ev"></span><span id="dolbyio::comms::encoded_video_frame::~encoded_video_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1encoded__video__frame_1a0b835a39d0a89199e2c2d3707e893b2a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~encoded_video_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19encoded_video_frameD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms19encoded_video_frame4dataEv">
+<span id="_CPPv3NK7dolbyio5comms19encoded_video_frame4dataEv"></span><span id="_CPPv2NK7dolbyio5comms19encoded_video_frame4dataEv"></span><span id="dolbyio::comms::encoded_video_frame::dataC"></span><span class="target" id="classdolbyio_1_1comms_1_1encoded__video__frame_1acb7cfb056b114a0b4221ae2e9eb88d71"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms19encoded_video_frame4dataEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns the binary data containing the frame payload. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The non-null pointer to the payload data. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms19encoded_video_frame4sizeEv">
+<span id="_CPPv3NK7dolbyio5comms19encoded_video_frame4sizeEv"></span><span id="_CPPv2NK7dolbyio5comms19encoded_video_frame4sizeEv"></span><span id="dolbyio::comms::encoded_video_frame::sizeC"></span><span class="target" id="classdolbyio_1_1comms_1_1encoded__video__frame_1ae4c30c02c644259d4975375d3b8e7977"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms19encoded_video_frame4sizeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns the size of the payload. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The size of the payload in bytes. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms19encoded_video_frame5widthEv">
+<span id="_CPPv3NK7dolbyio5comms19encoded_video_frame5widthEv"></span><span id="_CPPv2NK7dolbyio5comms19encoded_video_frame5widthEv"></span><span id="dolbyio::comms::encoded_video_frame::widthC"></span><span class="target" id="classdolbyio_1_1comms_1_1encoded__video__frame_1abc1bd1845ced5e0d2116ac88510470a2"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms19encoded_video_frame5widthEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the width of the frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The width of the frame. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms19encoded_video_frame6heightEv">
+<span id="_CPPv3NK7dolbyio5comms19encoded_video_frame6heightEv"></span><span id="_CPPv2NK7dolbyio5comms19encoded_video_frame6heightEv"></span><span id="dolbyio::comms::encoded_video_frame::heightC"></span><span class="target" id="classdolbyio_1_1comms_1_1encoded__video__frame_1afc615b0367447cf5a66e90943f8931a2"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms19encoded_video_frame6heightEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the height of the video frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The height of the frame. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms19encoded_video_frame11is_keyframeEv">
+<span id="_CPPv3NK7dolbyio5comms19encoded_video_frame11is_keyframeEv"></span><span id="_CPPv2NK7dolbyio5comms19encoded_video_frame11is_keyframeEv"></span><span id="dolbyio::comms::encoded_video_frame::is_keyframeC"></span><span class="target" id="classdolbyio_1_1comms_1_1encoded__video__frame_1aaaf5611e3a940e20ee96351b18beed50"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_keyframe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms19encoded_video_frame11is_keyframeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Checks if the frame is a key frame. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if keyframe, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <p>See <a class="reference internal" href="example.html#recording-example"><span class="std std-ref">Example Recorder Implementation</span></a> for a template for child recording class for all possible media.</p>
 </section>
 
@@ -162,8 +247,8 @@ is constructed. This function will be executed on the Webrtc DecodingQueue threa
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="audio.html" class="btn btn-neutral float-left" title="Audio Sink Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="raw_video.html" class="btn btn-neutral float-right" title="Raw Video Sink Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="raw_video.html" class="btn btn-neutral float-left" title="Raw Video" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="audio.html" class="btn btn-neutral float-right" title="Audio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

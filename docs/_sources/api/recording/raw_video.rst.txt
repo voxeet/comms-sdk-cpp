@@ -1,18 +1,9 @@
 .. _api_record_raw:
 
-Raw Video Sink Interface
-========================
-#include <dolbyio/comms/media/media_engine.h>
+Raw Video 
+=========
+#include <dolbyio/comms/media_engine/media_engine.h>
 
-The interface for handling decoded video frames. Application must set listener which overrides the virtual function. The 
-:cpp:func:`handle_frame <dolbyio::comms::video_sink_yuv::handle_frame>` function is called after the Webrtc Decoder has decoded the frame and will provide the 
-decoded data wrapped in the :cpp:class:`frame <dolbyio::comms::frame>` object. The frame class wraps the decoded video frame and essentailly just provides interface 
-to extract the underlying YUV data.
-
-.. doxygenclass:: dolbyio::comms::video_sink_yuv
-        :project: C++ SDK
-
-.. doxygenclass:: dolbyio::comms::video_frame 
-        :project: C++ SDK
+For details about Raw Video Recording an application must implement a :cpp:class:`Video Sink <dolbyio::comms::video_sink>` to receive the frames and provide this Video Sink to the SDK using the :cpp:class:`Remote Video Service <dolbyio::comms::services::remote_video>`.
 
 See :ref:`recording_example` for a template for child recording class for all possible media.

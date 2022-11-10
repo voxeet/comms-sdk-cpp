@@ -1,14 +1,13 @@
  .. _coresdk_api:
 
-CoreSDK API
-___________
-The main part of the Dolby.io Communications C++ SDK is the Core SDK that is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as
+Core API
+--------
+The main part of the Dolby.io Communications C++ SDK, refered to as Core API, is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as
 creating sessions, joining conferences, receiving Websocket events, sending/receiving messages, receiving WebRTC media streams, managing audio devices and leaving conferences.
 The SDK also provides the ability to configure the default Audio/Video recorder to handle and store the incoming media streams in desired formats.
 The SDK provides the ability to create a default Audio/Video injector to which the application can provide raw media frames that will
 then be injected into the conference. The SDK also provides the ability to set spatial locations of participants' audio and participate in a shared spatial scene within a conference.
-The :ref:`api_sdk`, :ref:`api_session`, :ref:`api_conference`, :ref:`api_device_management`, :ref:`api_audio_service`, :ref:`api_video_service`, :ref:`api_recorder`, :ref:`default_injector`
-sections are the core of the user interface to the CoreSDK.
+The :ref:`api_sdk`, :ref:`api_session`, :ref:`api_conference`, :ref:`api_device_management`, :ref:`api_audio_service`, :ref:`api_video_service` sections are the core of the user interface to the CoreSDK.
 
 .. toctree::
   :maxdepth: 2
@@ -21,8 +20,6 @@ sections are the core of the user interface to the CoreSDK.
   sdk/audio.rst
   sdk/video.rst
   sdk/device_management.rst
-  sdk/recorder.rst
-  sdk/injector.rst
   sdk/common/async_ops.rst
   sdk/common/log_level.rst
   sdk/common/exception.rst

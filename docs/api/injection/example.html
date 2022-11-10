@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example Injector Implementation &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Example Injector Implementation &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -22,7 +22,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Video Source Interface" href="video.html" /> 
+    <link rel="next" title="Raw Video" href="../recording/raw_video.html" />
+    <link rel="prev" title="Video" href="video.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,21 +46,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../media_injection.html">Media Injection API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="media_source_interface.html">Media Source Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Source Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="video.html">Video Source Interface</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Example Injector Implementation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#custom-injector-h">custom_injector.h</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#custom-injector-cc">custom_injector.cc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#main-cc">main.cc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#injector-cmakelists-txt">Injector CMakeLists.txt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_io.html">Media IO API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../media_io.html#injection">Injection</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="video.html">Video</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Example Injector Implementation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-injector-h">custom_injector.h</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-injector-cc">custom_injector.cc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#main-cc">main.cc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#injector-cmakelists-txt">Injector CMakeLists.txt</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../media_io.html#recording">Recording</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -76,7 +80,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_injection.html">Media Injection API</a> &raquo;</li>
+          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
       <li>Example Injector Implementation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/injection/example.rst.txt" rel="nofollow"> View page source</a>
@@ -90,10 +94,10 @@
   <section id="example-injector-implementation">
 <span id="injection-example"></span><h1>Example Injector Implementation<a class="headerlink" href="#example-injector-implementation" title="Permalink to this heading"></a></h1>
 <p>Below are the header and cpp files for a Media Injector Implementation. In order for this injector to be used by the C++ SDK, it must be passed to the conference service
-using the <a class="reference internal" href="../sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference16set_media_sourceEP22media_source_interface" title="dolbyio::comms::services::conference::set_media_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::conference::set_media_source()</span></code></a> method. Now when a conference is joined and audio/video is started, this injector is part of the media injection
+using the <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::conference::set_media_source()</span></code> method. Now when a conference is joined and audio/video is started, this injector is part of the media injection
 pipeline.</p>
 <p>The interfaces inherited by this custom_injector example must be implemented by any custom injector intended to inject video and audio frames to a conference.</p>
-<p>If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the <a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server sample application</span></a> section with the sample below.
+<p>If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the <a class="reference internal" href="../../other/getting_started.html#getting-started-sample"><span class="std std-ref">Sample application</span></a> section with the sample below.
 The paths in this CMakeLists.txt are assuming that the file is located in the same place as in the Writing Application portion of the Getting Started.</p>
 <section id="custom-injector-h">
 <h2>custom_injector.h<a class="headerlink" href="#custom-injector-h" title="Permalink to this heading"></a></h2>
@@ -122,7 +126,6 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">inject_video_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">frame</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// media_source_interface</span>
-<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_source</span><span class="o">*</span><span class="w"> </span><span class="nf">video</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_source</span><span class="o">*</span><span class="w"> </span><span class="nf">audio</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// audio_source interface</span>
@@ -130,14 +133,13 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">deregister_audio_frame_rtc_source</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// video_source interface</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">register_video_frame_rtc_source</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">rtc_video_source</span><span class="o">*</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">deregister_video_frame_rtc_source</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">set_sink</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">sink</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_source</span><span class="o">::</span><span class="n">config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
 
 <span class="w"> </span><span class="k">private</span><span class="o">:</span><span class="w"></span>
 <span class="w">  </span><span class="c1">// These are essentially audio/video sinks from the POV of the injector</span>
 <span class="w">  </span><span class="c1">// providing the connection in the respective media pipelines to Webrtc</span>
 <span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">rtc_audio_source</span><span class="o">*</span><span class="w"> </span><span class="n">rtc_audio_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">rtc_video_source</span><span class="o">*</span><span class="w"> </span><span class="n">rtc_video_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">video_sink_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="w"> </span><span class="n">audio_lock_</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="w"> </span><span class="n">video_lock_</span><span class="p">;</span><span class="w"></span>
@@ -172,8 +174,8 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
 
 <span class="kt">bool</span><span class="w"> </span><span class="nf">custom_injector_impl::inject_video_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">frame</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">video_lock_</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">frame</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rtc_video_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">rtc_video_</span><span class="o">-&gt;</span><span class="n">handle_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">frame</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">frame</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">video_sink_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">video_sink_</span><span class="o">-&gt;</span><span class="n">handle_frame</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">frame</span><span class="p">));</span><span class="w"></span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
@@ -191,13 +193,9 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
 <span class="p">}</span><span class="w"></span>
 
 <span class="c1">// video_source interface</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">custom_injector_impl::register_video_frame_rtc_source</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">rtc_video_source</span><span class="o">*</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">custom_injector_impl::set_sink</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">sink</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">config</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">video_lock_</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">rtc_video_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">source</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">custom_injector_impl::deregister_video_frame_rtc_source</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">video_lock_</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">rtc_video_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">video_sink_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sink</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -248,7 +246,8 @@ The paths in this CMakeLists.txt are assuming that the file is located in the sa
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="video.html" class="btn btn-neutral float-left" title="Video Source Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="video.html" class="btn btn-neutral float-left" title="Video" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../recording/raw_video.html" class="btn btn-neutral float-right" title="Raw Video" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

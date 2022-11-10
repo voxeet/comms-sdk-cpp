@@ -2,17 +2,62 @@
 
 Video Service
 =============
+
 .. note::
-  The Video Service is available in SDK versions 2.1.0 and later. Prior to 2.1.0 the methods were part of the :cpp:func:`Conference Service <dolbyio::comms::services::conference::start_video>`. 
+  The Video Service is considered to be in Beta phase on Linux systems.
 
-The Video Service allows managing the local participant's video stream.
+The Video Service allows managing the local participant's video stream as well as attaching a Video Sink to remote video streams.
 
-Video Interface
+Video interface
 ---------------
 #include <dolbyio/comms/video.h>
 
 .. doxygenclass:: dolbyio::comms::services::video
 
-Local Video
+Local video
 -----------
 .. doxygenclass:: dolbyio::comms::services::local_video
+
+
+Remote video
+------------
+The remote video API allows attaching a :cpp:class:`Video Sink <dolbyio::comms::services::video_sink>` to receive :cpp:class:`Raw Video Frames <dolbyio::comms::video_frame>`. These video frames can then be handled as the application desires. For example, for rendering on screen or dumping to a file.
+
+.. doxygenclass:: dolbyio::comms::services::remote_video
+
+
+.. _vid_frame_handle:
+
+Video frame handling
+--------------------
+#include <dolbyio/comms/media_engine/media_engine.h>
+
+The application can use the :cpp:class:`video frame handling <dolbyio::comms::video_frame_handler>` capabilities of the SDK to process captured :cpp:class:`VideoFrames <dolbyio::comms::video_frame>`. The frame handler is an interface providing a :cpp:class:`Video Sink <dolbyio::comms::video_sink>` and a :cpp:class:`Video Source <dolbyio::comms::video_source>`, thus inserting the frame handler into the video capture pipeline allows the application to receive, process, and then inject 
+:cpp:class:`VideoFrames <dolbyio::comms::video_frame>` into the SDK. If you want to only provide frames to the SDK, the application only needs to implement the :cpp:class:`Video Source <dolbyio::comms::video_source>` portion of the handler.
+
+.. doxygenclass:: dolbyio::comms::video_frame_handler
+
+.. doxygenclass:: dolbyio::comms::video_sink
+
+.. doxygenclass:: dolbyio::comms::video_source
+
+
+Video frame API
+---------------
+#include <dolbyio/comms/media_engine/media_engine.h>
+
+Video frame interface
+_____________________
+
+.. doxygenclass:: dolbyio::comms::video_frame
+
+YUV420 video frame
+__________________
+
+.. doxygenclass:: dolbyio::comms::video_frame_i420
+
+MacOS video frame
+_________________
+#includ <dolbyio/comms/media_engine/video_frame_macos.h>
+
+.. doxygenclass:: dolbyio::comms::video_frame_macos

@@ -1,3 +1,5 @@
+# cppsdk 2.2.0
+
 # Disclaimer
 
 In addition to the warranty disclaimers contained in these licenses, Dolby makes the following disclaimers regarding the third-party components on behalf of itself, and the copyright holders, contributors, and licensors of the listed third-party components:
@@ -1951,7 +1953,7 @@ https://github.com/gabime/spdlog/tree/b75edfafca581e33be29ab51b9546b2e955c2853/L
 ```
 The MIT License (MIT)
 
-Copyright (c) 2016 Gabi Melman.
+Copyright (c) 2016 Gabi Melman.                                       
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

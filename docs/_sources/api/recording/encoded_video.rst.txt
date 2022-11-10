@@ -1,14 +1,18 @@
 .. _api_record_encoded:
 
-Encoded Video Sink Interface
-============================
-#include <dolbyio/comms/media/media_engine.h>
+Encoded Video
+=============
+#include <dolbyio/comms/media_engine/media_engine.h>
 
 The interface for handling encoded video frames. Application must set listeners which override both of the virtual functions. The 
 :cpp:func:`handle_frame_encoded <dolbyio::comms::video_sink_encoded::handle_frame_encoded>` function is called after the RTP data is depacktized and an encoded frame 
-is constructed. This function will be executed on the Webrtc DecodingQueue thread created for the track to which the encoded frames belong.
+is constructed. This function will be executed on the Webrtc DecodingQueue thread created for the track to which the encoded frames belong. The Encoded Video Sink must be provided to the SDK using the
+:cpp:func:`Set Encoded Sink <dolbyio::comms::services::media_io::set_encoded_sink>` function.
 
 .. doxygenclass:: dolbyio::comms::video_sink_encoded
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::encoded_video_frame 
         :project: C++ SDK
 
 See :ref:`recording_example` for a template for child recording class for all possible media.

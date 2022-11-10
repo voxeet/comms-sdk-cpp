@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Default Media Injector &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Default Media Injector &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -22,7 +22,6 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Asynchronous Operations" href="common/async_ops.html" />
     <link rel="prev" title="Default Media Recorder" href="recorder.html" /> 
 </head>
 
@@ -46,13 +45,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="sdk.html">Sdk Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="session.html">Session Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="video.html">Video Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_io.html">Media IO API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">Plugins</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Default Media Injector</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#media-source-for-injector">Media Source for Injector</a></li>
@@ -62,15 +57,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#media-file-source-sample">Media File Source Sample</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="common/event_handling.html">Event Handling Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
 </ul>
 
         </div>
@@ -87,7 +75,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+          <li><a href="../plugins.html">Plugins</a> &raquo;</li>
       <li>Default Media Injector</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/sdk/injector.rst.txt" rel="nofollow"> View page source</a>
@@ -102,15 +90,15 @@
 <span id="default-injector"></span><h1>Default Media Injector<a class="headerlink" href="#default-media-injector" title="Permalink to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Default Media Injector is intended for Server applications.</p>
+<p>The Default Media Injector is considered to be in Beta phase on MacOS and Windows systems.</p>
 </div>
 <p>The Default Media Injector module provides two different types of injectors:</p>
 <ul class="simple">
 <li><p>A pass-through injector designed for streaming applications</p></li>
 <li><p>A pacing injector designed for media file injecting applications</p></li>
 </ul>
-<p>Both types of injectors provide connections to <a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms16rtc_audio_sourceE" title="dolbyio::comms::rtc_audio_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span></code></a> and <a class="reference internal" href="../injection/video.html#_CPPv4N7dolbyio5comms16rtc_video_sourceE" title="dolbyio::comms::rtc_video_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span></code></a> sinks for the media
-frames to be passed on to. Each of the injectors accepts <a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span> <span class="pre">frames</span></code></a> and <a class="reference internal" href="../recording/raw_video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frames</span></code></a>.</p>
+<p>Both types of injectors provide connections to <a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms16rtc_audio_sourceE" title="dolbyio::comms::rtc_audio_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span></code></a> and <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span></code> sinks for the media
+frames to be passed on to. Each of the injectors accepts <a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span> <span class="pre">frames</span></code></a> and <a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frames</span></code></a>.</p>
 <p>The main difference between the two injectors is that the paced injector provides a pacing logic, so that it can queue audio and video frames before injecting them into a conference. The passthrough injector accepts the raw audio and video frames and directly relays them to the CoreSDK. Thus, the application is responsible for invoking the frame injection
 interface quickly.</p>
 <section id="media-source-for-injector">
@@ -118,7 +106,7 @@ interface quickly.</p>
 <p>Neither of the default injectors provide infrastructure for capturing and decoding media. This is the application’s responsibility; once it has decoded media frames, it can pass them to either of the
 aforementioned injectors. We have provided a sample library to showcase how to create a Media Injection Source. This sample library, called <strong>media_source_file</strong>, reads media from a mov/mp4 file
 and using the Paced Injector injects the audio and video frames into the CoreSDK. This <strong>media_source_file</strong> library is utilized by the provided sample application to inject media files. The
-<a class="reference internal" href="../../other/getting_started.html#getting-started-server"><span class="std std-ref">Server sample application</span></a> page describes how to get media injection running with the sample application. A brief overview of the library is provided <a class="reference internal" href="#media-source-file"><span class="std std-ref">below</span></a>.</p>
+<a class="reference internal" href="../../other/getting_started.html#getting-started-sample"><span class="std std-ref">Sample application</span></a> page describes how to get media injection running with the sample application. A brief overview of the library is provided <a class="reference internal" href="#media-source-file"><span class="std std-ref">below</span></a>.</p>
 <p>The audio provided to the injector, contained by the <a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span> <span class="pre">frame</span></code></a>, should have the following specifications:</p>
 <table class="docutils align-default">
 <thead>
@@ -134,7 +122,7 @@ and using the Paced Injector injects the audio and video frames into the CoreSDK
 </tr>
 </tbody>
 </table>
-<p>The CoreSDK expects these 10ms chunks of PCM audio to be provided every 10ms. The video frames provided to the Injector, contained in <a class="reference internal" href="../recording/raw_video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frames</span></code></a>, must be YUV
+<p>The CoreSDK expects these 10ms chunks of PCM audio to be provided every 10ms. The video frames provided to the Injector, contained in <a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frames</span></code></a>, must be YUV
 pixels.</p>
 </section>
 <section id="passthrough-injector">
@@ -168,7 +156,7 @@ and the <a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin20injec
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin20injector_passthrough18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE">
 <span id="_CPPv3N7dolbyio5comms6plugin20injector_passthrough18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE"></span><span id="_CPPv2N7dolbyio5comms6plugin20injector_passthrough18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE"></span><span id="dolbyio::comms::plugin::injector_passthrough::inject_audio_frame__std::unique_ptr:audio_frame:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__passthrough_1a16a790b65bd3d80c6b3663df2ac9b662"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inject_audio_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><span class="n"><span class="pre">audio_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin20injector_passthrough18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Inject an audio frame into the conference. The audio frame must contain 10ms of PCM data. </p>
-<p>This method directly passes the frames to Webrtc. The application is responsible for providing frames in steady 10ms intervals.</p>
+<p>This method directly passes the frames to WebRTC. The application is responsible for providing frames in steady 10ms intervals.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>frame</strong> – Audio frame containing raw PCM data.</p>
@@ -184,9 +172,9 @@ and the <a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin20injec
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin20injector_passthrough18inject_video_frameERRNSt10unique_ptrI11video_frameEE">
-<span id="_CPPv3N7dolbyio5comms6plugin20injector_passthrough18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms6plugin20injector_passthrough18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::plugin::injector_passthrough::inject_video_frame__std::unique_ptr:video_frame:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__passthrough_1a709913fa0accb6dcbef3ab45594e4c06"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inject_video_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../recording/raw_video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin20injector_passthrough18inject_video_frameERRNSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms6plugin20injector_passthrough18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms6plugin20injector_passthrough18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::plugin::injector_passthrough::inject_video_frame__std::unique_ptr:video_frame:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__passthrough_1a709913fa0accb6dcbef3ab45594e4c06"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inject_video_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin20injector_passthrough18inject_video_frameERRNSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Inject a raw video frame into the conference. The video frame must contain YUV pixels. </p>
-<p>This method directly passes the frames to Webrtc. The application is responsible for delivering frames at a proper rate.</p>
+<p>This method directly passes the frames to WebRTC. The application is responsible for delivering frames at a proper rate.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>frame</strong> – The video frame.</p>
@@ -239,7 +227,7 @@ The Paced Injector also provides a method for injecting silent audio frames in 1
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin14injector_paced18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE">
 <span id="_CPPv3N7dolbyio5comms6plugin14injector_paced18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE"></span><span id="_CPPv2N7dolbyio5comms6plugin14injector_paced18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE"></span><span id="dolbyio::comms::plugin::injector_paced::inject_audio_frame__std::unique_ptr:audio_frame:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a4f1f5ef1706c01e2b61144cc296672fd"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inject_audio_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../injection/audio.html#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><span class="n"><span class="pre">audio_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin14injector_paced18inject_audio_frameERRNSt10unique_ptrI11audio_frameEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Inject an audio frame into the conference. The audio frame must contain 10ms of PCM data. </p>
-<p>This method can be called more often than every 10ms. The audio frames are queued and provided to Webrtc every 10ms. The queue can hold up to one second of audio; once the queue fills, this function blocks the calling thread until space on the queue is available.</p>
+<p>This method can be called more often than every 10ms. The audio frames are queued and provided to WebRTC every 10ms. The queue can hold up to one second of audio; once the queue fills, this function blocks the calling thread until space on the queue is available.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>frame</strong> – Audio frame containing raw PCM data.</p>
@@ -255,9 +243,9 @@ The Paced Injector also provides a method for injecting silent audio frames in 1
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE">
-<span id="_CPPv3N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::plugin::injector_paced::inject_video_frame__std::unique_ptr:video_frame:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1ab08a1f56bbdbc96cfa3ae8f71f90607b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inject_video_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../recording/raw_video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::plugin::injector_paced::inject_video_frame__std::unique_ptr:video_frame:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1ab08a1f56bbdbc96cfa3ae8f71f90607b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inject_video_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Inject a raw video frame into the conference. The video frame must contain YUV pixels. </p>
-<p>The desired frame interval for injecting the frames into Webrtc conference should be configured via the <a class="reference internal" href="#classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a1dce12c7c13d53cfe99cdf915e2914ad"><span class="std std-ref">set_video_frame_interval</span></a> method. The video frames are queued and provided to Webrtc every frame interval. The queue can hold up to 10 video frames; once the queue fills this function blocks the calling thread until space on the queue is available.</p>
+<p>The desired frame interval for injecting the frames into WebRTC conference should be configured via the <a class="reference internal" href="#classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a1dce12c7c13d53cfe99cdf915e2914ad"><span class="std std-ref">set_video_frame_interval</span></a> method. The video frames are queued and provided to WebRTC every frame interval. The queue can hold up to 10 video frames; once the queue fills this function blocks the calling thread until space on the queue is available.</p>
 <p><dl class="simple">
 <dt><strong>Attention</strong></dt><dd><p>This method blocks the calling thread when the video queue is full.</p>
 </dd>
@@ -279,7 +267,7 @@ The Paced Injector also provides a method for injecting silent audio frames in 1
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE">
 <span id="_CPPv3N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE"></span><span id="_CPPv2N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE"></span><span id="dolbyio::comms::plugin::injector_paced::set_video_frame_interval__std::chrono::milliseconds"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a1dce12c7c13d53cfe99cdf915e2914ad"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_video_frame_interval</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">milliseconds</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">interval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Sets the video frame interval for injecting video frames into the conference. The pacing injector provides frames to Webrtc at the interval specified by this method, provided the frames are available on the queue. </p>
+<dd><p>Sets the video frame interval for injecting video frames into the conference. The pacing injector provides frames to WebRTC at the interval specified by this method, provided the frames are available on the queue. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>interval</strong> – The frame interval in milliseconds. </p>
@@ -313,7 +301,7 @@ The Paced Injector also provides a method for injecting silent audio frames in 1
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin14injector_paced29start_audio_silence_injectionEii">
 <span id="_CPPv3N7dolbyio5comms6plugin14injector_paced29start_audio_silence_injectionEii"></span><span id="_CPPv2N7dolbyio5comms6plugin14injector_paced29start_audio_silence_injectionEii"></span><span id="dolbyio::comms::plugin::injector_paced::start_audio_silence_injection__i.i"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a836361dd405608b95d6bef9f7f21989c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start_audio_silence_injection</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sample_rate</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">channels</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin14injector_paced29start_audio_silence_injectionEii" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Start injecting audio silence into the conference. This should be used if the injection source wants to pause the injection of media while not removing the audio track. In order to keep AV sync on point when the media injection is resumed, calling this function will start the audio injection pacing thread to provide Webrtc with silent audio frames. The silence injection is stopped the same way as regular injection via the stop_audio_injection method. </p>
+<dd><p>Start injecting audio silence into the conference. This should be used if the injection source wants to pause the injection of media while not removing the audio track. In order to keep AV sync on point when the media injection is resumed, calling this function will start the audio injection pacing thread to provide WebRTC with silent audio frames. The silence injection is stopped the same way as regular injection via the stop_audio_injection method. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -512,7 +500,6 @@ of the Media Source File library is in the following files:</p>
 <span class="cm"> *                Copyright (C) 2022 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span><span class="w"></span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/exports.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/multimedia_streaming/injector.h&gt;</span><span class="cp"></span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/media_source/file/libav_wrapper/avcontext.h&quot;</span><span class="cp"></span>
@@ -541,7 +528,7 @@ of the Media Source File library is in the following files:</p>
 <span class="k">using</span><span class="w"> </span><span class="n">audio_pool_frame_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">frame_from_pool</span><span class="o">&lt;</span><span class="n">audio_buffer</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
 <span class="k">using</span><span class="w"> </span><span class="n">video_pool_frame_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">frame_from_pool</span><span class="o">&lt;</span><span class="n">frame</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">DLB_COMMS_EXPORT</span><span class="w"> </span><span class="n">file_source</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">file_source</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w"> </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
 <span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">file_source</span><span class="o">&gt;</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">files</span><span class="p">,</span><span class="w"></span>
 <span class="w">                                             </span><span class="kt">bool</span><span class="w"> </span><span class="n">loop</span><span class="p">,</span><span class="w"></span>
@@ -632,6 +619,8 @@ of the Media Source File library is in the following files:</p>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/media_source/file/source_capture.h&quot;</span><span class="cp"></span>
 
+
+
 <span class="k">namespace</span><span class="w"> </span><span class="nn">dolbyio</span><span class="o">::</span><span class="nn">comms</span><span class="o">::</span><span class="nn">sample</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">file_source</span><span class="o">&gt;</span><span class="w"> </span><span class="n">file_source</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">files</span><span class="p">,</span><span class="w"></span>
@@ -653,7 +642,11 @@ of the Media Source File library is in the following files:</p>
 <span class="w">      </span><span class="n">input_files_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">files</span><span class="p">)),</span><span class="w"></span>
 <span class="w">      </span><span class="n">curr_file_</span><span class="p">(</span><span class="n">input_files_</span><span class="p">.</span><span class="n">begin</span><span class="p">()),</span><span class="w"></span>
 <span class="w">      </span><span class="n">capture_thread_</span><span class="p">([</span><span class="k">this</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#if defined(__APPLE__)</span>
+<span class="w">        </span><span class="n">pthread_setname_np</span><span class="p">(</span><span class="s">&quot;injection_capture&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#elif defined(__linux__)</span>
 <span class="w">        </span><span class="n">pthread_setname_np</span><span class="p">(</span><span class="n">capture_thread_</span><span class="p">.</span><span class="n">native_handle</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;injection_capture&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#endif</span>
 <span class="w">        </span><span class="n">thread_function</span><span class="p">();</span><span class="w"></span>
 <span class="w">      </span><span class="p">}),</span><span class="w"></span>
 <span class="w">      </span><span class="n">capture_executor_</span><span class="p">([</span><span class="k">this</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">capture_loop</span><span class="p">();</span><span class="w"> </span><span class="p">}),</span><span class="w"></span>
@@ -1090,6 +1083,11 @@ of the Media Source File library is in the following files:</p>
 <span class="w">            </span><span class="n">video_pool_</span><span class="o">-&gt;</span><span class="n">return_frame</span><span class="p">(</span><span class="n">vframe</span><span class="p">);</span><span class="w"></span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
 <span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vframe</span><span class="o">-&gt;</span><span class="n">raw</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">format</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">AV_PIX_FMT_YUV420P</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">video_pool_</span><span class="o">-&gt;</span><span class="n">return_frame</span><span class="p">(</span><span class="n">vframe</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Bad video frame format&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
 <span class="w">          </span><span class="n">queue_video_frame</span><span class="p">(</span><span class="w"></span>
 <span class="w">              </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">frame_from_pool</span><span class="o">&lt;</span><span class="n">frame</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">vframe</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">video_pool_</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="n">frame</span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">unref</span><span class="p">();</span><span class="w"> </span><span class="p">}));</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">libav_context_</span><span class="o">-&gt;</span><span class="n">is_audio</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -1121,7 +1119,6 @@ of the Media Source File library is in the following files:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="recorder.html" class="btn btn-neutral float-left" title="Default Media Recorder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="common/async_ops.html" class="btn btn-neutral float-right" title="Asynchronous Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Audio Service &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Audio Service &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -46,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">Core API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="sdk.html">Sdk Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="session.html">Session Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="conference.html">Conference Service</a></li>
@@ -59,8 +59,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="video.html">Video Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
@@ -68,8 +66,8 @@
 <li class="toctree-l2"><a class="reference internal" href="common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_io.html">Media IO API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -86,7 +84,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+          <li><a href="../coresdk.html">Core API</a> &raquo;</li>
       <li>Audio Service</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/sdk/audio.rst.txt" rel="nofollow"> View page source</a>
@@ -101,7 +99,7 @@
 <span id="api-audio-service"></span><h1>Audio Service<a class="headerlink" href="#audio-service" title="Permalink to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Audio Service is available in SDK versions 2.1.0 and later. Prior to 2.1.0 the methods were part of the <a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms8services10conference11start_audioEv" title="dolbyio::comms::services::conference::start_audio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Conference</span> <span class="pre">Service</span></code></a>.</p>
+<p>The Audio Service is considered to be in Beta phase on Linux systems.</p>
 </div>
 <p>The Audio Service allows enabling and disabling audio for the local and remote participants, as well as configuring audio capture modes.</p>
 <section id="audio-interface">
@@ -159,7 +157,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audio5startEv">
 <span id="_CPPv3N7dolbyio5comms8services11local_audio5startEv"></span><span id="_CPPv2N7dolbyio5comms8services11local_audio5startEv"></span><span id="dolbyio::comms::services::local_audio::start"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio_1ae9c751ccca288db724656536559f5b84"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audio5startEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Opens the input audio device and starts processing audio. </p>
-<p>This method creates a WebRTC AudioTrack and attaches the AudioTrack to an active Peer Connection. This method also connects the Audio Sink of the <a class="reference internal" href="../injection/media_source_interface.html#classdolbyio_1_1comms_1_1media__source__interface"><span class="std std-ref">media_source_interface</span></a> with the WebRTC Audio Source, creating the audio delivery pipeline. When the async_result of this method resolves, the application can start an audio stream from any media source it chooses, pass the raw audio PCM data to the injector module from this source, and inject the audio data into a conference.</p>
+<p>This method creates a WebRTC AudioTrack and attaches the AudioTrack to an active Peer Connection. This method also connects the Audio Sink of the media_source_interface with the WebRTC Audio Source, creating the audio delivery pipeline. When the async_result of this method resolves, the application can start an audio stream from any media source it chooses, pass the raw audio PCM data to the injector module from this source, and inject the audio data into a conference.</p>
 <p><dl class="simple">
 <dt><strong>Attention</strong></dt><dd><p>This method does not start the capturing from a media source; this action needs to be performed separately, when the async_result of this method is resolved.</p>
 </dd>
@@ -176,7 +174,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services11local_audio4stopEv">
 <span id="_CPPv3N7dolbyio5comms8services11local_audio4stopEv"></span><span id="_CPPv2N7dolbyio5comms8services11local_audio4stopEv"></span><span id="dolbyio::comms::services::local_audio::stop"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1local__audio_1abe3ef6cae934673e9fc9b2733d822bf7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stop</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services11local_audio4stopEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Closes the input audio device and stops processing audio. </p>
-<p>This method destructs a WebRTC AudioTrack and detaches it from an active Peer Connection. This method also disconnects the Audio Sink of the <a class="reference internal" href="../injection/media_source_interface.html#classdolbyio_1_1comms_1_1media__source__interface"><span class="std std-ref">media_source_interface</span></a> from the WebRTC Audio Source, which deconstructs the audio delivery pipeline. All frames captured after the return of stop_audio are discarded, so an application should stop capturing audio from the local media source when async_result of this method resolves.</p>
+<p>This method destructs a WebRTC AudioTrack and detaches it from an active Peer Connection. This method also disconnects the Audio Sink of the media_source_interface from the WebRTC Audio Source, which deconstructs the audio delivery pipeline. All frames captured after the return of stop_audio are discarded, so an application should stop capturing audio from the local media source when async_result of this method resolves.</p>
 <p><dl class="simple">
 <dt><strong>Attention</strong></dt><dd><p>This method does not stop the capturing from a media source; this action needs to be performed separately by an application before or after calling stop_audio.</p>
 </dd>

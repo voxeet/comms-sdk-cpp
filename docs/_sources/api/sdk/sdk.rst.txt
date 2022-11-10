@@ -6,7 +6,7 @@ Sdk Interface
 
 This interface is the starting point for the SDK. It exposes methods that allow initializing the SDK and accessing the underlying services. The basic steps to use the SDK are:
   1) Acquire the necessary Access Token from the application server. This is a mandatory step that allows using the SDK.
-  2) Set a log level for the SDK :cpp:func:`sdk::set_log_level <dolbyio::comms::sdk::set_log_level>`. For the possible log levels, see the :ref:`logging` enum. 
+  2) Set a log level for the SDK :cpp:func:`sdk::set_log_level <dolbyio::comms::sdk::set_log_level>`. For the possible log levels, see the :ref:`api_log_level` enum. 
   3) Create the SDK using :cpp:func:`sdk::create <dolbyio::comms::sdk::create>`. The create call needs to pass a valid access token in order to initialize the SDK. Wait for the return of the create call.
   4) Log in to the Dolby.io backend. For more information, see the :ref:`api_session`.
   5) Retrieve a reference to :ref:`sess_serv` through :cpp:func:`sdk::session <dolbyio::comms::sdk::session>`.

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media IO API &mdash; C++ SDK 2.2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Audio" href="injection/audio.html" />
+    <link rel="prev" title="Overriding new/delete operators" href="sdk/common/custom_allocator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coresdk.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Media IO API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#injection">Injection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="injection/audio.html">Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="injection/video.html">Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="injection/example.html">Example Injector Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#recording">Recording</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recording/raw_video.html">Raw Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recording/encoded_video.html">Encoded Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recording/audio.html">Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recording/events.html">Media Recording Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recording/example.html">Example Recorder Implementation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Media IO API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/media_io.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <blockquote>
+<div></div></blockquote>
+<section id="media-io-api">
+<span id="id1"></span><h1>Media IO API<a class="headerlink" href="#media-io-api" title="Permalink to this heading"></a></h1>
+<p>The Media IO feature allows for <a class="reference internal" href="#api-injection"><span class="std std-ref">injecting</span></a> video and audio streams into a conference as well as <a class="reference internal" href="#api-recording"><span class="std std-ref">recording</span></a> the remote participants’ streams.</p>
+<dl class="simple">
+<dt>The basic usage of the Session Service consists of the following steps:</dt><dd><ol class="arabic simple">
+<li><p>Access the service after <a class="reference internal" href="sdk/sdk.html#_CPPv4N7dolbyio5comms3sdk6createERKNSt6stringERRNSt8functionIFvNSt10unique_ptrI13refresh_tokenEEEEE" title="dolbyio::comms::sdk::create"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">creating</span></code></a> and instance of the SDK through the <a class="reference internal" href="sdk/sdk.html#_CPPv4N7dolbyio5comms3sdk8media_ioEv" title="dolbyio::comms::sdk::media_io"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">sdk::media_io</span></code></a> method.</p></li>
+<li><p>Set an <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink" title="dolbyio::comms::services::media_io::set_audio_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Audio</span> <span class="pre">Sink</span></code></a>.</p></li>
+<li><p>Set an <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source" title="dolbyio::comms::services::media_io::set_audio_source"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Audio</span> <span class="pre">Source</span></code></a>.</p></li>
+<li><p>Set an <a class="reference internal" href="#_CPPv4N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded" title="dolbyio::comms::services::media_io::set_encoded_video_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Encoded</span> <span class="pre">Video</span> <span class="pre">Sink</span></code></a>.</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services8media_ioE">
+<span id="_CPPv3N7dolbyio5comms8services8media_ioE"></span><span id="_CPPv2N7dolbyio5comms8services8media_ioE"></span><span id="dolbyio::comms::services::media_io"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1media__io"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">services</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">media_io</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services8media_ioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Media IO service is intended for non-standard WebRTC utilization like recording the incoming video and audio streams to files or injecting audio and video from a file into the conference. Application can utilize this service to set encoded video and raw audio sinks as endpoints for remote video/audio streams or set video/audio sources on the SDK where media will be injected. Using this service for audio injection or recording forces the conference to use Opus. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded">
+<span id="_CPPv3N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded"></span><span id="_CPPv2N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded"></span><span id="dolbyio::comms::services::media_io::set_encoded_video_sink__video_sink_encodedP"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1media__io_1aa805ed75f0448e07273070a351c758f0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="sdk/common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_encoded_video_sink</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="recording/encoded_video.html#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="dolbyio::comms::video_sink_encoded"><span class="n"><span class="pre">video_sink_encoded</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sink</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the Encoded Video Sink on the SDK to start receiving the incoming frames before they are decoded. The frames can then be passed to the decoder and regular VideoSinks for rendering. However, if only encoded dumping is desired configuring the recorder implementation to dump ENCODED_OPTIMIZED frames will make it so the frames are not decoded just dumped. This greatly saves CPU but can result in poor video quality in the file in poor network conditions (if keyFrames are dropped there is no retry mechanism since the frames are never decoded), this the optimized option is suitable best when using the SDK in Cloud Server scenarios where bandwith/poor network are not an issue. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">));</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Media capturer is now set</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ <dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>The Encoded Sink can not be set when a conference is active.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sink</strong> – The pointer to the instance of the Encoded Video Sink interface, which can be either the default recorder created through the <a class="reference internal" href="sdk/recorder.html#classdolbyio_1_1comms_1_1plugin_1_1recorder"><span class="std std-ref">plugin::recorder</span></a> interface or an implemented customized recording module.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink">
+<span id="_CPPv3N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink"></span><span id="_CPPv2N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink"></span><span id="dolbyio::comms::services::media_io::set_audio_sink__audio_sinkP"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1media__io_1aa05b300077c43ec784587ebfd3f61a6d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="sdk/common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_audio_sink</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="recording/audio.html#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><span class="n"><span class="pre">audio_sink</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sink</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the Audio Sink on the SDK to start receiving the incoming Audio Frames after they are decoded. Setting an Audio Sink means that audio sent to the SDK will be encoded with Opus codec. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_media_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">));</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// The audio sink is now set</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ <dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>The Audio Sink can not be set when a conference is active.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sink</strong> – The pointer to the instance of the Audio Sink interface, which can be either the default recorder created through the <a class="reference internal" href="sdk/recorder.html#classdolbyio_1_1comms_1_1plugin_1_1recorder"><span class="std std-ref">plugin::recorder</span></a> interface or an implemented customized recording module.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source">
+<span id="_CPPv3N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source"></span><span id="_CPPv2N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source"></span><span id="dolbyio::comms::services::media_io::set_audio_source__audio_sourceP"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1media__io_1a3b43e363864fccc42d11cf07f10c35af"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="sdk/common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_audio_source</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="injection/audio.html#_CPPv4N7dolbyio5comms12audio_sourceE" title="dolbyio::comms::audio_source"><span class="n"><span class="pre">audio_source</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">source</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sets the Audio Source on the SDK to provide Audio Frames to the Conference. The Audio Source can be an instance of the Default Injector or a Custom Injector. Injected audio will be encoded in Opus. </p>
+<p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_source</span><span class="p">(</span><span class="n">injector</span><span class="p">));</span><span class="w"></span>
+
+<span class="c1">// Invoking the method directly requires chaining successive operations</span>
+<span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_source</span><span class="p">(</span><span class="n">injector</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Audio Source is now set</span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Handle exception</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+ <dl class="simple">
+<dt><strong>Attention</strong></dt><dd><p>The Audio Source can not be set when a conference is active.</p>
+</dd>
+</dl>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>source</strong> – The pointer to the instance of the Audio Source interface.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<section id="injection">
+<span id="api-injection"></span><h2>Injection<a class="headerlink" href="#injection" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="injection/audio.html">Audio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="injection/video.html">Video</a></li>
+<li class="toctree-l1"><a class="reference internal" href="injection/example.html">Example Injector Implementation</a></li>
+</ul>
+</div>
+</section>
+<section id="recording">
+<span id="api-recording"></span><h2>Recording<a class="headerlink" href="#recording" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="recording/raw_video.html">Raw Video</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording/encoded_video.html">Encoded Video</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording/audio.html">Audio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording/events.html">Media Recording Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording/example.html">Example Recorder Implementation</a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Core SDK API provides methods that are asynchronous in nature and return <a class="reference internal" href="sdk/common/async_ops.html#api-async-result"><span class="std std-ref">async_result</span></a>. This means that if
+the result or the completion of the operation is necessary for subsequent calls, you have to be careful.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sdk/common/custom_allocator.html" class="btn btn-neutral float-left" title="Overriding new/delete operators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="injection/audio.html" class="btn btn-neutral float-right" title="Audio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

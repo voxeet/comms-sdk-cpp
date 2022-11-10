@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Media Recording Events &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Media Recording Events &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Example Recorder Implementation" href="example.html" />
-    <link rel="prev" title="Raw Video Sink Interface" href="raw_video.html" /> 
+    <link rel="prev" title="Audio" href="audio.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,17 +46,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">CoreSDK API</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../media_recording.html">Media Recording API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="media_sink_interface.html">Media Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="encoded_video.html">Encoded Video Sink Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="raw_video.html">Raw Video Sink Interface</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Media Recording Events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../media_io.html">Media IO API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../media_io.html#injection">Injection</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../media_io.html#recording">Recording</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="raw_video.html">Raw Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="encoded_video.html">Encoded Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Media Recording Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example.html">Example Recorder Implementation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -73,7 +76,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_recording.html">Media Recording API</a> &raquo;</li>
+          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
       <li>Media Recording Events</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/recording/events.rst.txt" rel="nofollow"> View page source</a>
@@ -95,7 +98,7 @@ The Media Recording Module should set handlers for all of these events via the <
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="raw_video.html" class="btn btn-neutral float-left" title="Raw Video Sink Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="audio.html" class="btn btn-neutral float-left" title="Audio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="example.html" class="btn btn-neutral float-right" title="Example Recorder Implementation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

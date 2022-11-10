@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Session Service &mdash; C++ SDK 2.1.0 documentation</title>
+  <title>Session Service &mdash; C++ SDK 2.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -46,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">CoreSDK API</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../coresdk.html">Core API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="sdk.html">Sdk Interface</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Session Service</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#session-interface">Session Interface</a></li>
@@ -57,8 +57,6 @@
 <li class="toctree-l2"><a class="reference internal" href="audio.html">Audio Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="video.html">Video Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_management.html">Device Management Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/async_ops.html">Asynchronous Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/log_level.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common/exception.html">SDK Exceptions</a></li>
@@ -66,8 +64,8 @@
 <li class="toctree-l2"><a class="reference internal" href="common/custom_allocator.html">Overriding new/delete operators</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../media_recording.html">Media Recording API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../media_injection.html">Media Injection API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_io.html">Media IO API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
 </ul>
 
         </div>
@@ -84,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../coresdk.html">CoreSDK API</a> &raquo;</li>
+          <li><a href="../coresdk.html">Core API</a> &raquo;</li>
       <li>Session Service</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/sdk/session.rst.txt" rel="nofollow"> View page source</a>
@@ -274,7 +272,7 @@ are used by and returned by methods of the interface.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1participant__joined"><span class="std std-ref">subscription_events::participant_joined</span></a> events. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a participant joins the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa62181591d01225d852de3def9dcfa80"><span class="std std-ref">notification_subscription_type::participant_joined</span></a> subscription.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when a participant joins the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa62181591d01225d852de3def9dcfa80"><span class="std std-ref">notification_subscription_type::participant_joined</span></a> subscription.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
@@ -288,7 +286,7 @@ are used by and returned by methods of the interface.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1participant__left"><span class="std std-ref">subscription_events::participant_left</span></a> events. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a participant leaves the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a516820bfa2d3060d574f5351c1996f24"><span class="std std-ref">notification_subscription_type::participant_left</span></a> subscription.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when a participant leaves the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a516820bfa2d3060d574f5351c1996f24"><span class="std std-ref">notification_subscription_type::participant_left</span></a> subscription.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
@@ -302,7 +300,7 @@ are used by and returned by methods of the interface.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1active__participants"><span class="std std-ref">subscription_events::active_participants</span></a> events. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked periodically passing the list of active participants for the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa81483f8deda677b8799eb2143fcd5ca"><span class="std std-ref">notification_subscription_type::active_participants</span></a> subscription.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked periodically passing the list of active participants for the conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3aa81483f8deda677b8799eb2143fcd5ca"><span class="std std-ref">notification_subscription_type::active_participants</span></a> subscription.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
@@ -316,7 +314,7 @@ are used by and returned by methods of the interface.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1conference__status"><span class="std std-ref">subscription_events::conference_status</span></a> events. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked passing the status of the conference with the enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> subscription.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked passing the status of the conference with the enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> subscription.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
@@ -330,7 +328,7 @@ are used by and returned by methods of the interface.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1conference__created"><span class="std std-ref">subscription_events::conference_created</span></a> events. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> subscription is created.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when a conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a250894f82e5ca959ae3bd58aae81f5c7"><span class="std std-ref">notification_subscription_type::conference_created</span></a> subscription is created.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
@@ -344,7 +342,7 @@ are used by and returned by methods of the interface.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1subscription__events_1_1conference__ended"><span class="std std-ref">subscription_events::conference_ended</span></a> events. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that will be invoked when a conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a9d89202b6908e6359fac5e7d0419b209"><span class="std std-ref">notification_subscription_type::conference_ended</span></a> subscription ends.</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when a conference with enabled <a class="reference internal" href="#namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3a9d89202b6908e6359fac5e7d0419b209"><span class="std std-ref">notification_subscription_type::conference_ended</span></a> subscription ends.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
