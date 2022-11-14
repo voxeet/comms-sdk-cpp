@@ -29,6 +29,9 @@ Other Structures
 ----------------
 Other structures used by the :ref:`api_session`, which are not defined in the :ref:`sess_serv` interface.
 
+.. doxygenstruct:: dolbyio::comms::token_expired_event
+        :project: C++ SDK
+
 .. doxygenenum:: dolbyio::comms::notification_subscription_type
         :project: C++ SDK
 

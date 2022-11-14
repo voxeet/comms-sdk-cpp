@@ -350,6 +350,20 @@ are used by and returned by methods of the interface.</p>
 </dl>
 </dd></dl>
 
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerI19token_expired_eventE">
+<span id="_CPPv3N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerI19token_expired_eventE"></span><span id="_CPPv2N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerI19token_expired_eventE"></span><span id="dolbyio::comms::services::session::add_event_handler__event_handler:token_expired_event:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1a69d961d6224401ed4b3a3b7450d3542b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4N7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19token_expired_eventE" title="dolbyio::comms::token_expired_event"><span class="n"><span class="pre">token_expired_event</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session17add_event_handlerERR13event_handlerI19token_expired_eventE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1token__expired__event"><span class="std std-ref">token_expired_event</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked in the case of using an invalid token.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session15state_exceptionE">
@@ -435,6 +449,13 @@ are used by and returned by methods of the interface.</p>
 <section id="other-structures">
 <h2>Other Structures<a class="headerlink" href="#other-structures" title="Permalink to this heading"></a></h2>
 <p>Other structures used by the <a class="reference internal" href="#api-session"><span class="std std-ref">Session Service</span></a>, which are not defined in the <a class="reference internal" href="#sess-serv"><span class="std std-ref">Session Interface</span></a> interface.</p>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19token_expired_eventE">
+<span id="_CPPv3N7dolbyio5comms19token_expired_eventE"></span><span id="_CPPv2N7dolbyio5comms19token_expired_eventE"></span><span id="dolbyio::comms::token_expired_event"></span><span class="target" id="structdolbyio_1_1comms_1_1token__expired__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">token_expired_event</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19token_expired_eventE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The event notifying about the access token expiration. </p>
+<p>Upon the reception of this event, the application will know that the access token used by the SDK has expired. Note that the application will receive two token refresh requests before that. If the application does not deliver new, valid token, and the old one expires, the application can expect the conference to be closed, and most API calls will just return the errors. </p>
+</dd></dl>
+
 <dl class="cpp enum">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms30notification_subscription_typeE">
 <span id="_CPPv3N7dolbyio5comms30notification_subscription_typeE"></span><span id="_CPPv2N7dolbyio5comms30notification_subscription_typeE"></span><span class="target" id="namespacedolbyio_1_1comms_1aa5b0192517fb179da4bda615ad057fa3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">notification_subscription_type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms30notification_subscription_typeE" title="Permalink to this definition"></a><br /></dt>
