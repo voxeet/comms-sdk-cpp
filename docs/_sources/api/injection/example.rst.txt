@@ -8,8 +8,8 @@ pipeline.
 
 The interfaces inherited by this custom_injector example must be implemented by any custom injector intended to inject video and audio frames to a conference.
 
-If you want to use a custom injector module instead of the default injector module, you can replace the CMakeLists.txt in the :ref:`getting_started_sample` section with the sample below.
-The paths in this CMakeLists.txt are assuming that the file is located in the same place as in the Writing Application portion of the Getting Started.
+At the bottom of the page is a sample CMakeLists.txt which shows how to create a library for this custom injector, then the library can be linked against the executable shown in the 
+ :ref:`getting_started_sample` section if you want to use a custom injector module.
 
 custom_injector.h
 _________________
@@ -21,12 +21,7 @@ __________________
 .. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_injector/custom_injector.cc
   :language: c++
 
-main.cc
-_______
-.. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_injector/main.cc
-  :language: c++
-
-Injector CMakeLists.txt
-_______________________
+CMakeLists.txt
+_______________
 .. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_injector/CMakeLists.txt
   :language: console

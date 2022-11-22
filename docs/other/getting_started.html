@@ -22,7 +22,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Supported Platforms" href="supported_platforms.html" />
+    <link rel="next" title="Run Time Dependencies" href="run_time_deps.html" />
     <link rel="prev" title="C++ SDK 2.2.0 Documentation" href="../index.html" /> 
 </head>
 
@@ -49,16 +49,17 @@
 <li class="toctree-l2"><a class="reference internal" href="#getting-the-access-token">Getting the access token</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spatial-audio-conferences">Spatial audio conferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sample-application">Sample application</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#enhanced-media-mode">Enhanced Media Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-mode">Standard Mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#media-io-mode">Media IO Mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#build-and-run-the-sample-application">Build and run the sample application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#video-processor">Video processor</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#issues-linking">Issues Linking?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/coresdk.html">Core API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/media_io.html">Media IO API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/plugins.html">Plugins</a></li>
@@ -145,13 +146,17 @@ to (0,0,0). For more information on interactively changing the position, please 
 </section>
 <section id="sample-application">
 <span id="getting-started-sample"></span><h2>Sample application<a class="headerlink" href="#sample-application" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Samples are only provided to illustrate the programming concept with the C++ SDK, and should only be used as a design reference by developers.</p>
+</div>
 <p>A basic C++ sample application is available in the <strong>sdk-release/share/dolbyio/comms/sample/desktop_app/</strong> directory of the package. This directory contains C++ code for the application and the respective CMakeLists.txt file, which you can use to build the application.</p>
 <p>Note that most of the interaction with the SDK itself are located in the <strong>sdk-release/share/dolbyio/comms/sample/utilities/</strong> directory of the package. This is still sample code but it can be thought of as like an
 example of a simple wrapper over the SDK.</p>
-<p>To showcase all of the features of the SDK the sample application can be run in two modes, <strong>Enhanced Media or Media IO</strong>. <strong>Ehanced Media</strong> entails using the DVC-2 codec for audio transmition and enables the world class Dolby
-audio processing and spatial audio rendering, this mode is enabled by default in the sample application. The <a class="reference internal" href="../api/media_io.html#media-io-api"><span class="std std-ref">Media IO</span></a> features are enabled by setting the <strong>–enable-media-io</strong> command line
-switch when starting the application. Our sample application links all of the additional required libraries for Media IO features as it is a showcase application. Please note that you should only link what you need to reduce
-your binary size.</p>
+<p>To showcase all of the features of the SDK the sample application can be run in two modes, <strong>Standard or Media IO</strong>. <strong>Standard Mode</strong> this mode demonstrates the standard client application workflow that uses media
+peripheral devices. For example, how to implement a client to connect to a spatial audio conference. The <a class="reference internal" href="../api/media_io.html#media-io-api"><span class="std std-ref">Media IO</span></a> features are enabled by setting the <strong>–enable-media-io</strong> command line
+switch when starting the application. Our sample application links all of the additional required libraries for Media IO features as it is a showcase application. Please note that you should only link what you need to
+reduce your binary size.</p>
 <p>All applications must perform the following steps in order to connect/disconnect from Dolby.io conferences:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -162,14 +167,14 @@ your binary size.</p>
 <li><p><a class="reference internal" href="../api/sdk/session.html#_CPPv4N7dolbyio5comms8services7session5closeEv" title="dolbyio::comms::services::session::close"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Close</span></code></a> the Dolby.io session.</p></li>
 </ol>
 </div></blockquote>
-<section id="enhanced-media-mode">
-<h3>Enhanced Media Mode<a class="headerlink" href="#enhanced-media-mode" title="Permalink to this heading"></a></h3>
-<p>In the <strong>Enhanced Media Mode</strong> the sample app can also:</p>
+<section id="standard-mode">
+<h3>Standard Mode<a class="headerlink" href="#standard-mode" title="Permalink to this heading"></a></h3>
+<p>In the <strong>Standard Mode</strong> the sample app can also:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>Manage local audio  and video devices using the <a class="reference internal" href="../api/sdk/device_management.html#_CPPv4N7dolbyio5comms8services17device_managementE" title="dolbyio::comms::services::device_management"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">device_management</span></code></a> service.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">provide</span></code></a> a camera and possibly a <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frame</span> <span class="pre">handler</span></code></a> to stream video into the conference.</p></li>
-<li><p>The <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frame</span> <span class="pre">handler</span></code></a> can be used to display the camera locally, inject non-camera video, or process camera frames and then inject the processed video.</p></li>
+<li><p>The <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frame</span> <span class="pre">handler</span></code></a> can be used to display the camera locally, inject non-camera video, or process camera frames and then inject the processed video. <a class="reference internal" href="#cv-p-example"><span class="std std-ref">Video processor</span></a> section shows how to create a video processor which can then be attached to the SDK using step 2.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/audio.html#_CPPv4N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode11unprocessedE" title="dolbyio::comms::services::local_audio::set_capture_mode"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">set</span> <span class="pre">audio</span> <span class="pre">capture</span> <span class="pre">mode</span></code></a> to alter how capture microphone audio is processed before being sent to the conference.</p></li>
 <li><p>Use the <a class="reference internal" href="../api/sdk/audio.html#_CPPv4N7dolbyio5comms8services11local_audioE" title="dolbyio::comms::services::local_audio"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">local</span> <span class="pre">audio</span></code></a> and <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_videoE" title="dolbyio::comms::services::local_video"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">local</span> <span class="pre">video</span></code></a> services to start/stop audio/video whilst in the conference.</p></li>
 <li><p>Set a <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms10video_sinkE" title="dolbyio::comms::video_sink"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">sink</span></code></a> using the remote video service <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">set</span> <span class="pre">sink</span></code> function to receive incoming video streams from remote participants.</p></li>
@@ -191,7 +196,7 @@ your binary size.</p>
 <a class="reference internal" href="../api/injection/example.html#injection-example"><span class="std std-ref">Example Injector Implementation</span></a> section. If you would like to write your own Media Source for the injector, see the <a class="reference internal" href="../api/sdk/injector.html#media-source-file"><span class="std std-ref">Media Source File</span></a> section, as well as the sample library itself.</p>
 </section>
 <section id="build-and-run-the-sample-application">
-<h3>Build and run the sample application<a class="headerlink" href="#build-and-run-the-sample-application" title="Permalink to this heading"></a></h3>
+<span id="build-run-sample"></span><h3>Build and run the sample application<a class="headerlink" href="#build-and-run-the-sample-application" title="Permalink to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Build the desktop application in a few simple steps from the <strong>sample/</strong> directory:</p></li>
 </ol>
@@ -199,28 +204,34 @@ your binary size.</p>
 <span class="gp">$ </span>mkdir build
 <span class="gp">$ </span><span class="nb">cd</span> build/ <span class="o">&amp;&amp;</span> cmake ../
 <span class="gp">$ </span>cmake --build . -j <span class="m">8</span>
-
-<span class="go">        DXJOVA-MBP16:build dxjova$ cmake --build . -j 16</span>
-<span class="go">        [ 12%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/avcontext.cc.o</span>
-<span class="go">        [ 20%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/decoder.cc.o</span>
-<span class="go">        [ 29%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/media_frame.cc.o</span>
-<span class="go">        [ 37%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/source_capture.cc.o</span>
-<span class="go">        [ 41%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/audio_buffer.cc.o</span>
-<span class="go">        [ 41%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/frame.cc.o</span>
-<span class="go">        [ 54%] Linking CXX static library libmedia_source_file.a</span>
-<span class="go">        [ 54%] Built target media_source_file</span>
-<span class="go">        [ 58%] Building CXX object utilities/CMakeFiles/utils.dir/commands_handler.cc.o</span>
-<span class="go">        [ 66%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/interactions.cc.o</span>
-<span class="go">        [ 66%] Building CXX object utilities/CMakeFiles/utils.dir/media/injection/interactions.cc.o</span>
-<span class="go">        [ 70%] Building CXX object utilities/CMakeFiles/utils.dir/media/recording/interactions.cc.o</span>
-<span class="go">        [ 79%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/events.cc.o</span>
-<span class="go">        [ 83%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/device_manager/interactions.cc.o</span>
-<span class="go">        [ 87%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/macos_ui.mm.o</span>
-<span class="go">        [ 87%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/ui.cc.o</span>
+<span class="go">        [  4%] Building CXX object custom_recorder/CMakeFiles/custom_recorder.dir/custom_recorder.cc.o</span>
+<span class="go">        [ 13%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/source_capture.cc.o</span>
+<span class="go">        [ 21%] Building CXX object custom_injector/CMakeFiles/custom_injector.dir/custom_injector.cc.o</span>
+<span class="go">        [ 21%] Building CXX object custom_video_processor/CMakeFiles/custom_video_processor.dir/custom_video_processor.cc.o</span>
+<span class="go">        [ 30%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/audio_buffer.cc.o</span>
+<span class="go">        [ 30%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/avcontext.cc.o</span>
+<span class="go">        [ 30%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/decoder.cc.o</span>
+<span class="go">        [ 34%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/frame.cc.o</span>
+<span class="go">        [ 39%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/media_frame.cc.o</span>
+<span class="go">        [ 43%] Linking CXX static library libcustom_injector.a</span>
+<span class="go">        [ 43%] Built target custom_injector</span>
+<span class="go">        [ 52%] Linking CXX static library libmedia_source_file.a</span>
+<span class="go">        [ 52%] Linking CXX static library libcustom_recorder.a</span>
+<span class="go">        [ 56%] Built target custom_recorder</span>
+<span class="go">        [ 56%] Built target media_source_file</span>
+<span class="go">        [ 56%] Built target custom_video_processor</span>
+<span class="go">        [ 65%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/interactions.cc.o</span>
+<span class="go">        [ 69%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/events.cc.o</span>
+<span class="go">        [ 78%] Building CXX object utilities/CMakeFiles/utils.dir/commands_handler.cc.o</span>
+<span class="go">        [ 82%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/ui.cc.o</span>
+<span class="go">        [ 86%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/macos_ui.mm.o</span>
+<span class="go">        [ 86%] Building CXX object utilities/CMakeFiles/utils.dir/media/media_io_interactions.cc.o</span>
+<span class="go">        [ 86%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/device_manager/interactions.cc.o</span>
 <span class="go">        [ 91%] Linking CXX static library libutils.a</span>
 <span class="go">        [ 91%] Built target utils</span>
 <span class="go">        [ 95%] Building CXX object desktop_app/CMakeFiles/desktop_app.dir/desktop_app.cc.o</span>
 <span class="go">        [100%] Linking CXX executable desktop_app</span>
+<span class="go">        [100%] Built target desktop_app</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -280,7 +291,7 @@ your binary size.</p>
 <td><p>Join with simulcast enabled</p></td>
 </tr>
 <tr class="row-odd"><td><p>-no-display-video</p></td>
-<td><p>Do not render video incoming video (sampleapp only renders incoming video on MacOS)</p></td>
+<td><p>Do not render video incoming video (sampleapp only renders incoming video on macOS)</p></td>
 </tr>
 <tr class="row-even"><td><p>-enable-media-io</p></td>
 <td><p>Enable the sample applications Media IO features (injection/recording)</p></td>
@@ -462,6 +473,51 @@ added. Once this method is resolved, the injection of audio from the Media Sourc
 </pre></div>
 </div>
 </section>
+<section id="video-processor">
+<span id="cv-p-example"></span><h3>Video processor<a class="headerlink" href="#video-processor" title="Permalink to this heading"></a></h3>
+<p>The <strong>share/dolby/comms/sample/custom_video_processor/</strong> directory contains cpp and header files to build a library implementing a custom video processor. In order for this processor to be used by the C++ SDK it must be
+provided as the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">dolbyio::comms::video_frame_handler</span></code></a> with the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::local_video::start()</span></code></a> function call.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For macOS the captured camera frames are stored in shared IOSurface. This sample processes the frames in place. A proper application implementation should make a copy of the CVPixelBuffer
+and underlying IOSurface and only then process its copy of these memory buffers. Otherwise other applications capturing from the same video device will have their frames altered as well.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For macOS Video Support relies on the presence and running of the macOS main event loop. If you try to start video before you have executed something like <strong>[NSApp run]</strong> the SDK will throw an exception.
+Thus any calls to <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start_video</span></code></a> must be done after the main event loop has been started.</p>
+</div>
+<p>The interfaces inheritted by this custom_video_processor example must be implemented by any custom video processor which wishes to receive video frames and have somehwere to inject them.</p>
+<p>Adding this sample custom video procesor to any app is very simple, here we show basic instructions for integrating it with our sample desktop_app:</p>
+<ol class="arabic simple">
+<li><p>Edit the <strong>share/dolby/comms/sample/utilities/CMakeLists.txt</strong> file so it links the custom_video_processor shared library by modifying the following:</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">target_link_libraries(utils PUBLIC</span>
+<span class="go">        custom_video_processor</span>
+<span class="go">media_source_file</span>
+<span class="go">DolbyioComms::multimedia_streaming_addon</span>
+<span class="go">DolbyioComms::media</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+<p>2) Next edit the <strong>share/dolby/comms/sample/utilities/ui_loop/ui.cc</strong> file to include the custom_processor header file. Then finally inside the <strong>ui_interface::ui_loop_on_helper_thread</strong> method create a processor and
+provide the processor to the SDK using the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start</span> <span class="pre">video</span></code></a> method. Essentially you just need to add 3 lines of code in respective places as show below:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/custom_video_processor/custom_video_processor.h&quot;</span><span class="cp"></span>
+
+<span class="p">...</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">ui_interface</span><span class="o">::</span><span class="n">ui_loop_on_helper_thread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">processor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">custom_video_processor</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="p">...</span><span class="w"></span>
+<span class="w">                </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">video</span><span class="p">().</span><span class="n">local</span><span class="p">().</span><span class="n">start</span><span class="p">({},</span><span class="w"> </span><span class="n">processor</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span><span class="w"></span>
+<span class="w">                </span><span class="p">...</span><span class="w"></span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Then follow the <a class="reference internal" href="#build-run-sample"><span class="std std-ref">Build and run the sample application</span></a> instructions of Getting Started and you will have built your editted desktop_app</p></li>
+</ol>
+</section>
 </section>
 <section id="issues-linking">
 <h2>Issues Linking?<a class="headerlink" href="#issues-linking" title="Permalink to this heading"></a></h2>
@@ -477,7 +533,7 @@ added. Once this method is resolved, the injection of audio from the Media Sourc
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.2.0 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="supported_platforms.html" class="btn btn-neutral float-right" title="Supported Platforms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="run_time_deps.html" class="btn btn-neutral float-right" title="Run Time Dependencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

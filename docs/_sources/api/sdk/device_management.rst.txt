@@ -32,6 +32,20 @@ The :ref:`api_device_management` events that are emitted by the SDK. They can be
 .. doxygenstruct:: dolbyio::comms::audio_device_changed
         :project: C++ SDK
 
+.. doxygenstruct:: dolbyio::comms::audio_device_timeout_failure
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::video_device_added
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::video_device_removed
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::video_device_changed
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::video_device_error
+        :project: C++ SDK
 
 .. _devman_models:
 

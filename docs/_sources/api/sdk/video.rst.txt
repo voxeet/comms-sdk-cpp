@@ -35,6 +35,11 @@ Video frame handling
 The application can use the :cpp:class:`video frame handling <dolbyio::comms::video_frame_handler>` capabilities of the SDK to process captured :cpp:class:`VideoFrames <dolbyio::comms::video_frame>`. The frame handler is an interface providing a :cpp:class:`Video Sink <dolbyio::comms::video_sink>` and a :cpp:class:`Video Source <dolbyio::comms::video_source>`, thus inserting the frame handler into the video capture pipeline allows the application to receive, process, and then inject 
 :cpp:class:`VideoFrames <dolbyio::comms::video_frame>` into the SDK. If you want to only provide frames to the SDK, the application only needs to implement the :cpp:class:`Video Source <dolbyio::comms::video_source>` portion of the handler.
 
+The :ref:`cv_p_example` section shows a very basic idea for implementing a Video Processor to receive camera frames, alter them and inject them back into the SDK. Note that this is just an example
+to give an idea of how to create such a module.
+After creating a custom video processor module like the example, one must call :cpp:func:`start video <dolbyio::comms::services::local_video::start>` and provide the processor to this function 
+call. At this point the processor will be part of the Video Capture pipeline and all camera frames will pass through it.  
+
 .. doxygenclass:: dolbyio::comms::video_frame_handler
 
 .. doxygenclass:: dolbyio::comms::video_sink
@@ -58,6 +63,12 @@ __________________
 
 MacOS video frame
 _________________
-#includ <dolbyio/comms/media_engine/video_frame_macos.h>
+#include <dolbyio/comms/media_engine/video_frame_macos.h>
 
 .. doxygenclass:: dolbyio::comms::video_frame_macos
+
+Video utilities
+_______________
+#include <dolbyio/comms/media_engine/video_utils.h>
+
+.. doxygenclass:: dolbyio::comms::video_utils::format_converter

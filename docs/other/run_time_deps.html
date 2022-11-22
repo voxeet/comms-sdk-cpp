@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Core API" href="../api/coresdk.html" />
-    <link rel="prev" title="Supported Platforms" href="supported_platforms.html" /> 
+    <link rel="next" title="Supported Platforms" href="supported_platforms.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,7 +44,6 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Run Time Dependencies</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#macos-systems">MacOS Systems</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#system-event-loop">System Event Loop</a></li>
@@ -52,6 +51,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#windows-systems">Windows Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#crt-version">CRT version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Microphone/Camera Permission</a></li>
 </ul>
 </li>
@@ -61,6 +61,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/coresdk.html">Core API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/media_io.html">Media IO API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/plugins.html">Plugins</a></li>
@@ -115,6 +116,18 @@
 </section>
 <section id="windows-systems">
 <h2>Windows Systems<a class="headerlink" href="#windows-systems" title="Permalink to this heading"></a></h2>
+<section id="crt-version">
+<h3>CRT version<a class="headerlink" href="#crt-version" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>All components of the SDK use the dynamic, release, multithreaded runtime. The SDK API requires passing some memory ownership between the application and the SDK.</p></li>
+<li><p>The application needs to use the dynamic, release, multithreaded CRT in the code which interfaces with the SDK.</p></li>
+<li><p>In order to achieve this, the <strong>/MD</strong> switch should be used for the MSVC compiler; the sample code uses the CMake build system</p></li>
+<li><p>CMake-based applications can easily enforce using the correct CRT flavour using the following directive in the CMakeLists.txt file:</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)</span>
+</pre></div>
+</div>
+</section>
 <section id="id1">
 <h3>Microphone/Camera Permission<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <ul class="simple">
@@ -156,8 +169,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="supported_platforms.html" class="btn btn-neutral float-left" title="Supported Platforms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api/coresdk.html" class="btn btn-neutral float-right" title="Core API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="supported_platforms.html" class="btn btn-neutral float-right" title="Supported Platforms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

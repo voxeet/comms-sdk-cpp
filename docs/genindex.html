@@ -41,8 +41,8 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="other/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other/supported_platforms.html">Supported Platforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/coresdk.html">Core API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/media_io.html">Media IO API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/plugins.html">Plugins</a></li>
@@ -142,6 +142,8 @@
       <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms20audio_device_removedE">dolbyio::comms::audio_device_removed (C++ struct)</a>
 </li>
       <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms20audio_device_removed3uidE">dolbyio::comms::audio_device_removed::uid (C++ member)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms28audio_device_timeout_failureE">dolbyio::comms::audio_device_timeout_failure (C++ struct)</a>
 </li>
       <li><a href="api/injection/audio.html#_CPPv4N7dolbyio5comms11audio_frameE">dolbyio::comms::audio_frame (C++ class)</a>
 </li>
@@ -595,8 +597,6 @@
 </li>
       <li><a href="api/sdk/recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config4NONEE">dolbyio::comms::plugin::recorder::audio_recording_config::NONE (C++ enumerator)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/sdk/recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_config3PCME">dolbyio::comms::plugin::recorder::audio_recording_config::PCM (C++ enumerator)</a>
 </li>
       <li><a href="api/sdk/recorder.html#_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE22audio_recording_config22video_recording_config">dolbyio::comms::plugin::recorder::create (C++ function)</a>
@@ -619,6 +619,8 @@
 </li>
       <li><a href="api/sdk/conference.html#_CPPv4N7dolbyio5comms14polar_positionE">dolbyio::comms::polar_position (C++ struct)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/sdk/conference.html#_CPPv4N7dolbyio5comms14polar_position7azimuthE">dolbyio::comms::polar_position::azimuth (C++ member)</a>
 </li>
       <li><a href="api/sdk/conference.html#_CPPv4N7dolbyio5comms14polar_position8distanceE">dolbyio::comms::polar_position::distance (C++ member)</a>
@@ -1003,6 +1005,34 @@
 </li>
       <li><a href="api/sdk/session.html#_CPPv4N7dolbyio5comms19token_expired_eventE">dolbyio::comms::token_expired_event (C++ struct)</a>
 </li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_addedE">dolbyio::comms::video_device_added (C++ struct)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_added6deviceE">dolbyio::comms::video_device_added::device (C++ member)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms20video_device_changedE">dolbyio::comms::video_device_changed (C++ struct)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms20video_device_changed6deviceE">dolbyio::comms::video_device_changed::device (C++ member)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_errorE">dolbyio::comms::video_device_error (C++ struct)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_error11descriptionE">dolbyio::comms::video_device_error::description (C++ member)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_error10error_typeE">dolbyio::comms::video_device_error::error_type (C++ enum)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_error10error_type14camera_failureE">dolbyio::comms::video_device_error::error_type::camera_failure (C++ enumerator)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_error10error_type12start_cameraE">dolbyio::comms::video_device_error::error_type::start_camera (C++ enumerator)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_error19recovery_suggestionE">dolbyio::comms::video_device_error::recovery_suggestion (C++ member)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_error4typeE">dolbyio::comms::video_device_error::type (C++ member)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms18video_device_error3uidE">dolbyio::comms::video_device_error::uid (C++ member)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms20video_device_removedE">dolbyio::comms::video_device_removed (C++ struct)</a>
+</li>
+      <li><a href="api/sdk/device_management.html#_CPPv4N7dolbyio5comms20video_device_removed3uidE">dolbyio::comms::video_device_removed::uid (C++ member)</a>
+</li>
       <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_frameE">dolbyio::comms::video_frame (C++ class)</a>
 </li>
       <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_frame14get_i420_frameEv">dolbyio::comms::video_frame::get_i420_frame (C++ function)</a>
@@ -1106,6 +1136,26 @@
       <li><a href="api/sdk/conference.html#_CPPv4N7dolbyio5comms19video_track_removed9stream_idE">dolbyio::comms::video_track_removed::stream_id (C++ member)</a>
 </li>
       <li><a href="api/sdk/conference.html#_CPPv4N7dolbyio5comms19video_track_removed8track_idE">dolbyio::comms::video_track_removed::track_id (C++ member)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converterE">dolbyio::comms::video_utils::format_converter (C++ class)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter12argb_to_i420EPK7uint8_tiP7uint8_tiP7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::argb_to_i420 (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter12argb_to_nv12EPK7uint8_tiP7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::argb_to_nv12 (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter12i420_to_argbEPK7uint8_tiPK7uint8_tiPK7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::i420_to_argb (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter12i420_to_nv12EPK7uint8_tiPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::i420_to_nv12 (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter14merge_uv_planeEPK7uint8_tiPK7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::merge_uv_plane (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter12nv12_to_argbEPK7uint8_tiPK7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::nv12_to_argb (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter12nv12_to_i420EPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::nv12_to_i420 (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter22set_plane_buffer_valueEP7uint8_tiii8uint32_t">dolbyio::comms::video_utils::format_converter::set_plane_buffer_value (C++ function)</a>
+</li>
+      <li><a href="api/sdk/video.html#_CPPv4N7dolbyio5comms11video_utils16format_converter15split_uv_planesEPK7uint8_tiP7uint8_tiP7uint8_tiii">dolbyio::comms::video_utils::format_converter::split_uv_planes (C++ function)</a>
 </li>
       <li><a href="api/sdk/common/async_ops.html#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE">dolbyio::comms::wait (C++ function)</a>
 </li>

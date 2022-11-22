@@ -53,15 +53,18 @@ to (0,0,0). For more information on interactively changing the position, please 
 
 Sample application
 ------------------
+.. note::
+  Samples are only provided to illustrate the programming concept with the C++ SDK, and should only be used as a design reference by developers.
+
 A basic C++ sample application is available in the **sdk-release/share/dolbyio/comms/sample/desktop_app/** directory of the package. This directory contains C++ code for the application and the respective CMakeLists.txt file, which you can use to build the application.
 
 Note that most of the interaction with the SDK itself are located in the **sdk-release/share/dolbyio/comms/sample/utilities/** directory of the package. This is still sample code but it can be thought of as like an
 example of a simple wrapper over the SDK.
 
-To showcase all of the features of the SDK the sample application can be run in two modes, **Enhanced Media or Media IO**. **Ehanced Media** entails using the DVC-2 codec for audio transmition and enables the world class Dolby
-audio processing and spatial audio rendering, this mode is enabled by default in the sample application. The :ref:`Media IO <media_io_api>` features are enabled by setting the **--enable-media-io** command line 
-switch when starting the application. Our sample application links all of the additional required libraries for Media IO features as it is a showcase application. Please note that you should only link what you need to reduce 
-your binary size.
+To showcase all of the features of the SDK the sample application can be run in two modes, **Standard or Media IO**. **Standard Mode** this mode demonstrates the standard client application workflow that uses media 
+peripheral devices. For example, how to implement a client to connect to a spatial audio conference. The :ref:`Media IO <media_io_api>` features are enabled by setting the **--enable-media-io** command line 
+switch when starting the application. Our sample application links all of the additional required libraries for Media IO features as it is a showcase application. Please note that you should only link what you need to 
+reduce your binary size.
 
 All applications must perform the following steps in order to connect/disconnect from Dolby.io conferences:
 
@@ -71,13 +74,13 @@ All applications must perform the following steps in order to connect/disconnect
   4) :cpp:func:`Leave <dolbyio::comms::services::conference::leave>` the conference.
   5) :cpp:func:`Close <dolbyio::comms::services::session::close>` the Dolby.io session.
 
-Enhanced Media Mode
-___________________
-In the **Enhanced Media Mode** the sample app can also:
+Standard Mode
+_____________
+In the **Standard Mode** the sample app can also:
 
   1) Manage local audio  and video devices using the :cpp:class:`device_management <dolbyio::comms::services::device_management>` service.
   2) :cpp:func:`provide <dolbyio::comms::services::local_video::start>` a camera and possibly a :cpp:class:`video frame handler <dolbyio::comms::video_frame_handler>` to stream video into the conference.
-  3) The :cpp:class:`video frame handler <dolbyio::comms::video_frame_handler>` can be used to display the camera locally, inject non-camera video, or process camera frames and then inject the processed video.
+  3) The :cpp:class:`video frame handler <dolbyio::comms::video_frame_handler>` can be used to display the camera locally, inject non-camera video, or process camera frames and then inject the processed video. :ref:`cv_p_example` section shows how to create a video processor which can then be attached to the SDK using step 2.
   4) :cpp:func:`set audio capture mode <dolbyio::comms::services::local_audio::set_capture_mode>` to alter how capture microphone audio is processed before being sent to the conference.
   5) Use the :cpp:class:`local audio <dolbyio::comms::services::local_audio>` and :cpp:class:`local video <dolbyio::comms::services::local_video>` services to start/stop audio/video whilst in the conference.
   6) Set a :cpp:class:`video sink <dolbyio::comms::video_sink>` using the remote video service :cpp:func:`set sink <dolbyio::comms::services::remote_video::set_sink>` function to receive incoming video streams from remote participants.
@@ -94,6 +97,8 @@ In the **Media IO Mode** the sample app can:
 The sample application makes use of the :cpp:func:`dolbyio::comms::wait` call for all asynchronous operations. Additionally, the sample application makes use of the Default Media Recorder module. If you would like to write your own Media Recorder, see the :ref:`recording_example` section. The sample application also uses the Default Media Injector module and the sample Media Source File library. If you would like to write your own Media Injector, see the 
 :ref:`injection_example` section. If you would like to write your own Media Source for the injector, see the :ref:`Media Source File <media_source_file>` section, as well as the sample library itself.
 
+.. _build_run_sample:
+
 Build and run the sample application
 _______________________________________
 
@@ -105,28 +110,34 @@ _______________________________________
         $ mkdir build
         $ cd build/ && cmake ../
         $ cmake --build . -j 8
-
-		DXJOVA-MBP16:build dxjova$ cmake --build . -j 16
-		[ 12%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/avcontext.cc.o
-		[ 20%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/decoder.cc.o
-		[ 29%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/media_frame.cc.o
-		[ 37%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/source_capture.cc.o
-		[ 41%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/audio_buffer.cc.o
-		[ 41%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/frame.cc.o
-		[ 54%] Linking CXX static library libmedia_source_file.a
-		[ 54%] Built target media_source_file
-		[ 58%] Building CXX object utilities/CMakeFiles/utils.dir/commands_handler.cc.o
-		[ 66%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/interactions.cc.o
-		[ 66%] Building CXX object utilities/CMakeFiles/utils.dir/media/injection/interactions.cc.o
-		[ 70%] Building CXX object utilities/CMakeFiles/utils.dir/media/recording/interactions.cc.o
-		[ 79%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/events.cc.o
-		[ 83%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/device_manager/interactions.cc.o
-		[ 87%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/macos_ui.mm.o
-		[ 87%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/ui.cc.o
+		[  4%] Building CXX object custom_recorder/CMakeFiles/custom_recorder.dir/custom_recorder.cc.o
+		[ 13%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/source_capture.cc.o
+		[ 21%] Building CXX object custom_injector/CMakeFiles/custom_injector.dir/custom_injector.cc.o
+		[ 21%] Building CXX object custom_video_processor/CMakeFiles/custom_video_processor.dir/custom_video_processor.cc.o
+		[ 30%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/audio_buffer.cc.o
+		[ 30%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/avcontext.cc.o
+		[ 30%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/decoder.cc.o
+		[ 34%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/libav_wrapper/frame.cc.o
+		[ 39%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/utils/media_frame.cc.o
+		[ 43%] Linking CXX static library libcustom_injector.a
+		[ 43%] Built target custom_injector
+		[ 52%] Linking CXX static library libmedia_source_file.a
+		[ 52%] Linking CXX static library libcustom_recorder.a
+		[ 56%] Built target custom_recorder
+		[ 56%] Built target media_source_file
+		[ 56%] Built target custom_video_processor
+		[ 65%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/interactions.cc.o
+		[ 69%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/events.cc.o
+		[ 78%] Building CXX object utilities/CMakeFiles/utils.dir/commands_handler.cc.o
+		[ 82%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/ui.cc.o
+		[ 86%] Building CXX object utilities/CMakeFiles/utils.dir/ui_loop/macos_ui.mm.o
+		[ 86%] Building CXX object utilities/CMakeFiles/utils.dir/media/media_io_interactions.cc.o
+		[ 86%] Building CXX object utilities/CMakeFiles/utils.dir/sdk/device_manager/interactions.cc.o
 		[ 91%] Linking CXX static library libutils.a
 		[ 91%] Built target utils
 		[ 95%] Building CXX object desktop_app/CMakeFiles/desktop_app.dir/desktop_app.cc.o
 		[100%] Linking CXX executable desktop_app
+		[100%] Built target desktop_app
 
 
 2. Run the created **desktop_app** executable using the following command line parameters:
@@ -164,7 +175,7 @@ _______________________________________
  +-----------------------+------------------------------------------------------------------------------------------+
  | -simulcast            | Join with simulcast enabled                                                              |
  +-----------------------+------------------------------------------------------------------------------------------+
- | -no-display-video     | Do not render video incoming video (sampleapp only renders incoming video on MacOS)      |
+ | -no-display-video     | Do not render video incoming video (sampleapp only renders incoming video on macOS)      |
  +-----------------------+------------------------------------------------------------------------------------------+
  | -enable-media-io      | Enable the sample applications Media IO features (injection/recording)                   |
  +-----------------------+------------------------------------------------------------------------------------------+
@@ -298,6 +309,55 @@ added. Once this method is resolved, the injection of audio from the Media Sourc
             std::cerr << "start audio failed: " << e.what() << std::endl;
           }
         });
+
+.. _cv_p_example:
+
+Video processor
+________________
+The **share/dolby/comms/sample/custom_video_processor/** directory contains cpp and header files to build a library implementing a custom video processor. In order for this processor to be used by the C++ SDK it must be 
+provided as the :cpp:class:`dolbyio::comms::video_frame_handler` with the :cpp:func:`dolbyio::comms::services::local_video::start` function call.
+
+.. note::
+ For macOS the captured camera frames are stored in shared IOSurface. This sample processes the frames in place. A proper application implementation should make a copy of the CVPixelBuffer
+ and underlying IOSurface and only then process its copy of these memory buffers. Otherwise other applications capturing from the same video device will have their frames altered as well.
+
+.. note::
+ For macOS Video Support relies on the presence and running of the macOS main event loop. If you try to start video before you have executed something like **[NSApp run]** the SDK will throw an exception.
+ Thus any calls to :cpp:func:`start_video <dolbyio::comms::services::local_video::start>` must be done after the main event loop has been started.
+
+The interfaces inheritted by this custom_video_processor example must be implemented by any custom video processor which wishes to receive video frames and have somehwere to inject them.
+
+Adding this sample custom video procesor to any app is very simple, here we show basic instructions for integrating it with our sample desktop_app:
+
+1) Edit the **share/dolby/comms/sample/utilities/CMakeLists.txt** file so it links the custom_video_processor shared library by modifying the following:
+
+.. code-block:: console
+    
+	target_link_libraries(utils PUBLIC
+		custom_video_processor
+    	media_source_file
+    	DolbyioComms::multimedia_streaming_addon
+    	DolbyioComms::media
+	)
+
+
+2) Next edit the **share/dolby/comms/sample/utilities/ui_loop/ui.cc** file to include the custom_processor header file. Then finally inside the **ui_interface::ui_loop_on_helper_thread** method create a processor and 
+provide the processor to the SDK using the :cpp:func:`start video <dolbyio::comms::services::local_video::start>` method. Essentially you just need to add 3 lines of code in respective places as show below:
+
+.. code-block:: c++
+ 	
+	#include "comms/sample/custom_video_processor/custom_video_processor.h"
+
+	...
+
+	void ui_interface::ui_loop_on_helper_thread() {
+		auto processor = std::make_unique<custom_video_processor>();
+		try {
+			...
+			wait(sdk->video().local().start({}, processor.get()));
+			...
+
+3) Then follow the :ref:`build_run_sample` instructions of Getting Started and you will have built your editted desktop_app
 
 Issues Linking?
 ---------------

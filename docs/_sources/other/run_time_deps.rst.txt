@@ -24,6 +24,17 @@ _____________________________
 Windows Systems
 ---------------
 
+CRT version
+___________
+- All components of the SDK use the dynamic, release, multithreaded runtime. The SDK API requires passing some memory ownership between the application and the SDK. 
+- The application needs to use the dynamic, release, multithreaded CRT in the code which interfaces with the SDK. 
+- In order to achieve this, the **/MD** switch should be used for the MSVC compiler; the sample code uses the CMake build system
+- CMake-based applications can easily enforce using the correct CRT flavour using the following directive in the CMakeLists.txt file:
+
+.. code-block:: console
+
+	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
+
 Microphone/Camera Permission
 _____________________________
 - Ensure that terminal has access to a microphone and a camera.
@@ -33,7 +44,7 @@ _____________________________
 Linux Systems
 -------------
 
-PulseAudio 
+PulseAudio
 __________
 - On Linux systems the C++ SDK needs access to the PulseAudio Sound Server in order to successfully initialize. 
 - Make sure that the Ubuntu has either system wide PulseAudio running or that an instance of PulseAudio is started by the same user who will run the application.
@@ -41,13 +52,13 @@ __________
 
 .. code-block:: console
 
-        $ pulseaudio --version
+	$ pulseaudio --version
 
 - The Ubuntu machine should already have pulseaudio installed, but if it does not, run the following command. Please note, to use package manager you need to be super user.
 
 .. code-block:: console
 
-        $ sudo apt-get install pulseaudio
+	$ sudo apt-get install pulseaudio
 
 - When it is installed, start pulseaudio for your user as follows:
 

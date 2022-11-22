@@ -10,8 +10,8 @@ to the conference service.
 
 The interfaces inheritted from by this custom_recorder example must be implemented by any custom recorder which wishes to receive video and audio frames.
 
-At the bottom of the page there is sample CMakeLists.txt which can replace the one shown in the :ref:`getting_started_sample` section if you want to use a custom recording module instead of our default one.
-This paths in this CMakeLists.txt are assuming that the file is located in the same place as in the Writing Application portion of Getting Started.
+At the bottom of the page is a sample CMakeLists.txt which shows how to create a library for this custom recorder, then the library can be linked against the executable shown in the 
+ :ref:`getting_started_sample` section if you want to use a custom recorder module.
 
 custom_recorder.h
 _________________
@@ -23,7 +23,7 @@ __________________
 .. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_recorder/custom_recorder.cc
   :language: c++
 
-Recorder CMakeLists.txt
-_______________________
+CMakeLists.txt
+_______________
 .. literalinclude:: ../../../src/public/dolbyio/comms/sample/custom_recorder/CMakeLists.txt
   :language: console

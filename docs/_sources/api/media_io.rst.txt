@@ -1,7 +1,7 @@
  .. _media_io_api:
 
 Media IO API
-======================
+=============
 The Media IO feature allows for :ref:`injecting <api_injection>` video and audio streams into a conference as well as :ref:`recording <api_recording>` the remote participants' streams. 
 
 The basic usage of the Session Service consists of the following steps:

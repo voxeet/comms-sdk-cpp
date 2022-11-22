@@ -16,9 +16,10 @@ Dolby Voice Conferences where participants can send and receive high-quality voi
 into your own game engine or virtual world experience. The C++ SDK provides applications the ability to capture and playback audio and video, manage input and output audio devices and input video devices, add 
 spatial placement for participants, as well as partake in a shared spatial scene. 
 
-The Audio captured using the Core C++ SDK features is processed using Dolby Voice audio processing and transmitted using the DVC-2 codec. This allows for clear, crisp conversations without echo or background noise and provides the option to use Dolby's world class 3D audio spatialization.
+The Audio captured using the Core C++ SDK features is processed using Dolby Voice audio processing allowing for clear, crisp conversations without echo or background noise and provides the option to use Dolby's world class 3D audio spatialization.
 
-The C++ SDK offers full control of the video capture pipeline to applications. Applications have the ability to provide camera frames, inject their own frames from a file for instance, or attach a Video Processorplugin to provide filtered camera frames to the conference. The SDK also allows applications to connect their own sinks to incoming Video streams and receive the decoded video frames.
+The C++ SDK offers full control of the video capture pipeline to applications. For instance allowing developers to implement video filters and apply them to a user’s camera feed. As part of our documentation we provide
+:ref:`an example <cv_p_example>` of how this can be done. 
 
 Media IO
 ===================
@@ -32,10 +33,9 @@ Plugins
 =======
 The C++ SDK also allows applications to make use of our ready-to-use :ref:`plugins_api`. The C++ SDK provides a default media recorder plugin; a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format.  
 
-The C++ SDK provides two default media injection plugins that are able to receive raw media frames and pass them to WebRTC. One of the default plugins is the Pacing Injector. The injector exposes an interface 
-for an application and allows passing decoded audio and video. Then, the injector provides these frames to WebRTC at specified intervals.
-
-The other default plugin is the Passthrough-Injector, which simply exposes the interface for passing decoded audio/video. 
+The C++ SDK provides two default media injection plugins that are able to receive raw media frames and pass them to the SDK. One of the default plugins is the Pacing Injector. This injector exposes interfaces for an application to provide the 
+injector with decoded audio and video frames. Then, the injector provides these frames into the SDK at specified intervals. The other default plugin is the Passthrough-Injector, which exposes interfaces for passing decoded audio/video 
+frames that are directly provided to the SDK. 
 
 Table of Contents
 -----------------
@@ -46,8 +46,8 @@ Table of Contents
 
    Overview <self>
    other/getting_started
-   other/supported_platforms
    other/run_time_deps
+   other/supported_platforms
    api/coresdk
    api/media_io
    api/plugins
