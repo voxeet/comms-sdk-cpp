@@ -1,20 +1,27 @@
 # Dolby.io Communications C++ SDK
 
-The Dolby.io Communications C++ SDK provides both Client and Server applications the ability to create HD voice and video for fully immersive real-time communications and streaming experiences. The C++SDK allows creating an application that can join Dolby.io conferences.
+The Dolby.io Communications C++ SDK provides applications with the ability to create high-quality voice and video for fully immersive real-time communications experiences. The C++ SDK allows creating an application that can join Dolby.io conferences.
 
-The C++ SDK is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, as well as
-receiving and injecting WebRTC media streams.
+The C++ SDK is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, as well as receiving and injecting WebRTC media streams.
 
 Currently, an instance of the C++ SDK can connect to only one conference at a time. Joining multiple conferences at a time requires running multiple instances of the application.
 
-## Client Applications
+Core SDK
+========
+The [Core C++ SDK](https://api-references.dolby.io/comms-sdk-cpp/api/coresdk.html) handles all of the signalling with the Dolby.io backend as well as providing various events, messages and other valuable information to users. The Dolby.io Communications C++ SDK allows joining Dolby Voice Conferences where participants can send and receive high-quality voice streams, including spatial audio and shared scenes. This functionality is useful for integrating the Dolby Voice experience into your own game engine or virtual world experience. The C++ SDK provides applications with the ability to capture and playback audio and video, manage input and output audio devices and input video devices, add spatial placement for participants, as well as partake in a shared spatial scene.
 
-Using the Dolby.io Communications C++SDK Client applications have the ability to join Dolby Voice Conferences where they can send and receive HD voice streams, including spatial audio and shared scenes. This functionality is useful for integrating the HD Dolby Voice experience into your own game engine or virtual world experience.
-To offer this functionality, the C++ SDK provides applications the ability to capture and playback audio, manage input/output Audio Devices, add spatial placement for participants as well as partake in a shared spatial scene.
+The Audio captured using the Core C++ SDK features is processed using Dolby Voice audio processing, allowing for clear, crisp conversations without echo or background noise and provides the option to use Dolby's world class 3D audio spatialization.
 
-## Server Applications
+The C++ SDK offers full control of the video capture pipeline to applications. For instance, allowing developers to implement video filters and apply them to a user’s camera feed. As part of our documentation we provide [an example](https://api-references.dolby.io/comms-sdk-cpp/other/getting_started.html#video-processor) of how this can be done.
 
-Using the Dolby.io Communications C++ SDK, Server applications have the ability to record and store high-quality voice and video calls on your server. This functionality is especially useful if you want full control over the audio and video recording. The C++ SDK also provides the ability to inject audio and video streams from the server into the conference. This functionality can be used to inject the audio and
-video stored in some media file on the server into the conference. After joining a Dolby.io conference, the C++ SDK offers the functionality to record the incoming audio and video streams for desired conference participants. This application runs in your infrastructure and not on Dolby.io.
+Media IO
+========
+In addition to the Core features, the Dolby.io Communications C++ SDK also provides [Media IO](https://api-references.dolby.io/comms-sdk-cpp/api/media_io.html) features. These include injecting audio from custom sources into conferences, connecting audio sinks to receive decoded PCM audio data and receiving encoded video frames before they are decoded. These features allow applications to connect as a client to a Dolby.io conference and record all of the present participants' video and audio. Think of it as recording a conference on your own machine without needing to pay for recording minutes. Additionally, you can inject some media from an external source (a file for instance) into the conference (especially applicable for Virtual Worlds for example). Note that using the Media IO features for Audio currently forces the use of the Opus Codec.
+
+Plugins
+=======
+The C++ SDK also allows applications to make use of our ready-to-use [plugins](https://api-references.dolby.io/comms-sdk-cpp/api/plugins.html#plugins-api). The C++ SDK provides a default media recorder plugin: a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format.
+
+The C++ SDK provides two default media injection plugins that are able to receive raw media frames and pass them to the SDK. One of the default plugins is the Pacing Injector. This injector exposes interfaces for an application to provide the injector with decoded audio and video frames. Then, the injector provides these frames into the SDK at specified intervals. The other default plugin is the Passthrough-Injector, which exposes interfaces for passing decoded audio/video frames that are directly provided to the SDK.
 
 For information about building basic applications using the C++ SDK, see the [Getting Started](https://dolbyio.github.io/comms-sdk-cpp/other/getting_started.html) guide.
