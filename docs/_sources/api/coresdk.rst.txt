@@ -27,8 +27,9 @@ The :ref:`api_sdk`, :ref:`api_session`, :ref:`api_conference`, :ref:`api_device_
   sdk/common/custom_allocator.rst
 
 .. note::
-   The Core SDK API provides methods that are asynchronous in nature and return :ref:`async_result <api_async_result>`. This means that if
-   the result or the completion of operation is necessary for subsequent calls, you have to be careful. For more details refer to the :ref:`api_async_result` page or read the notes from the; 
-   :cpp:class:`sdk <dolbyio::comms::sdk>`, :cpp:class:`conference <dolbyio::comms::services::conference>`, :cpp:class:`session <dolbyio::comms::services::session>`,
-   :cpp:class:`device_management <dolbyio::comms::services::device_management>`, :cpp:class:`audio <dolbyio::comms::services::local_audio>`, :cpp:class:`audio <dolbyio::comms::services::remote_audio>`,
-   :cpp:class:`video <dolbyio::comms::services::localvideo>` interfaces and refer to the examples of each documented asynchronous method. 
+
+   The Core SDK API provides methods that are asynchronous in nature and return :ref:`async_result <api_async_result>`. This means that if the result or the completion of operation is necessary for subsequent calls, you have to be 
+   careful. For more details refer to the :ref:`api_async_result` page. Details are also available in the descriptions of each interface which has functions producing results asynchronously: :cpp:class:`sdk <dolbyio::comms::sdk>`,
+   :cpp:class:`conference <dolbyio::comms::services::conference>`, :cpp:class:`session <dolbyio::comms::services::session>`, :cpp:class:`device_management <dolbyio::comms::services::device_management>`, 
+   :cpp:class:`local audio <dolbyio::comms::services::local_audio>`, :cpp:class:`remote audio <dolbyio::comms::services::remote_audio>`, :cpp:class:`local video <dolbyio::comms::services::local_video>`, 
+   :cpp:class:`remote video <dolbyio::comms::services::remote_video>`. 
