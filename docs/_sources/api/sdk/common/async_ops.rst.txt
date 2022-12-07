@@ -3,17 +3,10 @@
 Asynchronous Operations
 =======================
 
-The SDK provides a thread-safe, asynchronous, and reentrant public API. This means that these public API methods can return results produced asynchronously
-in the form of :cpp:type:`async_result <dolbyio::comms::async_result>`. The :cpp:type:`async_result <dolbyio::comms::async_result>` object represents
-an eventual completion or a failure of an asynchronous operation and its resulting value. All calls to the SDK are queued onto the SDKs event loop
-and processed in the FIFO (First In, First Out) order. After making a call, the SDK user application is responsible for either blocking the :cpp:func:`wait <dolbyio::comms::wait>`
-results or setting a function object execute when the asynchronous operation returns using the
-:cpp:class:`async_result and <dolbyio::comms::detail::async_result>` methods.
+The SDK provides a thread-safe, asynchronous, and reentrant public API. This means that these public API methods can return results produced asynchronously in the form of :cpp:type:`async_result <dolbyio::comms::async_result>`. The :cpp:type:`async_result <dolbyio::comms::async_result>` object represents an eventual completion or a failure of an asynchronous operation and its resulting value. All calls to the SDK are queued onto the SDKs event loop and processed in the FIFO (First In, First Out) order. After making a call, the SDK user application is responsible for either blocking until the operation completes and result is available or setting a function object to execute when the asynchronous operation resolves using the :cpp:class:`async_result and <dolbyio::comms::detail::async_result>` methods. We highly recommend the latter to fully utilize the asynchronous capabilities of the SDK.
 
 When a user application invokes an asynchronous method of the SDK, the SDK creates two objects: :cpp:type:`solver <dolbyio::comms::solver>`,
-which is used by the asynchronous operation to notify about its completion, and :cpp:type:`async_result <dolbyio::comms::async_result>`, which is used by the application to get the completion notifications. Both of these objects share the same internal state. The user application must set function
-object callbacks to be executed when the operation succeeds or fails on the async_result. If the :cpp:func:`wait <dolbyio::comms::wait>` helper is used,
-this is done automatically. When the asynchronous operation completes the callbacks set by the user, it invokes the application.
+which is used by the asynchronous operation to notify about its completion, and :cpp:type:`async_result <dolbyio::comms::async_result>`, which is used by the application to get the completion notifications. Both of these objects share the same internal state. The user application must set function object callbacks to be executed when the operation succeeds or fails on the async_result. When the asynchronous operation completes the callbacks set by the user, it invokes the application.
 If the asynchronous operation ends before the callbacks are set by the user application, then the callbacks are invoked as soon as they are
 set, on the application's thread. Otherwise, the callbacks are invoked when the operation is finished on the SDK's event loop.
 
@@ -46,7 +39,6 @@ sections below. The helper method allows for synchronous usage of the asynchrono
 
 .. doxygenfunction:: dolbyio::comms::wait
         :project: C++ SDK
-
 
 .. _async_resultt:
 
