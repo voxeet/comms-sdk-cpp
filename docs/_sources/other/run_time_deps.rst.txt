@@ -3,10 +3,10 @@
 Run Time Dependencies
 ======================
 
-MacOS systems
+MacOS Systems
 -------------
 
-System event loop
+System Event Loop
 _________________
 - Ensure that the application has started its mainQueue. This must be done as any UI Rendering of Video Frames or receiving of AVCaptureDevice events relies on the existence of an active mainQueue.
 - In our samples we enable the mainQueue to start processing events as follows (refer to **share/dolbyio/comms/sample/utilities/ui_loop/macos_ui.mm** for more details): 
@@ -15,16 +15,13 @@ _________________
 
 	[NSApp run]
 
-- **IMPORTANT:** On macOS some operations performed by the SDK require using the application mainQueue. Blocking the application mainQueue while awaiting any specific SDK operation to finish may lead to deadlocks. Refer to following documentation section to see how to properly :ref:`chain asynchronous operations <api_async_result>` and avoid the need for blocking.
-
-
-Microphone/camera permission
+Microphone/Camera Permission
 _____________________________
 - Ensure that terminal has access to a microphone and a camera.
 - If not provided, the SDK will request access when launching application; then make sure to grant permission.
 - Failure to grant permissions will not allow the SDK to capture audio/video and send it into the conference.
 
-Windows systems
+Windows Systems
 ---------------
 
 CRT version
@@ -38,13 +35,13 @@ ___________
 
 	set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
 
-Microphone/camera permission
+Microphone/Camera Permission
 _____________________________
 - Ensure that terminal has access to a microphone and a camera.
 - If not provided, the SDK will request access when launching application; then make sure to grant permission.
 - Failure to grant permissions will not allow the SDK to capture audio/video and send it into the conference.
 
-Linux systems
+Linux Systems
 -------------
 
 PulseAudio

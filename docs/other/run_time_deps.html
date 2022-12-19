@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Run Time Dependencies &mdash; C++ SDK 2.3.0 documentation</title>
+  <title>Run Time Dependencies &mdash; C++ SDK 2.2.3 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -45,17 +45,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Run Time Dependencies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#macos-systems">MacOS systems</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#system-event-loop">System event loop</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#microphone-camera-permission">Microphone/camera permission</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#macos-systems">MacOS Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-event-loop">System Event Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#microphone-camera-permission">Microphone/Camera Permission</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#windows-systems">Windows systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#windows-systems">Windows Systems</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#crt-version">CRT version</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Microphone/camera permission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Microphone/Camera Permission</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#linux-systems">Linux systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#linux-systems">Linux Systems</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pulseaudio">PulseAudio</a></li>
 </ul>
 </li>
@@ -94,9 +94,9 @@
   <section id="run-time-dependencies">
 <span id="run-time-deps"></span><h1>Run Time Dependencies<a class="headerlink" href="#run-time-dependencies" title="Permalink to this heading"></a></h1>
 <section id="macos-systems">
-<h2>MacOS systems<a class="headerlink" href="#macos-systems" title="Permalink to this heading"></a></h2>
+<h2>MacOS Systems<a class="headerlink" href="#macos-systems" title="Permalink to this heading"></a></h2>
 <section id="system-event-loop">
-<h3>System event loop<a class="headerlink" href="#system-event-loop" title="Permalink to this heading"></a></h3>
+<h3>System Event Loop<a class="headerlink" href="#system-event-loop" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Ensure that the application has started its mainQueue. This must be done as any UI Rendering of Video Frames or receiving of AVCaptureDevice events relies on the existence of an active mainQueue.</p></li>
 <li><p>In our samples we enable the mainQueue to start processing events as follows (refer to <strong>share/dolbyio/comms/sample/utilities/ui_loop/macos_ui.mm</strong> for more details):</p></li>
@@ -104,12 +104,9 @@
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">NSApp</span><span class="w"> </span><span class="n">run</span><span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>IMPORTANT:</strong> On macOS some operations performed by the SDK require using the application mainQueue. Blocking the application mainQueue while awaiting any specific SDK operation to finish may lead to deadlocks. Refer to following documentation section to see how to properly <a class="reference internal" href="../api/sdk/common/async_ops.html#api-async-result"><span class="std std-ref">chain asynchronous operations</span></a> and avoid the need for blocking.</p></li>
-</ul>
 </section>
 <section id="microphone-camera-permission">
-<h3>Microphone/camera permission<a class="headerlink" href="#microphone-camera-permission" title="Permalink to this heading"></a></h3>
+<h3>Microphone/Camera Permission<a class="headerlink" href="#microphone-camera-permission" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Ensure that terminal has access to a microphone and a camera.</p></li>
 <li><p>If not provided, the SDK will request access when launching application; then make sure to grant permission.</p></li>
@@ -118,7 +115,7 @@
 </section>
 </section>
 <section id="windows-systems">
-<h2>Windows systems<a class="headerlink" href="#windows-systems" title="Permalink to this heading"></a></h2>
+<h2>Windows Systems<a class="headerlink" href="#windows-systems" title="Permalink to this heading"></a></h2>
 <section id="crt-version">
 <h3>CRT version<a class="headerlink" href="#crt-version" title="Permalink to this heading"></a></h3>
 <ul class="simple">
@@ -132,7 +129,7 @@
 </div>
 </section>
 <section id="id1">
-<h3>Microphone/camera permission<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<h3>Microphone/Camera Permission<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Ensure that terminal has access to a microphone and a camera.</p></li>
 <li><p>If not provided, the SDK will request access when launching application; then make sure to grant permission.</p></li>
@@ -141,7 +138,7 @@
 </section>
 </section>
 <section id="linux-systems">
-<h2>Linux systems<a class="headerlink" href="#linux-systems" title="Permalink to this heading"></a></h2>
+<h2>Linux Systems<a class="headerlink" href="#linux-systems" title="Permalink to this heading"></a></h2>
 <section id="pulseaudio">
 <h3>PulseAudio<a class="headerlink" href="#pulseaudio" title="Permalink to this heading"></a></h3>
 <ul class="simple">
