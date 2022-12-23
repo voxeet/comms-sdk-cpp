@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; C++ SDK 2.3.0 documentation</title>
+  <title>Getting Started &mdash; C++ SDK 2.2.5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Run Time Dependencies" href="run_time_deps.html" />
-    <link rel="prev" title="C++ SDK 2.3.0 Documentation" href="../index.html" /> 
+    <link rel="prev" title="C++ SDK 2.2.5 Documentation" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -192,7 +192,7 @@ reduce your binary size.</p>
 <li><p><a class="reference internal" href="../api/media_io.html#_CPPv4N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded" title="dolbyio::comms::services::media_io::set_encoded_video_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Encoded</span> <span class="pre">Video</span> <span class="pre">Sink</span></code></a> for the conference to receive video frames before they are decoded. This must be called before the conference is created, but it does not prevent applications from receiving the decoded video frames as well.</p></li>
 </ol>
 </div></blockquote>
-<p>The sample application makes use of the Default Media Recorder module. If you would like to write your own Media Recorder, see the <a class="reference internal" href="../api/recording/example.html#recording-example"><span class="std std-ref">Example Recorder Implementation</span></a> section. The sample application also uses the Default Media Injector module and the sample Media Source File library. If you would like to write your own Media Injector, see the
+<p>The sample application makes use of the <a class="reference internal" href="../api/sdk/common/async_ops.html#_CPPv4I0EN7dolbyio5comms4waitE1TRR12async_resultI1TE" title="dolbyio::comms::wait"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::wait()</span></code></a> call for all asynchronous operations. Additionally, the sample application makes use of the Default Media Recorder module. If you would like to write your own Media Recorder, see the <a class="reference internal" href="../api/recording/example.html#recording-example"><span class="std std-ref">Example Recorder Implementation</span></a> section. The sample application also uses the Default Media Injector module and the sample Media Source File library. If you would like to write your own Media Injector, see the
 <a class="reference internal" href="../api/injection/example.html#injection-example"><span class="std std-ref">Example Injector Implementation</span></a> section. If you would like to write your own Media Source for the injector, see the <a class="reference internal" href="../api/sdk/injector.html#media-source-file"><span class="std std-ref">Media Source File</span></a> section, as well as the sample library itself.</p>
 </section>
 <section id="build-and-run-the-sample-application">
@@ -532,7 +532,7 @@ provide the processor to the SDK using the <a class="reference internal" href=".
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.3.0 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.2.5 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="run_time_deps.html" class="btn btn-neutral float-right" title="Run Time Dependencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

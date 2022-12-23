@@ -94,7 +94,7 @@ In the **Media IO Mode** the sample app can:
   2) :cpp:func:`Set Audio Sink <dolbyio::comms::services::media_io::set_audio_sink>` for the conference to receive PCM audio from conference participants. This means Opus Codec will be used and thus to use the :cpp:class:`Audio Sink <dolbyio::comms::audio_sink>` must be set prior to conference creation.
   3) :cpp:func:`Set Encoded Video Sink <dolbyio::comms::services::media_io::set_encoded_video_sink>` for the conference to receive video frames before they are decoded. This must be called before the conference is created, but it does not prevent applications from receiving the decoded video frames as well.
 
-The sample application makes use of the Default Media Recorder module. If you would like to write your own Media Recorder, see the :ref:`recording_example` section. The sample application also uses the Default Media Injector module and the sample Media Source File library. If you would like to write your own Media Injector, see the 
+The sample application makes use of the :cpp:func:`dolbyio::comms::wait` call for all asynchronous operations. Additionally, the sample application makes use of the Default Media Recorder module. If you would like to write your own Media Recorder, see the :ref:`recording_example` section. The sample application also uses the Default Media Injector module and the sample Media Source File library. If you would like to write your own Media Injector, see the 
 :ref:`injection_example` section. If you would like to write your own Media Source for the injector, see the :ref:`Media Source File <media_source_file>` section, as well as the sample library itself.
 
 .. _build_run_sample:
