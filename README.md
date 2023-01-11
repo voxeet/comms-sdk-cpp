@@ -1,5 +1,9 @@
 # Dolby.io Communications C++ SDK
 
+[Reference Documentation](https://api-references.dolby.io/comms-sdk-cpp/index.html)
+
+[Getting Started Guide](https://api-references.dolby.io/comms-sdk-cpp/other/getting_started.html)
+
 The Dolby.io Communications C++ SDK provides applications with the ability to create high-quality voice and video for fully immersive real-time communications experiences. The C++ SDK allows creating an application that can join Dolby.io conferences.
 
 The C++ SDK is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, as well as receiving and injecting WebRTC media streams.
@@ -23,5 +27,3 @@ Plugins
 The C++ SDK also allows applications to make use of our ready-to-use [plugins](https://api-references.dolby.io/comms-sdk-cpp/api/plugins.html#plugins-api). The C++ SDK provides a default media recorder plugin: a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format.
 
 The C++ SDK provides two default media injection plugins that are able to receive raw media frames and pass them to the SDK. One of the default plugins is the Pacing Injector. This injector exposes interfaces for an application to provide the injector with decoded audio and video frames. Then, the injector provides these frames into the SDK at specified intervals. The other default plugin is the Passthrough-Injector, which exposes interfaces for passing decoded audio/video frames that are directly provided to the SDK.
-
-For information about building basic applications using the C++ SDK, see the [Getting Started](https://dolbyio.github.io/comms-sdk-cpp/other/getting_started.html) guide.
