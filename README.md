@@ -1,5 +1,9 @@
 # Dolby.io Communications C++ SDK
 
+[Reference Documentation](https://api-references.dolby.io/comms-sdk-cpp/index.html)
+
+[Getting Started Guide](https://api-references.dolby.io/comms-sdk-cpp/other/getting_started.html)
+
 The Dolby.io Communications C++ SDK provides applications with the ability to create high-quality voice and video for fully immersive real-time communications experiences. The C++ SDK allows creating an application that can join Dolby.io conferences.
 
 The C++ SDK is responsible for communicating with the Dolby.io backend and providing conferencing functionalities, such as opening and closing sessions, joining and leaving conferences, sending and receiving messages, as well as receiving and injecting WebRTC media streams.
