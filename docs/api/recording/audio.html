@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Audio &mdash; C++ SDK 2.3.0 documentation</title>
@@ -19,6 +19,7 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -75,9 +76,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
-      <li>Audio</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../media_io.html">Media IO API</a></li>
+      <li class="breadcrumb-item active">Audio</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/recording/audio.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,7 +96,7 @@
 C++ SDK will receive a single audio stream which contains the mixed audio of all unmuted participants within that conference. The <a class="reference internal" href="#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Audio</span> <span class="pre">Sink</span></code></a> must be provided to the SDK using the <a class="reference internal" href="../media_io.html#_CPPv4N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink" title="dolbyio::comms::services::media_io::set_audio_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Audio</span> <span class="pre">Sink</span></code></a> function and this must be done before starting a conference.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10audio_sinkE">
-<span id="_CPPv3N7dolbyio5comms10audio_sinkE"></span><span id="_CPPv2N7dolbyio5comms10audio_sinkE"></span><span id="dolbyio::comms::audio_sink"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__sink"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_sink</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10audio_sinkE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms10audio_sinkE"></span><span id="_CPPv2N7dolbyio5comms10audio_sinkE"></span><span id="dolbyio::comms::audio_sink"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__sink"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_sink</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10audio_sinkE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The interface for receiving audio frames. </p>
 <p>Subclassed by <a class="reference internal" href="../sdk/recorder.html#classdolbyio_1_1comms_1_1plugin_1_1recorder"><span class="std std-ref">dolbyio::comms::plugin::recorder</span></a></p>
 <div class="breathe-sectiondef docutils container">

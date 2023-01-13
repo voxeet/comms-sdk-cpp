@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Default Media Recorder &mdash; C++ SDK 2.3.0 documentation</title>
@@ -19,6 +19,7 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -71,9 +72,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../plugins.html">Plugins</a> &raquo;</li>
-      <li>Default Media Recorder</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../plugins.html">Plugins</a></li>
+      <li class="breadcrumb-item active">Default Media Recorder</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/sdk/recorder.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -173,13 +174,13 @@ the structure of the corresponding lines for the events in the metadata.txt file
 creates and configures the recording module that is provided as a part of the C++ SDK. The enums of the interface are used for setting the Video/Audio storage formats of the media. If you want to build your own recorder module, do not use this API.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorderE">
-<span id="_CPPv3N7dolbyio5comms6plugin8recorderE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorderE"></span><span id="dolbyio::comms::plugin::recorder"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">plugin</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">recorder</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../recording/audio.html#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><span class="n"><span class="pre">audio_sink</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms10video_sinkE" title="dolbyio::comms::video_sink"><span class="n"><span class="pre">video_sink</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../recording/encoded_video.html#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="dolbyio::comms::video_sink_encoded"><span class="n"><span class="pre">video_sink_encoded</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorderE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms6plugin8recorderE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorderE"></span><span id="dolbyio::comms::plugin::recorder"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recorder</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../recording/audio.html#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><span class="n"><span class="pre">audio_sink</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms10video_sinkE" title="dolbyio::comms::video_sink"><span class="n"><span class="pre">video_sink</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../recording/encoded_video.html#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="dolbyio::comms::video_sink_encoded"><span class="n"><span class="pre">video_sink_encoded</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorderE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The interface for the Default Media Recorder. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
-<dl class="cpp enum">
+<dl class="cpp enum-class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE">
-<span id="_CPPv3N7dolbyio5comms6plugin8recorder22audio_recording_configE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22audio_recording_configE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1adac7b7cb66a3d4006310a8a12caef287"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_recording_config</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22audio_recording_configE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22audio_recording_configE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1adac7b7cb66a3d4006310a8a12caef287"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_recording_config</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The available formats for capturing audio. </p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
@@ -202,9 +203,9 @@ creates and configures the recording module that is provided as a part of the C+
 
 </dd></dl>
 
-<dl class="cpp enum">
+<dl class="cpp enum-class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE">
-<span id="_CPPv3N7dolbyio5comms6plugin8recorder22video_recording_configE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22video_recording_configE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a67f3983348be29bd7994ca2ab6b78412"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_recording_config</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms6plugin8recorder22video_recording_configE"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder22video_recording_configE"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a67f3983348be29bd7994ca2ab6b78412"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_recording_config</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The available configurations for capturing and storing video. The captured video frames are stored in corresponding containers. The encoded video is not transcoded during or after the recording, so the corresponding container depends on what is negotiated in the SDP. Video encoded via the H264 codec is stored in the MPEG-TS container and video encoded via VP8 is stored in Matroska. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

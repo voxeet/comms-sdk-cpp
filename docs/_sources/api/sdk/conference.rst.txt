@@ -78,6 +78,8 @@ The :ref:`api_conference` events that are emitted by the SDK. You can subscribe 
 .. doxygenstruct:: dolbyio::comms::audio_track_removed
         :project: C++ SDK
 
+.. doxygenstruct:: dolbyio::comms::recording_status_updated
+        :project: C++ SDK
 
 .. _conf_models:
 
@@ -95,4 +97,7 @@ Other structures used by the :ref:`api_conference`, which are not defined in the
         :project: C++ SDK
 
 .. doxygenenum:: dolbyio::comms::participant_type
+        :project: C++ SDK
+
+.. doxygenenum:: dolbyio::comms::video_forwarding_strategy
         :project: C++ SDK

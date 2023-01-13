@@ -25,6 +25,9 @@ The following table lists the contents of the C++ SDK package:
  +---------------+-----------------------------------------------------------------------------------+
 
 .. note::
+ With the addition of Apple silicon support, the macOS package contains two subdirectories inside the unzipped **sdk-release** directory, with libraries for respective platforms. The **sdk-release-arm** packages are designed for Arm architectures, and the **sdk-release-x86** packages are designed for x86 architectures. To simplify this guide, we will mention only the **sdk-release** directory.
+
+.. note::
  On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do this via terminal and the macOS attribute stripping command line tool:
 
  **xattr -d -r com.apple.quarantine sdk-release/**
@@ -163,7 +166,7 @@ _______________________________________
  +-----------------------+------------------------------------------------------------------------------------------+
  | -ml                   | The Media Engine logging level (0-5)                                                     |
  +-----------------------+------------------------------------------------------------------------------------------+
- | -p                    | The user type (user or listener)                                                         |
+ | -p                    | The user type (user|listener) (standard mode automatically joins as user)                | 
  +-----------------------+------------------------------------------------------------------------------------------+
  | -s                    | The send-only mode                                                                       |
  +-----------------------+------------------------------------------------------------------------------------------+
@@ -177,6 +180,8 @@ _______________________________________
  +-----------------------+------------------------------------------------------------------------------------------+
  | -no-display-video     | Do not render video incoming video (sampleapp only renders incoming video on macOS)      |
  +-----------------------+------------------------------------------------------------------------------------------+
+ | -no-background-render | Do not render video when app is in background (only available on macOS)                  |
+ +-----------------------+------------------------------------------------------------------------------------------+
  | -enable-media-io      | Enable the sample applications Media IO features (injection/recording)                   |
  +-----------------------+------------------------------------------------------------------------------------------+
  | -d                    | the relative path to outputdirectory (only considered if Media IO features enabled)      |
@@ -185,15 +190,15 @@ _______________________________________
  +-----------------------+------------------------------------------------------------------------------------------+
  | -a                    | The audio format for recording   (only considered if Media IO features enabled)          |
  +-----------------------+------------------------------------------------------------------------------------------+
- | -p                    | The user type (user or listener)  (only considered if Media IO features enabled)         | 
- +-----------------------+------------------------------------------------------------------------------------------+
  | -m                    | The initial media to inject  (only considered if Media IO features enabled)              |
  +-----------------------+------------------------------------------------------------------------------------------+
  | -f                    | The name of a media file to inject (only considered if Media IO features enabled)        |
  +-----------------------+------------------------------------------------------------------------------------------+
  | -s                    | The send-only mode  (only considered if Media IO features enabled)                       |
  +-----------------------+------------------------------------------------------------------------------------------+
- | -V, -max_vfs          | Max video forwarding strategy                                                            |
+ | -V, -max_vfs          | Maximum video forwarding strategy (maximum video streams to receive)                     |
+ +-----------------------+------------------------------------------------------------------------------------------+
+ | -forwarding-strategy  | The desired video forwarding strategy (lastSpeaker, closestUser)                         |
  +-----------------------+------------------------------------------------------------------------------------------+
 
 For example:
@@ -266,15 +271,13 @@ explain each of the options. If the chosen option requires more input, the user 
  +--------------------------+----------------------------------------------------------------+
  | decline                  | Declines a conference invitation                               |
  +--------------------------+----------------------------------------------------------------+
- | audio-level              | Get audio level for a single participant                       |
+ | al+                      | Start getting audio levels event periodically                  |
  +--------------------------+----------------------------------------------------------------+
- | audio-levels             | Get audio levels for all participants in a conference          |
+ | al-                      | Stop getting the audio levels event                            |
  +--------------------------+----------------------------------------------------------------+
  | set-audio-capture-mode   | Set the audio capture mode.                                    |
  +--------------------------+----------------------------------------------------------------+
  | get-audio-capture-mode   | Get the current audio capture mode.                            |
- +--------------------------+----------------------------------------------------------------+
- | audio-levels             | Get audio levels for all participants in a conference          |
  +--------------------------+----------------------------------------------------------------+
  | q                        | Quits the application                                          |
  +--------------------------+----------------------------------------------------------------+
@@ -325,7 +328,7 @@ provided as the :cpp:class:`dolbyio::comms::video_frame_handler` with the :cpp:f
  For macOS Video Support relies on the presence and running of the macOS main event loop. If you try to start video before you have executed something like **[NSApp run]** the SDK will throw an exception.
  Thus any calls to :cpp:func:`start_video <dolbyio::comms::services::local_video::start>` must be done after the main event loop has been started.
 
-The interfaces inheritted by this custom_video_processor example must be implemented by any custom video processor which wishes to receive video frames and have somehwere to inject them.
+The interfaces inheritted by this custom_video_processor example must be implemented by any custom video processor which wishes to receive video frames and have somewhere to inject them.
 
 Adding this sample custom video procesor to any app is very simple, here we show basic instructions for integrating it with our sample desktop_app:
 

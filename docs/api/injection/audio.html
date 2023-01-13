@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Audio &mdash; C++ SDK 2.3.0 documentation</title>
@@ -19,6 +19,7 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -73,9 +74,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
-      <li>Audio</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../media_io.html">Media IO API</a></li>
+      <li class="breadcrumb-item active">Audio</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/injection/audio.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,7 +96,7 @@ pipeline so that frames can be passed to the CoreSDK. The <a class="reference in
 must be done before starting a Conference.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12audio_sourceE">
-<span id="_CPPv3N7dolbyio5comms12audio_sourceE"></span><span id="_CPPv2N7dolbyio5comms12audio_sourceE"></span><span id="dolbyio::comms::audio_source"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12audio_sourceE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms12audio_sourceE"></span><span id="_CPPv2N7dolbyio5comms12audio_sourceE"></span><span id="dolbyio::comms::audio_source"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms12audio_sourceE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The interface for providing audio frames. </p>
 <p>This interface must be implemented by the injector, it shall serve as the source of audio frames passed to the <a class="reference internal" href="#classdolbyio_1_1comms_1_1rtc__audio__source"><span class="std std-ref">rtc_audio_source</span></a>. </p>
 <p>Subclassed by dolbyio::comms::plugin::injector</p>
@@ -126,7 +127,7 @@ receiving audio frames from some media source, the injector provides the raw aud
 The RTC Audio Source then pushes the audio data further down the audio pipeline until it is injected into the conference. The RTC Audio Source expects <a class="reference internal" href="#_CPPv4N7dolbyio5comms11audio_frameE" title="dolbyio::comms::audio_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">audio</span> <span class="pre">frames</span></code></a>.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16rtc_audio_sourceE">
-<span id="_CPPv3N7dolbyio5comms16rtc_audio_sourceE"></span><span id="_CPPv2N7dolbyio5comms16rtc_audio_sourceE"></span><span id="dolbyio::comms::rtc_audio_source"></span><span class="target" id="classdolbyio_1_1comms_1_1rtc__audio__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">rtc_audio_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16rtc_audio_sourceE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms16rtc_audio_sourceE"></span><span id="_CPPv2N7dolbyio5comms16rtc_audio_sourceE"></span><span id="dolbyio::comms::rtc_audio_source"></span><span class="target" id="classdolbyio_1_1comms_1_1rtc__audio__source"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rtc_audio_source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16rtc_audio_sourceE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The adapter which is used for providing Audio frames into WebRTC. This interface is an Audio Sink from the perspective of the Injector. It is an Audio Source from the perspective of WebRTC Audio Tracks, thus it provides this connection in establishing the audio injection pipeline. </p>
 <p>This interface is NOT implemented by the injector, it is used to be the injector to provide audio frames. </p>
 <div class="breathe-sectiondef docutils container">
@@ -153,7 +154,7 @@ The RTC Audio Source then pushes the audio data further down the audio pipeline 
 
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11audio_frameE">
-<span id="_CPPv3N7dolbyio5comms11audio_frameE"></span><span id="_CPPv2N7dolbyio5comms11audio_frameE"></span><span id="dolbyio::comms::audio_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">audio_frame</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11audio_frameE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms11audio_frameE"></span><span id="_CPPv2N7dolbyio5comms11audio_frameE"></span><span id="dolbyio::comms::audio_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__frame"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_frame</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11audio_frameE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Interface that wraps decoded audio frames to be injected into WebRTC. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>

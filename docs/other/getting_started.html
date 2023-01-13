@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started &mdash; C++ SDK 2.3.0 documentation</title>
@@ -19,6 +19,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -78,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Getting Started</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Getting Started</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/other/getting_started.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -119,6 +120,10 @@
 </tbody>
 </table>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>With the addition of Apple silicon support, the macOS package contains two subdirectories inside the unzipped <strong>sdk-release</strong> directory, with libraries for respective platforms. The <strong>sdk-release-arm</strong> packages are designed for Arm architectures, and the <strong>sdk-release-x86</strong> packages are designed for x86 architectures. To simplify this guide, we will mention only the <strong>sdk-release</strong> directory.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do this via terminal and the macOS attribute stripping command line tool:</p>
@@ -273,7 +278,7 @@ reduce your binary size.</p>
 <td><p>The Media Engine logging level (0-5)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-p</p></td>
-<td><p>The user type (user or listener)</p></td>
+<td><p>The user type (user|listener) (standard mode automatically joins as user)</p></td>
 </tr>
 <tr class="row-even"><td><p>-s</p></td>
 <td><p>The send-only mode</p></td>
@@ -293,20 +298,20 @@ reduce your binary size.</p>
 <tr class="row-odd"><td><p>-no-display-video</p></td>
 <td><p>Do not render video incoming video (sampleapp only renders incoming video on macOS)</p></td>
 </tr>
-<tr class="row-even"><td><p>-enable-media-io</p></td>
+<tr class="row-even"><td><p>-no-background-render</p></td>
+<td><p>Do not render video when app is in background (only available on macOS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>-enable-media-io</p></td>
 <td><p>Enable the sample applications Media IO features (injection/recording)</p></td>
 </tr>
-<tr class="row-odd"><td><p>-d</p></td>
+<tr class="row-even"><td><p>-d</p></td>
 <td><p>the relative path to outputdirectory (only considered if Media IO features enabled)</p></td>
 </tr>
-<tr class="row-even"><td><p>-v</p></td>
+<tr class="row-odd"><td><p>-v</p></td>
 <td><p>The video format for recording  (only considered if Media IO features enabled)</p></td>
 </tr>
-<tr class="row-odd"><td><p>-a</p></td>
+<tr class="row-even"><td><p>-a</p></td>
 <td><p>The audio format for recording   (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-even"><td><p>-p</p></td>
-<td><p>The user type (user or listener)  (only considered if Media IO features enabled)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-m</p></td>
 <td><p>The initial media to inject  (only considered if Media IO features enabled)</p></td>
@@ -318,7 +323,10 @@ reduce your binary size.</p>
 <td><p>The send-only mode  (only considered if Media IO features enabled)</p></td>
 </tr>
 <tr class="row-even"><td><p>-V, -max_vfs</p></td>
-<td><p>Max video forwarding strategy</p></td>
+<td><p>Maximum video forwarding strategy (maximum video streams to receive)</p></td>
+</tr>
+<tr class="row-odd"><td><p>-forwarding-strategy</p></td>
+<td><p>The desired video forwarding strategy (lastSpeaker, closestUser)</p></td>
 </tr>
 </tbody>
 </table>
@@ -417,11 +425,11 @@ explain each of the options. If the chosen option requires more input, the user 
 <tr class="row-even"><td><p>decline</p></td>
 <td><p>Declines a conference invitation</p></td>
 </tr>
-<tr class="row-odd"><td><p>audio-level</p></td>
-<td><p>Get audio level for a single participant</p></td>
+<tr class="row-odd"><td><p>al+</p></td>
+<td><p>Start getting audio levels event periodically</p></td>
 </tr>
-<tr class="row-even"><td><p>audio-levels</p></td>
-<td><p>Get audio levels for all participants in a conference</p></td>
+<tr class="row-even"><td><p>al-</p></td>
+<td><p>Stop getting the audio levels event</p></td>
 </tr>
 <tr class="row-odd"><td><p>set-audio-capture-mode</p></td>
 <td><p>Set the audio capture mode.</p></td>
@@ -429,25 +437,22 @@ explain each of the options. If the chosen option requires more input, the user 
 <tr class="row-even"><td><p>get-audio-capture-mode</p></td>
 <td><p>Get the current audio capture mode.</p></td>
 </tr>
-<tr class="row-odd"><td><p>audio-levels</p></td>
-<td><p>Get audio levels for all participants in a conference</p></td>
-</tr>
-<tr class="row-even"><td><p>q</p></td>
+<tr class="row-odd"><td><p>q</p></td>
 <td><p>Quits the application</p></td>
 </tr>
-<tr class="row-odd"><td><p>f*</p></td>
+<tr class="row-even"><td><p>f*</p></td>
 <td><p>Sets a new media file to play (if media io enabled)</p></td>
 </tr>
-<tr class="row-even"><td><p>F*</p></td>
+<tr class="row-odd"><td><p>F*</p></td>
 <td><p>Adds a new media file to a playlist (if media io enabled)</p></td>
 </tr>
-<tr class="row-odd"><td><p>p*</p></td>
+<tr class="row-even"><td><p>p*</p></td>
 <td><p>Pauses the file injection  (if media io enabled)</p></td>
 </tr>
-<tr class="row-even"><td><p>r*</p></td>
+<tr class="row-odd"><td><p>r*</p></td>
 <td><p>Resumes the paused file injection  (if media io enabled)</p></td>
 </tr>
-<tr class="row-odd"><td><p>s*</p></td>
+<tr class="row-even"><td><p>s*</p></td>
 <td><p>Seeks to time in the file  (if media io enabled)</p></td>
 </tr>
 </tbody>
@@ -487,7 +492,7 @@ and underlying IOSurface and only then process its copy of these memory buffers.
 <p>For macOS Video Support relies on the presence and running of the macOS main event loop. If you try to start video before you have executed something like <strong>[NSApp run]</strong> the SDK will throw an exception.
 Thus any calls to <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start_video</span></code></a> must be done after the main event loop has been started.</p>
 </div>
-<p>The interfaces inheritted by this custom_video_processor example must be implemented by any custom video processor which wishes to receive video frames and have somehwere to inject them.</p>
+<p>The interfaces inheritted by this custom_video_processor example must be implemented by any custom video processor which wishes to receive video frames and have somewhere to inject them.</p>
 <p>Adding this sample custom video procesor to any app is very simple, here we show basic instructions for integrating it with our sample desktop_app:</p>
 <ol class="arabic simple">
 <li><p>Edit the <strong>share/dolby/comms/sample/utilities/CMakeLists.txt</strong> file so it links the custom_video_processor shared library by modifying the following:</p></li>

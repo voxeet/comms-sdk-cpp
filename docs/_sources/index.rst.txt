@@ -12,7 +12,7 @@ Currently, an instance of the C++ SDK can connect to only one conference at a ti
 Core SDK
 ========
 The Core C++ SDK handles all of the signalling with the Dolby.io backend as well as providing various events, messages and other valuable information to users. The Dolby.io Communications C++ SDK allows joining 
-Dolby Voice Conferences where participants can send and receive high-quality voice streams, including spatial audio and shared scenes. This functionality is useful for integrating the Dolby Voice experience 
+Dolby Voice Conferences where participants can send and receive high-quality voice streams, including Dolby.io Spatial Audio, powered by Dolby Atmos technology, and shared scenes. This functionality is useful for integrating the Dolby Voice experience 
 into your own game engine or virtual world experience. The C++ SDK provides applications the ability to capture and playback audio and video, manage input and output audio devices and input video devices, add 
 spatial placement for participants, as well as partake in a shared spatial scene. 
 

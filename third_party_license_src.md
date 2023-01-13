@@ -12,11 +12,11 @@ TO THE FULLEST EXTENT PERMITTED UNDER APPLICABLE LAW, THE THIRD-PARTY COMPONENTS
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/rtc_base/third_party/base64/
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/rtc_base/third_party/base64/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/rtc_base/third_party/base64/LICENSE
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/rtc_base/third_party/base64/LICENSE
 
 ### License
 
@@ -41,11 +41,11 @@ https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/r
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/src/third_party/+/d897faa4f89d29ff5501a89043b0cec71dd3fb8a/abseil-cpp/
+https://chromium.googlesource.com/chromium/src/third_party/+/24f89f2000caa5b1e3f72e15e90e327df4debfa3/abseil-cpp/
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/src/third_party/+/d897faa4f89d29ff5501a89043b0cec71dd3fb8a/abseil-cpp/LICENSE
+https://chromium.googlesource.com/chromium/src/third_party/+/24f89f2000caa5b1e3f72e15e90e327df4debfa3/abseil-cpp/LICENSE
 
 ### License
 
@@ -258,12 +258,12 @@ limitations under the License.
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/src/third_party/+/d897faa4f89d29ff5501a89043b0cec71dd3fb8a/boringssl/
-https://boringssl.googlesource.com/boringssl.git/+/05cd93068b0a553afc48f69acbceae10c6a17593
+https://chromium.googlesource.com/chromium/src/third_party/+/24f89f2000caa5b1e3f72e15e90e327df4debfa3/boringssl/
+https://boringssl.googlesource.com/boringssl.git/+/b95124305ab15c7523d3e21437309fa5dd717ee8
 
 ### License URL
 
-https://boringssl.googlesource.com/boringssl.git/+/05cd93068b0a553afc48f69acbceae10c6a17593/LICENSE
+https://boringssl.googlesource.com/boringssl.git/+/b95124305ab15c7523d3e21437309fa5dd717ee8/LICENSE
 
 ### License
 
@@ -548,11 +548,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/e41c4335022e7a2804daf365670b918e26e0d5c6/rtc_base/third_party/sigslot/
+https://webrtc.googlesource.com/src/+/10ed5f98b993edfde5042b79df4320b22955477f/rtc_base/third_party/sigslot/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/e41c4335022e7a2804daf365670b918e26e0d5c6/rtc_base/third_party/sigslot/LICENSE
+https://webrtc.googlesource.com/src/+/10ed5f98b993edfde5042b79df4320b22955477f/rtc_base/third_party/sigslot/LICENSE
 
 ### License
 
@@ -570,11 +570,11 @@ https://webrtc.googlesource.com/src/+/e41c4335022e7a2804daf365670b918e26e0d5c6/r
 
 ### Source root
 
-https://git.ffmpeg.org/gitweb/ffmpeg.git/tree/f60b1211b2aa7b6e8902d64072b678b4ccd87e54
+https://git.ffmpeg.org/gitweb/ffmpeg.git/tree/cf30b538e522703924ce3ef68ddfbd557a29d93f
 
 ### License URL
 
-https://git.ffmpeg.org/gitweb/ffmpeg.git/blob/f60b1211b2aa7b6e8902d64072b678b4ccd87e54:/LICENSE.md
+https://git.ffmpeg.org/gitweb/ffmpeg.git/blob/cf30b538e522703924ce3ef68ddfbd557a29d93f:/LICENSE.md
 
 ### License
 
@@ -696,11 +696,11 @@ compatible with the LGPL.
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/fft/
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/fft/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/fft/LICENSE
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/fft/LICENSE
 
 ### License
 
@@ -736,11 +736,11 @@ https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/m
 
 ### Source root
 
-https://boringssl.googlesource.com/boringssl.git/+/05cd93068b0a553afc48f69acbceae10c6a17593/third_party/fiat/
+https://boringssl.googlesource.com/boringssl.git/+/b95124305ab15c7523d3e21437309fa5dd717ee8/third_party/fiat/
 
 ### License URL
 
-https://boringssl.googlesource.com/boringssl.git/+/05cd93068b0a553afc48f69acbceae10c6a17593/third_party/fiat/LICENSE
+https://boringssl.googlesource.com/boringssl.git/+/b95124305ab15c7523d3e21437309fa5dd717ee8/third_party/fiat/LICENSE
 
 ### License
 
@@ -773,11 +773,11 @@ SOFTWARE.
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/a4d873786f10eedd72de25ad0d94ad7c53c1f68a/common_audio/third_party/fft4g/
+https://webrtc.googlesource.com/src/+/bef022bde040b9712c1e7234d476cb58ac1a4159/common_audio/third_party/ooura/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/a4d873786f10eedd72de25ad0d94ad7c53c1f68a/common_audio/third_party/fft4g/LICENSE
+https://webrtc.googlesource.com/src/+/bef022bde040b9712c1e7234d476cb58ac1a4159/common_audio/third_party/ooura/LICENSE
 
 ### License
 
@@ -796,11 +796,11 @@ https://webrtc.googlesource.com/src/+/a4d873786f10eedd72de25ad0d94ad7c53c1f68a/c
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/g711/
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/g711/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/g711/LICENSE
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/g711/LICENSE
 
 ### License
 
@@ -825,11 +825,11 @@ https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/m
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/src/base/+/ebf82dc7c4f05d3df2b0c164810d893a54c77f81/third_party/libevent/
+https://chromium.googlesource.com/chromium/src/third_party/+/89bf585c11331531dc4e9d095b3eed2eb48b48dc/libevent/
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/src/base/+/ebf82dc7c4f05d3df2b0c164810d893a54c77f81/third_party/libevent/LICENSE
+https://chromium.googlesource.com/chromium/src/third_party/+/89bf585c11331531dc4e9d095b3eed2eb48b48dc/libevent/LICENSE
 
 ### License
 
@@ -893,11 +893,11 @@ tree.h:
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/deps/libjpeg_turbo/+/d460d6b1cb965c3363f36f7ed716f13d60cdb65d
+https://chromium.googlesource.com/chromium/deps/libjpeg_turbo/+/22f1a22c99e9dde8cd3c72ead333f425c5a7aa77
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/deps/libjpeg_turbo/+/d460d6b1cb965c3363f36f7ed716f13d60cdb65d/LICENSE.md
+https://chromium.googlesource.com/chromium/deps/libjpeg_turbo/+/22f1a22c99e9dde8cd3c72ead333f425c5a7aa77/LICENSE.md
 
 ### License
 
@@ -1061,11 +1061,11 @@ that were granted to the IJG for code derived from their software.
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/deps/libsrtp/+/650611720ecc23e0e6b32b0e3100f8b4df91696c
+https://chromium.googlesource.com/chromium/deps/libsrtp/+/5b7c744eb8310250ccc534f3f86a2015b3887a0a
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/deps/libsrtp/+/650611720ecc23e0e6b32b0e3100f8b4df91696c/LICENSE
+https://chromium.googlesource.com/chromium/deps/libsrtp/+/5b7c744eb8310250ccc534f3f86a2015b3887a0a/LICENSE
 
 ### License
 
@@ -1111,11 +1111,11 @@ https://chromium.googlesource.com/chromium/deps/libsrtp/+/650611720ecc23e0e6b32b
 
 ### Source root
 
-https://chromium.googlesource.com/webm/libvpx/+/7584f1311e10738ab39f51633aa3f624772a79ba
+https://chromium.googlesource.com/webm/libvpx/+/711bef67400f096416cb1ba7f6560e533871490f
 
 ### License URL
 
-https://chromium.googlesource.com/webm/libvpx/+/7584f1311e10738ab39f51633aa3f624772a79ba/LICENSE
+https://chromium.googlesource.com/webm/libvpx/+/711bef67400f096416cb1ba7f6560e533871490f/LICENSE
 
 ### License
 
@@ -1157,11 +1157,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Source root
 
-https://chromium.googlesource.com/libyuv/libyuv/+/f9aacffa029ff3a32f0408f78e2588663271f1b1
+https://chromium.googlesource.com/libyuv/libyuv/+/d248929c059ff7629a85333699717d7a677d8d96
 
 ### License URL
 
-https://chromium.googlesource.com/libyuv/libyuv/+/f9aacffa029ff3a32f0408f78e2588663271f1b1/LICENSE
+https://chromium.googlesource.com/libyuv/libyuv/+/d248929c059ff7629a85333699717d7a677d8d96/LICENSE
 
 ### License
 
@@ -1201,11 +1201,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Source root
 
-https://chromium.googlesource.com/external/github.com/cisco/openh264/+/6f26bce0b1c4e8ce0e13332f7c0083788def5fdf
+https://chromium.googlesource.com/external/github.com/cisco/openh264/+/fac04ceb3e966f613ed17e98178e9d690280bba6
 
 ### License URL
 
-https://chromium.googlesource.com/external/github.com/cisco/openh264/+/6f26bce0b1c4e8ce0e13332f7c0083788def5fdf/LICENSE
+https://chromium.googlesource.com/external/github.com/cisco/openh264/+/fac04ceb3e966f613ed17e98178e9d690280bba6/LICENSE
 
 ### License
 
@@ -1239,11 +1239,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/src/third_party/+/d897faa4f89d29ff5501a89043b0cec71dd3fb8a/opus/
+https://chromium.googlesource.com/chromium/src/third_party/+/24f89f2000caa5b1e3f72e15e90e327df4debfa3/opus/
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/src/third_party/+/d897faa4f89d29ff5501a89043b0cec71dd3fb8a/opus/src/COPYING
+https://chromium.googlesource.com/chromium/src/third_party/+/24f89f2000caa5b1e3f72e15e90e327df4debfa3/opus/src/COPYING
 
 ### License
 
@@ -1298,11 +1298,11 @@ https://datatracker.ietf.org/ipr/1526/
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/src/third_party/+/72101370fe531c46c379dfb5191f4a88f4d76bb5/pffft/
+https://chromium.googlesource.com/chromium/src/third_party/+/fda1c4adce2ada5c9f8d1071976a02b4d36ec692/pffft/
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/src/third_party/+/72101370fe531c46c379dfb5191f4a88f4d76bb5/pffft/LICENSE
+https://chromium.googlesource.com/chromium/src/third_party/+/fda1c4adce2ada5c9f8d1071976a02b4d36ec692/pffft/LICENSE
 
 ### License
 
@@ -1358,11 +1358,11 @@ SOFTWARE.
 
 ### Source root
 
-https://github.com/protocolbuffers/protobuf/tree/cf242503ec157a7dda8a6eda48712dd26c81d2e6
+https://chromium.googlesource.com/chromium/src/third_party/+/7662a555c4d1e87dad1049edb9cace20a2a40158/protobuf/
 
 ### License URL
 
-https://github.com/protocolbuffers/protobuf/blob/cf242503ec157a7dda8a6eda48712dd26c81d2e6/LICENSE
+https://chromium.googlesource.com/chromium/src/third_party/+/7662a555c4d1e87dad1049edb9cace20a2a40158/protobuf/LICENSE
 
 ### License
 
@@ -1405,11 +1405,11 @@ support library is itself covered by the above license.
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/src/third_party/+/4a8e38d47979a514d1587ad5a19273fadf57ec71/rnnoise/
+https://chromium.googlesource.com/chromium/src/third_party/+/8ec25ad3c39bbcb2f05f0970f510cc6093631838/rnnoise/
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/src/third_party/+/4a8e38d47979a514d1587ad5a19273fadf57ec71/rnnoise/COPYING
+https://chromium.googlesource.com/chromium/src/third_party/+/8ec25ad3c39bbcb2f05f0970f510cc6093631838/rnnoise/COPYING
 
 ### License
 
@@ -1493,11 +1493,11 @@ https://webrtc.googlesource.com/src/+/refs/heads/master/common_audio/third_party
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/LICENSE
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/LICENSE
 
 ### License
 
@@ -1537,11 +1537,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/g722/
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/g722/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/g722/LICENSE
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/g722/LICENSE
 https://github.com/sippy/libg722/blob/master/LICENSE
 
 ### License
@@ -1580,60 +1580,15 @@ https://github.com/sippy/libg722/blob/master/LICENSE
 *****
 ```
 
-## usrsctp
-
-### Source root
-
-https://chromium.googlesource.com/external/github.com/sctplab/usrsctp/+/7a8bc9a90ca96634aa56ee712856d97f27d903f8/
-
-### License URL
-
-https://chromium.googlesource.com/external/github.com/sctplab/usrsctp/+/7a8bc9a90ca96634aa56ee712856d97f27d903f8/LICENSE.md
-
-### License
-
-```
-(Copied from the COPYRIGHT file of
-https://code.google.com/p/sctp-refimpl/source/browse/trunk/COPYRIGHT)
---------------------------------------------------------------------------------
-
-Copyright (c) 2001, 2002 Cisco Systems, Inc.
-Copyright (c) 2002-12 Randall R. Stewart
-Copyright (c) 2002-12 Michael Tuexen
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
-1. Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in the
-   documentation and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGE.
-```
-
 ## zlib
 
 ### Source root
 
-https://chromium.googlesource.com/chromium/src/third_party/+/d897faa4f89d29ff5501a89043b0cec71dd3fb8a/zlib/
+https://chromium.googlesource.com/chromium/src/third_party/+/24f89f2000caa5b1e3f72e15e90e327df4debfa3/zlib/
 
 ### License URL
 
-https://chromium.googlesource.com/chromium/src/third_party/+/d897faa4f89d29ff5501a89043b0cec71dd3fb8a/zlib/LICENSE
+https://chromium.googlesource.com/chromium/src/third_party/+/24f89f2000caa5b1e3f72e15e90e327df4debfa3/zlib/LICENSE
 
 ### License
 
@@ -1663,11 +1618,11 @@ freely, subject to the following restrictions:
 
 ### Source root
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/portaudio/
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/portaudio/
 
 ### License URL
 
-https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/modules/third_party/portaudio/LICENSE
+https://webrtc.googlesource.com/src/+/42be4ae879ed6870dfc5ca554d11062b536da717/modules/third_party/portaudio/LICENSE
 
 ### License
 
@@ -1765,11 +1720,11 @@ https://webrtc.googlesource.com/src/+/0b2302e5e0418b6716fbc0b3927874fd3a842caf/m
 
 ### Source root
 
-https://git.openssl.org/?p=openssl.git;a=tree;h=39e3223245ae719e1281c929647c09d67308dae9;hb=fd78df59b0f656aefe96e39533130454aa957c00
+https://git.openssl.org/?p=openssl.git;a=tree;hb=129058165d195e43a0ad10111b0c2e29bdf65980
 
 ### License URL
 
-https://git.openssl.org/?p=openssl.git;a=tree;h=39e3223245ae719e1281c929647c09d67308dae9;hb=fd78df59b0f656aefe96e39533130454aa957c00
+https://git.openssl.org/?p=openssl.git;a=blob;f=LICENSE;h=9601ab43575f9719ca6d2731580ec31ca5dfb0e7;hb=129058165d195e43a0ad10111b0c2e29bdf65980
 
 ### License
 
@@ -1904,7 +1859,7 @@ Original SSLeay License
 
 ### Source root
 
-https://github.com/boostorg/boost/tree/boost-1.76.0
+https://github.com/boostorg/boost/tree/boost-1.80.0
 
 ### License URL
 
@@ -1976,4 +1931,46 @@ THE SOFTWARE.
 -- NOTE: Third party dependency used by this software --
 This software depends on the fmt lib (MIT License),
 and users must comply to its license: https://github.com/fmtlib/fmt/blob/master/LICENSE.rst
+```
+
+## CRC32C
+
+### Source root
+
+https://github.com/google/crc32c/tree/fa5ade41ee480003d9c5af6f43567ba22e4e17e6
+
+### License URL
+
+https://github.com/google/crc32c/blob/fa5ade41ee480003d9c5af6f43567ba22e4e17e6/LICENSE
+
+### License
+```
+Copyright 2017, The CRC32C Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+
+   * Neither the name of Google Inc. nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
