@@ -55,3 +55,6 @@ Other structures used by the :ref:`api_device_management` that are not defined i
 
 .. doxygenclass:: dolbyio::comms::dvc_device
         :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::camera_device
+        :project: C++ SDK

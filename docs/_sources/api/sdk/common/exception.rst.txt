@@ -12,6 +12,9 @@ Exception's which can be thrown by the SDK and caught by user. These have been l
 .. doxygenclass:: dolbyio::comms::async_operation_canceled
         :project: C++ SDK
 
+.. doxygenclass:: dolbyio::comms::dvc_error_exception
+        :project: C++ SDK
+
 .. doxygenclass:: dolbyio::comms::json_exception
         :project: C++ SDK
 
@@ -30,9 +33,6 @@ Exception's which can be thrown by the SDK and caught by user. These have been l
 .. doxygenclass:: dolbyio::comms::session_exception
         :project: C++ SDK
 
-.. doxygenclass:: dolbyio::comms::services::session::state_exception
-        :project: C++ SDK
-
 .. doxygenclass:: dolbyio::comms::conference_exception
         :project: C++ SDK
 
@@ -42,10 +42,44 @@ Exception's which can be thrown by the SDK and caught by user. These have been l
 .. doxygenclass:: dolbyio::comms::media_exception
         :project: C++ SDK
 
+.. doxygenclass:: dolbyio::comms::media_engine_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::create_answer_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::create_peer_connection_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::ice_candidate_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::media_stream_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::peer_connection_disconnected_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::peer_connection_failed_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::sdp_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::spatial_placement_exception
+        :project: C++ SDK
+
 .. doxygenclass:: dolbyio::comms::dvc_exception
         :project: C++ SDK
 
 .. doxygenclass:: dolbyio::comms::certificate_exception
         :project: C++ SDK
 
+.. doxygenclass:: dolbyio::comms::security_check_exception
+        :project: C++ SDK
 
+.. doxygenclass:: dolbyio::comms::signaling_channel_exception
+        :project: C++ SDK
+
+.. doxygenclass:: dolbyio::comms::invalid_token_exception
+        :project: C++ SDK

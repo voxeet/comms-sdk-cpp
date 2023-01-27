@@ -246,7 +246,7 @@ The Paced Injector also provides a method for injecting silent audio frames in 1
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE">
 <span id="_CPPv3N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::plugin::injector_paced::inject_video_frame__std::unique_ptr:video_frame:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1ab08a1f56bbdbc96cfa3ae8f71f90607b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inject_video_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin14injector_paced18inject_video_frameERRNSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Inject a raw video frame into the conference. The video frame must contain YUV pixels. </p>
-<p>The desired frame interval for injecting the frames into WebRTC conference should be configured via the <a class="reference internal" href="#classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a1dce12c7c13d53cfe99cdf915e2914ad"><span class="std std-ref">set_video_frame_interval</span></a> method. The video frames are queued and provided to WebRTC every frame interval. The queue can hold up to 10 video frames; once the queue fills this function blocks the calling thread until space on the queue is available.</p>
+<p>The desired frame interval for injecting the frames into WebRTC conference should be configured via the #set_video_frame_interval method. The video frames are queued and provided to WebRTC every frame interval. The queue can hold up to 10 video frames; once the queue fills this function blocks the calling thread until space on the queue is available.</p>
 <p><dl class="simple">
 <dt><strong>Attention</strong></dt><dd><p>This method blocks the calling thread when the video queue is full.</p>
 </dd>
@@ -275,24 +275,6 @@ The Paced Injector also provides a method for injecting silent audio frames in 1
 <li><p><strong>numerator</strong> – The numerator of the frame rate value. </p></li>
 <li><p><strong>denominator</strong> – The denominator of the frame rate value. </p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE">
-<span id="_CPPv3N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE"></span><span id="_CPPv2N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE"></span><span id="dolbyio::comms::plugin::injector_paced::set_video_frame_interval__std::chrono::milliseconds"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a1dce12c7c13d53cfe99cdf915e2914ad"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_video_frame_interval</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">chrono</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">milliseconds</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">interval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin14injector_paced24set_video_frame_intervalENSt6chrono12millisecondsE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Sets the video frame interval for injecting video frames into the conference. The pacing injector provides frames to WebRTC at the interval specified by this method, provided the frames are available on the queue. </p>
-<p><dl>
-<dt class="sig sig-object cpp">
-<em><span class="pre">Deprecated:</span></em></dt>
-<dd><p>As of 2.2 use <a class="reference internal" href="#classdolbyio_1_1comms_1_1plugin_1_1injector__paced_1a850d388d9c055aa6ea924cc8a8780faa"><span class="std std-ref">set_video_frame_rate</span></a>.</p>
-</dd></dl>
-
-</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>interval</strong> – The frame interval in milliseconds. </p>
 </dd>
 </dl>
 </dd></dl>

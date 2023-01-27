@@ -54,10 +54,13 @@ Conference Events
 -----------------
 The :ref:`api_conference` events that are emitted by the SDK. You can subscribe to the events using the :cpp:func:`conference::add_event_handler <dolbyio::comms::services::conference::add_event_handler>` methods. 
 
-.. doxygenstruct:: dolbyio::comms::active_speaker_change
+.. doxygenstruct:: dolbyio::comms::active_speaker_changed
         :project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::conference_status_updated
+        :project: C++ SDK
+
+.. doxygenenum:: dolbyio::comms::conference_status
         :project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::participant_added
@@ -81,6 +84,21 @@ The :ref:`api_conference` events that are emitted by the SDK. You can subscribe 
 .. doxygenstruct:: dolbyio::comms::recording_status_updated
         :project: C++ SDK
 
+.. doxygenstruct:: dolbyio::comms::video_forwarded_changed
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::conference_message_received
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::conference_invitation_received
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::audio_level
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::audio_levels
+        :project: C++ SDK
+
 .. _conf_models:
 
 Other Structures
@@ -88,6 +106,9 @@ Other Structures
 Other structures used by the :ref:`api_conference`, which are not defined in the :ref:`conf_serv` interface.
 
 .. doxygenstruct:: dolbyio::comms::conference_info
+        :project: C++ SDK
+
+.. doxygenenum:: dolbyio::comms::conference_access_permissions
         :project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::participant_info
@@ -100,4 +121,7 @@ Other structures used by the :ref:`api_conference`, which are not defined in the
         :project: C++ SDK
 
 .. doxygenenum:: dolbyio::comms::video_forwarding_strategy
+        :project: C++ SDK
+
+.. doxygenenum:: dolbyio::comms::listen_mode
         :project: C++ SDK

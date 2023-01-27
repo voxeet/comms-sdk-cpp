@@ -98,7 +98,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9exceptionE">
 <span id="_CPPv3N7dolbyio5comms9exceptionE"></span><span id="_CPPv2N7dolbyio5comms9exceptionE"></span><span id="dolbyio::comms::exception"></span><span class="target" id="classdolbyio_1_1comms_1_1exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n"><span class="pre">exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms9exceptionE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The base class for the SDK exceptions. </p>
-<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1async__operation__canceled"><span class="std std-ref">dolbyio::comms::async_operation_canceled</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1certificate__exception"><span class="std std-ref">dolbyio::comms::certificate_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1conference__exception"><span class="std std-ref">dolbyio::comms::conference_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1io__exception"><span class="std std-ref">dolbyio::comms::io_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1json__exception"><span class="std std-ref">dolbyio::comms::json_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1jwt__exception"><span class="std std-ref">dolbyio::comms::jwt_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1media__exception"><span class="std std-ref">dolbyio::comms::media_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1session__exception"><span class="std std-ref">dolbyio::comms::session_exception</span></a>, dolbyio::comms::spatial_placement_exception</p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1async__operation__canceled"><span class="std std-ref">dolbyio::comms::async_operation_canceled</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1certificate__exception"><span class="std std-ref">dolbyio::comms::certificate_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1conference__exception"><span class="std std-ref">dolbyio::comms::conference_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1io__exception"><span class="std std-ref">dolbyio::comms::io_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1json__exception"><span class="std std-ref">dolbyio::comms::json_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1jwt__exception"><span class="std std-ref">dolbyio::comms::jwt_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1media__exception"><span class="std std-ref">dolbyio::comms::media_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1session__exception"><span class="std std-ref">dolbyio::comms::session_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1spatial__placement__exception"><span class="std std-ref">dolbyio::comms::spatial_placement_exception</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -139,6 +139,26 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>reason</strong> – A string that indicates a reason for failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19dvc_error_exceptionE">
+<span id="_CPPv3N7dolbyio5comms19dvc_error_exceptionE"></span><span id="_CPPv2N7dolbyio5comms19dvc_error_exceptionE"></span><span id="dolbyio::comms::dvc_error_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1dvc__error__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dvc_error_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms19dvc_error_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes a conference error which originates in the DVC library. This exception can also be listened for by attaching a handler for the <a class="reference internal" href="#classdolbyio_1_1comms_1_1dvc__error__exception"><span class="std std-ref">dvc_error_exception</span></a> type through the Conference Service. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19dvc_error_exception19dvc_error_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms19dvc_error_exception19dvc_error_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms19dvc_error_exception19dvc_error_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::dvc_error_exception::dvc_error_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1dvc__error__exception_1a30743d8bdb49a7c1d09df30ee73990b0"></span><span class="sig-name descname"><span class="n"><span class="pre">dvc_error_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19dvc_error_exception19dvc_error_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes a reason for the DVC error. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – Describes in detail why the error occurred. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -215,7 +235,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms12io_exceptionE">
 <span id="_CPPv3N7dolbyio5comms12io_exceptionE"></span><span id="_CPPv2N7dolbyio5comms12io_exceptionE"></span><span id="dolbyio::comms::io_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1io__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">io_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n"><span class="pre">exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms12io_exceptionE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The base class for all IO exceptions that occur in the case of problems with opening sockets or files. </p>
-<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1http__exception"><span class="std std-ref">dolbyio::comms::http_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1restapi__exception"><span class="std std-ref">dolbyio::comms::restapi_exception</span></a>, dolbyio::comms::security_check_exception, dolbyio::comms::signaling_channel_exception</p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1http__exception"><span class="std std-ref">dolbyio::comms::http_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1restapi__exception"><span class="std std-ref">dolbyio::comms::restapi_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1security__check__exception"><span class="std std-ref">dolbyio::comms::security_check_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1signaling__channel__exception"><span class="std std-ref">dolbyio::comms::signaling_channel_exception</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -267,7 +287,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17restapi_exceptionE">
 <span id="_CPPv3N7dolbyio5comms17restapi_exceptionE"></span><span id="_CPPv2N7dolbyio5comms17restapi_exceptionE"></span><span id="dolbyio::comms::restapi_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1restapi__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">restapi_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms12io_exceptionE" title="dolbyio::comms::io_exception"><span class="n"><span class="pre">io_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms17restapi_exceptionE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The class that describes errors received from the backend service during REST API calls. </p>
-<p>Subclassed by dolbyio::comms::invalid_token_exception</p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1invalid__token__exception"><span class="std std-ref">dolbyio::comms::invalid_token_exception</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -355,55 +375,10 @@
 </dd></dl>
 
 <dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session15state_exceptionE">
-<span id="_CPPv3N7dolbyio5comms8services7session15state_exceptionE"></span><span id="_CPPv2N7dolbyio5comms8services7session15state_exceptionE"></span><span id="dolbyio::comms::services::session::state_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms17session_exceptionE" title="dolbyio::comms::session_exception"><span class="n"><span class="pre">session_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session15state_exceptionE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The class that defines exceptions for invalid session states. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session15state_exception15state_exceptionE5state5state">
-<span id="_CPPv3N7dolbyio5comms8services7session15state_exception15state_exceptionE5state5state"></span><span id="_CPPv2N7dolbyio5comms8services7session15state_exception15state_exceptionE5state5state"></span><span id="dolbyio::comms::services::session::state_exception::state_exception__state.state"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception_1a67bcef454a0937c22bbb57a820b41210"></span><span class="sig-name descname"><span class="n"><span class="pre">state_exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../session.html#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">current</span></span>, <a class="reference internal" href="../session.html#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">required</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session15state_exception15state_exceptionE5state5state" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The constructor that takes the current and the required state of a session. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>current</strong> – The current state of the session. </p></li>
-<li><p><strong>required</strong> – The required state of the session. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms8services7session15state_exception13current_stateEv">
-<span id="_CPPv3NK7dolbyio5comms8services7session15state_exception13current_stateEv"></span><span id="_CPPv2NK7dolbyio5comms8services7session15state_exception13current_stateEv"></span><span id="dolbyio::comms::services::session::state_exception::current_stateC"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception_1aafe9ca3ce74f1b205244ebe1dce548df"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="../session.html#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_state</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms8services7session15state_exception13current_stateEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Returns the current state of a session that is stored in the exception. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The current state of the session. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms8services7session15state_exception14required_stateEv">
-<span id="_CPPv3NK7dolbyio5comms8services7session15state_exception14required_stateEv"></span><span id="_CPPv2NK7dolbyio5comms8services7session15state_exception14required_stateEv"></span><span id="dolbyio::comms::services::session::state_exception::required_stateC"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1_1state__exception_1a9bbd4a1bf7fb6f31cfc0b346a9794369"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="../session.html#_CPPv4N7dolbyio5comms8services7session5stateE" title="dolbyio::comms::services::session::state"><span class="n"><span class="pre">state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">required_state</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms8services7session15state_exception14required_stateEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Returns the required state of a session that is stored in the exception. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A string that contains the required state of a session. </p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms20conference_exceptionE">
 <span id="_CPPv3N7dolbyio5comms20conference_exceptionE"></span><span id="_CPPv2N7dolbyio5comms20conference_exceptionE"></span><span id="dolbyio::comms::conference_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1conference__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conference_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n"><span class="pre">exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms20conference_exceptionE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The class that describes errors that occur in an active conference. </p>
-<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1conference__state__exception"><span class="std std-ref">dolbyio::comms::conference_state_exception</span></a>, dolbyio::comms::media_engine_exception</p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1conference__state__exception"><span class="std std-ref">dolbyio::comms::conference_state_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1media__engine__exception"><span class="std std-ref">dolbyio::comms::media_engine_exception</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -487,6 +462,177 @@
 </dd></dl>
 
 <dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms22media_engine_exceptionE">
+<span id="_CPPv3N7dolbyio5comms22media_engine_exceptionE"></span><span id="_CPPv2N7dolbyio5comms22media_engine_exceptionE"></span><span id="dolbyio::comms::media_engine_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1media__engine__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">media_engine_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms20conference_exceptionE" title="dolbyio::comms::conference_exception"><span class="n"><span class="pre">conference_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The base class describing exceptions stemming from media engine. </p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1create__answer__exception"><span class="std std-ref">dolbyio::comms::create_answer_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1create__peer__connection__exception"><span class="std std-ref">dolbyio::comms::create_peer_connection_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1dvc__error__exception"><span class="std std-ref">dolbyio::comms::dvc_error_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1ice__candidate__exception"><span class="std std-ref">dolbyio::comms::ice_candidate_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1media__stream__exception"><span class="std std-ref">dolbyio::comms::media_stream_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1peer__connection__disconnected__exception"><span class="std std-ref">dolbyio::comms::peer_connection_disconnected_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1peer__connection__failed__exception"><span class="std std-ref">dolbyio::comms::peer_connection_failed_exception</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1sdp__exception"><span class="std std-ref">dolbyio::comms::sdp_exception</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms22media_engine_exception22media_engine_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms22media_engine_exception22media_engine_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms22media_engine_exception22media_engine_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::media_engine_exception::media_engine_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1media__engine__exception_1a166b384cb1d92cb5d2dfe584484c90fe"></span><span class="sig-name descname"><span class="n"><span class="pre">media_engine_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms22media_engine_exception22media_engine_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#classdolbyio_1_1comms_1_1media__engine__exception"><span class="std std-ref">media_engine_exception</span></a> constructor </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – describing the media engine exception. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23create_answer_exceptionE">
+<span id="_CPPv3N7dolbyio5comms23create_answer_exceptionE"></span><span id="_CPPv2N7dolbyio5comms23create_answer_exceptionE"></span><span id="dolbyio::comms::create_answer_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1create__answer__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create_answer_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms23create_answer_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes conference error where the WebRTC is unable to create an answer for the received offer. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23create_answer_exception23create_answer_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms23create_answer_exception23create_answer_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms23create_answer_exception23create_answer_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::create_answer_exception::create_answer_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1create__answer__exception_1a2a2d36fd2c7a5bc5daeed26af58a448f"></span><span class="sig-name descname"><span class="n"><span class="pre">create_answer_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23create_answer_exception23create_answer_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes a reason for error. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – Describes in detail the reason for failing to create answer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms32create_peer_connection_exceptionE">
+<span id="_CPPv3N7dolbyio5comms32create_peer_connection_exceptionE"></span><span id="_CPPv2N7dolbyio5comms32create_peer_connection_exceptionE"></span><span id="dolbyio::comms::create_peer_connection_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1create__peer__connection__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create_peer_connection_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms32create_peer_connection_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes a conferencing error which may occur during a creation of an initial peer connection. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms32create_peer_connection_exception32create_peer_connection_exceptionEv">
+<span id="_CPPv3N7dolbyio5comms32create_peer_connection_exception32create_peer_connection_exceptionEv"></span><span id="_CPPv2N7dolbyio5comms32create_peer_connection_exception32create_peer_connection_exceptionEv"></span><span id="dolbyio::comms::create_peer_connection_exception::create_peer_connection_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1create__peer__connection__exception_1ab9bd52e804597ecef1952e59869203d3"></span><span class="sig-name descname"><span class="n"><span class="pre">create_peer_connection_exception</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms32create_peer_connection_exception32create_peer_connection_exceptionEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default constructor. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23ice_candidate_exceptionE">
+<span id="_CPPv3N7dolbyio5comms23ice_candidate_exceptionE"></span><span id="_CPPv2N7dolbyio5comms23ice_candidate_exceptionE"></span><span id="dolbyio::comms::ice_candidate_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1ice__candidate__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ice_candidate_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms23ice_candidate_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes a conferencing error which can occur during an initial setting of candidates for a connection when the remote description is successfully applied. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23ice_candidate_exception23ice_candidate_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms23ice_candidate_exception23ice_candidate_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms23ice_candidate_exception23ice_candidate_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::ice_candidate_exception::ice_candidate_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1ice__candidate__exception_1abbb1a4d173bc2176c332071ded8cec0f"></span><span class="sig-name descname"><span class="n"><span class="pre">ice_candidate_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23ice_candidate_exception23ice_candidate_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes the reason for error. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – Describes in detail the reason for the ice candidate error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms22media_stream_exceptionE">
+<span id="_CPPv3N7dolbyio5comms22media_stream_exceptionE"></span><span id="_CPPv2N7dolbyio5comms22media_stream_exceptionE"></span><span id="dolbyio::comms::media_stream_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1media__stream__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">media_stream_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms22media_stream_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The exception that indicates an issue with the local media stream. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms22media_stream_exception22media_stream_exceptionEv">
+<span id="_CPPv3N7dolbyio5comms22media_stream_exception22media_stream_exceptionEv"></span><span id="_CPPv2N7dolbyio5comms22media_stream_exception22media_stream_exceptionEv"></span><span id="dolbyio::comms::media_stream_exception::media_stream_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1media__stream__exception_1a7d88e3eacbca3a150f4910f5891498fe"></span><span class="sig-name descname"><span class="n"><span class="pre">media_stream_exception</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms22media_stream_exception22media_stream_exceptionEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default constructor for the error. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms38peer_connection_disconnected_exceptionE">
+<span id="_CPPv3N7dolbyio5comms38peer_connection_disconnected_exceptionE"></span><span id="_CPPv2N7dolbyio5comms38peer_connection_disconnected_exceptionE"></span><span id="dolbyio::comms::peer_connection_disconnected_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1peer__connection__disconnected__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peer_connection_disconnected_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms38peer_connection_disconnected_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes a conference error that results from a network connection issue. This error has a direct correlation with the disconnected PeerConnectionState. According to the WebRTC documentation, this state may be triggered intermittently and resolve without any action on less reliable networks. Therefore, this error is not considered fatal or non-recoverable like the PeerConnectionFailed state. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms38peer_connection_disconnected_exception38peer_connection_disconnected_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms38peer_connection_disconnected_exception38peer_connection_disconnected_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms38peer_connection_disconnected_exception38peer_connection_disconnected_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::peer_connection_disconnected_exception::peer_connection_disconnected_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1peer__connection__disconnected__exception_1ac2fe6ab62e0f1ebf5f91c3425d3c0871"></span><span class="sig-name descname"><span class="n"><span class="pre">peer_connection_disconnected_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms38peer_connection_disconnected_exception38peer_connection_disconnected_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes the reason for error. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – Describes in detail the reason for the <a class="reference internal" href="#classdolbyio_1_1comms_1_1peer__connection__disconnected__exception"><span class="std std-ref">peer_connection_disconnected_exception</span></a>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms32peer_connection_failed_exceptionE">
+<span id="_CPPv3N7dolbyio5comms32peer_connection_failed_exceptionE"></span><span id="_CPPv2N7dolbyio5comms32peer_connection_failed_exceptionE"></span><span id="dolbyio::comms::peer_connection_failed_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1peer__connection__failed__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peer_connection_failed_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms32peer_connection_failed_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The exception that is emitted when there is a failure detected with the peer connection to the server. Meaning One or more of the ICE transports on the connection is in the failed state. This error is strict and indicates that peer connection will not return to normal state. This exception can also be listened for by attaching a handler for the <a class="reference internal" href="#classdolbyio_1_1comms_1_1peer__connection__failed__exception"><span class="std std-ref">peer_connection_failed_exception</span></a> type through the Conference Service. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms32peer_connection_failed_exception32peer_connection_failed_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms32peer_connection_failed_exception32peer_connection_failed_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms32peer_connection_failed_exception32peer_connection_failed_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::peer_connection_failed_exception::peer_connection_failed_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1peer__connection__failed__exception_1a0b4e38e5f7f15b5b45b78c558021eca6"></span><span class="sig-name descname"><span class="n"><span class="pre">peer_connection_failed_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms32peer_connection_failed_exception32peer_connection_failed_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes a reason for failure. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – Describes in detail why failure occurred. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13sdp_exceptionE">
+<span id="_CPPv3N7dolbyio5comms13sdp_exceptionE"></span><span id="_CPPv2N7dolbyio5comms13sdp_exceptionE"></span><span id="dolbyio::comms::sdp_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1sdp__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sdp_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms22media_engine_exceptionE" title="dolbyio::comms::media_engine_exception"><span class="n"><span class="pre">media_engine_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms13sdp_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes conferencing errors that occur when setting a remote description fails. This means that there is an incompatibility in the offer, for example, that the offer contains not supported codecs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13sdp_exception13sdp_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms13sdp_exception13sdp_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms13sdp_exception13sdp_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::sdp_exception::sdp_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1sdp__exception_1ae6bb40c0903e8bbeabc266146d48852c"></span><span class="sig-name descname"><span class="n"><span class="pre">sdp_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">reason</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms13sdp_exception13sdp_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes a reason for error. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reason</strong> – Describes in detail the reason for remote description setup failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms27spatial_placement_exceptionE">
+<span id="_CPPv3N7dolbyio5comms27spatial_placement_exceptionE"></span><span id="_CPPv2N7dolbyio5comms27spatial_placement_exceptionE"></span><span id="dolbyio::comms::spatial_placement_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1spatial__placement__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spatial_placement_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n"><span class="pre">exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms27spatial_placement_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An error setting spatial coordinates. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms27spatial_placement_exception27spatial_placement_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms27spatial_placement_exception27spatial_placement_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms27spatial_placement_exception27spatial_placement_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::spatial_placement_exception::spatial_placement_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1spatial__placement__exception_1a45c3e4670bc49969a27868c498b5f8fd"></span><span class="sig-name descname"><span class="n"><span class="pre">spatial_placement_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">description</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms27spatial_placement_exception27spatial_placement_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes the description of the exception. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>description</strong> – A string indicating a reason for the exception. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms13dvc_exceptionE">
 <span id="_CPPv3N7dolbyio5comms13dvc_exceptionE"></span><span id="_CPPv2N7dolbyio5comms13dvc_exceptionE"></span><span id="dolbyio::comms::dvc_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1dvc__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dvc_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15media_exceptionE" title="dolbyio::comms::media_exception"><span class="n"><span class="pre">media_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms13dvc_exceptionE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Describes exceptions originating from the DVC library. </p>
@@ -519,6 +665,71 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>description</strong> – The description of the exception. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms24security_check_exceptionE">
+<span id="_CPPv3N7dolbyio5comms24security_check_exceptionE"></span><span id="_CPPv2N7dolbyio5comms24security_check_exceptionE"></span><span id="dolbyio::comms::security_check_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1security__check__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">security_check_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms12io_exceptionE" title="dolbyio::comms::io_exception"><span class="n"><span class="pre">io_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms24security_check_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class for exceptions indicating that the CA certificates are not properly loaded. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms24security_check_exception24security_check_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms24security_check_exception24security_check_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms24security_check_exception24security_check_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::security_check_exception::security_check_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1security__check__exception_1a7694d4fbce7ef491e8169b0690f2004b"></span><span class="sig-name descname"><span class="n"><span class="pre">security_check_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">message</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms24security_check_exception24security_check_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1security__check__exception"><span class="std std-ref">security_check_exception</span></a> constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – A string that describes the error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms27signaling_channel_exceptionE">
+<span id="_CPPv3N7dolbyio5comms27signaling_channel_exceptionE"></span><span id="_CPPv2N7dolbyio5comms27signaling_channel_exceptionE"></span><span id="dolbyio::comms::signaling_channel_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1signaling__channel__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">signaling_channel_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms12io_exceptionE" title="dolbyio::comms::io_exception"><span class="n"><span class="pre">io_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms27signaling_channel_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes IO errors that occur on the signaling WebSocket. The user can also set a listener for this exception object using <a class="reference internal" href="../sdk.html#classdolbyio_1_1comms_1_1sdk_1abee8e8b0d070c11d0053da99e21a464b"><span class="std std-ref">sdk::add_event_handler</span></a> to emitted the event whenever a signaling error occurs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms27signaling_channel_exception27signaling_channel_exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms27signaling_channel_exception27signaling_channel_exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms27signaling_channel_exception27signaling_channel_exceptionERKNSt6stringE"></span><span id="dolbyio::comms::signaling_channel_exception::signaling_channel_exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1signaling__channel__exception_1a0a89b65302b50befa79b4b30f5830dfa"></span><span class="sig-name descname"><span class="n"><span class="pre">signaling_channel_exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">message</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms27signaling_channel_exception27signaling_channel_exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1signaling__channel__exception"><span class="std std-ref">signaling_channel_exception</span></a> constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – A string that describes the error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23invalid_token_exceptionE">
+<span id="_CPPv3N7dolbyio5comms23invalid_token_exceptionE"></span><span id="_CPPv2N7dolbyio5comms23invalid_token_exceptionE"></span><span id="dolbyio::comms::invalid_token_exception"></span><span class="target" id="classdolbyio_1_1comms_1_1invalid__token__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invalid_token_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms17restapi_exceptionE" title="dolbyio::comms::restapi_exception"><span class="n"><span class="pre">restapi_exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms23invalid_token_exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The class that describes the rejected REST API requests caused by an invalid access token. The user can also set a listener for this exception object using <a class="reference internal" href="../sdk.html#classdolbyio_1_1comms_1_1sdk_1abee8e8b0d070c11d0053da99e21a464b"><span class="std std-ref">sdk::add_event_handler</span></a>. In such a case, the event will be emitted whenever a signaling error occurs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23invalid_token_exception23invalid_token_exceptionEiiRKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms23invalid_token_exception23invalid_token_exceptionEiiRKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms23invalid_token_exception23invalid_token_exceptionEiiRKNSt6stringERKNSt6stringE"></span><span id="dolbyio::comms::invalid_token_exception::invalid_token_exception__i.i.ssCR.ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1invalid__token__exception_1a4b0561298e7f945a22751678511ad0e9"></span><span class="sig-name descname"><span class="n"><span class="pre">invalid_token_exception</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">http_code</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rest_code</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">err_reason</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">err_description</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23invalid_token_exception23invalid_token_exceptionEiiRKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor that takes the error codes, reasons, and descriptions of the error that is in the server response. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>http_code</strong> – The HTTP code. </p></li>
+<li><p><strong>rest_code</strong> – The REST API code. </p></li>
+<li><p><strong>err_reason</strong> – The reason for the error. </p></li>
+<li><p><strong>err_description</strong> – The error description. </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
