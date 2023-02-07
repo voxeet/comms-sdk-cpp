@@ -4,20 +4,16 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Media IO API &mdash; C++ SDK 2.3.0 documentation</title>
+  <title>Media IO API &mdash; C++ SDK 2.3.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -117,17 +113,17 @@
 <span id="_CPPv3N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded"></span><span id="_CPPv2N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded"></span><span id="dolbyio::comms::services::media_io::set_encoded_video_sink__video_sink_encodedP"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1media__io_1aa805ed75f0448e07273070a351c758f0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="sdk/common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_encoded_video_sink</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="recording/encoded_video.html#_CPPv4N7dolbyio5comms18video_sink_encodedE" title="dolbyio::comms::video_sink_encoded"><span class="n"><span class="pre">video_sink_encoded</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sink</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services8media_io22set_encoded_video_sinkEP18video_sink_encoded" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Sets the Encoded Video Sink on the SDK to start receiving the incoming frames before they are decoded. The frames can then be passed to the decoder and regular VideoSinks for rendering. However, if only encoded dumping is desired configuring the recorder implementation to dump ENCODED_OPTIMIZED frames will make it so the frames are not decoded just dumped. This greatly saves CPU but can result in poor video quality in the file in poor network conditions (if keyFrames are dropped there is no retry mechanism since the frames are never decoded), this the optimized option is suitable best when using the SDK in Cloud Server scenarios where bandwith/poor network are not an issue. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">));</span><span class="w"></span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Media capturer is now set</span>
-<span class="w">  </span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">})</span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">
@@ -150,17 +146,17 @@
 <span id="_CPPv3N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink"></span><span id="_CPPv2N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink"></span><span id="dolbyio::comms::services::media_io::set_audio_sink__audio_sinkP"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1media__io_1aa05b300077c43ec784587ebfd3f61a6d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="sdk/common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_audio_sink</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="recording/audio.html#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><span class="n"><span class="pre">audio_sink</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sink</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Sets the Audio Sink on the SDK to start receiving the incoming Audio Frames after they are decoded. Setting an Audio Sink means that audio sent to the SDK will be encoded with Opus codec. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_media_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">));</span><span class="w"></span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_media_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// The audio sink is now set</span>
-<span class="w">  </span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">})</span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">
@@ -183,17 +179,17 @@
 <span id="_CPPv3N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source"></span><span id="_CPPv2N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source"></span><span id="dolbyio::comms::services::media_io::set_audio_source__audio_sourceP"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1media__io_1a3b43e363864fccc42d11cf07f10c35af"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="sdk/common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_audio_source</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="injection/audio.html#_CPPv4N7dolbyio5comms12audio_sourceE" title="dolbyio::comms::audio_source"><span class="n"><span class="pre">audio_source</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">source</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services8media_io16set_audio_sourceEP12audio_source" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Sets the Audio Source on the SDK to provide Audio Frames to the Conference. The Audio Source can be an instance of the Default Injector or a Custom Injector. Injected audio will be encoded in Opus. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_source</span><span class="p">(</span><span class="n">injector</span><span class="p">));</span><span class="w"></span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_source</span><span class="p">(</span><span class="n">injector</span><span class="p">));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_source</span><span class="p">(</span><span class="n">injector</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_source</span><span class="p">(</span><span class="n">injector</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Audio Source is now set</span>
-<span class="w">  </span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">})</span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">

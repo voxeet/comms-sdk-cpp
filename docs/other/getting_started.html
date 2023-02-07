@@ -4,27 +4,23 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; C++ SDK 2.3.0 documentation</title>
+  <title>Getting Started &mdash; C++ SDK 2.3.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Run Time Dependencies" href="run_time_deps.html" />
-    <link rel="prev" title="C++ SDK 2.3.0 Documentation" href="../index.html" /> 
+    <link rel="prev" title="C++ SDK 2.3.1 Documentation" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -205,10 +201,10 @@ reduce your binary size.</p>
 <ol class="arabic simple">
 <li><p>Build the desktop application in a few simple steps from the <strong>sample/</strong> directory:</p></li>
 </ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> sdk-release/share/dolbyio/comms/sample/
-<span class="gp">$ </span>mkdir build
-<span class="gp">$ </span><span class="nb">cd</span> build/ <span class="o">&amp;&amp;</span> cmake ../
-<span class="gp">$ </span>cmake --build . -j <span class="m">8</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>sdk-release/share/dolbyio/comms/sample/
+<span class="gp">$ </span>mkdir<span class="w"> </span>build
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>build/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cmake<span class="w"> </span>../
+<span class="gp">$ </span>cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>-j<span class="w"> </span><span class="m">8</span>
 <span class="go">        [  4%] Building CXX object custom_recorder/CMakeFiles/custom_recorder.dir/custom_recorder.cc.o</span>
 <span class="go">        [ 13%] Building CXX object media_source/CMakeFiles/media_source_file.dir/file/source_capture.cc.o</span>
 <span class="go">        [ 21%] Building CXX object custom_injector/CMakeFiles/custom_injector.dir/custom_injector.cc.o</span>
@@ -338,11 +334,11 @@ reduce your binary size.</p>
 </table>
 </div></blockquote>
 <p>For example:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./desktop_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -ml LOG_LEVEL_MEDIA -p user -m AV -spatial shared
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./desktop_app<span class="w"> </span>-u<span class="w"> </span>USERNAME<span class="w"> </span>-k<span class="w"> </span>ACCESS_TOKEN<span class="w"> </span>-i<span class="w"> </span>CONF_ID<span class="w"> </span>-l<span class="w"> </span>LOG_LEVEL<span class="w"> </span>-ml<span class="w"> </span>LOG_LEVEL_MEDIA<span class="w"> </span>-p<span class="w"> </span>user<span class="w"> </span>-m<span class="w"> </span>AV<span class="w"> </span>-spatial<span class="w"> </span>shared
 
 <span class="go">                 or</span>
 
-<span class="gp">$ </span>./desktop_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -ml LOG_LEVEL_MEDIA -p user -enable-media-io -d PATH_TO_DUMP_DIRECTORY -m AV -f SOME_FILE.mp4 -spatial shared
+<span class="gp">$ </span>./desktop_app<span class="w"> </span>-u<span class="w"> </span>USERNAME<span class="w"> </span>-k<span class="w"> </span>ACCESS_TOKEN<span class="w"> </span>-i<span class="w"> </span>CONF_ID<span class="w"> </span>-l<span class="w"> </span>LOG_LEVEL<span class="w"> </span>-ml<span class="w"> </span>LOG_LEVEL_MEDIA<span class="w"> </span>-p<span class="w"> </span>user<span class="w"> </span>-enable-media-io<span class="w"> </span>-d<span class="w"> </span>PATH_TO_DUMP_DIRECTORY<span class="w"> </span>-m<span class="w"> </span>AV<span class="w"> </span>-f<span class="w"> </span>SOME_FILE.mp4<span class="w"> </span>-spatial<span class="w"> </span>shared
 </pre></div>
 </div>
 <div class="admonition note">
@@ -467,20 +463,20 @@ explain each of the options. If the chosen option requires more input, the user 
 <p>Please note that in the media io enabled mode the sample application methods that start and stop audio consist of two parts. For example for starting audio, the first step uses the
 <a class="reference internal" href="../api/sdk/audio.html#_CPPv4N7dolbyio5comms8services11local_audio5startEv" title="dolbyio::comms::services::local_audio::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::local_audio::start()</span></code></a> method, which attaches an audio track to the active PeerConnection. This method resolves once the audio track has been successfully
 added. Once this method is resolved, the injection of audio from the Media Source starts. The following code block presents the entire procedure:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">audio</span><span class="p">().</span><span class="n">local</span><span class="p">()</span><span class="w"></span>
-<span class="p">.</span><span class="n">start_</span><span class="p">()</span><span class="w"></span>
-<span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="n">injection_src</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;start audio success&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">injection_src</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">injection_src</span><span class="o">-&gt;</span><span class="n">set_audio_capture</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
-<span class="p">})</span><span class="w"></span>
-<span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">exception_ptr</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">rethrow_exception</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;start audio failed: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">audio</span><span class="p">().</span><span class="n">local</span><span class="p">()</span>
+<span class="p">.</span><span class="n">start_</span><span class="p">()</span>
+<span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="n">injection_src</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;start audio success&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">injection_src</span><span class="p">)</span>
+<span class="w">    </span><span class="n">injection_src</span><span class="o">-&gt;</span><span class="n">set_audio_capture</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">exception_ptr</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">rethrow_exception</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;start audio failed: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 </section>
@@ -513,16 +509,16 @@ Thus any calls to <a class="reference internal" href="../api/sdk/video.html#_CPP
 </div>
 <p>2) Next edit the <strong>share/dolby/comms/sample/utilities/ui_loop/ui.cc</strong> file to include the custom_processor header file. Then finally inside the <strong>ui_interface::ui_loop_on_helper_thread</strong> method create a processor and
 provide the processor to the SDK using the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start</span> <span class="pre">video</span></code></a> method. Essentially you just need to add 3 lines of code in respective places as show below:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/custom_video_processor/custom_video_processor.h&quot;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/custom_video_processor/custom_video_processor.h&quot;</span>
 
-<span class="p">...</span><span class="w"></span>
+<span class="p">...</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">ui_interface</span><span class="o">::</span><span class="n">ui_loop_on_helper_thread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">processor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">custom_video_processor</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="p">...</span><span class="w"></span>
-<span class="w">                </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">video</span><span class="p">().</span><span class="n">local</span><span class="p">().</span><span class="n">start</span><span class="p">({},</span><span class="w"> </span><span class="n">processor</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span><span class="w"></span>
-<span class="w">                </span><span class="p">...</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ui_interface</span><span class="o">::</span><span class="n">ui_loop_on_helper_thread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">processor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">custom_video_processor</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">...</span>
+<span class="w">                </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">video</span><span class="p">().</span><span class="n">local</span><span class="p">().</span><span class="n">start</span><span class="p">({},</span><span class="w"> </span><span class="n">processor</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+<span class="w">                </span><span class="p">...</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -533,7 +529,7 @@ provide the processor to the SDK using the <a class="reference internal" href=".
 <section id="issues-linking">
 <h2>Issues Linking?<a class="headerlink" href="#issues-linking" title="Permalink to this heading"></a></h2>
 <p>If you have problems with running the application due to a not-found media library, set the <strong>LD_LIBRARY_PATH</strong> to the location of the <strong>sdk-release/lib</strong> directory. If you plan to move the libraries to different locations, include these locations in the paths. The path can be set as follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/path/to/sdk-release/lib/:<span class="nv">$LD_LIBRARY_PATH</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/path/to/sdk-release/lib/:<span class="nv">$LD_LIBRARY_PATH</span>
 </pre></div>
 </div>
 </section>
@@ -543,7 +539,7 @@ provide the processor to the SDK using the <a class="reference internal" href=".
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.3.0 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.3.1 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="run_time_deps.html" class="btn btn-neutral float-right" title="Run Time Dependencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

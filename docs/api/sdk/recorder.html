@@ -4,20 +4,16 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Default Media Recorder &mdash; C++ SDK 2.3.0 documentation</title>
+  <title>Default Media Recorder &mdash; C++ SDK 2.3.1 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -281,7 +277,7 @@ creates and configures the recording module that is provided as a part of the C+
 <span id="_CPPv3N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE22audio_recording_config22video_recording_config"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE22audio_recording_config22video_recording_config"></span><span id="dolbyio::comms::plugin::recorder::create__ssCR.dolbyio::comms::sdkR.audio_recording_config.video_recording_config"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a741bfa9007d99c15add5dcb574cc44b2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorderE" title="dolbyio::comms::plugin::recorder"><span class="n"><span class="pre">recorder</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out_dir</span></span>, <span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="sdk.html#_CPPv4N7dolbyio5comms3sdkE" title="dolbyio::comms::sdk"><span class="n"><span class="pre">sdk</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sdk</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE" title="dolbyio::comms::plugin::recorder::audio_recording_config"><span class="n"><span class="pre">audio_recording_config</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">audio</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE" title="dolbyio::comms::plugin::recorder::video_recording_config"><span class="n"><span class="pre">video_recording_config</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">video</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE22audio_recording_config22video_recording_config" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Creates the media recording module. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// When an output directory and the sdk instance are created</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">recorder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">plugin</span><span class="o">::</span><span class="n">recorder</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="n">sdk</span><span class="p">,</span><span class="w"> </span><span class="n">audio_cfg</span><span class="p">,</span><span class="w"> </span><span class="n">video_cfg</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">recorder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">plugin</span><span class="o">::</span><span class="n">recorder</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="n">sdk</span><span class="p">,</span><span class="w"> </span><span class="n">audio_cfg</span><span class="p">,</span><span class="w"> </span><span class="n">video_cfg</span><span class="p">);</span>
 </pre></div>
 </div>
  </p>
