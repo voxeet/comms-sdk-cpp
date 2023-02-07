@@ -120,6 +120,9 @@ Other structures used by the :ref:`api_conference`, which are not defined in the
 .. doxygenenum:: dolbyio::comms::participant_type
         :project: C++ SDK
 
+.. doxygenenum:: dolbyio::comms::video_codec
+        :project: C++ SDK
+
 .. doxygenenum:: dolbyio::comms::video_forwarding_strategy
         :project: C++ SDK
 
