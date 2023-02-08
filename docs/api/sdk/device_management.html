@@ -9,13 +9,16 @@
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -122,7 +125,7 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management31set_default_audio_device_policyE27default_audio_device_policy">
-<span id="_CPPv3N7dolbyio5comms8services17device_management31set_default_audio_device_policyE27default_audio_device_policy"></span><span id="_CPPv2N7dolbyio5comms8services17device_management31set_default_audio_device_policyE27default_audio_device_policy"></span><span id="dolbyio::comms::services::device_management::set_default_audio_device_policy__default_audio_device_policy"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1af48f7eb65db38d0f87299e06f681e39e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_default_audio_device_policy</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">default_audio_device_policy</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">policy</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management31set_default_audio_device_policyE27default_audio_device_policy" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms8services17device_management31set_default_audio_device_policyE27default_audio_device_policy"></span><span id="_CPPv2N7dolbyio5comms8services17device_management31set_default_audio_device_policyE27default_audio_device_policy"></span><span id="dolbyio::comms::services::device_management::set_default_audio_device_policy__default_audio_device_policy"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1af48f7eb65db38d0f87299e06f681e39e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_default_audio_device_policy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms27default_audio_device_policyE" title="dolbyio::comms::default_audio_device_policy"><span class="n"><span class="pre">default_audio_device_policy</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">policy</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management31set_default_audio_device_policyE27default_audio_device_policy" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Sets the default audio device selection policy on Windows. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -996,6 +999,29 @@
 <dd></dd></dl>
 
 </div>
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms27default_audio_device_policyE">
+<span id="_CPPv3N7dolbyio5comms27default_audio_device_policyE"></span><span id="_CPPv2N7dolbyio5comms27default_audio_device_policyE"></span><span class="target" id="namespacedolbyio_1_1comms_1a693269e76d3212fb93217a475b3f1390"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">default_audio_device_policy</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms27default_audio_device_policyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default audio device selection policy. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API is Windows-only. </p>
+</div>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms27default_audio_device_policy6outputE">
+<span id="_CPPv3N7dolbyio5comms27default_audio_device_policy6outputE"></span><span id="_CPPv2N7dolbyio5comms27default_audio_device_policy6outputE"></span><span class="target" id="namespacedolbyio_1_1comms_1a693269e76d3212fb93217a475b3f1390a78e6221f6393d1356681db398f14ce6d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">output</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms27default_audio_device_policy6outputE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use the default output device. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms27default_audio_device_policy14communicationsE">
+<span id="_CPPv3N7dolbyio5comms27default_audio_device_policy14communicationsE"></span><span id="_CPPv2N7dolbyio5comms27default_audio_device_policy14communicationsE"></span><span class="target" id="namespacedolbyio_1_1comms_1a693269e76d3212fb93217a475b3f1390a77a351e585a4406e734071a334a3f7b7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">communications</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms27default_audio_device_policy14communicationsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use the default communications device. </p>
+</dd></dl>
+
 </dd></dl>
 
 </section>

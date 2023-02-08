@@ -24,28 +24,28 @@ The :ref:`api_device_management` events that are emitted by the SDK. They can be
 :cpp:func:`device_management::add_event_handler <dolbyio::comms::services::device_management::add_event_handler>` methods. 
 
 .. doxygenstruct:: dolbyio::comms::audio_device_added
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::audio_device_removed
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::audio_device_changed
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::audio_device_timeout_failure
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::video_device_added
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::video_device_removed
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::video_device_changed
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::video_device_error
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. _devman_models:
 
@@ -54,7 +54,10 @@ Device Structs
 Other structures used by the :ref:`api_device_management` that are not defined in the :ref:`devman_serv` interface.
 
 .. doxygenclass:: dolbyio::comms::dvc_device
-        :project: C++ SDK
+	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::camera_device
-        :project: C++ SDK
+	:project: C++ SDK
+
+.. doxygenenum:: dolbyio::comms::default_audio_device_policy
+	:project: C++ SDK
