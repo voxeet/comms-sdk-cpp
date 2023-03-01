@@ -35,6 +35,9 @@ The :ref:`api_device_management` events that are emitted by the SDK. They can be
 .. doxygenstruct:: dolbyio::comms::audio_device_timeout_failure
 	:project: C++ SDK
 
+.. doxygenstruct:: dolbyio::comms::audio_volume_changed
+	:project: C++ SDK
+
 .. doxygenstruct:: dolbyio::comms::video_device_added
 	:project: C++ SDK
 
@@ -53,11 +56,17 @@ Device Structs
 ---------------
 Other structures used by the :ref:`api_device_management` that are not defined in the :ref:`devman_serv` interface.
 
-.. doxygenclass:: dolbyio::comms::dvc_device
+.. doxygenclass:: dolbyio::comms::audio_device
 	:project: C++ SDK
 
 .. doxygenstruct:: dolbyio::comms::camera_device
 	:project: C++ SDK
 
+.. doxygenstruct:: dolbyio::comms::screen_share_source
+	:project: C++ SDK
+
 .. doxygenenum:: dolbyio::comms::default_audio_device_policy
 	:project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::linear_volume
+        :project: C++ SDK
