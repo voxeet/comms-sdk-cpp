@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> C++ SDK
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            C++ SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,7 +87,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../coresdk.html">Core API</a></li>
       <li class="breadcrumb-item active">Conference Service</li>
       <li class="wy-breadcrumbs-aside">
@@ -599,6 +603,7 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Starts local capture of screen share. </p>
 <p>This method may be called only if a conference is active.</p>
 <p>This method can also be used to switch screen share sources at any point. If you have passed in a <a class="reference internal" href="video.html#classdolbyio_1_1comms_1_1video__frame__handler"><span class="std std-ref">video_frame_handler</span></a> to the previous start call and would like to continue using this handler, you must pass the same handler into the subsequent call used to switch sources. This will have the effect of just switching sources, keeping the rest of the pipeline in tact.</p>
+<p>The SDK supports switching seamlesly between various screen capture sources, without readding a video track to the peer connection. However, if switching from low resolution Window capture to high resolution Fullscreen capture the Window capture screen share must be stopped before the Fullscreen capture can be started.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
