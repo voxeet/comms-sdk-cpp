@@ -111,6 +111,9 @@ Other structures used by the :ref:`api_conference`, which are not defined in the
 .. doxygenenum:: dolbyio::comms::conference_access_permissions
         :project: C++ SDK
 
+.. doxygenenum:: dolbyio::comms::listen_mode
+        :project: C++ SDK
+
 .. doxygenstruct:: dolbyio::comms::participant_info
         :project: C++ SDK
 
@@ -120,11 +123,17 @@ Other structures used by the :ref:`api_conference`, which are not defined in the
 .. doxygenenum:: dolbyio::comms::participant_type
         :project: C++ SDK
 
+.. doxygenenum:: dolbyio::comms::recording_format
+        :project: C++ SDK
+
+.. doxygenenum:: dolbyio::comms::rtcp_mode
+        :project: C++ SDK
+
+.. doxygenenum:: dolbyio::comms::screen_share_content_type
+        :project: C++ SDK
+
 .. doxygenenum:: dolbyio::comms::video_codec
         :project: C++ SDK
 
 .. doxygenenum:: dolbyio::comms::video_forwarding_strategy
-        :project: C++ SDK
-
-.. doxygenenum:: dolbyio::comms::listen_mode
         :project: C++ SDK
