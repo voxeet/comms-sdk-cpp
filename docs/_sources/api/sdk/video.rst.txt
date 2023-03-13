@@ -46,6 +46,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 
 .. doxygenclass:: dolbyio::comms::video_source
 
+
 Video frame API
 ---------------
 #include <dolbyio/comms/media_engine/media_engine.h>
