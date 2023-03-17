@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conference Service &mdash; C++ SDK 2.3.3 documentation</title>
+  <title>Conference Service &mdash; C++ SDK 2.4.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -598,68 +598,47 @@ interface can be passed to and returned by the service.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE">
-<span id="_CPPv3N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE"></span><span id="dolbyio::comms::services::conference::get_audio_level__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a7d6144fe9a93dacedd2ddc267098ea18"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">float</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_audio_level</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference15get_audio_levelERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets a specific participant’s audio level. </p>
-<p><dl>
-<dt class="sig sig-object cpp">
-<em><span class="pre">Deprecated:</span></em></dt>
-<dd><p>Use the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__levels"><span class="std std-ref">audio_levels</span></a> event.</p>
-</dd></dl>
-
-</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">audio_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">get_audio_level</span><span class="p">(</span><span class="n">participant_id</span><span class="p">));</span>
-
-<span class="c1">// Invoking the method directly requires chaining successive operations</span>
-<span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">get_audio_level</span><span class="p">(</span><span class="n">participant_id</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="kt">float</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">audio_level</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Use the returned audio level</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
-</pre></div>
-</div>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference18start_screen_shareERKN7dolbyio5comms19screen_share_sourceERKNSt10shared_ptrIN7dolbyio5comms19video_frame_handlerEEEN7dolbyio5comms25screen_share_content_typeE">
+<span id="_CPPv3N7dolbyio5comms8services10conference18start_screen_shareERKN7dolbyio5comms19screen_share_sourceERKNSt10shared_ptrIN7dolbyio5comms19video_frame_handlerEEEN7dolbyio5comms25screen_share_content_typeE"></span><span id="_CPPv2N7dolbyio5comms8services10conference18start_screen_shareERKN7dolbyio5comms19screen_share_sourceERKNSt10shared_ptrIN7dolbyio5comms19video_frame_handlerEEEN7dolbyio5comms25screen_share_content_typeE"></span><span id="dolbyio::comms::services::conference::start_screen_share__dolbyio::comms::screen_share_sourceCR.std::shared_ptr:dolbyio::comms::video_frame_handler:CR.dolbyio::comms::screen_share_content_type"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a542023fd557a5b1d35586a6b19cb5d4e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start_screen_share</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="device_management.html#_CPPv4N7dolbyio5comms19screen_share_sourceE" title="dolbyio::comms::screen_share_source"><span class="n"><span class="pre">screen_share_source</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">source</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><span class="n"><span class="pre">video_frame_handler</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">handler</span></span>, <span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25screen_share_content_typeE" title="dolbyio::comms::screen_share_content_type"><span class="n"><span class="pre">screen_share_content_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25screen_share_content_typeE" title="dolbyio::comms::screen_share_content_type"><span class="n"><span class="pre">screen_share_content_type</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25screen_share_content_type8detailedE" title="dolbyio::comms::screen_share_content_type::detailed"><span class="n"><span class="pre">detailed</span></span></a><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference18start_screen_shareERKN7dolbyio5comms19screen_share_sourceERKNSt10shared_ptrIN7dolbyio5comms19video_frame_handlerEEEN7dolbyio5comms25screen_share_content_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Starts local capture of screen share. </p>
+<p>This method may be called only if a conference is active.</p>
+<p>This method can also be used to switch screen share sources at any point. If you have passed in a <a class="reference internal" href="video.html#classdolbyio_1_1comms_1_1video__frame__handler"><span class="std std-ref">video_frame_handler</span></a> to the previous start call and would like to continue using this handler, you must pass the same handler into the subsequent call used to switch sources. This will have the effect of just switching sources, keeping the rest of the pipeline in tact.</p>
+<p>The SDK supports switching seamlesly between various screen capture sources, without readding a video track to the peer connection. However, if switching from low resolution Window capture to high resolution Fullscreen capture the Window capture screen share must be stopped before the Fullscreen capture can be started.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>participant_id</strong> – The ID of the participant.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> – The screen source to capture from. </p></li>
+<li><p><strong>handler</strong> – The screen share streams video frame handler. </p></li>
+<li><p><strong>type</strong> – The type of content being captured.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The object producing the audio level (between 0.0 and 1.0) asynchronously.</p>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference20get_all_audio_levelsEv">
-<span id="_CPPv3N7dolbyio5comms8services10conference20get_all_audio_levelsEv"></span><span id="_CPPv2N7dolbyio5comms8services10conference20get_all_audio_levelsEv"></span><span id="dolbyio::comms::services::conference::get_all_audio_levels"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a5fa4b144742bb2951a95ea8b8c110258"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11audio_levelE" title="dolbyio::comms::audio_level"><span class="n"><span class="pre">audio_level</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_all_audio_levels</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference20get_all_audio_levelsEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets audio levels for all participants whose audio level is greater than or equal to 0.05. </p>
-<p><dl>
-<dt class="sig sig-object cpp">
-<em><span class="pre">Deprecated:</span></em></dt>
-<dd><p>Use the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__levels"><span class="std std-ref">audio_levels</span></a> event.</p>
-</dd></dl>
-
-</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">audio_levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">get_all_audio_levels</span><span class="p">());</span>
-
-<span class="c1">// Invoking the method directly requires chaining successive operations</span>
-<span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">get_all_audio_levels</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_level</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">audio_levels</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the returned audio levels</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
-</pre></div>
-</div>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference17stop_screen_shareEv">
+<span id="_CPPv3N7dolbyio5comms8services10conference17stop_screen_shareEv"></span><span id="_CPPv2N7dolbyio5comms8services10conference17stop_screen_shareEv"></span><span id="dolbyio::comms::services::conference::stop_screen_share"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a4b87047c93ea9d70181e00f6b0e2c9c3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stop_screen_share</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference17stop_screen_shareEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Stops the screen share capture. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The object producing the vector of <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__level"><span class="std std-ref">audio_level</span></a> structs {participant_id, <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__level"><span class="std std-ref">audio_level</span></a> (between 0.0 and 1.0)} asynchronously.</p>
+<dd class="field-odd"><p>The result object producing the operation status asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference25screen_share_content_typeEN7dolbyio5comms25screen_share_content_typeE">
+<span id="_CPPv3N7dolbyio5comms8services10conference25screen_share_content_typeEN7dolbyio5comms25screen_share_content_typeE"></span><span id="_CPPv2N7dolbyio5comms8services10conference25screen_share_content_typeEN7dolbyio5comms25screen_share_content_typeE"></span><span id="dolbyio::comms::services::conference::screen_share_content_type__dolbyio::comms::screen_share_content_type"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a194d20b9398cc71be0ddb5beb2291fb3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">screen_share_content_type</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms25screen_share_content_typeE" title="dolbyio::comms::screen_share_content_type"><span class="n"><span class="pre">screen_share_content_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">type</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference25screen_share_content_typeEN7dolbyio5comms25screen_share_content_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Change the screen share content type if the screen share is already active. If screen share is not yet active the content type is to be set during the <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1conference_1a542023fd557a5b1d35586a6b19cb5d4e"><span class="std std-ref">start_screen_share</span></a> call. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>type</strong> – The type of screen share content</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the operation status asynchronously. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1130,7 +1109,7 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1recording__status__updated"><span class="std std-ref">recording_status_updated</span></a> events. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when the recording status event is received..</p>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when the recording status event is received.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> class that wraps a <a class="reference internal" href="common/async_ops.html#group__async__ops_1gad842e65395899c4b966690d52b285ad2"><span class="std std-ref">solver</span></a> that can contain the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> object.<ul class="simple">
@@ -1188,7 +1167,7 @@ interface can be passed to and returned by the service.</p>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE">
-<span id="_CPPv3N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE"></span><span id="_CPPv2N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE"></span><span id="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style__dolbyio::comms::spatial_audio_style"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1conference_1_1conference__options_1_1params_1a008f122bf26ae0676c324227e40c39ef"></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19spatial_audio_styleE" title="dolbyio::comms::spatial_audio_style"><span class="n"><span class="pre">spatial_audio_style</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spatial_audio_style</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style"><span class="n"><span class="pre">spatial_audio_style</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">individual</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE"></span><span id="_CPPv2N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE"></span><span id="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style__spatial_audio_style"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1conference_1_1conference__options_1_1params_1aa538e1a171d03c17d05319715a9b70ff"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style"><span class="n"><span class="pre">spatial_audio_style</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spatial_audio_style</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style"><span class="n"><span class="pre">spatial_audio_style</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">individual</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>An enum that defines how the spatial location is communicated between the SDK and the Dolby.io server. </p>
 </dd></dl>
 
@@ -1935,39 +1914,9 @@ interface can be passed to and returned by the service.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_track_added7peer_idE">
-<span id="_CPPv3N7dolbyio5comms17video_track_added7peer_idE"></span><span id="_CPPv2N7dolbyio5comms17video_track_added7peer_idE"></span><span id="dolbyio::comms::video_track_added::peer_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__added_1acfddbf15d9e7238d511418344a2a703c"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peer_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_track_added7peer_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The ID of the participant to whom the video track belongs. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_track_added9stream_idE">
-<span id="_CPPv3N7dolbyio5comms17video_track_added9stream_idE"></span><span id="_CPPv2N7dolbyio5comms17video_track_added9stream_idE"></span><span id="dolbyio::comms::video_track_added::stream_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__added_1a77fcf630c199c118590d0895a7df1698"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stream_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_track_added9stream_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The ID of the stream to which the video track belongs. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_track_added8track_idE">
-<span id="_CPPv3N7dolbyio5comms17video_track_added8track_idE"></span><span id="_CPPv2N7dolbyio5comms17video_track_added8track_idE"></span><span id="dolbyio::comms::video_track_added::track_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__added_1aef8c18e5c261bd3c0a6fb2194d9a25d2"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">track_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_track_added8track_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The ID of the video track. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_track_added12sdp_track_idE">
-<span id="_CPPv3N7dolbyio5comms17video_track_added12sdp_track_idE"></span><span id="_CPPv2N7dolbyio5comms17video_track_added12sdp_track_idE"></span><span id="dolbyio::comms::video_track_added::sdp_track_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__added_1ae68789ed39f040e701476709aa6eab50"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sdp_track_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_track_added12sdp_track_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The id of the track in the SDP matching the sender side </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_track_added14is_screenshareE">
-<span id="_CPPv3N7dolbyio5comms17video_track_added14is_screenshareE"></span><span id="_CPPv2N7dolbyio5comms17video_track_added14is_screenshareE"></span><span id="dolbyio::comms::video_track_added::is_screenshare__b"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__added_1ae9cb4a289d47977ab64c94a4336642b6"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_screenshare</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_track_added14is_screenshareE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>A boolean that indicates whether the video track is a screen share track. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_track_added6remoteE">
-<span id="_CPPv3N7dolbyio5comms17video_track_added6remoteE"></span><span id="_CPPv2N7dolbyio5comms17video_track_added6remoteE"></span><span id="dolbyio::comms::video_track_added::remote__b"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__added_1a7c1792715fbd6a955f89ec312f706981"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remote</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_track_added6remoteE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Boolean indicating whether the track is from a remote participant. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_track_added5trackE">
+<span id="_CPPv3N7dolbyio5comms17video_track_added5trackE"></span><span id="_CPPv2N7dolbyio5comms17video_track_added5trackE"></span><span id="dolbyio::comms::video_track_added::track__video_track"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__added_1acbd248d388258c65e1ae0aec5ba17ef3"></span><span class="n"><span class="pre">video_track</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">track</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_track_added5trackE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The track being added. </p>
 </dd></dl>
 
 </div>
@@ -1980,39 +1929,9 @@ interface can be passed to and returned by the service.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19video_track_removed7peer_idE">
-<span id="_CPPv3N7dolbyio5comms19video_track_removed7peer_idE"></span><span id="_CPPv2N7dolbyio5comms19video_track_removed7peer_idE"></span><span id="dolbyio::comms::video_track_removed::peer_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__removed_1adaae638c97799a2b8b8dedd8384fd1ee"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peer_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19video_track_removed7peer_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The ID of the participant to whom the track belonged. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19video_track_removed9stream_idE">
-<span id="_CPPv3N7dolbyio5comms19video_track_removed9stream_idE"></span><span id="_CPPv2N7dolbyio5comms19video_track_removed9stream_idE"></span><span id="dolbyio::comms::video_track_removed::stream_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__removed_1a12fb46e91f10822007b112e5c94e8c2f"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stream_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19video_track_removed9stream_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The ID of the stream to which the video track belonged. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19video_track_removed8track_idE">
-<span id="_CPPv3N7dolbyio5comms19video_track_removed8track_idE"></span><span id="_CPPv2N7dolbyio5comms19video_track_removed8track_idE"></span><span id="dolbyio::comms::video_track_removed::track_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__removed_1a87e9fd3a2af0cb02222f5bf004a40b58"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">track_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19video_track_removed8track_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The ID of the video track. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19video_track_removed12sdp_track_idE">
-<span id="_CPPv3N7dolbyio5comms19video_track_removed12sdp_track_idE"></span><span id="_CPPv2N7dolbyio5comms19video_track_removed12sdp_track_idE"></span><span id="dolbyio::comms::video_track_removed::sdp_track_id__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__removed_1ae9a0ff88d10e3d020084ad5df2667a83"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sdp_track_id</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19video_track_removed12sdp_track_idE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The ID of the track in the SDP matching the sender side. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19video_track_removed14is_screenshareE">
-<span id="_CPPv3N7dolbyio5comms19video_track_removed14is_screenshareE"></span><span id="_CPPv2N7dolbyio5comms19video_track_removed14is_screenshareE"></span><span id="dolbyio::comms::video_track_removed::is_screenshare__b"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__removed_1a53e21b232584feb88246a5ef6906aa59"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_screenshare</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19video_track_removed14is_screenshareE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>A boolean that indicates whether the video track was a screen share track. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19video_track_removed6remoteE">
-<span id="_CPPv3N7dolbyio5comms19video_track_removed6remoteE"></span><span id="_CPPv2N7dolbyio5comms19video_track_removed6remoteE"></span><span id="dolbyio::comms::video_track_removed::remote__b"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__removed_1a18cd755f8cfd87c433d4c93248af27c4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remote</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19video_track_removed6remoteE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Boolean indicating whether the track is from a remote participant. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms19video_track_removed5trackE">
+<span id="_CPPv3N7dolbyio5comms19video_track_removed5trackE"></span><span id="_CPPv2N7dolbyio5comms19video_track_removed5trackE"></span><span id="dolbyio::comms::video_track_removed::track__video_track"></span><span class="target" id="structdolbyio_1_1comms_1_1video__track__removed_1a789bfc59c848fbd819c26dbca5c864da"></span><span class="n"><span class="pre">video_track</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">track</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms19video_track_removed5trackE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The track being removed. </p>
 </dd></dl>
 
 </div>
@@ -2323,6 +2242,71 @@ interface can be passed to and returned by the service.</p>
 </p>
 </dd></dl>
 
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15conference_info11video_codecE">
+<span id="_CPPv3N7dolbyio5comms15conference_info11video_codecE"></span><span id="_CPPv2N7dolbyio5comms15conference_info11video_codecE"></span><span id="dolbyio::comms::conference_info::video_codec__dolbyio::comms::video_codec"></span><span class="target" id="structdolbyio_1_1comms_1_1conference__info_1afed6b103c08db61041d88c680b063d64"></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_codecE" title="dolbyio::comms::video_codec"><span class="n"><span class="pre">video_codec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_codec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15conference_info11video_codecE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The video codec to be used in the conference. </p>
+<p><dl class="simple">
+<dt><strong>Since</strong></dt><dd><p>2.4.0 </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15conference_info10audio_onlyE">
+<span id="_CPPv3N7dolbyio5comms15conference_info10audio_onlyE"></span><span id="_CPPv2N7dolbyio5comms15conference_info10audio_onlyE"></span><span id="dolbyio::comms::conference_info::audio_only__b"></span><span class="target" id="structdolbyio_1_1comms_1_1conference__info_1aee0fa3ac5b8450993eb23fc88b90086f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_only</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15conference_info10audio_onlyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Indicates whether the conference represented by the object is audio only. </p>
+<p><dl class="simple">
+<dt><strong>Since</strong></dt><dd><p>2.4.0 </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15conference_info11dolby_voiceE">
+<span id="_CPPv3N7dolbyio5comms15conference_info11dolby_voiceE"></span><span id="_CPPv2N7dolbyio5comms15conference_info11dolby_voiceE"></span><span id="dolbyio::comms::conference_info::dolby_voice__b"></span><span class="target" id="structdolbyio_1_1comms_1_1conference__info_1a7d537f06ab71a61adf14369f14c6be57"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dolby_voice</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15conference_info11dolby_voiceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><dl class="simple">
+<dt><strong>Since</strong></dt><dd><p>2.4.0 Indicates whether the conference represented by the object is a Dolby Voice conference. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15conference_info17recording_formatsE">
+<span id="_CPPv3N7dolbyio5comms15conference_info17recording_formatsE"></span><span id="_CPPv2N7dolbyio5comms15conference_info17recording_formatsE"></span><span id="dolbyio::comms::conference_info::recording_formats__std::vector:recording_format:"></span><span class="target" id="structdolbyio_1_1comms_1_1conference__info_1afffae7097edf1e1563718bf255b56531"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16recording_formatE" title="dolbyio::comms::recording_format"><span class="n"><span class="pre">recording_format</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recording_formats</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15conference_info17recording_formatsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Indicates the possible recording formats the conference recording can be stored in. </p>
+<p><dl class="simple">
+<dt><strong>Since</strong></dt><dd><p>2.4.0 </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15conference_info9rtcp_modeE">
+<span id="_CPPv3N7dolbyio5comms15conference_info9rtcp_modeE"></span><span id="_CPPv2N7dolbyio5comms15conference_info9rtcp_modeE"></span><span id="dolbyio::comms::conference_info::rtcp_mode__dolbyio::comms::rtcp_mode"></span><span class="target" id="structdolbyio_1_1comms_1_1conference__info_1a3bbc140f32b655e9879f939995e06046"></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms9rtcp_modeE" title="dolbyio::comms::rtcp_mode"><span class="n"><span class="pre">rtcp_mode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rtcp_mode</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15conference_info9rtcp_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The bitrate adaptation mode used for the video transmission. </p>
+<p><dl class="simple">
+<dt><strong>Since</strong></dt><dd><p>2.4.0 </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms15conference_info14live_recordingE">
+<span id="_CPPv3N7dolbyio5comms15conference_info14live_recordingE"></span><span id="_CPPv2N7dolbyio5comms15conference_info14live_recordingE"></span><span id="dolbyio::comms::conference_info::live_recording__b"></span><span class="target" id="structdolbyio_1_1comms_1_1conference__info_1ae444e2ccadb079703a889ceeea08c795"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">live_recording</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms15conference_info14live_recordingE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Indicates whether the conference is being recorded. If true the video recorded file shall be available at the end of the call and downloadable immediately. </p>
+<p><dl class="simple">
+<dt><strong>Since</strong></dt><dd><p>2.4.0 </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
 </div>
 </dd></dl>
 
@@ -2401,6 +2385,25 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms29conference_access_permissions18update_permissionsE">
 <span id="_CPPv3N7dolbyio5comms29conference_access_permissions18update_permissionsE"></span><span id="_CPPv2N7dolbyio5comms29conference_access_permissions18update_permissionsE"></span><span class="target" id="namespacedolbyio_1_1comms_1a19cebe925e05f2eec8f5f13e0fdab951ad579553922ecadfcae50864ac24fdaf1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update_permissions</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms29conference_access_permissions18update_permissionsE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Allows a participant to update other participants’ permissions. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11listen_modeE">
+<span id="_CPPv3N7dolbyio5comms11listen_modeE"></span><span id="_CPPv2N7dolbyio5comms11listen_modeE"></span><span class="target" id="namespacedolbyio_1_1comms_1a885a0ecaebc5a43ad96b7ac7ea7477bc"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">listen_mode</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11listen_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The listen mode for the conference joined as a listener. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11listen_mode7regularE">
+<span id="_CPPv3N7dolbyio5comms11listen_mode7regularE"></span><span id="_CPPv2N7dolbyio5comms11listen_mode7regularE"></span><span class="target" id="namespacedolbyio_1_1comms_1a885a0ecaebc5a43ad96b7ac7ea7477bcaaf37d08ae228a87dc6b265fd1019c97d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">regular</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11listen_mode7regularE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Receive multiple video streams from senders. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11listen_mode9rts_mixedE">
+<span id="_CPPv3N7dolbyio5comms11listen_mode9rts_mixedE"></span><span id="_CPPv2N7dolbyio5comms11listen_mode9rts_mixedE"></span><span class="target" id="namespacedolbyio_1_1comms_1a885a0ecaebc5a43ad96b7ac7ea7477bca7a5bc993333c79c6fb9031bbfaccbb8a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rts_mixed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11listen_mode9rts_mixedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Receive a realtime mixed stream. </p>
 </dd></dl>
 
 </dd></dl>
@@ -2573,10 +2576,91 @@ interface can be passed to and returned by the service.</p>
 </dd></dl>
 
 <dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16recording_formatE">
+<span id="_CPPv3N7dolbyio5comms16recording_formatE"></span><span id="_CPPv2N7dolbyio5comms16recording_formatE"></span><span class="target" id="namespacedolbyio_1_1comms_1a0563e0258a16552aad523c7b20b6bfbf"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">recording_format</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16recording_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The possible recording formats for the conference. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16recording_format3mp3E">
+<span id="_CPPv3N7dolbyio5comms16recording_format3mp3E"></span><span id="_CPPv2N7dolbyio5comms16recording_format3mp3E"></span><span class="target" id="namespacedolbyio_1_1comms_1a0563e0258a16552aad523c7b20b6bfbfa28dafd4a8cb5f33065e93cbc83862563"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mp3</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16recording_format3mp3E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MP3 coding format for digital audio. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16recording_format3mp4E">
+<span id="_CPPv3N7dolbyio5comms16recording_format3mp4E"></span><span id="_CPPv2N7dolbyio5comms16recording_format3mp4E"></span><span class="target" id="namespacedolbyio_1_1comms_1a0563e0258a16552aad523c7b20b6bfbfa4866d635ea7b0ed8e2452da897143528"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mp4</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16recording_format3mp4E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MP4 container used for storing video and audio. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9rtcp_modeE">
+<span id="_CPPv3N7dolbyio5comms9rtcp_modeE"></span><span id="_CPPv2N7dolbyio5comms9rtcp_modeE"></span><span class="target" id="namespacedolbyio_1_1comms_1a4f38ac1d6a31051ffcfb248b0c9c2e9f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">rtcp_mode</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms9rtcp_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The bitrate adaptation mode used for the video transmission. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9rtcp_mode5worstE">
+<span id="_CPPv3N7dolbyio5comms9rtcp_mode5worstE"></span><span id="_CPPv2N7dolbyio5comms9rtcp_mode5worstE"></span><span class="target" id="namespacedolbyio_1_1comms_1a4f38ac1d6a31051ffcfb248b0c9c2e9faf5f46a62bde5dd979c0652f06d716a9e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">worst</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms9rtcp_mode5worstE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adjusts the transmission bitrate to the receiver who has the worst network conditions. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9rtcp_mode7averageE">
+<span id="_CPPv3N7dolbyio5comms9rtcp_mode7averageE"></span><span id="_CPPv2N7dolbyio5comms9rtcp_mode7averageE"></span><span class="target" id="namespacedolbyio_1_1comms_1a4f38ac1d6a31051ffcfb248b0c9c2e9fa6927a3a7218a3195858411433ec20a21"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">average</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms9rtcp_mode7averageE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Averages the available bandwidth of all the receivers and adjusts the transmission bitrate to this value. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9rtcp_mode3maxE">
+<span id="_CPPv3N7dolbyio5comms9rtcp_mode3maxE"></span><span id="_CPPv2N7dolbyio5comms9rtcp_mode3maxE"></span><span class="target" id="namespacedolbyio_1_1comms_1a4f38ac1d6a31051ffcfb248b0c9c2e9fa2ffe4e77325d9a7152f7086ea7aa5114"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms9rtcp_mode3maxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Does not adjust the transmission bitrate to the receiver’s bandwidth. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25screen_share_content_typeE">
+<span id="_CPPv3N7dolbyio5comms25screen_share_content_typeE"></span><span id="_CPPv2N7dolbyio5comms25screen_share_content_typeE"></span><span class="target" id="namespacedolbyio_1_1comms_1ac5bf894ba64f1ea5e4ecc639aa6cda23"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">screen_share_content_type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25screen_share_content_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The screen share content type provides a hint to the SDK as to what type of content is being captured by the screen share. This can be used to help when making decisions for choosing encoder settings based on what aspects of the content are important. For instance if network conditions worsen is it more important to keep a higher resolution of screen share or frame rate to keep the motion more fluid. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25screen_share_content_type11unspecifiedE">
+<span id="_CPPv3N7dolbyio5comms25screen_share_content_type11unspecifiedE"></span><span id="_CPPv2N7dolbyio5comms25screen_share_content_type11unspecifiedE"></span><span class="target" id="namespacedolbyio_1_1comms_1ac5bf894ba64f1ea5e4ecc639aa6cda23ad415f0e30c471dfdd9bc4f827329ef48"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unspecified</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25screen_share_content_type11unspecifiedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default value not specifying content type. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25screen_share_content_type8detailedE">
+<span id="_CPPv3N7dolbyio5comms25screen_share_content_type8detailedE"></span><span id="_CPPv2N7dolbyio5comms25screen_share_content_type8detailedE"></span><span class="target" id="namespacedolbyio_1_1comms_1ac5bf894ba64f1ea5e4ecc639aa6cda23ae9ec7f4e74efce2a94f55ed09bab9fce"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">detailed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25screen_share_content_type8detailedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Content is very detailed, encoder should keep resolution high if it can. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25screen_share_content_type4textE">
+<span id="_CPPv3N7dolbyio5comms25screen_share_content_type4textE"></span><span id="_CPPv2N7dolbyio5comms25screen_share_content_type4textE"></span><span class="target" id="namespacedolbyio_1_1comms_1ac5bf894ba64f1ea5e4ecc639aa6cda23a1cb251ec0d568de6a929b520c4aed8d1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">text</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25screen_share_content_type4textE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Content is text. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25screen_share_content_type5fluidE">
+<span id="_CPPv3N7dolbyio5comms25screen_share_content_type5fluidE"></span><span id="_CPPv2N7dolbyio5comms25screen_share_content_type5fluidE"></span><span class="target" id="namespacedolbyio_1_1comms_1ac5bf894ba64f1ea5e4ecc639aa6cda23a5cfea13ba1397f696bea7b2ff62c0188"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fluid</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25screen_share_content_type5fluidE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Content is fluid like a video for instance, encoder should keep frame rate higher. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum-class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_codecE">
 <span id="_CPPv3N7dolbyio5comms11video_codecE"></span><span id="_CPPv2N7dolbyio5comms11video_codecE"></span><span class="target" id="namespacedolbyio_1_1comms_1a6b2984a5d9b15e72f8edb38fb095f18b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">video_codec</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_codecE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The preferred video codec, either H264 or VP8. </p>
 <p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_codec4noneE">
+<span id="_CPPv3N7dolbyio5comms11video_codec4noneE"></span><span id="_CPPv2N7dolbyio5comms11video_codec4noneE"></span><span class="target" id="namespacedolbyio_1_1comms_1a6b2984a5d9b15e72f8edb38fb095f18ba334c4a4c42fdb79d7ebc3e73b517e6f8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">none</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_codec4noneE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>No codec used (meaning no video). </p>
+</dd></dl>
+
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_codec4h264E">
 <span id="_CPPv3N7dolbyio5comms11video_codec4h264E"></span><span id="_CPPv2N7dolbyio5comms11video_codec4h264E"></span><span class="target" id="namespacedolbyio_1_1comms_1a6b2984a5d9b15e72f8edb38fb095f18ba10dc9f554d16c87ec54b127438551658"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">h264</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_codec4h264E" title="Permalink to this definition"></a><br /></dt>
@@ -2606,19 +2690,6 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms25video_forwarding_strategy12closest_userE">
 <span id="_CPPv3N7dolbyio5comms25video_forwarding_strategy12closest_userE"></span><span id="_CPPv2N7dolbyio5comms25video_forwarding_strategy12closest_userE"></span><span class="target" id="namespacedolbyio_1_1comms_1a53b64ebd444abf16a4c66a70f0663804a154ebc4d5d5d20955ce1438a2e1c8707"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">closest_user</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms25video_forwarding_strategy12closest_userE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Selects participants based on the distance from the local participant. This means that the local participant receives video streams only from the nearest participants. This strategy is available only for participants who enabled spatial audio. </p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="cpp enum-class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11listen_modeE">
-<span id="_CPPv3N7dolbyio5comms11listen_modeE"></span><span id="_CPPv2N7dolbyio5comms11listen_modeE"></span><span class="target" id="namespacedolbyio_1_1comms_1a885a0ecaebc5a43ad96b7ac7ea7477bc"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">listen_mode</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11listen_modeE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The listen mode for the conference joined as a listener. </p>
-<p><em>Values:</em></p>
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11listen_mode7regularE">
-<span id="_CPPv3N7dolbyio5comms11listen_mode7regularE"></span><span id="_CPPv2N7dolbyio5comms11listen_mode7regularE"></span><span class="target" id="namespacedolbyio_1_1comms_1a885a0ecaebc5a43ad96b7ac7ea7477bcaaf37d08ae228a87dc6b265fd1019c97d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">regular</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11listen_mode7regularE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Receive multiple video streams from senders. </p>
 </dd></dl>
 
 </dd></dl>

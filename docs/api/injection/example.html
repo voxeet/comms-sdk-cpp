@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example Injector Implementation &mdash; C++ SDK 2.3.3 documentation</title>
+  <title>Example Injector Implementation &mdash; C++ SDK 2.4.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -112,7 +112,7 @@ pipeline.</p>
 <span class="cm"> * express or implied. See the License for the specific language governing</span>
 <span class="cm"> * permissions and limitations under the License.</span>
 <span class="cm"> *</span>
-<span class="cm"> *                Copyright (C) 2022 by Dolby Laboratories.</span>
+<span class="cm"> *                Copyright (C) 2022-2023 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/media_engine/media_engine.h&gt;</span>
@@ -120,31 +120,28 @@ pipeline.</p>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mutex&gt;</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">custom_injector_impl</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">media_source_interface</span><span class="p">,</span>
-<span class="w">                             </span><span class="k">public</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_source</span><span class="p">,</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">custom_injector_impl</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_source</span><span class="p">,</span>
 <span class="w">                             </span><span class="k">public</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_source</span><span class="w"> </span><span class="p">{</span>
 <span class="w"> </span><span class="k">public</span><span class="o">:</span>
 <span class="w">  </span><span class="n">custom_injector_impl</span><span class="p">();</span>
-<span class="w">  </span><span class="o">~</span><span class="n">custom_injector_impl</span><span class="p">();</span>
+<span class="w">  </span><span class="o">~</span><span class="n">custom_injector_impl</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">inject_audio_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_frame</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">frame</span><span class="p">);</span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">inject_video_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">frame</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// media_source_interface</span>
-<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_source</span><span class="o">*</span><span class="w"> </span><span class="nf">audio</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
 <span class="w">  </span><span class="c1">// audio_source interface</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">register_audio_frame_rtc_source</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">rtc_audio_source</span><span class="o">*</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">deregister_audio_frame_rtc_source</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// video_source interface</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">set_sink</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">sink</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_source</span><span class="o">::</span><span class="n">config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">set_sink</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">sink</span><span class="p">,</span>
+<span class="w">                </span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_source</span><span class="o">::</span><span class="n">config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
 
 <span class="w"> </span><span class="k">private</span><span class="o">:</span>
 <span class="w">  </span><span class="c1">// These are essentially audio/video sinks from the POV of the injector</span>
 <span class="w">  </span><span class="c1">// providing the connection in the respective media pipelines to Webrtc</span>
 <span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">rtc_audio_source</span><span class="o">*</span><span class="w"> </span><span class="n">rtc_audio_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">video_sink_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">&gt;</span><span class="w"> </span><span class="n">video_sink_</span><span class="p">{};</span>
 
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="w"> </span><span class="n">audio_lock_</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="w"> </span><span class="n">video_lock_</span><span class="p">;</span>
@@ -160,7 +157,7 @@ pipeline.</p>
 <span class="cm"> * express or implied. See the License for the specific language governing</span>
 <span class="cm"> * permissions and limitations under the License.</span>
 <span class="cm"> *</span>
-<span class="cm"> *                Copyright (C) 2022 by Dolby Laboratories.</span>
+<span class="cm"> *                Copyright (C) 2022-2023 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;custom_injector.h&quot;</span>
@@ -180,7 +177,7 @@ pipeline.</p>
 <span class="kt">bool</span><span class="w"> </span><span class="nf">custom_injector_impl::inject_video_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">frame</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">video_lock_</span><span class="p">);</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">frame</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">video_sink_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">video_sink_</span><span class="o">-&gt;</span><span class="n">handle_frame</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">frame</span><span class="p">));</span>
+<span class="w">    </span><span class="n">video_sink_</span><span class="o">-&gt;</span><span class="n">handle_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">frame</span><span class="p">));</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
@@ -198,7 +195,7 @@ pipeline.</p>
 <span class="p">}</span>
 
 <span class="c1">// video_source interface</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">custom_injector_impl::set_sink</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">sink</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">config</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">custom_injector_impl::set_sink</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">sink</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">config</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">(</span><span class="n">video_lock_</span><span class="p">);</span>
 <span class="w">  </span><span class="n">video_sink_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sink</span><span class="p">;</span>
 <span class="p">}</span>

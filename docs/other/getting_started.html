@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; C++ SDK 2.3.3 documentation</title>
+  <title>Getting Started &mdash; C++ SDK 2.4.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Run Time Dependencies" href="run_time_deps.html" />
-    <link rel="prev" title="C++ SDK 2.3.3 Documentation" href="../index.html" /> 
+    <link rel="prev" title="C++ SDK 2.4.0 Documentation" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -129,8 +129,8 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do this via terminal and the macOS attribute stripping command line tool:</p>
-<p><strong>xattr -d -r com.apple.quarantine sdk-release/</strong></p>
+<p>On macOS, it is necessary to unquarantine the prebuilt desktop_app sample binary included in the package. To strip quarantine via terminal and the macOS attribute stripping command line tool do the following:</p>
+<p><strong>xattr -d -r com.apple.quarantine sdk-release/bin/desktop_app</strong></p>
 </div>
 </section>
 <section id="ca-certificates">
@@ -181,7 +181,7 @@ reduce your binary size.</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>Manage local audio  and video devices using the <a class="reference internal" href="../api/sdk/device_management.html#_CPPv4N7dolbyio5comms8services17device_managementE" title="dolbyio::comms::services::device_management"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">device_management</span></code></a> service.</p></li>
-<li><p><a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">provide</span></code></a> a camera and possibly a <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frame</span> <span class="pre">handler</span></code></a> to stream video into the conference.</p></li>
+<li><p><a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceRKNSt10shared_ptrI19video_frame_handlerEE" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">provide</span></code></a> a camera and possibly a <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frame</span> <span class="pre">handler</span></code></a> to stream video into the conference.</p></li>
 <li><p>The <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frame</span> <span class="pre">handler</span></code></a> can be used to display the camera locally, inject non-camera video, or process camera frames and then inject the processed video. <a class="reference internal" href="#cv-p-example"><span class="std std-ref">Video processor</span></a> section shows how to create a video processor which can then be attached to the SDK using step 2.</p></li>
 <li><p><a class="reference internal" href="../api/sdk/audio.html#_CPPv4N7dolbyio5comms8services11local_audio16set_capture_modeERKN18audio_capture_mode11unprocessedE" title="dolbyio::comms::services::local_audio::set_capture_mode"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">set</span> <span class="pre">audio</span> <span class="pre">capture</span> <span class="pre">mode</span></code></a> to alter how capture microphone audio is processed before being sent to the conference.</p></li>
 <li><p>Use the <a class="reference internal" href="../api/sdk/audio.html#_CPPv4N7dolbyio5comms8services11local_audioE" title="dolbyio::comms::services::local_audio"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">local</span> <span class="pre">audio</span></code></a> and <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_videoE" title="dolbyio::comms::services::local_video"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">local</span> <span class="pre">video</span></code></a> services to start/stop audio/video whilst in the conference.</p></li>
@@ -281,7 +281,7 @@ reduce your binary size.</p>
 <td><p>The Media Engine logging level (0-5)</p></td>
 </tr>
 <tr class="row-odd"><td><p>-p</p></td>
-<td><p>The user type (user|listener) (standard mode automatically joins as user)</p></td>
+<td><p>The user type (user|listener|rts-listener) (standard mode automatically joins as user)</p></td>
 </tr>
 <tr class="row-even"><td><p>-s</p></td>
 <td><p>The send-only mode</p></td>
@@ -336,6 +336,12 @@ reduce your binary size.</p>
 </tr>
 <tr class="row-odd"><td><p>-record</p></td>
 <td><p>Request for conference to be recorded, works if app creates conference in the backend.</p></td>
+</tr>
+<tr class="row-even"><td><p>-opus</p></td>
+<td><p>Create an Opus conference (only taken into account if you are creating the conference)</p></td>
+</tr>
+<tr class="row-odd"><td><p>-video-codec</p></td>
+<td><p>Create conference with specific codec (H264/VP8) (if you are creating the conference)</p></td>
 </tr>
 </tbody>
 </table>
@@ -446,22 +452,31 @@ explain each of the options. If the chosen option requires more input, the user 
 <tr class="row-even"><td><p>get-audio-capture-mode</p></td>
 <td><p>Get the current audio capture mode.</p></td>
 </tr>
-<tr class="row-odd"><td><p>q</p></td>
+<tr class="row-odd"><td><p>sc+</p></td>
+<td><p>Start screen share, or switch share source if already active</p></td>
+</tr>
+<tr class="row-even"><td><p>sc-</p></td>
+<td><p>Stop the screen share</p></td>
+</tr>
+<tr class="row-odd"><td><p>screen-share-type</p></td>
+<td><p>Change the screen share content type hint</p></td>
+</tr>
+<tr class="row-even"><td><p>q</p></td>
 <td><p>Quits the application</p></td>
 </tr>
-<tr class="row-even"><td><p>f*</p></td>
+<tr class="row-odd"><td><p>f*</p></td>
 <td><p>Sets a new media file to play (if media io enabled)</p></td>
 </tr>
-<tr class="row-odd"><td><p>F*</p></td>
+<tr class="row-even"><td><p>F*</p></td>
 <td><p>Adds a new media file to a playlist (if media io enabled)</p></td>
 </tr>
-<tr class="row-even"><td><p>p*</p></td>
+<tr class="row-odd"><td><p>p*</p></td>
 <td><p>Pauses the file injection  (if media io enabled)</p></td>
 </tr>
-<tr class="row-odd"><td><p>r*</p></td>
+<tr class="row-even"><td><p>r*</p></td>
 <td><p>Resumes the paused file injection  (if media io enabled)</p></td>
 </tr>
-<tr class="row-even"><td><p>s*</p></td>
+<tr class="row-odd"><td><p>s*</p></td>
 <td><p>Seeks to time in the file  (if media io enabled)</p></td>
 </tr>
 </tbody>
@@ -490,7 +505,7 @@ added. Once this method is resolved, the injection of audio from the Media Sourc
 <section id="video-processor">
 <span id="cv-p-example"></span><h3>Video processor<a class="headerlink" href="#video-processor" title="Permalink to this heading"></a></h3>
 <p>The <strong>share/dolby/comms/sample/custom_video_processor/</strong> directory contains cpp and header files to build a library implementing a custom video processor. In order for this processor to be used by the C++ SDK it must be
-provided as the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">dolbyio::comms::video_frame_handler</span></code></a> with the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::local_video::start()</span></code></a> function call.</p>
+provided as the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">dolbyio::comms::video_frame_handler</span></code></a> with the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceRKNSt10shared_ptrI19video_frame_handlerEE" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::local_video::start()</span></code></a> function call.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For macOS the captured camera frames are stored in shared IOSurface. This sample processes the frames in place. A proper application implementation should make a copy of the CVPixelBuffer
@@ -499,7 +514,7 @@ and underlying IOSurface and only then process its copy of these memory buffers.
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For macOS Video Support relies on the presence and running of the macOS main event loop. If you try to start video before you have executed something like <strong>[NSApp run]</strong> the SDK will throw an exception.
-Thus any calls to <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start_video</span></code></a> must be done after the main event loop has been started.</p>
+Thus any calls to <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceRKNSt10shared_ptrI19video_frame_handlerEE" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start_video</span></code></a> must be done after the main event loop has been started.</p>
 </div>
 <p>The interfaces inheritted by this custom_video_processor example must be implemented by any custom video processor which wishes to receive video frames and have somewhere to inject them.</p>
 <p>Adding this sample custom video procesor to any app is very simple, here we show basic instructions for integrating it with our sample desktop_app:</p>
@@ -515,7 +530,7 @@ Thus any calls to <a class="reference internal" href="../api/sdk/video.html#_CPP
 </pre></div>
 </div>
 <p>2) Next edit the <strong>share/dolby/comms/sample/utilities/ui_loop/ui.cc</strong> file to include the custom_processor header file. Then finally inside the <strong>ui_interface::ui_loop_on_helper_thread</strong> method create a processor and
-provide the processor to the SDK using the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceP19video_frame_handler" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start</span> <span class="pre">video</span></code></a> method. Essentially you just need to add 3 lines of code in respective places as show below:</p>
+provide the processor to the SDK using the <a class="reference internal" href="../api/sdk/video.html#_CPPv4N7dolbyio5comms8services11local_video5startERK13camera_deviceRKNSt10shared_ptrI19video_frame_handlerEE" title="dolbyio::comms::services::local_video::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">start</span> <span class="pre">video</span></code></a> method. Essentially you just need to add 3 lines of code in respective places as show below:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;comms/sample/custom_video_processor/custom_video_processor.h&quot;</span>
 
 <span class="p">...</span>
@@ -546,7 +561,7 @@ provide the processor to the SDK using the <a class="reference internal" href=".
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.3.3 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.4.0 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="run_time_deps.html" class="btn btn-neutral float-right" title="Run Time Dependencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
