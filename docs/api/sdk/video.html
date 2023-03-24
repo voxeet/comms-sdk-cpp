@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Video Service &mdash; C++ SDK 2.4.0 documentation</title>
+  <title>Video Service &mdash; C++ SDK 2.4.1 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -862,6 +862,28 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <li><p><strong>width</strong> – Width of buffer the plane in bytes. </p></li>
 <li><p><strong>height</strong> – Height of the plane buffer in bytes. </p></li>
 <li><p><strong>value</strong> – Value to be set. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_utils16format_converter9nv12_copyEPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiii">
+<span id="_CPPv3N7dolbyio5comms11video_utils16format_converter9nv12_copyEPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiii"></span><span id="_CPPv2N7dolbyio5comms11video_utils16format_converter9nv12_copyEPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiii"></span><span id="dolbyio::comms::video_utils::format_converter::nv12_copy__uint8_tCP.i.uint8_tCP.i.uint8_tP.i.uint8_tP.i.i.i"></span><span class="target" id="classdolbyio_1_1comms_1_1video__utils_1_1format__converter_1a9ff305c4ccb2093aff5ab7f3b3d47036"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nv12_copy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_y</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_stride_y</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_uv</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_stride_uv</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_y</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dst_stride_y</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_uv</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dst_stride_uv</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_utils16format_converter9nv12_copyEPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copies NV12 video format. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_y</strong> – Source Y plane buffer. </p></li>
+<li><p><strong>src_stride_y</strong> – Source Y plane stride. </p></li>
+<li><p><strong>src_uv</strong> – Source UV plane buffer. </p></li>
+<li><p><strong>src_stride_uv</strong> – Source UV plane stride. </p></li>
+<li><p><strong>dst_y</strong> – Destination Y plane buffer. </p></li>
+<li><p><strong>dst_stride_y</strong> – Destination Y plane stride. </p></li>
+<li><p><strong>dst_uv</strong> – Destination UV plane buffer. </p></li>
+<li><p><strong>dst_stride_uv</strong> – Destination UV plane stride. </p></li>
+<li><p><strong>width</strong> – Frame width. </p></li>
+<li><p><strong>height</strong> – Frame height. </p></li>
 </ul>
 </dd>
 </dl>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conference Service &mdash; C++ SDK 2.4.0 documentation</title>
+  <title>Conference Service &mdash; C++ SDK 2.4.1 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -1169,6 +1169,12 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE">
 <span id="_CPPv3N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE"></span><span id="_CPPv2N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE"></span><span id="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style__spatial_audio_style"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1conference_1_1conference__options_1_1params_1aa538e1a171d03c17d05319715a9b70ff"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style"><span class="n"><span class="pre">spatial_audio_style</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spatial_audio_style</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="dolbyio::comms::services::conference::conference_options::params::spatial_audio_style"><span class="n"><span class="pre">spatial_audio_style</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">individual</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params19spatial_audio_styleE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>An enum that defines how the spatial location is communicated between the SDK and the Dolby.io server. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference18conference_options6params9rtcp_modeE">
+<span id="_CPPv3N7dolbyio5comms8services10conference18conference_options6params9rtcp_modeE"></span><span id="_CPPv2N7dolbyio5comms8services10conference18conference_options6params9rtcp_modeE"></span><span id="dolbyio::comms::services::conference::conference_options::params::rtcp_mode__std::optional:rtcp_mode:"></span><span class="target" id="structdolbyio_1_1comms_1_1services_1_1conference_1_1conference__options_1_1params_1a1189f24214ecf3190eedde7b0b6018e1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">optional</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params9rtcp_modeE" title="dolbyio::comms::services::conference::conference_options::params::rtcp_mode"><span class="n"><span class="pre">rtcp_mode</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rtcp_mode</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference18conference_options6params9rtcp_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Rtcp Mode to be used for the conference. If not specified the <a class="reference internal" href="#namespacedolbyio_1_1comms_1a4f38ac1d6a31051ffcfb248b0c9c2e9fa6927a3a7218a3195858411433ec20a21"><span class="std std-ref">rtcp_mode::average</span></a> will be used. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -2608,7 +2614,7 @@ interface can be passed to and returned by the service.</p>
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms9rtcp_mode7averageE">
 <span id="_CPPv3N7dolbyio5comms9rtcp_mode7averageE"></span><span id="_CPPv2N7dolbyio5comms9rtcp_mode7averageE"></span><span class="target" id="namespacedolbyio_1_1comms_1a4f38ac1d6a31051ffcfb248b0c9c2e9fa6927a3a7218a3195858411433ec20a21"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">average</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms9rtcp_mode7averageE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Averages the available bandwidth of all the receivers and adjusts the transmission bitrate to this value. </p>
+<dd><p>Averages the available bandwidth of all the receivers and adjusts the transmission bitrate to this value. This is the default value used. </p>
 </dd></dl>
 
 <dl class="cpp enumerator">

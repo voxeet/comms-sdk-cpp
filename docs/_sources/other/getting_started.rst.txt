@@ -204,9 +204,11 @@ _______________________________________
  +-----------------------+------------------------------------------------------------------------------------------+
  | -record               | Request for conference to be recorded, works if app creates conference in the backend.   |
  +-----------------------+------------------------------------------------------------------------------------------+
- | -opus                 | Create an Opus conference (only taken into account if you are creating the conference)   |
+ | -opus                 | Create an Opus conference (only taken into account if you create the conference)         |
  +-----------------------+------------------------------------------------------------------------------------------+
- | -video-codec          | Create conference with specific codec (H264/VP8) (if you are creating the conference)    |
+ | -video-codec          | Create conference with specific codec (H264/VP8) (if you create the conference)          |
+ +-----------------------+------------------------------------------------------------------------------------------+
+ | -rtcp-mode            | Set rtcp_mode used in conference (worst/average/max) (if you create the conference)      |
  +-----------------------+------------------------------------------------------------------------------------------+
 
 For example:
