@@ -17,8 +17,26 @@ frames to be passed on to. Each of the injectors accepts :cpp:class:`audio frame
 The main difference between the two injectors is that the paced injector provides a pacing logic, so that it can queue audio and video frames before injecting them into a conference. The passthrough injector accepts the raw audio and video frames and directly relays them to the CoreSDK. Thus, the application is responsible for invoking the frame injection 
 interface quickly.
 
-.. doxygenclass:: dolbyio::comms::plugin::injector
-        :project: C++ SDK
+
+Media Source for Injector
+_________________________
+Neither of the default injectors provide infrastructure for capturing and decoding media. This is the application's responsibility; once it has decoded media frames, it can pass them to either of the
+aforementioned injectors. We have provided a sample library to showcase how to create a Media Injection Source. This sample library, called **media_source_file**, reads media from a mov/mp4 file 
+and using the Paced Injector injects the audio and video frames into the CoreSDK. This **media_source_file** library is utilized by the provided sample application to inject media files. The 
+:ref:`getting_started_sample` page describes how to get media injection running with the sample application. A brief overview of the library is provided :ref:`below <media_source_file>`.
+
+The audio provided to the injector, contained by the :cpp:class:`audio frame <dolbyio::comms::audio_frame>`, should have the following specifications:
+
+.. table::
+
+  +-------+--------------+---------+
+  | Codec |    Size      | Format  |
+  +=======+==============+=========+
+  | PCM   | 10ms of data | s16_Int |
+  +-------+--------------+---------+
+
+The CoreSDK expects these 10ms chunks of PCM audio to be provided every 10ms. The video frames provided to the Injector, contained in :cpp:class:`video frames <dolbyio::comms::video_frame>`, must be YUV 
+pixels.
 
 Passthrough Injector
 ____________________
@@ -40,32 +58,13 @@ The Paced Injector also provides a method for injecting silent audio frames in 1
 .. doxygenclass:: dolbyio::comms::plugin::injector_paced
         :project: C++ SDK
 
+
 Media Injection Status
 ______________________
 The Media Injection Status is a structure that depicts the status of the injector. It is passed to the application when the status changes.
 
 .. doxygenstruct:: dolbyio::comms::plugin::media_injection_status
         :project: C++ SDK
-
-Media Source for Injector
-_________________________
-Neither of the default injectors provide infrastructure for capturing and decoding media. This is the application's responsibility; once it has decoded media frames, it can pass them to either of the
-aforementioned injectors. We have provided a sample library to showcase how to create a Media Injection Source. This sample library, called :ref:`media_source_file`, reads media from a mov/mp4 file 
-and using the Paced Injector injects the audio and video frames into the CoreSDK. This :ref:`media_source_file` library is utilized by the provided sample application to inject media files. The 
-:ref:`getting_started_sample` page describes how to get media injection running with the sample application. A brief overview of the library is provided :ref:`below <media_source_file>`.
-
-The audio provided to the injector, contained by the :cpp:class:`audio frame <dolbyio::comms::audio_frame>`, should have the following specifications:
-
-.. table::
-
-  +-------+--------------+---------+
-  | Codec |    Size      | Format  |
-  +=======+==============+=========+
-  | PCM   | 10ms of data | s16_Int |
-  +-------+--------------+---------+
-
-The CoreSDK expects these 10ms chunks of PCM audio to be provided every 10ms. The video frames provided to the Injector, contained in :cpp:class:`video frames <dolbyio::comms::video_frame>`, must be YUV 
-pixels.
 
 .. _media_source_file:
 
