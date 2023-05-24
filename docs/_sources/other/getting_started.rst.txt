@@ -28,9 +28,9 @@ The following table lists the contents of the C++ SDK package:
  With the addition of Apple silicon support, the macOS package contains two subdirectories inside the unzipped **sdk-release** directory, with libraries for respective platforms. The **sdk-release-arm** packages are designed for Arm architectures, and the **sdk-release-x86** packages are designed for x86 architectures. To simplify this guide, we will mention only the **sdk-release** directory.
 
 .. note::
- On macOS, it is necessary to unquarantine SDK libraries and sample binaries. Otherwise, quarantine attributes prevent their usage. The simplest way to unquarantine is to strip the quarantine attributes recursively for all the files in the package. The following example presents how to do this via terminal and the macOS attribute stripping command line tool:
+ On macOS, it is necessary to unquarantine the prebuilt desktop_app sample binary included in the package. To strip quarantine via terminal and the macOS attribute stripping command line tool do the following:
 
- **xattr -d -r com.apple.quarantine sdk-release/**
+ **xattr -d -r com.apple.quarantine sdk-release/bin/desktop_app**
 
 CA certificates
 ---------------
@@ -166,7 +166,7 @@ _______________________________________
  +-----------------------+------------------------------------------------------------------------------------------+
  | -ml                   | The Media Engine logging level (0-5)                                                     |
  +-----------------------+------------------------------------------------------------------------------------------+
- | -p                    | The user type (user|listener) (standard mode automatically joins as user)                | 
+ | -p                    | The user type (user|listener|rts-listener) (standard mode automatically joins as user)   | 
  +-----------------------+------------------------------------------------------------------------------------------+
  | -s                    | The send-only mode                                                                       |
  +-----------------------+------------------------------------------------------------------------------------------+
@@ -203,6 +203,12 @@ _______________________________________
  | -loop                 | Play the media injected file in a loop (only considered if Media IO features enabled)    |
  +-----------------------+------------------------------------------------------------------------------------------+
  | -record               | Request for conference to be recorded, works if app creates conference in the backend.   |
+ +-----------------------+------------------------------------------------------------------------------------------+
+ | -opus                 | Create an Opus conference (only taken into account if you create the conference)         |
+ +-----------------------+------------------------------------------------------------------------------------------+
+ | -video-codec          | Create conference with specific codec (H264/VP8) (if you create the conference)          |
+ +-----------------------+------------------------------------------------------------------------------------------+
+ | -rtcp-mode            | Set rtcp_mode used in conference (worst/average/max) (if you create the conference)      |
  +-----------------------+------------------------------------------------------------------------------------------+
 
 For example:
@@ -282,6 +288,12 @@ explain each of the options. If the chosen option requires more input, the user 
  | set-audio-capture-mode   | Set the audio capture mode.                                    |
  +--------------------------+----------------------------------------------------------------+
  | get-audio-capture-mode   | Get the current audio capture mode.                            |
+ +--------------------------+----------------------------------------------------------------+
+ | sc+                      | Start screen share, or switch share source if already active   |
+ +--------------------------+----------------------------------------------------------------+
+ | sc-                      | Stop the screen share                                          |
+ +--------------------------+----------------------------------------------------------------+
+ | screen-share-type        | Change the screen share content type hint                      |
  +--------------------------+----------------------------------------------------------------+
  | q                        | Quits the application                                          |
  +--------------------------+----------------------------------------------------------------+
