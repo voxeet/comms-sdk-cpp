@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Event Handling Interface &mdash; C++ SDK 2.4.3 documentation</title>
+  <title>Event Handling Interface &mdash; C++ SDK 2.5.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
@@ -152,7 +152,7 @@
 </pre></div>
 </div>
  <dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>This function is asynchronous and the operation is executed on the event loop of the SDK. You can either block the calling thread until the operation completes or chain consecutive operations that depend on the completion of this method using the <a class="reference internal" href="async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> call. The async_result chain operations need to be terminated with an <a class="reference internal" href="async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>.</p>
+<dt><strong>Attention</strong></dt><dd><p>This function is asynchronous and the operation is executed on the event loop of the SDK. You can either block the calling thread until the operation completes or chain consecutive operations that depend on the completion of this method using the <a class="reference internal" href="async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a01990316ea6d6c7081eb9545f5a6146d"><span class="std std-ref">async_result::then</span></a> call. The async_result chain operations need to be terminated with an <a class="reference internal" href="async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>.</p>
 </dd>
 </dl>
 </p>

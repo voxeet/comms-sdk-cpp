@@ -3,9 +3,6 @@
 Audio Service
 ==============
 
-.. note::
-  The Audio Service is considered to be in Beta phase on Linux systems.
-
 The Audio Service allows enabling and disabling audio for the local and remote participants, as well as configuring audio capture modes.
 
 Audio Interface
@@ -27,6 +24,8 @@ Remote Audio
 Audio Processing
 ----------------
 .. doxygenenum:: dolbyio::comms::noise_reduction
+
+.. doxygenenum:: dolbyio::comms::voice_font
 
 .. doxygenstruct:: dolbyio::comms::audio_capture_mode::unprocessed
 

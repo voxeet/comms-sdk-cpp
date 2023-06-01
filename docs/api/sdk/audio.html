@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Audio Service &mdash; C++ SDK 2.4.3 documentation</title>
+  <title>Audio Service &mdash; C++ SDK 2.5.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -101,10 +101,6 @@
              
   <section id="audio-service">
 <span id="api-audio-service"></span><h1>Audio Service<a class="headerlink" href="#audio-service" title="Permalink to this heading"></a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The Audio Service is considered to be in Beta phase on Linux systems.</p>
-</div>
 <p>The Audio Service allows enabling and disabling audio for the local and remote participants, as well as configuring audio capture modes.</p>
 <section id="audio-interface">
 <h2>Audio Interface<a class="headerlink" href="#audio-interface" title="Permalink to this heading"></a></h2>
@@ -151,7 +147,7 @@
 <p>This service is used to control local participant’s input audio properties, and enabling or disabling audio capture and sending into conference.</p>
 <p>The start and stop audio methods of the local audio service should only be used when the conference is active.</p>
 <p><dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1local__audio"><span class="std std-ref">local_audio</span></a> interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+<dt><strong>Attention</strong></dt><dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1local__audio"><span class="std std-ref">local_audio</span></a> interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a01990316ea6d6c7081eb9545f5a6146d"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
 </dd>
 </dl>
 </p>
@@ -255,7 +251,7 @@
 <p>This service is used to control the local properties of the remote participants’ audio, that is the audio which is played in the conference on the current client’s endpoint.</p>
 <p>All methods of the remote audio service should only be used when the conference is active.</p>
 <p><dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1remote__audio"><span class="std std-ref">remote_audio</span></a> interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+<dt><strong>Attention</strong></dt><dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1remote__audio"><span class="std std-ref">remote_audio</span></a> interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a01990316ea6d6c7081eb9545f5a6146d"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
 </dd>
 </dl>
 </p>
@@ -326,11 +322,100 @@
 
 </dd></dl>
 
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_fontE">
+<span id="_CPPv3N7dolbyio5comms10voice_fontE"></span><span id="_CPPv2N7dolbyio5comms10voice_fontE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">voice_font</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_fontE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Voice modification effect. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font4noneE">
+<span id="_CPPv3N7dolbyio5comms10voice_font4noneE"></span><span id="_CPPv2N7dolbyio5comms10voice_font4noneE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba334c4a4c42fdb79d7ebc3e73b517e6f8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">none</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font4noneE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font9masculineE">
+<span id="_CPPv3N7dolbyio5comms10voice_font9masculineE"></span><span id="_CPPv2N7dolbyio5comms10voice_font9masculineE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba0b1ad037e5342242eb1efc61a64bd0da"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">masculine</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font9masculineE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font8feminineE">
+<span id="_CPPv3N7dolbyio5comms10voice_font8feminineE"></span><span id="_CPPv2N7dolbyio5comms10voice_font8feminineE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba35be10c27af10feaddfcdbf4c4f03a01"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">feminine</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font8feminineE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font6heliumE">
+<span id="_CPPv3N7dolbyio5comms10voice_font6heliumE"></span><span id="_CPPv2N7dolbyio5comms10voice_font6heliumE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05bab31fc82e204fa4f181d0117fc8ab52fd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">helium</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font6heliumE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font15dark_modulationE">
+<span id="_CPPv3N7dolbyio5comms10voice_font15dark_modulationE"></span><span id="_CPPv2N7dolbyio5comms10voice_font15dark_modulationE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba059d48834094b8ebbcae73bad3063ce9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dark_modulation</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font15dark_modulationE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font12broken_robotE">
+<span id="_CPPv3N7dolbyio5comms10voice_font12broken_robotE"></span><span id="_CPPv2N7dolbyio5comms10voice_font12broken_robotE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba07516edc528923634b49e0f8d7c05b48"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">broken_robot</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font12broken_robotE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font12interferenceE">
+<span id="_CPPv3N7dolbyio5comms10voice_font12interferenceE"></span><span id="_CPPv2N7dolbyio5comms10voice_font12interferenceE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05bad6e4039dd3f6554f26c8d650873b88f2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interference</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font12interferenceE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font5abyssE">
+<span id="_CPPv3N7dolbyio5comms10voice_font5abyssE"></span><span id="_CPPv2N7dolbyio5comms10voice_font5abyssE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba7321a0a60f5809733b8a12a55bb0845c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">abyss</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font5abyssE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font6wobbleE">
+<span id="_CPPv3N7dolbyio5comms10voice_font6wobbleE"></span><span id="_CPPv2N7dolbyio5comms10voice_font6wobbleE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba9fb0ced7b15b1fb4a6acbabe3a26b2f2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">wobble</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font6wobbleE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font16starship_captainE">
+<span id="_CPPv3N7dolbyio5comms10voice_font16starship_captainE"></span><span id="_CPPv2N7dolbyio5comms10voice_font16starship_captainE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba535eec2004829c3daf7f419dd5b6c51c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">starship_captain</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font16starship_captainE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font13nervous_robotE">
+<span id="_CPPv3N7dolbyio5comms10voice_font13nervous_robotE"></span><span id="_CPPv2N7dolbyio5comms10voice_font13nervous_robotE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba09c6e9c6d144689c2b58b37d995bcc43"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nervous_robot</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font13nervous_robotE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font5swarmE">
+<span id="_CPPv3N7dolbyio5comms10voice_font5swarmE"></span><span id="_CPPv2N7dolbyio5comms10voice_font5swarmE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba6b3d43184271885b9fb260c59821d5e8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">swarm</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font5swarmE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10voice_font8am_radioE">
+<span id="_CPPv3N7dolbyio5comms10voice_font8am_radioE"></span><span id="_CPPv2N7dolbyio5comms10voice_font8am_radioE"></span><span class="target" id="namespacedolbyio_1_1comms_1a59c1434e5e7703ae596db1af8eadb05ba1e16f51441ca757b1027aebf4ee80ceb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">am_radio</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10voice_font8am_radioE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode11unprocessedE">
 <span id="_CPPv3N7dolbyio5comms18audio_capture_mode11unprocessedE"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode11unprocessedE"></span><span id="dolbyio::comms::audio_capture_mode::unprocessed"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1unprocessed"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unprocessed</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode11unprocessedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Capture background noise and non-voice sounds. </p>
 <p>This mode uses echo suppression. No noise suppression is applied, and so a low end microphone or a noisy environment may introduce the noise into the conference. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18audio_capture_mode11unprocessedeqERK11unprocessed">
+<span id="_CPPv3NK7dolbyio5comms18audio_capture_mode11unprocessedeqERK11unprocessed"></span><span id="_CPPv2NK7dolbyio5comms18audio_capture_mode11unprocessedeqERK11unprocessed"></span><span id="dolbyio::comms::audio_capture_mode::unprocessed::eq-operator__unprocessedCRC"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1unprocessed_1aeff0832d385bb37da4cb1ff0dd73539a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_capture_mode11unprocessedE" title="dolbyio::comms::audio_capture_mode::unprocessed"><span class="n"><span class="pre">unprocessed</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18audio_capture_mode11unprocessedeqERK11unprocessed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Compare operator for comparison against other unprocessed audio capture mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The unprocessed audio capture modemode to be compared against </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if the other structure is of the same type </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 </dd></dl>
 
 <dl class="cpp struct">
@@ -346,12 +431,29 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction">
-<span id="_CPPv3N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction"></span><span id="dolbyio::comms::audio_capture_mode::standard::standard__noise_reductionCE"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard_1a75f76375d9461df363679131bbdce29b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">standard</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15noise_reductionE" title="dolbyio::comms::noise_reduction"><span class="n"><span class="pre">noise_reduction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">reduce_noise</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction10voice_font">
+<span id="_CPPv3N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction10voice_font"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction10voice_font"></span><span id="dolbyio::comms::audio_capture_mode::standard::standard__noise_reduction.voice_fontCE"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard_1a729379b05921bb0741987f5aba4106a1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">standard</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15noise_reductionE" title="dolbyio::comms::noise_reduction"><span class="n"><span class="pre">noise_reduction</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">reduce_noise</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms10voice_fontE" title="dolbyio::comms::voice_font"><span class="n"><span class="pre">voice_font</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">apply_voice_font</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10voice_fontE" title="dolbyio::comms::voice_font"><span class="n"><span class="pre">voice_font</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10voice_font4noneE" title="dolbyio::comms::voice_font::none"><span class="n"><span class="pre">none</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standard8standardE15noise_reduction10voice_font" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The constructor. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>reduce_noise</strong> – the noise reduction level. </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reduce_noise</strong> – the noise reduction level. </p></li>
+<li><p><strong>apply_voice_font</strong> – the voice font to apply. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18audio_capture_mode8standardeqERK8standard">
+<span id="_CPPv3NK7dolbyio5comms18audio_capture_mode8standardeqERK8standard"></span><span id="_CPPv2NK7dolbyio5comms18audio_capture_mode8standardeqERK8standard"></span><span id="dolbyio::comms::audio_capture_mode::standard::eq-operator__standardCRC"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard_1a3b1e36b8c08c0862ca9f51cb94d1c7ca"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standardE" title="dolbyio::comms::audio_capture_mode::standard"><span class="n"><span class="pre">standard</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18audio_capture_mode8standardeqERK8standard" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Compare operator for comparison against other standard audio capture mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The standard audio capture mode to be compared against </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if the other denotes the same mode as this, false otherwise. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -363,6 +465,12 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE">
 <span id="_CPPv3N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE"></span><span id="dolbyio::comms::audio_capture_mode::standard::reduce_noise__noise_reduction"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard_1a857ccd3f886082a9e3d183a381d2a0ea"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15noise_reductionE" title="dolbyio::comms::noise_reduction"><span class="n"><span class="pre">noise_reduction</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reduce_noise</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standard12reduce_noiseE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The noise reduction level. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18audio_capture_mode8standard16apply_voice_fontE">
+<span id="_CPPv3N7dolbyio5comms18audio_capture_mode8standard16apply_voice_fontE"></span><span id="_CPPv2N7dolbyio5comms18audio_capture_mode8standard16apply_voice_fontE"></span><span id="dolbyio::comms::audio_capture_mode::standard::apply_voice_font__voice_font"></span><span class="target" id="structdolbyio_1_1comms_1_1audio__capture__mode_1_1standard_1a10f13581a9d37e02a48eb80606b7c003"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms10voice_fontE" title="dolbyio::comms::voice_font"><span class="n"><span class="pre">voice_font</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">apply_voice_font</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18audio_capture_mode8standard16apply_voice_fontE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Voice modification effect. </p>
 </dd></dl>
 
 </div>

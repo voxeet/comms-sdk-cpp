@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sdk Interface &mdash; C++ SDK 2.4.3 documentation</title>
+  <title>Sdk Interface &mdash; C++ SDK 2.5.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -116,7 +116,7 @@
 <span id="_CPPv3N7dolbyio5comms3sdkE"></span><span id="_CPPv2N7dolbyio5comms3sdkE"></span><span id="dolbyio::comms::sdk"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sdk</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdkE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The SDK interface is the entry point for the CoreSDK API. </p>
 <p><dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>The SDK interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and executes operations on the SDK event loop. The caller can block the calling thread until the operation completes and can use the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations which depend on the completion of this method using <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. When you create an async_result chain, terminate it using <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+<dt><strong>Attention</strong></dt><dd><p>The SDK interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and executes operations on the SDK event loop. The caller can block the calling thread until the operation completes and can use the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations which depend on the completion of this method using <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a01990316ea6d6c7081eb9545f5a6146d"><span class="std std-ref">async_result::then</span></a> calls. When you create an async_result chain, terminate it using <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
 </dd>
 </dl>
 </p>
@@ -212,17 +212,24 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk26register_component_versionERKNSt6stringERKNSt6stringE">
-<span id="_CPPv3N7dolbyio5comms3sdk26register_component_versionERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms3sdk26register_component_versionERKNSt6stringERKNSt6stringE"></span><span id="dolbyio::comms::sdk::register_component_version__ssCR.ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a3f3e6de3a9c3be6a9f3cad2200cc21d7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">register_component_version</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">version</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk26register_component_versionERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms3sdk26register_component_versionERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms3sdk26register_component_versionERKNSt6stringERKNSt6stringE"></span><span id="dolbyio::comms::sdk::register_component_version__ssCR.ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1sdk_1a074e3d39647f7e4b69a94c9014eee68d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms3sdk14component_dataE" title="dolbyio::comms::sdk::component_data"><span class="n"><span class="pre">component_data</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">register_component_version</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">version</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk26register_component_versionERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Registers the component version for internal telemetry. </p>
-<p>The component name and version are free-form strings, which will be added to the Dolby.io telemetry reports. If a component with given name has already been registered, this method fails and returns error information asynchronously.</p>
+<p>The component name and version are free-form strings, which will be added to the Dolby.io telemetry reports. If a component with given name has already been registered with a different version, this method fails and returns error information asynchronously.</p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">register_component_version</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span><span class="p">)</span>
-<span class="w">     </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">){</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Failed to register my app to telemetry&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">     </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">){</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Failed to register my app to</span>
+<span class="n">telemetry</span><span class="s">&quot; &lt;&lt; std::endl; }); </span>
 </pre></div>
 </div>
  </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The result object producing the success or failure information asynchronously.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – the name of the component </p></li>
+<li><p><strong>version</strong> – the version of the component</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the success or failure information asynchronously.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -386,6 +393,19 @@ This method causes the global operators new and delete in the SDK to use the app
 
 </div>
 <dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk14component_dataE">
+<span id="_CPPv3N7dolbyio5comms3sdk14component_dataE"></span><span id="_CPPv2N7dolbyio5comms3sdk14component_dataE"></span><span id="dolbyio::comms::sdk::component_data"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1component__data"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">component_data</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk14component_dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk14component_data6loggerE">
+<span id="_CPPv3N7dolbyio5comms3sdk14component_data6loggerE"></span><span id="_CPPv2N7dolbyio5comms3sdk14component_data6loggerE"></span><span id="dolbyio::comms::sdk::component_data::logger__std::shared_ptr:logger_sink:"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1component__data_1a8592d8ee6aa90f456e4586960e8eac57"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">logger_sink</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">logger</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk14component_data6loggerE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settingsE">
 <span id="_CPPv3N7dolbyio5comms3sdk12log_settingsE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settingsE"></span><span id="dolbyio::comms::sdk::log_settings"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_settings</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settingsE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Settings describing what and how to log. </p>
@@ -404,14 +424,21 @@ This method causes the global operators new and delete in the SDK to use the app
 </dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settings13dvc_log_levelE">
+<span id="_CPPv3N7dolbyio5comms3sdk12log_settings13dvc_log_levelE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settings13dvc_log_levelE"></span><span id="dolbyio::comms::sdk::log_settings::dvc_log_level__log_level"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings_1a47c3cd33b241ed4dc596ac7527aa47b5"></span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dvc_log_level</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_levelE" title="dolbyio::comms::log_level"><span class="n"><span class="pre">log_level</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="common/log_level.html#_CPPv4N7dolbyio5comms9log_level3OFFE" title="dolbyio::comms::log_level::OFF"><span class="n"><span class="pre">OFF</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settings13dvc_log_levelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Log level for DVC logs. It is recommended to keep the DVC log level at OFF, ERROR or WARNING to avoid spam and only enable more detailed logs when necessary. Default is OFF. </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settings13log_directoryE">
 <span id="_CPPv3N7dolbyio5comms3sdk12log_settings13log_directoryE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settings13log_directoryE"></span><span id="dolbyio::comms::sdk::log_settings::log_directory__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings_1a134ae6683f37f1883d1a461480ba8943"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_directory</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settings13log_directoryE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Directory to which SDK logs should be saved. The application must have write access to the directory or it must be able to create such a directory. Providing a valid directory implies starting logging to a timestamped file. Providing no value or an empty string has no effect. Default is an empty string. </p>
-<p><dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>SDK logs are always also output to stdout regardless of this setting. </p>
-</dd>
-</dl>
-</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk12log_settings20suppress_stdout_logsE">
+<span id="_CPPv3N7dolbyio5comms3sdk12log_settings20suppress_stdout_logsE"></span><span id="_CPPv2N7dolbyio5comms3sdk12log_settings20suppress_stdout_logsE"></span><span id="dolbyio::comms::sdk::log_settings::suppress_stdout_logs__b"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1log__settings_1adc26e8f452aa6aedab25296592371b3d"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">suppress_stdout_logs</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk12log_settings20suppress_stdout_logsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Suppress the logs to stdout. This parameter will only be taken into account if the log directory is set. In which case logs will only be passed to the file in directory and nothing on stdout. </p>
 </dd></dl>
 
 </div>

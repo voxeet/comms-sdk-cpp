@@ -3,9 +3,6 @@
 Default Media Recorder
 ============================
 
-.. note::
-  The Default Media Recorder is considered to be in Beta phase on MacOS and Windows systems.
-
 The default recorder handles the incoming media streams and stores the streams in proper containers. The following table lists containers used for respective codecs:
 
 .. table::

@@ -25,7 +25,6 @@ The remote video API allows attaching a :cpp:class:`Video Sink <dolbyio::comms::
 
 .. doxygenclass:: dolbyio::comms::services::remote_video
 
-
 .. _vid_frame_handle:
 
 Video frame handling
@@ -55,16 +54,36 @@ _____________________
 
 .. doxygenclass:: dolbyio::comms::video_frame
 
-YUV420 video frame
-__________________
+Video frame buffer interface
+____________________________
 
-.. doxygenclass:: dolbyio::comms::video_frame_i420
+.. doxygenclass:: dolbyio::comms::video_frame_buffer
 
-MacOS video frame
-_________________
-#include <dolbyio/comms/media_engine/video_frame_macos.h>
+YUV420 video frame buffer
+_________________________
+#include <dolbyio/comms/media_engine/video_frame_buffer_i420.h>
 
-.. doxygenclass:: dolbyio::comms::video_frame_macos
+.. doxygenclass:: dolbyio::comms::video_frame_buffer_i420_interface
+.. doxygenclass:: dolbyio::comms::video_frame_buffer_i420
+
+NV12 video frame buffer
+_______________________
+#include <dolbyio/comms/media_engine/video_frame_buffer_nv12.h>
+
+.. doxygenclass:: dolbyio::comms::video_frame_buffer_nv12_interface
+.. doxygenclass:: dolbyio::comms::video_frame_buffer_nv12
+
+Native video frame buffer
+_________________________
+
+.. doxygenclass:: dolbyio::comms::video_frame_buffer_native_interface
+
+ARGB video frame buffer
+_______________________
+#include <dolbyio/comms/media_engine/video_frame_buffer_argb.h>
+
+.. doxygenclass:: dolbyio::comms::video_frame_buffer_argb_interface
+.. doxygenclass:: dolbyio::comms::video_frame_buffer_argb
 
 Video utilities
 _______________

@@ -2,7 +2,9 @@
 
 Plugins
 =======
-The Plugins are provided as part of the **dolbyio_multimedia_streaming_addon** library. Applications that would like to use our Default Injector/Recorder modules should link against this library.
+The video processing library is part of the **dolbyio_video_processor** library. Applications which would like to use our video processor should link against this library. The video processor library provides the ability to process frames captured from camera and blur the background, the processed frames can then be sent into the conference.
+
+The media injection/recording plugins are provided as part of the **dolbyio_multimedia_streaming_addon** library. Applications that would like to use our Default Injector/Recorder modules should link against this library.
 
 To record conferences, the C++ SDK uses a Media Recorder that allows processing and storing video frames from the incoming WebRTC media streams. The library provides a default media recorder plugin. The default media recorder plugin is 
 a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format.
@@ -15,5 +17,6 @@ for injecting frames, but this plugin directly relays the frames it receives to 
   :titlesonly:
   :glob:
 
+  sdk/processor.rst
   sdk/recorder.rst
   sdk/injector.rst

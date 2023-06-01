@@ -89,6 +89,8 @@ In the **Standard Mode** the sample app can also:
   6) Set a :cpp:class:`video sink <dolbyio::comms::video_sink>` using the remote video service :cpp:func:`set sink <dolbyio::comms::services::remote_video::set_sink>` function to receive incoming video streams from remote participants.
   7) Start/stop receiving the audio streams of desired participants using the :cpp:class:`remote audio service <dolbyio::comms::services::remote_audio>`.
 
+.. _media_io_mode:
+
 Media IO Mode
 _______________________
 In the **Media IO Mode** the sample app can:
@@ -143,172 +145,24 @@ _______________________________________
 		[100%] Built target desktop_app
 
 
-2. Run the created **desktop_app** executable using the following command line parameters:
+2. Run the created **desktop_app** executable with help option to see the available command line parameters:
 
- +-----------------------+------------------------------------------------------------------------------------------+
- | Argument              | Description                                                                              |
- +=======================+==========================================================================================+
- | -h                    | Print the help menu.                                                                     |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -u                    | The participant's name.                                                                  |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -e                    | The external ID                                                                          |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -k                    | The access token                                                                         |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -c                    | The conference alias (DEMO to join a demo conference)                                    |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -t                    | The conference access token                                                              |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -i                    | The conference ID                                                                        |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -l                    | The SDK logging level (0-5)                                                              |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -ml                   | The Media Engine logging level (0-5)                                                     |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -p                    | The user type (user|listener|rts-listener) (standard mode automatically joins as user)   | 
- +-----------------------+------------------------------------------------------------------------------------------+
- | -s                    | The send-only mode                                                                       |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -m <AV>               | The initial media to send (A || V || AV)                                                 |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -spatial              | Spatial audio (shared|individual|disabled)                                               |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -log_speaker          | Logs the active speaker changes  (yes|no)                                                |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -simulcast            | Join with simulcast enabled                                                              |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -no-display-video     | Do not render video incoming video (sampleapp only renders incoming video on macOS)      |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -no-background-render | Do not render video when app is in background (only available on macOS)                  |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -enable-media-io      | Enable the sample applications Media IO features (injection/recording)                   |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -d                    | the relative path to outputdirectory (only considered if Media IO features enabled)      |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -v                    | The video format for recording  (only considered if Media IO features enabled)           |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -a                    | The audio format for recording   (only considered if Media IO features enabled)          |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -m                    | The initial media to inject  (only considered if Media IO features enabled)              |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -f                    | The name of a media file to inject (only considered if Media IO features enabled)        |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -s                    | The send-only mode  (only considered if Media IO features enabled)                       |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -V, -max_vfs          | Maximum video forwarding strategy (maximum video streams to receive)                     |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -forwarding-strategy  | The desired video forwarding strategy (lastSpeaker, closestUser)                         |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -loop                 | Play the media injected file in a loop (only considered if Media IO features enabled)    |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -record               | Request for conference to be recorded, works if app creates conference in the backend.   |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -opus                 | Create an Opus conference (only taken into account if you create the conference)         |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -video-codec          | Create conference with specific codec (H264/VP8) (if you create the conference)          |
- +-----------------------+------------------------------------------------------------------------------------------+
- | -rtcp-mode            | Set rtcp_mode used in conference (worst/average/max) (if you create the conference)      |
- +-----------------------+------------------------------------------------------------------------------------------+
+.. code-block:: console
+        
+        $ ./desktop_app -h
+        $ ./desktop_app --help
 
 For example:
 
 .. code-block:: console
         
-        $ ./desktop_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -ml LOG_LEVEL_MEDIA -p user -m AV -spatial shared
+        $ ./desktop_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -ld LOG_DIRECTORY -lmedia LOG_LEVEL_MEDIA -p user -m AV -spatial shared
 		   
 			 or
 
-        $ ./desktop_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -ml LOG_LEVEL_MEDIA -p user -enable-media-io -d PATH_TO_DUMP_DIRECTORY -m AV -f SOME_FILE.mp4 -spatial shared
+        $ ./desktop_app -u USERNAME -k ACCESS_TOKEN -i CONF_ID -l LOG_LEVEL -ld LOG_DIRECTORY -lmedia LOG_LEVEL_MEDIA -p user -enable-media-io -d PATH_TO_DUMP_DIRECTORY -m AV -f SOME_FILE.mp4 -spatial shared
 
-
-.. note::
-	Providing the **-i** command line parameter causes that the application joins the specific conference if the conference with the provided ID already exists. Providing **-c** causes that the application joins the specific conference. 
-	If the requested conference does not exist on the Dolby.io backend the application creates and joins the conference. Providing a **DEMO** value of the **-c** parameter causes that the application creates and joins a demo conference.
-	If you do not provide **CONFERENCE_ID** nor **CONFERENCE_ALIAS** when joining, the application will open a session with the Dolby.io backend and wait for interactions. In this scenario, it is possible
-	to listen for subscription or invitation events, get invited to conferences and invite others.
-
-
-3. Interact with the **desktop_app** executable using one of the following command line options, which can be provided whilst the application is running. The application will prompt the user for input and
-explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well. 
-
- +--------------------------+----------------------------------------------------------------+
- | Option                   | Description                                                    |
- +==========================+================================================================+
- | q                        | Quits the application                                          |
- +--------------------------+----------------------------------------------------------------+
- | stop-audio               | Stops the local audio                                          |
- +--------------------------+----------------------------------------------------------------+
- | start-audio              | Starts the local audio                                         |
- +--------------------------+----------------------------------------------------------------+
- | v                        | Stops the local video                                          |
- +--------------------------+----------------------------------------------------------------+
- | V                        | Starts the local video                                         |
- +--------------------------+----------------------------------------------------------------+
- | stop-audio-remote        | Stops remote audio in a Dolby Voice conference                 |
- +--------------------------+----------------------------------------------------------------+
- | start-audio-remote       | Starts remote audio in a Dolby Voice conference                |
- +--------------------------+----------------------------------------------------------------+
- | m                        | Sends a message to a conference                                |
- +--------------------------+----------------------------------------------------------------+
- | P                        | Lists conference participants                                  |
- +--------------------------+----------------------------------------------------------------+
- | S                        | Sets a spatial audio configuration                             |
- +--------------------------+----------------------------------------------------------------+
- | mute                     | Mutes the local participant's microphone                       |
- +--------------------------+----------------------------------------------------------------+
- | unmute                   | Un-mutes the local participant's microphone                    |
- +--------------------------+----------------------------------------------------------------+
- | mute-remote              | Mutes a remote participant in a non-Dolby Voice conference     |
- +--------------------------+----------------------------------------------------------------+
- | unmute-remote            | Un-mutes a remote participant in a non-Dolby Voice conference  |
- +--------------------------+----------------------------------------------------------------+
- | k                        | Sets output audio mute                                         |
- +--------------------------+----------------------------------------------------------------+
- | K                        | Sets output audio un-mute                                      |
- +--------------------------+----------------------------------------------------------------+
- | invite                   | Invites a participant to a conference                          |
- +--------------------------+----------------------------------------------------------------+
- | subscribe                | Subscribes to all conference events                            |
- +--------------------------+----------------------------------------------------------------+
- | unsubscribe              | Unsubscribes from all conference events                        |
- +--------------------------+----------------------------------------------------------------+
- | join                     | Joins a conference by providing ID                             |
- +--------------------------+----------------------------------------------------------------+
- | create                   | Creates a conference by providing alias                        |
- +--------------------------+----------------------------------------------------------------+
- | accept                   | Accepts a conference invitation                                |
- +--------------------------+----------------------------------------------------------------+
- | decline                  | Declines a conference invitation                               |
- +--------------------------+----------------------------------------------------------------+
- | al+                      | Start getting audio levels event periodically                  |
- +--------------------------+----------------------------------------------------------------+
- | al-                      | Stop getting the audio levels event                            |
- +--------------------------+----------------------------------------------------------------+
- | set-audio-capture-mode   | Set the audio capture mode.                                    |
- +--------------------------+----------------------------------------------------------------+
- | get-audio-capture-mode   | Get the current audio capture mode.                            |
- +--------------------------+----------------------------------------------------------------+
- | sc+                      | Start screen share, or switch share source if already active   |
- +--------------------------+----------------------------------------------------------------+
- | sc-                      | Stop the screen share                                          |
- +--------------------------+----------------------------------------------------------------+
- | screen-share-type        | Change the screen share content type hint                      |
- +--------------------------+----------------------------------------------------------------+
- | q                        | Quits the application                                          |
- +--------------------------+----------------------------------------------------------------+
- | f*                       | Sets a new media file to play (if media io enabled)            |
- +--------------------------+----------------------------------------------------------------+
- | F*                       | Adds a new media file to a playlist (if media io enabled)      |
- +--------------------------+----------------------------------------------------------------+
- | p*                       | Pauses the file injection  (if media io enabled)               |
- +--------------------------+----------------------------------------------------------------+
- | r*                       | Resumes the paused file injection  (if media io enabled)       |
- +--------------------------+----------------------------------------------------------------+
- | s*                       | Seeks to time in the file  (if media io enabled)               |
- +--------------------------+----------------------------------------------------------------+
-
-Please note that in the media io enabled mode the sample application methods that start and stop audio consist of two parts. For example for starting audio, the first step uses the 
+Note that when using the :ref:`media io enabled mode`<media_io_mode>` the sample application methods that start and stop audio consist of two parts. For example for starting audio, the first step uses the 
 :cpp:func:`dolbyio::comms::services::local_audio::start` method, which attaches an audio track to the active PeerConnection. This method resolves once the audio track has been successfully
 added. Once this method is resolved, the injection of audio from the Media Source starts. The following code block presents the entire procedure:
 
@@ -328,6 +182,8 @@ added. Once this method is resolved, the injection of audio from the Media Sourc
             std::cerr << "start audio failed: " << e.what() << std::endl;
           }
         });
+
+3. Interact with the **desktop_app** executable using the available interactive command options. The application will prompt the user for input and explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well. 
 
 .. _cv_p_example:
 
@@ -375,6 +231,7 @@ provide the processor to the SDK using the :cpp:func:`start video <dolbyio::comm
 			...
 			wait(sdk->video().local().start({}, processor.get()));
 			...
+		}
 
 3) Then follow the :ref:`build_run_sample` instructions of Getting Started and you will have built your editted desktop_app
 

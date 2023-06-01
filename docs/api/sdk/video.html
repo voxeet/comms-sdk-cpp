@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Video Service &mdash; C++ SDK 2.4.3 documentation</title>
+  <title>Video Service &mdash; C++ SDK 2.5.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -62,8 +62,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#video-frame-handling">Video frame handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#video-frame-api">Video frame API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#video-frame-interface">Video frame interface</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#yuv420-video-frame">YUV420 video frame</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#macos-video-frame">MacOS video frame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#video-frame-buffer-interface">Video frame buffer interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yuv420-video-frame-buffer">YUV420 video frame buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nv12-video-frame-buffer">NV12 video frame buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#native-video-frame-buffer">Native video frame buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#argb-video-frame-buffer">ARGB video frame buffer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#video-utilities">Video utilities</a></li>
 </ul>
 </li>
@@ -156,7 +159,7 @@
 <dd><p>The local video service. </p>
 <p>This service is used to control local participant’s video capture and sending into conference.</p>
 <p><dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>The local video interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+<dt><strong>Attention</strong></dt><dd><p>The local video interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a01990316ea6d6c7081eb9545f5a6146d"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
 </dd>
 </dl>
 </p>
@@ -206,7 +209,7 @@
 <span id="_CPPv3N7dolbyio5comms8services12remote_videoE"></span><span id="_CPPv2N7dolbyio5comms8services12remote_videoE"></span><span id="dolbyio::comms::services::remote_video"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1remote__video"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remote_video</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services12remote_videoE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The remote video service. </p>
 <p><dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>The remote video interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a3f99952d89540452433405331bd41253"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
+<dt><strong>Attention</strong></dt><dd><p>The remote video interface contains methods that return <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a>. Each function that returns <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> is asynchronous and the operation is executed during the SDK event loop. The caller can block the calling thread until the operation completes using the <a class="reference internal" href="common/async_ops.html#group__async__ops_1gaa37c6fd772c5ca78cf4a5fb8b9d1e86c"><span class="std std-ref">wait</span></a> helper. The caller can also chain consecutive operations, which are dependent on the completion of this method, using the <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a01990316ea6d6c7081eb9545f5a6146d"><span class="std std-ref">async_result::then</span></a> calls. Each async_result chain needs to be terminated with an <a class="reference internal" href="common/async_ops.html#classdolbyio_1_1comms_1_1detail_1_1async__result_1a83cb95ae744889c4779ac91d7816ead1"><span class="std std-ref">async_result::on_error</span></a>. </p>
 </dd>
 </dl>
 </p>
@@ -224,18 +227,20 @@
 <li><p>in each <a class="reference internal" href="conference.html#structdolbyio_1_1comms_1_1video__track__added"><span class="std std-ref">video_track_added</span></a> event create a new instance of the <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__sink"><span class="std std-ref">video_sink</span></a> and use <a class="reference internal" href="#classdolbyio_1_1comms_1_1services_1_1remote__video_1ac3797421f8dea4b2dc0313a54873430c"><span class="std std-ref">set_video_sink()</span></a> for attaching the sink.</p></li>
 <li><p>for the least intrusive port, the application may implement the <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__sink"><span class="std std-ref">video_sink</span></a> interface as a proxy that bridges to the old implementation of the video sink: <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">old_video_sink</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">handle_frame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">handle_frame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;</span><span class="p">);</span>
 <span class="p">};</span>
 
 <span class="n">old_video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">some_global_sink_pointer</span><span class="p">;</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">new_video_sink</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="n">new_video_sink</span><span class="p">(</span><span class="n">old_video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">old_sink</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">stream_id</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">track_id</span><span class="p">)</span>
-<span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="n">sink_</span><span class="p">(</span><span class="n">old_sink</span><span class="p">),</span><span class="w"> </span><span class="n">stream_id_</span><span class="p">(</span><span class="n">stream_id</span><span class="p">),</span><span class="w"> </span><span class="n">track_id_</span><span class="p">(</span><span class="n">track_id</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="n">new_video_sink</span><span class="p">(</span><span class="n">old_video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">old_sink</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">stream_id</span><span class="p">,</span>
+<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">track_id</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">sink_</span><span class="p">(</span><span class="n">old_sink</span><span class="p">),</span><span class="w"> </span><span class="n">stream_id_</span><span class="p">(</span><span class="n">stream_id</span><span class="p">),</span>
+<span class="n">track_id_</span><span class="p">(</span><span class="n">track_id</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">handle_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">sink_</span><span class="o">-&gt;</span><span class="n">handle_frame</span><span class="p">(</span><span class="n">stream_id_</span><span class="p">,</span><span class="w"> </span><span class="n">track_id_</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">handle_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">)</span>
+<span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">sink_</span><span class="o">-&gt;</span><span class="n">handle_frame</span><span class="p">(</span><span class="n">stream_id_</span><span class="p">,</span><span class="w"> </span><span class="n">track_id_</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
 <span class="w">  </span><span class="p">}</span>
 
 <span class="k">private</span><span class="o">:</span>
@@ -249,8 +254,8 @@
 <span class="n">some_global_sink_pointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app_sink</span><span class="p">;</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">()</span>
 <span class="w">  </span><span class="p">.</span><span class="n">add_event_handler</span><span class="p">([](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_track_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">evt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">video</span><span class="p">().</span><span class="n">remote</span><span class="p">().</span><span class="n">set_video_sink</span><span class="p">(</span><span class="n">evt</span><span class="p">.</span><span class="n">track</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">new_video_sink</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">      </span><span class="n">some_global_sink_pointer</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">video</span><span class="p">().</span><span class="n">remote</span><span class="p">().</span><span class="n">set_video_sink</span><span class="p">(</span><span class="n">evt</span><span class="p">.</span><span class="n">track</span><span class="p">,</span>
+<span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">new_video_sink</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">some_global_sink_pointer</span><span class="p">,</span>
 <span class="w">      </span><span class="n">evt</span><span class="p">.</span><span class="n">track</span><span class="p">.</span><span class="n">stream_id</span><span class="p">,</span>
 <span class="w">      </span><span class="n">evt</span><span class="p">.</span><span class="n">track</span><span class="p">.</span><span class="n">sdp_track_id</span><span class="p">)).</span><span class="n">on_error</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">exception_ptr</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// handle error</span>
@@ -302,7 +307,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </ol>
 </p>
 <p>In the local preview and video processing scenarios, the camera is open all the time, regardless of the video track state in the conference. The local preview can be displayed even before joining the conference, and will remain open after the conference is left. In the video injection scenario, the camera is not open at all. When a no-op frame handler is used, the conference’s video track presence enables the camera. </p>
-<p>Subclassed by <a class="reference internal" href="injector.html#classdolbyio_1_1comms_1_1plugin_1_1injector"><span class="std std-ref">dolbyio::comms::plugin::injector</span></a></p>
+<p>Subclassed by <a class="reference internal" href="injector.html#classdolbyio_1_1comms_1_1plugin_1_1injector"><span class="std std-ref">dolbyio::comms::plugin::injector</span></a>, <a class="reference internal" href="processor.html#classdolbyio_1_1comms_1_1plugin_1_1video__processor"><span class="std std-ref">dolbyio::comms::plugin::video_processor</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -344,8 +349,8 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10video_sink12handle_frameENSt10unique_ptrI11video_frameEE">
-<span id="_CPPv3N7dolbyio5comms10video_sink12handle_frameENSt10unique_ptrI11video_frameEE"></span><span id="_CPPv2N7dolbyio5comms10video_sink12handle_frameENSt10unique_ptrI11video_frameEE"></span><span id="dolbyio::comms::video_sink::handle_frame__std::unique_ptr:video_frame:"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink_1ae2731cb3674f64dc0d8f60384a7d7759"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10video_sink12handle_frameENSt10unique_ptrI11video_frameEE" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10video_sink12handle_frameERK11video_frame">
+<span id="_CPPv3N7dolbyio5comms10video_sink12handle_frameERK11video_frame"></span><span id="_CPPv2N7dolbyio5comms10video_sink12handle_frameERK11video_frame"></span><span id="dolbyio::comms::video_sink::handle_frame__video_frameCR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__sink_1a48922b73644afe0e11edffae98142324"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_frame</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">frame</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10video_sink12handle_frameERK11video_frame" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The callback that is invoked when a video frame is decoded and ready to be processed. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -446,13 +451,43 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame11video_frameEv">
+<span id="_CPPv3N7dolbyio5comms11video_frame11video_frameEv"></span><span id="_CPPv2N7dolbyio5comms11video_frame11video_frameEv"></span><span id="dolbyio::comms::video_frame::video_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a947a18b3d13fead14c1e8971a20e9821"></span><span class="sig-name descname"><span class="n"><span class="pre">video_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame11video_frameEv" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame11video_frameENSt10shared_ptrIN7dolbyio5comms18video_frame_bufferEEE7int64_t">
+<span id="_CPPv3N7dolbyio5comms11video_frame11video_frameENSt10shared_ptrIN7dolbyio5comms18video_frame_bufferEEE7int64_t"></span><span id="_CPPv2N7dolbyio5comms11video_frame11video_frameENSt10shared_ptrIN7dolbyio5comms18video_frame_bufferEEE7int64_t"></span><span id="dolbyio::comms::video_frame::video_frame__std::shared_ptr:dolbyio::comms::video_frame_buffer:.int64_t"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a5cee4802d0d5c47fedbc635f1a2c922c"></span><span class="sig-name descname"><span class="n"><span class="pre">video_frame</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_frame_bufferE" title="dolbyio::comms::video_frame_buffer"><span class="n"><span class="pre">video_frame_buffer</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buffer</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timestamp_us</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame11video_frameENSt10shared_ptrIN7dolbyio5comms18video_frame_bufferEEE7int64_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame11video_frameERK11video_frame">
+<span id="_CPPv3N7dolbyio5comms11video_frame11video_frameERK11video_frame"></span><span id="_CPPv2N7dolbyio5comms11video_frame11video_frameERK11video_frame"></span><span id="dolbyio::comms::video_frame::video_frame__video_frameCR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a0cf355e402d2d26a0c1e5479c4c7f75f"></span><span class="sig-name descname"><span class="n"><span class="pre">video_frame</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frame11video_frameERK11video_frame" title="dolbyio::comms::video_frame::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame11video_frameERK11video_frame" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame11video_frameERR11video_frame">
+<span id="_CPPv3N7dolbyio5comms11video_frame11video_frameERR11video_frame"></span><span id="_CPPv2N7dolbyio5comms11video_frame11video_frameERR11video_frame"></span><span id="dolbyio::comms::video_frame::video_frame__video_frameRR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ad15224add791924d4a358b664546421e"></span><span class="sig-name descname"><span class="n"><span class="pre">video_frame</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frame11video_frameERR11video_frame" title="dolbyio::comms::video_frame::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame11video_frameERR11video_frame" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frameaSERK11video_frame">
+<span id="_CPPv3N7dolbyio5comms11video_frameaSERK11video_frame"></span><span id="_CPPv2N7dolbyio5comms11video_frameaSERK11video_frame"></span><span id="dolbyio::comms::video_frame::assign-operator__video_frameCR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a4d1f3a206e563e83c250cb259261e6d0"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frameaSERK11video_frame" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frameaSERR11video_frame">
+<span id="_CPPv3N7dolbyio5comms11video_frameaSERR11video_frame"></span><span id="_CPPv2N7dolbyio5comms11video_frameaSERR11video_frame"></span><span id="dolbyio::comms::video_frame::assign-operator__video_frameRR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a56365dc643780639701ba2ce5f123835"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><span class="n"><span class="pre">video_frame</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frameaSERR11video_frame" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frameD0Ev">
-<span id="_CPPv3N7dolbyio5comms11video_frameD0Ev"></span><span id="_CPPv2N7dolbyio5comms11video_frameD0Ev"></span><span id="dolbyio::comms::video_frame::~video_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a2cdc6d8b403e1bcbb003c230af57f6c0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frameD0Ev" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N7dolbyio5comms11video_frameD0Ev"></span><span id="_CPPv2N7dolbyio5comms11video_frameD0Ev"></span><span id="dolbyio::comms::video_frame::~video_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ad78616f499f41ad8b8ee11649705c23e"></span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frameD0Ev" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame5widthEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame5widthEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame5widthEv"></span><span id="dolbyio::comms::video_frame::widthC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a34bf865ae5f3cb4dd7921b4f8c20e938"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame5widthEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK7dolbyio5comms11video_frame5widthEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame5widthEv"></span><span id="dolbyio::comms::video_frame::widthC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a97b1c072625368503928389caa47bf49"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame5widthEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Gets the width of the frame. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -463,7 +498,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame6heightEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame6heightEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame6heightEv"></span><span id="dolbyio::comms::video_frame::heightC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a08c10018cc712c73d1dcacddf57b7b57"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame6heightEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK7dolbyio5comms11video_frame6heightEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame6heightEv"></span><span id="dolbyio::comms::video_frame::heightC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1af32edd55e6130d3330f993ec1e636403"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame6heightEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Gets the height of the video frame. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -474,7 +509,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame12timestamp_usEv">
-<span id="_CPPv3NK7dolbyio5comms11video_frame12timestamp_usEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame12timestamp_usEv"></span><span id="dolbyio::comms::video_frame::timestamp_usC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a7e0926bdaba02fc754b946adde0b4b83"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timestamp_us</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame12timestamp_usEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK7dolbyio5comms11video_frame12timestamp_usEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame12timestamp_usEv"></span><span id="dolbyio::comms::video_frame::timestamp_usC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ac255c60e09120c50748982b82c276e9b"></span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timestamp_us</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame12timestamp_usEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Gets the timestamp of the video frame if it was set. </p>
 <p><dl class="simple">
 <dt><strong>Attention</strong></dt><dd><p>On frames passed from the SDK this will be set to the time when the frame was captured. This will be in sync with the timestamp of the captured audio frame corresponding to this video frame. If the application plans to process the frame and then inject the processed frame back to the SDK, it should reuse the timestamp it receives from the SDK to ensure proper AV synchronization on the receiving end.</p>
@@ -489,28 +524,12 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame14get_i420_frameEv">
-<span id="_CPPv3N7dolbyio5comms11video_frame14get_i420_frameEv"></span><span id="_CPPv2N7dolbyio5comms11video_frame14get_i420_frameEv"></span><span id="dolbyio::comms::video_frame::get_i420_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a9f89e24b2801889d45c39c22e346e971"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16video_frame_i420E" title="dolbyio::comms::video_frame_i420"><span class="n"><span class="pre">video_frame_i420</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_i420_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame14get_i420_frameEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the I420 (YUV) data of the frame. </p>
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms11video_frame18video_frame_bufferEv">
+<span id="_CPPv3NK7dolbyio5comms11video_frame18video_frame_bufferEv"></span><span id="_CPPv2NK7dolbyio5comms11video_frame18video_frame_bufferEv"></span><span id="dolbyio::comms::video_frame::video_frame_bufferC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1ad8dab3e7953bc1bf682d5767d050a8a2"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_frame_bufferE" title="dolbyio::comms::video_frame_buffer"><span class="n"><span class="pre">video_frame_buffer</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms11video_frame18video_frame_bufferEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns the underlying buffer. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the instance of the YUV interface to the data frame, or nullptr if the video frame is not in YUV format. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_frame16get_native_frameEv">
-<span id="_CPPv3N7dolbyio5comms11video_frame16get_native_frameEv"></span><span id="_CPPv2N7dolbyio5comms11video_frame16get_native_frameEv"></span><span id="dolbyio::comms::video_frame::get_native_frame"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame_1a364b541fa3829646b94a9f129f76c0fb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms17video_frame_macosE" title="dolbyio::comms::video_frame_macos"><span class="n"><span class="pre">video_frame_macos</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_native_frame</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_frame16get_native_frameEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the Texture data of the frame. </p>
-<p><dl class="simple">
-<dt><strong>Attention</strong></dt><dd><p>This is currently only available on MacOS.</p>
-</dd>
-</dl>
-</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the instance of the MacOS video frame interface to the data frame, or nullptr if the video frame is not a texture. </p>
+<dd class="field-odd"><p>Pointer to the buffer. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -519,17 +538,181 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </dd></dl>
 
 </section>
-<section id="yuv420-video-frame">
-<h3>YUV420 video frame<a class="headerlink" href="#yuv420-video-frame" title="Permalink to this heading"></a></h3>
+<section id="video-frame-buffer-interface">
+<h3>Video frame buffer interface<a class="headerlink" href="#video-frame-buffer-interface" title="Permalink to this heading"></a></h3>
 <dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms16video_frame_i420E">
-<span id="_CPPv3N7dolbyio5comms16video_frame_i420E"></span><span id="_CPPv2N7dolbyio5comms16video_frame_i420E"></span><span id="dolbyio::comms::video_frame_i420"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__i420"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_i420</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms16video_frame_i420E" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The interface for obtainig I420 (YUV) memory pointers and info for i420 frames. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_bufferE">
+<span id="_CPPv3N7dolbyio5comms18video_frame_bufferE"></span><span id="_CPPv2N7dolbyio5comms18video_frame_bufferE"></span><span id="dolbyio::comms::video_frame_buffer"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Base class for video frame buffers. </p>
+<p>Base class for video frame buffers of different type of pixel format and storage. </p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer__argb__interface"><span class="std std-ref">dolbyio::comms::video_frame_buffer_argb_interface</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface"><span class="std std-ref">dolbyio::comms::video_frame_buffer_i420_interface</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer__native__interface"><span class="std std-ref">dolbyio::comms::video_frame_buffer_native_interface</span></a>, <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface"><span class="std std-ref">dolbyio::comms::video_frame_buffer_nv12_interface</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_buffer4typeE">
+<span id="_CPPv3N7dolbyio5comms18video_frame_buffer4typeE"></span><span id="_CPPv2N7dolbyio5comms18video_frame_buffer4typeE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_buffer4typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Types of pixel format and storage. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_buffer4type4argbE">
+<span id="_CPPv3N7dolbyio5comms18video_frame_buffer4type4argbE"></span><span id="_CPPv2N7dolbyio5comms18video_frame_buffer4type4argbE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6a160d69bb77496bdc5035cf5b53fd273f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">argb</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_buffer4type4argbE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A memory-backed frame buffer in argb format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_buffer4type4i420E">
+<span id="_CPPv3N7dolbyio5comms18video_frame_buffer4type4i420E"></span><span id="_CPPv2N7dolbyio5comms18video_frame_buffer4type4i420E"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6a21ddac9e55593ae8272d555f6d5ddbf3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">i420</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_buffer4type4i420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A memory-backed frame buffer in i420 format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_buffer4type4nv12E">
+<span id="_CPPv3N7dolbyio5comms18video_frame_buffer4type4nv12E"></span><span id="_CPPv2N7dolbyio5comms18video_frame_buffer4type4nv12E"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6a70d831c8685ddf61857a6d0e41eb5889"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nv12</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_buffer4type4nv12E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A memory-backed frame buffer in nv12 format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_buffer4type6nativeE">
+<span id="_CPPv3N7dolbyio5comms18video_frame_buffer4type6nativeE"></span><span id="_CPPv2N7dolbyio5comms18video_frame_buffer4type6nativeE"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6a8e5f3adee38c8fccc13c1f3be0143796"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">native</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_buffer4type6nativeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Special value is provided for external clients to implement their own frame buffer representations, e.g. as textures. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms16video_frame_i4205get_yEv">
-<span id="_CPPv3NK7dolbyio5comms16video_frame_i4205get_yEv"></span><span id="_CPPv2NK7dolbyio5comms16video_frame_i4205get_yEv"></span><span id="dolbyio::comms::video_frame_i420::get_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__i420_1ac285ab7d260e6fa18f28162261ee2638"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms16video_frame_i4205get_yEv" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_bufferD0Ev">
+<span id="_CPPv3N7dolbyio5comms18video_frame_bufferD0Ev"></span><span id="_CPPv2N7dolbyio5comms18video_frame_bufferD0Ev"></span><span id="dolbyio::comms::video_frame_buffer::~video_frame_buffer"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a0b75cec63f2b9ac3261dfe88b8fb149b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_bufferD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_frame_buffer4typeEv">
+<span id="_CPPv3NK7dolbyio5comms18video_frame_buffer4typeEv"></span><span id="_CPPv2NK7dolbyio5comms18video_frame_buffer4typeEv"></span><span id="dolbyio::comms::video_frame_buffer::typeC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a6519abd008b7a9a4bdc5a9514071a648"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4NK7dolbyio5comms18video_frame_buffer4typeEv" title="dolbyio::comms::video_frame_buffer::type"><span class="n"><span class="pre">type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
+<dd><p>Returns the type of video frame buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type of video frame buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_frame_buffer5widthEv">
+<span id="_CPPv3NK7dolbyio5comms18video_frame_buffer5widthEv"></span><span id="_CPPv2NK7dolbyio5comms18video_frame_buffer5widthEv"></span><span id="dolbyio::comms::video_frame_buffer::widthC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a9d67affa19fe7d227dd553307de6d716"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18video_frame_buffer5widthEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the width of the frame buffer in pixels. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The width of the frame. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_frame_buffer6heightEv">
+<span id="_CPPv3NK7dolbyio5comms18video_frame_buffer6heightEv"></span><span id="_CPPv2NK7dolbyio5comms18video_frame_buffer6heightEv"></span><span id="dolbyio::comms::video_frame_buffer::heightC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a786420fae1e6494038b6f85edcfb1636"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18video_frame_buffer6heightEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the height of the video frame buffer in pixels. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The height of the frame. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_frame_buffer7to_i420Ev">
+<span id="_CPPv3N7dolbyio5comms18video_frame_buffer7to_i420Ev"></span><span id="_CPPv2N7dolbyio5comms18video_frame_buffer7to_i420Ev"></span><span id="dolbyio::comms::video_frame_buffer::to_i420"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a0623bfe08827a46b10c4ee5352428674"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceE" title="dolbyio::comms::video_frame_buffer_i420_interface"><span class="n"><span class="pre">video_frame_buffer_i420_interface</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_i420</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_frame_buffer7to_i420Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns this frame buffer in i420 pixel format. </p>
+<p>If the pixel data is in another format, a conversion will take place. If the conversion fails, nullptr is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A memory-backed frame buffer in i420 format. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_frame_buffer8get_argbEv">
+<span id="_CPPv3NK7dolbyio5comms18video_frame_buffer8get_argbEv"></span><span id="_CPPv2NK7dolbyio5comms18video_frame_buffer8get_argbEv"></span><span id="dolbyio::comms::video_frame_buffer::get_argbC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a34bf6e37c2de1a7f7694dbccfd05dca5"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_argb_interfaceE" title="dolbyio::comms::video_frame_buffer_argb_interface"><span class="n"><span class="pre">video_frame_buffer_argb_interface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_argb</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18video_frame_buffer8get_argbEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cast this buffer to argb buffer interface. </p>
+<p>This function should only be called if <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6"><span class="std std-ref">type()</span></a> is of the correct type. Calling with a different type will result in a crash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Raw pointer to argb buffer interface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_frame_buffer8get_i420Ev">
+<span id="_CPPv3NK7dolbyio5comms18video_frame_buffer8get_i420Ev"></span><span id="_CPPv2NK7dolbyio5comms18video_frame_buffer8get_i420Ev"></span><span id="dolbyio::comms::video_frame_buffer::get_i420C"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a302a5264697a5ecf39949e0f90165f04"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceE" title="dolbyio::comms::video_frame_buffer_i420_interface"><span class="n"><span class="pre">video_frame_buffer_i420_interface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_i420</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18video_frame_buffer8get_i420Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cast this buffer to i420 buffer interface. </p>
+<p>This function should only be called if <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6"><span class="std std-ref">type()</span></a> is of the correct type. Calling with a different type will result in a crash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Raw pointer to i420 buffer interface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_frame_buffer8get_nv12Ev">
+<span id="_CPPv3NK7dolbyio5comms18video_frame_buffer8get_nv12Ev"></span><span id="_CPPv2NK7dolbyio5comms18video_frame_buffer8get_nv12Ev"></span><span id="dolbyio::comms::video_frame_buffer::get_nv12C"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1a91d61e57a80c0702758a7e36f4b7654f"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_nv12_interfaceE" title="dolbyio::comms::video_frame_buffer_nv12_interface"><span class="n"><span class="pre">video_frame_buffer_nv12_interface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_nv12</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18video_frame_buffer8get_nv12Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cast this buffer to nv12 buffer interface. </p>
+<p>This function should only be called if <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6"><span class="std std-ref">type()</span></a> is of the correct type. Calling with a different type will result in a crash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Raw pointer to nv12 buffer interface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms18video_frame_buffer10get_nativeEv">
+<span id="_CPPv3NK7dolbyio5comms18video_frame_buffer10get_nativeEv"></span><span id="_CPPv2NK7dolbyio5comms18video_frame_buffer10get_nativeEv"></span><span id="dolbyio::comms::video_frame_buffer::get_nativeC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer_1af1f53adbc7ab118b389093bc6dae528e"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms35video_frame_buffer_native_interfaceE" title="dolbyio::comms::video_frame_buffer_native_interface"><span class="n"><span class="pre">video_frame_buffer_native_interface</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_native</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms18video_frame_buffer10get_nativeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cast this buffer to native buffer interface. </p>
+<p>This function should only be called if <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer_1a7441966bb841f98d6551d9df8ef087b6"><span class="std std-ref">type()</span></a> is of the correct type. Calling with a different type will result in a crash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Raw pointer to native buffer interface. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="yuv420-video-frame-buffer">
+<h3>YUV420 video frame buffer<a class="headerlink" href="#yuv420-video-frame-buffer" title="Permalink to this heading"></a></h3>
+<p>#include &lt;dolbyio/comms/media_engine/video_frame_buffer_i420.h&gt;</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceE">
+<span id="_CPPv3N7dolbyio5comms33video_frame_buffer_i420_interfaceE"></span><span id="_CPPv2N7dolbyio5comms33video_frame_buffer_i420_interfaceE"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer_i420_interface</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_frame_bufferE" title="dolbyio::comms::video_frame_buffer"><span class="n"><span class="pre">video_frame_buffer</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface represents i420 pixel format. </p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer__i420"><span class="std std-ref">dolbyio::comms::video_frame_buffer_i420</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceD0Ev">
+<span id="_CPPv3N7dolbyio5comms33video_frame_buffer_i420_interfaceD0Ev"></span><span id="_CPPv2N7dolbyio5comms33video_frame_buffer_i420_interfaceD0Ev"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::~video_frame_buffer_i420_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1aa1e59188ebc9f3a2b7aa0c36b115f1f6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer_i420_interface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface4typeEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_i420_interface4typeEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_i420_interface4typeEv"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::typeC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1a5941bb35a33a663d4f1e9ac5c7d54c1f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface4typeEv" title="dolbyio::comms::video_frame_buffer_i420_interface::type"><span class="n"><span class="pre">type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">final</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface4typeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The type of the video frame buffer, this will always return i420. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pixel format of the buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface6data_yEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_i420_interface6data_yEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_i420_interface6data_yEv"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::data_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1a9683f80f336c63cd8b0050f3f45ae870"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface6data_yEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Gets the Y component. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -539,8 +722,8 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms16video_frame_i4205get_uEv">
-<span id="_CPPv3NK7dolbyio5comms16video_frame_i4205get_uEv"></span><span id="_CPPv2NK7dolbyio5comms16video_frame_i4205get_uEv"></span><span id="dolbyio::comms::video_frame_i420::get_uC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__i420_1a2dd6b07901047242724f8e3654b22705"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_u</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms16video_frame_i4205get_uEv" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface6data_uEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_i420_interface6data_uEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_i420_interface6data_uEv"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::data_uC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1a85747c496de35f0b5922ba8f9ec55bbb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data_u</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface6data_uEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Gets the U component. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -550,9 +733,9 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms16video_frame_i4205get_vEv">
-<span id="_CPPv3NK7dolbyio5comms16video_frame_i4205get_vEv"></span><span id="_CPPv2NK7dolbyio5comms16video_frame_i4205get_vEv"></span><span id="dolbyio::comms::video_frame_i420::get_vC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__i420_1a9729f29d95445f3ef8a3a29111700356"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_v</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms16video_frame_i4205get_vEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the V component for YUV. </p>
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface6data_vEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_i420_interface6data_vEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_i420_interface6data_vEv"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::data_vC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1a7897c175efacc44695f49d6a5b16f411"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data_v</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface6data_vEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the V component. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The pointer to the V data buffer. </p>
@@ -561,8 +744,8 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms16video_frame_i4208stride_yEv">
-<span id="_CPPv3NK7dolbyio5comms16video_frame_i4208stride_yEv"></span><span id="_CPPv2NK7dolbyio5comms16video_frame_i4208stride_yEv"></span><span id="dolbyio::comms::video_frame_i420::stride_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__i420_1ab24051ad304f06194585f202ac8cf449"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms16video_frame_i4208stride_yEv" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_yEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_yEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_yEv"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::stride_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1abc90f5f2637212d9394d217f23c24d5d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_yEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Returns the Y component stride. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -572,23 +755,62 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms16video_frame_i4208stride_uEv">
-<span id="_CPPv3NK7dolbyio5comms16video_frame_i4208stride_uEv"></span><span id="_CPPv2NK7dolbyio5comms16video_frame_i4208stride_uEv"></span><span id="dolbyio::comms::video_frame_i420::stride_uC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__i420_1a2d65585b56c9dc04ec6a75dadc4a0e57"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_u</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms16video_frame_i4208stride_uEv" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_uEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_uEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_uEv"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::stride_uC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1a015dd1c3ef2300720822c4414294dd62"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_u</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_uEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Returns the U component stride. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An integer representing the U component stride. </p>
+<dd class="field-odd"><p>An integer representing the Y component stride. </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms16video_frame_i4208stride_vEv">
-<span id="_CPPv3NK7dolbyio5comms16video_frame_i4208stride_vEv"></span><span id="_CPPv2NK7dolbyio5comms16video_frame_i4208stride_vEv"></span><span id="dolbyio::comms::video_frame_i420::stride_vC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__i420_1a40070236ae09ab3e405f37df02e479bb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_v</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms16video_frame_i4208stride_vEv" title="Permalink to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_vEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_vEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_vEv"></span><span id="dolbyio::comms::video_frame_buffer_i420_interface::stride_vC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420__interface_1a7f258a696a45b13d6d41ffdc39ceb9be"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_v</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_i420_interface8stride_vEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Returns the V component stride. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An integer representing the V component stride. </p>
+<dd class="field-odd"><p>An integer representing the Y component stride. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_i420E">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_i420E"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_i420E"></span><span id="dolbyio::comms::video_frame_buffer_i420"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer_i420</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceE" title="dolbyio::comms::video_frame_buffer_i420_interface"><span class="n"><span class="pre">video_frame_buffer_i420_interface</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_i420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Plain i420 buffer in standard memory. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_i420D0Ev">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_i420D0Ev"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_i420D0Ev"></span><span id="dolbyio::comms::video_frame_buffer_i420::~video_frame_buffer_i420"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420_1ad5475c83607bf20b5c4fbc29b058fa96"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer_i420</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_i420D0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_i4206createEii">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_i4206createEii"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_i4206createEii"></span><span id="dolbyio::comms::video_frame_buffer_i420::create__i.i"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420_1a59fb7c87a8cef3a9e969a9e8b33a39cc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_i420E" title="dolbyio::comms::video_frame_buffer_i420"><span class="n"><span class="pre">video_frame_buffer_i420</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_i4206createEii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocates a video frame buffer of i420 pixel format in standard memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Shared pointer pointing to newly created buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_i4204copyERK33video_frame_buffer_i420_interface">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_i4204copyERK33video_frame_buffer_i420_interface"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_i4204copyERK33video_frame_buffer_i420_interface"></span><span id="dolbyio::comms::video_frame_buffer_i420::copy__video_frame_buffer_i420_interfaceCR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__i420_1a7dbce91f75b90dd8ce193a2a862ba52c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_i420E" title="dolbyio::comms::video_frame_buffer_i420"><span class="n"><span class="pre">video_frame_buffer_i420</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">copy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_i420_interfaceE" title="dolbyio::comms::video_frame_buffer_i420_interface"><span class="n"><span class="pre">video_frame_buffer_i420_interface</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_i4204copyERK33video_frame_buffer_i420_interface" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocates a video frame buffer and copies the pixel data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Shared pointer pointing to newly created buffer. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -597,22 +819,241 @@ call. At this point the processor will be part of the Video Capture pipeline and
 </dd></dl>
 
 </section>
-<section id="macos-video-frame">
-<h3>MacOS video frame<a class="headerlink" href="#macos-video-frame" title="Permalink to this heading"></a></h3>
-<p>#include &lt;dolbyio/comms/media_engine/video_frame_macos.h&gt;</p>
+<section id="nv12-video-frame-buffer">
+<h3>NV12 video frame buffer<a class="headerlink" href="#nv12-video-frame-buffer" title="Permalink to this heading"></a></h3>
+<p>#include &lt;dolbyio/comms/media_engine/video_frame_buffer_nv12.h&gt;</p>
 <dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_frame_macosE">
-<span id="_CPPv3N7dolbyio5comms17video_frame_macosE"></span><span id="_CPPv2N7dolbyio5comms17video_frame_macosE"></span><span id="dolbyio::comms::video_frame_macos"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__macos"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_macos</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_frame_macosE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>MacOS Video Frames containing Texture data. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms33video_frame_buffer_nv12_interfaceE">
+<span id="_CPPv3N7dolbyio5comms33video_frame_buffer_nv12_interfaceE"></span><span id="_CPPv2N7dolbyio5comms33video_frame_buffer_nv12_interfaceE"></span><span id="dolbyio::comms::video_frame_buffer_nv12_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer_nv12_interface</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_frame_bufferE" title="dolbyio::comms::video_frame_buffer"><span class="n"><span class="pre">video_frame_buffer</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_nv12_interfaceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface represents nv12 pixel format. </p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer__nv12"><span class="std std-ref">dolbyio::comms::video_frame_buffer_nv12</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms17video_frame_macos10get_bufferEv">
-<span id="_CPPv3N7dolbyio5comms17video_frame_macos10get_bufferEv"></span><span id="_CPPv2N7dolbyio5comms17video_frame_macos10get_bufferEv"></span><span id="dolbyio::comms::video_frame_macos::get_buffer"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__macos_1a1305d3ee3a24485006adc3e3af7733af"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">CVPixelBufferRef</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_buffer</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms17video_frame_macos10get_bufferEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Gets the underlying <a class="reference external" href="https://developer.apple.com/documentation/corevideo/cvpixelbufferref">CVPixelBUfferRef</a> . </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms33video_frame_buffer_nv12_interfaceD0Ev">
+<span id="_CPPv3N7dolbyio5comms33video_frame_buffer_nv12_interfaceD0Ev"></span><span id="_CPPv2N7dolbyio5comms33video_frame_buffer_nv12_interfaceD0Ev"></span><span id="dolbyio::comms::video_frame_buffer_nv12_interface::~video_frame_buffer_nv12_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface_1a2fa273655ee2fea8b3aacd18b470636e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer_nv12_interface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_nv12_interfaceD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface4typeEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_nv12_interface4typeEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_nv12_interface4typeEv"></span><span id="dolbyio::comms::video_frame_buffer_nv12_interface::typeC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface_1a8efe3abd2dfd0b74e1b00c85adb861ef"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface4typeEv" title="dolbyio::comms::video_frame_buffer_nv12_interface::type"><span class="n"><span class="pre">type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">final</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface4typeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns the type of video frame buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type of video frame buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface6data_yEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_nv12_interface6data_yEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_nv12_interface6data_yEv"></span><span id="dolbyio::comms::video_frame_buffer_nv12_interface::data_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface_1a6c71c36642f8da22fe56fa77a2db9c92"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface6data_yEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the Y component. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to the Y data buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface7data_uvEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_nv12_interface7data_uvEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_nv12_interface7data_uvEv"></span><span id="dolbyio::comms::video_frame_buffer_nv12_interface::data_uvC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface_1a7d3e556890c31f96e0baf8474b3796ae"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data_uv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface7data_uvEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the UV component. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to the UV data buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface8stride_yEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_nv12_interface8stride_yEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_nv12_interface8stride_yEv"></span><span id="dolbyio::comms::video_frame_buffer_nv12_interface::stride_yC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface_1a899d2e105634fc1c8ace4ea4c12baf8e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface8stride_yEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns the Y component stride. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An integer representing the Y component stride. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface9stride_uvEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_nv12_interface9stride_uvEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_nv12_interface9stride_uvEv"></span><span id="dolbyio::comms::video_frame_buffer_nv12_interface::stride_uvC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12__interface_1a1400dfa0fa8c17306140ce50438cd195"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride_uv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_nv12_interface9stride_uvEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns the UV component stride. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An integer representing the Y component stride. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_nv12E">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_nv12E"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_nv12E"></span><span id="dolbyio::comms::video_frame_buffer_nv12"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer_nv12</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_nv12_interfaceE" title="dolbyio::comms::video_frame_buffer_nv12_interface"><span class="n"><span class="pre">video_frame_buffer_nv12_interface</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_nv12E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Plain nv12 buffer in standard memory. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_nv12D0Ev">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_nv12D0Ev"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_nv12D0Ev"></span><span id="dolbyio::comms::video_frame_buffer_nv12::~video_frame_buffer_nv12"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12_1afa817230255dd503666a498323baa675"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer_nv12</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_nv12D0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_nv126createEii">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_nv126createEii"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_nv126createEii"></span><span id="dolbyio::comms::video_frame_buffer_nv12::create__i.i"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12_1a1f572e860e58046af80123300982bb7c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_nv12E" title="dolbyio::comms::video_frame_buffer_nv12"><span class="n"><span class="pre">video_frame_buffer_nv12</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_nv126createEii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocates a video frame buffer of nv12 pixel format in standard memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Shared pointer pointing to newly created buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_nv124copyERK33video_frame_buffer_nv12_interface">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_nv124copyERK33video_frame_buffer_nv12_interface"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_nv124copyERK33video_frame_buffer_nv12_interface"></span><span id="dolbyio::comms::video_frame_buffer_nv12::copy__video_frame_buffer_nv12_interfaceCR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__nv12_1a45b6b7322fe26f2e4f75f92f988fde31"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_nv12E" title="dolbyio::comms::video_frame_buffer_nv12"><span class="n"><span class="pre">video_frame_buffer_nv12</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">copy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_nv12_interfaceE" title="dolbyio::comms::video_frame_buffer_nv12_interface"><span class="n"><span class="pre">video_frame_buffer_nv12_interface</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_nv124copyERK33video_frame_buffer_nv12_interface" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocates a video frame buffer and copies the pixel data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Shared pointer pointing to newly created buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="native-video-frame-buffer">
+<h3>Native video frame buffer<a class="headerlink" href="#native-video-frame-buffer" title="Permalink to this heading"></a></h3>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms35video_frame_buffer_native_interfaceE">
+<span id="_CPPv3N7dolbyio5comms35video_frame_buffer_native_interfaceE"></span><span id="_CPPv2N7dolbyio5comms35video_frame_buffer_native_interfaceE"></span><span id="dolbyio::comms::video_frame_buffer_native_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__native__interface"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer_native_interface</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_frame_bufferE" title="dolbyio::comms::video_frame_buffer"><span class="n"><span class="pre">video_frame_buffer</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms35video_frame_buffer_native_interfaceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface represents native storage. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms35video_frame_buffer_native_interfaceD0Ev">
+<span id="_CPPv3N7dolbyio5comms35video_frame_buffer_native_interfaceD0Ev"></span><span id="_CPPv2N7dolbyio5comms35video_frame_buffer_native_interfaceD0Ev"></span><span id="dolbyio::comms::video_frame_buffer_native_interface::~video_frame_buffer_native_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__native__interface_1af134856b607e10783d28be70eaa33e0c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer_native_interface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms35video_frame_buffer_native_interfaceD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms35video_frame_buffer_native_interface4typeEv">
+<span id="_CPPv3NK7dolbyio5comms35video_frame_buffer_native_interface4typeEv"></span><span id="_CPPv2NK7dolbyio5comms35video_frame_buffer_native_interface4typeEv"></span><span id="dolbyio::comms::video_frame_buffer_native_interface::typeC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__native__interface_1a19d29e4336a70289a765a7c109183b93"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4NK7dolbyio5comms35video_frame_buffer_native_interface4typeEv" title="dolbyio::comms::video_frame_buffer_native_interface::type"><span class="n"><span class="pre">type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">final</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms35video_frame_buffer_native_interface4typeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Returns the type of video frame buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type of video frame buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms35video_frame_buffer_native_interface19cv_pixel_buffer_refEv">
+<span id="_CPPv3NK7dolbyio5comms35video_frame_buffer_native_interface19cv_pixel_buffer_refEv"></span><span id="_CPPv2NK7dolbyio5comms35video_frame_buffer_native_interface19cv_pixel_buffer_refEv"></span><span id="dolbyio::comms::video_frame_buffer_native_interface::cv_pixel_buffer_refC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__native__interface_1a413b43ace213fca5256479fbb0e3a939"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">CVPixelBufferRef</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cv_pixel_buffer_ref</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms35video_frame_buffer_native_interface19cv_pixel_buffer_refEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the underlying <a class="reference external" href="https://developer.apple.com/documentation/corevideo/cvpixelbufferref">CVPixelBUfferRef</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Reference to the underling CVPixerlBuffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="argb-video-frame-buffer">
+<h3>ARGB video frame buffer<a class="headerlink" href="#argb-video-frame-buffer" title="Permalink to this heading"></a></h3>
+<p>#include &lt;dolbyio/comms/media_engine/video_frame_buffer_argb.h&gt;</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms33video_frame_buffer_argb_interfaceE">
+<span id="_CPPv3N7dolbyio5comms33video_frame_buffer_argb_interfaceE"></span><span id="_CPPv2N7dolbyio5comms33video_frame_buffer_argb_interfaceE"></span><span id="dolbyio::comms::video_frame_buffer_argb_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb__interface"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer_argb_interface</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_frame_bufferE" title="dolbyio::comms::video_frame_buffer"><span class="n"><span class="pre">video_frame_buffer</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_argb_interfaceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interface represents argb pixel format. </p>
+<p>Subclassed by <a class="reference internal" href="#classdolbyio_1_1comms_1_1video__frame__buffer__argb"><span class="std std-ref">dolbyio::comms::video_frame_buffer_argb</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms33video_frame_buffer_argb_interfaceD0Ev">
+<span id="_CPPv3N7dolbyio5comms33video_frame_buffer_argb_interfaceD0Ev"></span><span id="_CPPv2N7dolbyio5comms33video_frame_buffer_argb_interfaceD0Ev"></span><span id="dolbyio::comms::video_frame_buffer_argb_interface::~video_frame_buffer_argb_interface"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb__interface_1a6e184456b332a0e790acef7161974916"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer_argb_interface</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_argb_interfaceD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_argb_interface4typeEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_argb_interface4typeEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_argb_interface4typeEv"></span><span id="dolbyio::comms::video_frame_buffer_argb_interface::typeC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb__interface_1a4a4c0d3630c62f1122d6c0dfb80d1bd2"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_argb_interface4typeEv" title="dolbyio::comms::video_frame_buffer_argb_interface::type"><span class="n"><span class="pre">type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">final</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_argb_interface4typeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The type of the video frame buffer, this will always return argb. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pixel format of the buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_argb_interface4dataEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_argb_interface4dataEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_argb_interface4dataEv"></span><span id="dolbyio::comms::video_frame_buffer_argb_interface::dataC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb__interface_1a8a677e98c674c21fdbf2e491c79270e2"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_argb_interface4dataEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the data contained by the buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pointer to the buffer data. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7dolbyio5comms33video_frame_buffer_argb_interface6strideEv">
+<span id="_CPPv3NK7dolbyio5comms33video_frame_buffer_argb_interface6strideEv"></span><span id="_CPPv2NK7dolbyio5comms33video_frame_buffer_argb_interface6strideEv"></span><span id="dolbyio::comms::video_frame_buffer_argb_interface::strideC"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb__interface_1a89eba20f770062d795fd929bb867c910"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stride</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK7dolbyio5comms33video_frame_buffer_argb_interface6strideEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Gets the stride of the buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An integer representing the stride of the buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_argbE">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_argbE"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_argbE"></span><span id="dolbyio::comms::video_frame_buffer_argb"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_frame_buffer_argb</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_argb_interfaceE" title="dolbyio::comms::video_frame_buffer_argb_interface"><span class="n"><span class="pre">video_frame_buffer_argb_interface</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_argbE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Plain ARGB buffer in standard memory. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_argbD0Ev">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_argbD0Ev"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_argbD0Ev"></span><span id="dolbyio::comms::video_frame_buffer_argb::~video_frame_buffer_argb"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb_1ad10c1270473f012f0c5ff20b3f6a3914"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~video_frame_buffer_argb</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_argbD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_argb6createEii">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_argb6createEii"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_argb6createEii"></span><span id="dolbyio::comms::video_frame_buffer_argb::create__i.i"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb_1ac349d9b2a4190ab021e156138848dbc8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_argbE" title="dolbyio::comms::video_frame_buffer_argb"><span class="n"><span class="pre">video_frame_buffer_argb</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_argb6createEii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocates a video frame buffer of argb pixel format in standard memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Shared pointer pointing to newly created buffer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms23video_frame_buffer_argb4copyERK33video_frame_buffer_argb_interface">
+<span id="_CPPv3N7dolbyio5comms23video_frame_buffer_argb4copyERK33video_frame_buffer_argb_interface"></span><span id="_CPPv2N7dolbyio5comms23video_frame_buffer_argb4copyERK33video_frame_buffer_argb_interface"></span><span id="dolbyio::comms::video_frame_buffer_argb::copy__video_frame_buffer_argb_interfaceCR"></span><span class="target" id="classdolbyio_1_1comms_1_1video__frame__buffer__argb_1a69675b319428e46d8c559e8c8e8206e4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_argbE" title="dolbyio::comms::video_frame_buffer_argb"><span class="n"><span class="pre">video_frame_buffer_argb</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">copy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms33video_frame_buffer_argb_interfaceE" title="dolbyio::comms::video_frame_buffer_argb_interface"><span class="n"><span class="pre">video_frame_buffer_argb_interface</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">buffer</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms23video_frame_buffer_argb4copyERK33video_frame_buffer_argb_interface" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocates a video frame buffer and copies the pixel data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Shared pointer pointing to newly created buffer. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -654,7 +1095,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>0</strong> – On success. </p></li>
-<li><p><strong>1</strong> – On failure. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
 </ul>
 </dd>
 </dl>
@@ -708,7 +1149,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>0</strong> – On success. </p></li>
-<li><p><strong>1</strong> – On failure. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
 </ul>
 </dd>
 </dl>
@@ -760,7 +1201,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>0</strong> – On success. </p></li>
-<li><p><strong>1</strong> – On failure. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
 </ul>
 </dd>
 </dl>
@@ -788,7 +1229,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>0</strong> – On success. </p></li>
-<li><p><strong>1</strong> – On failure. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
 </ul>
 </dd>
 </dl>
@@ -814,7 +1255,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>0</strong> – On success. </p></li>
-<li><p><strong>1</strong> – On failure. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
 </ul>
 </dd>
 </dl>
@@ -840,7 +1281,7 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>0</strong> – On success. </p></li>
-<li><p><strong>1</strong> – On failure. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
 </ul>
 </dd>
 </dl>
@@ -884,6 +1325,62 @@ call. At this point the processor will be part of the Video Capture pipeline and
 <li><p><strong>dst_stride_uv</strong> – Destination UV plane stride. </p></li>
 <li><p><strong>width</strong> – Frame width. </p></li>
 <li><p><strong>height</strong> – Frame height. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_utils16format_converter9i420_copyEPK7uint8_tiPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiP7uint8_tiii">
+<span id="_CPPv3N7dolbyio5comms11video_utils16format_converter9i420_copyEPK7uint8_tiPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiP7uint8_tiii"></span><span id="_CPPv2N7dolbyio5comms11video_utils16format_converter9i420_copyEPK7uint8_tiPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiP7uint8_tiii"></span><span id="dolbyio::comms::video_utils::format_converter::i420_copy__uint8_tCP.i.uint8_tCP.i.uint8_tCP.i.uint8_tP.i.uint8_tP.i.uint8_tP.i.i.i"></span><span class="target" id="classdolbyio_1_1comms_1_1video__utils_1_1format__converter_1a0fffcee3952bd2f83845404b94ccaeab"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">i420_copy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_y</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_stride_y</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_u</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_stride_u</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_v</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_stride_v</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_y</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dst_stride_y</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_u</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dst_stride_u</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_v</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dst_stride_v</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_utils16format_converter9i420_copyEPK7uint8_tiPK7uint8_tiPK7uint8_tiP7uint8_tiP7uint8_tiP7uint8_tiii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copies I420 video format. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_y</strong> – Source Y plane buffer. </p></li>
+<li><p><strong>src_stride_y</strong> – Source Y plane stride. </p></li>
+<li><p><strong>src_u</strong> – Source U plane buffer. </p></li>
+<li><p><strong>src_stride_u</strong> – Source U plane stride. </p></li>
+<li><p><strong>src_v</strong> – Source V plane buffer. </p></li>
+<li><p><strong>src_stride_v</strong> – Source V plane stride. </p></li>
+<li><p><strong>dst_y</strong> – Destination Y plane buffer. </p></li>
+<li><p><strong>dst_stride_y</strong> – Destination Y plane stride. </p></li>
+<li><p><strong>dst_u</strong> – Destination U plane buffer. </p></li>
+<li><p><strong>dst_stride_u</strong> – Destination U plane stride. </p></li>
+<li><p><strong>dst_v</strong> – Destination V plane buffer. </p></li>
+<li><p><strong>dst_stride_v</strong> – Destination V plane stride. </p></li>
+<li><p><strong>width</strong> – Frame width. </p></li>
+<li><p><strong>height</strong> – Frame height. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms11video_utils16format_converter9argb_copyEPK7uint8_tiP7uint8_tiii">
+<span id="_CPPv3N7dolbyio5comms11video_utils16format_converter9argb_copyEPK7uint8_tiP7uint8_tiii"></span><span id="_CPPv2N7dolbyio5comms11video_utils16format_converter9argb_copyEPK7uint8_tiP7uint8_tiii"></span><span id="dolbyio::comms::video_utils::format_converter::argb_copy__uint8_tCP.i.uint8_tP.i.i.i"></span><span class="target" id="classdolbyio_1_1comms_1_1video__utils_1_1format__converter_1a8f0c2b6f4a870a85f5e29cf41c48e65c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">argb_copy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_argb</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_stride_argb</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst_argb</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dst_stride_argb</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms11video_utils16format_converter9argb_copyEPK7uint8_tiP7uint8_tiii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copies ARGB video format. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_argb</strong> – The pointer to the source ARGB data buffer. </p></li>
+<li><p><strong>src_stride_argb</strong> – The stride of the source ARGB buffer. </p></li>
+<li><p><strong>dst_argb</strong> – The pointer to the destination ARGB buffer. </p></li>
+<li><p><strong>dst_stride_argb</strong> – The stride of the destination ARGB buffer. </p></li>
+<li><p><strong>width</strong> – The width of the buffer. </p></li>
+<li><p><strong>height</strong> – The height of the buffer. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-1</strong> – On failure. </p></li>
 </ul>
 </dd>
 </dl>

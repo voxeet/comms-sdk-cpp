@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plugins &mdash; C++ SDK 2.4.3 documentation</title>
+  <title>Plugins &mdash; C++ SDK 2.5.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -22,7 +22,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Default Media Recorder" href="sdk/recorder.html" />
+    <link rel="next" title="Video Processor Library" href="sdk/processor.html" />
     <link rel="prev" title="Example Recorder Implementation" href="recording/example.html" /> 
 </head>
 
@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="coresdk.html">Core API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="media_io.html">Media IO API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sdk/processor.html">Video Processor Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdk/injector.html">Default Media Injector</a></li>
 </ul>
@@ -87,13 +88,15 @@
 <div></div></blockquote>
 <section id="plugins">
 <span id="plugins-api"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this heading"></a></h1>
-<p>The Plugins are provided as part of the <strong>dolbyio_multimedia_streaming_addon</strong> library. Applications that would like to use our Default Injector/Recorder modules should link against this library.</p>
+<p>The video processing library is part of the <strong>dolbyio_video_processor</strong> library. Applications which would like to use our video processor should link against this library. The video processor library provides the ability to process frames captured from camera and blur the background, the processed frames can then be sent into the conference.</p>
+<p>The media injection/recording plugins are provided as part of the <strong>dolbyio_multimedia_streaming_addon</strong> library. Applications that would like to use our Default Injector/Recorder modules should link against this library.</p>
 <p>To record conferences, the C++ SDK uses a Media Recorder that allows processing and storing video frames from the incoming WebRTC media streams. The library provides a default media recorder plugin. The default media recorder plugin is
 a ready-to-use library that can be easily configured and included in an application. The plugin automatically records the incoming media streams for conference participants and stores the recorded streams in either raw or encoded format.</p>
 <p>The library also provides two flavors of Media Injectors as plugins. One of the default plugins is the Pacing Injector. The injector exposes an interface for an application and allows passing decoded audio and video. Then, the injector provides these frames to WebRTC at specified intervals. This version of the plugin is suitable for injecting media files. The second default injection plugin is the Passthrough Injector, which exposes the application the same interface
 for injecting frames, but this plugin directly relays the frames it receives to WebRTC without any internal pacing. The media injection plugins do not provide capturing of audio or video; instead, they serve in constructing the respective media injection pipelines. The application is responsible for performing the audio and video capture and providing the decoded frames to the injector plugin.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="sdk/processor.html">Video Processor Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/recorder.html">Default Media Recorder</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk/injector.html">Default Media Injector</a></li>
 </ul>
@@ -105,7 +108,7 @@ for injecting frames, but this plugin directly relays the frames it receives to 
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="recording/example.html" class="btn btn-neutral float-left" title="Example Recorder Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sdk/recorder.html" class="btn btn-neutral float-right" title="Default Media Recorder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sdk/processor.html" class="btn btn-neutral float-right" title="Video Processor Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

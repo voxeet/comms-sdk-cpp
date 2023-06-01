@@ -38,8 +38,6 @@ The spatial audio methods that allow placing conference participants spatially i
 
 .. doxygenstruct:: dolbyio::comms::spatial_position
 
-.. doxygenstruct:: dolbyio::comms::polar_position
-
 .. doxygenstruct:: dolbyio::comms::spatial_direction
 
 .. doxygenstruct:: dolbyio::comms::spatial_scale
@@ -131,6 +129,9 @@ Other structures used by the :ref:`api_conference`, which are not defined in the
 
 .. doxygenenum:: dolbyio::comms::screen_share_content_type
         :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::screen_share_content_info
+		:project: C++ SDK
 
 .. doxygenenum:: dolbyio::comms::video_codec
         :project: C++ SDK

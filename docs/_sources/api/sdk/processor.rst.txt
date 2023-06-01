@@ -1,0 +1,9 @@
+.. _plugin_video_processor:
+
+Video Processor Library
+==========================
+
+The Video Processor library, available on Windows and MacOS platforms. For usage please refer to the **sample/utilities/vsl/interactions.cc** and desktop_app sample code.
+
+.. doxygenclass:: dolbyio::comms::plugin::video_processor
+        :project: C++ SDK

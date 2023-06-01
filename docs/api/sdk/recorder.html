@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Default Media Recorder &mdash; C++ SDK 2.4.3 documentation</title>
+  <title>Default Media Recorder &mdash; C++ SDK 2.5.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Default Media Injector" href="injector.html" />
-    <link rel="prev" title="Plugins" href="../plugins.html" /> 
+    <link rel="prev" title="Video Processor Library" href="processor.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../media_io.html">Media IO API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="processor.html">Video Processor Library</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Default Media Recorder</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#default-recorder-interface">Default Recorder Interface</a></li>
 </ul>
@@ -89,10 +90,6 @@
              
   <section id="default-media-recorder">
 <span id="api-recorder"></span><h1>Default Media Recorder<a class="headerlink" href="#default-media-recorder" title="Permalink to this heading"></a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The Default Media Recorder is considered to be in Beta phase on MacOS and Windows systems.</p>
-</div>
 <p>The default recorder handles the incoming media streams and stores the streams in proper containers. The following table lists containers used for respective codecs:</p>
 <table class="docutils align-default">
 <thead>
@@ -284,7 +281,8 @@ creates and configures the recording module that is provided as a part of the C+
 <span id="_CPPv3N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE22audio_recording_config22video_recording_config"></span><span id="_CPPv2N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE22audio_recording_config22video_recording_config"></span><span id="dolbyio::comms::plugin::recorder::create__ssCR.dolbyio::comms::sdkR.audio_recording_config.video_recording_config"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1recorder_1a741bfa9007d99c15add5dcb574cc44b2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorderE" title="dolbyio::comms::plugin::recorder"><span class="n"><span class="pre">recorder</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out_dir</span></span>, <span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="sdk.html#_CPPv4N7dolbyio5comms3sdkE" title="dolbyio::comms::sdk"><span class="n"><span class="pre">sdk</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sdk</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorder22audio_recording_configE" title="dolbyio::comms::plugin::recorder::audio_recording_config"><span class="n"><span class="pre">audio_recording_config</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">audio</span></span>, <a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin8recorder22video_recording_configE" title="dolbyio::comms::plugin::recorder::video_recording_config"><span class="n"><span class="pre">video_recording_config</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">video</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin8recorder6createERKNSt6stringERN7dolbyio5comms3sdkE22audio_recording_config22video_recording_config" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Creates the media recording module. </p>
 <p><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// When an output directory and the sdk instance are created</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">recorder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">plugin</span><span class="o">::</span><span class="n">recorder</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="n">sdk</span><span class="p">,</span><span class="w"> </span><span class="n">audio_cfg</span><span class="p">,</span><span class="w"> </span><span class="n">video_cfg</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">recorder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">plugin</span><span class="o">::</span><span class="n">recorder</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span><span class="w"> </span><span class="n">sdk</span><span class="p">,</span>
+<span class="n">audio_cfg</span><span class="p">,</span><span class="w"> </span><span class="n">video_cfg</span><span class="p">);</span>
 </pre></div>
 </div>
  </p>
@@ -320,7 +318,7 @@ creates and configures the recording module that is provided as a part of the C+
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../plugins.html" class="btn btn-neutral float-left" title="Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="processor.html" class="btn btn-neutral float-left" title="Video Processor Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="injector.html" class="btn btn-neutral float-right" title="Default Media Injector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; C++ SDK 2.4.3 documentation</title>
+  <title>Getting Started &mdash; C++ SDK 2.5.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Run Time Dependencies" href="run_time_deps.html" />
-    <link rel="prev" title="C++ SDK 2.4.3 Documentation" href="../index.html" /> 
+    <link rel="prev" title="C++ SDK 2.5.0 Documentation" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -191,7 +191,7 @@ reduce your binary size.</p>
 </div></blockquote>
 </section>
 <section id="media-io-mode">
-<h3>Media IO Mode<a class="headerlink" href="#media-io-mode" title="Permalink to this heading"></a></h3>
+<span id="id2"></span><h3>Media IO Mode<a class="headerlink" href="#media-io-mode" title="Permalink to this heading"></a></h3>
 <p>In the <strong>Media IO Mode</strong> the sample app can:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -243,249 +243,21 @@ reduce your binary size.</p>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Run the created <strong>desktop_app</strong> executable using the following command line parameters:</p></li>
+<li><p>Run the created <strong>desktop_app</strong> executable with help option to see the available command line parameters:</p></li>
 </ol>
-<blockquote>
-<div><table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Argument</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>-h</p></td>
-<td><p>Print the help menu.</p></td>
-</tr>
-<tr class="row-odd"><td><p>-u</p></td>
-<td><p>The participant’s name.</p></td>
-</tr>
-<tr class="row-even"><td><p>-e</p></td>
-<td><p>The external ID</p></td>
-</tr>
-<tr class="row-odd"><td><p>-k</p></td>
-<td><p>The access token</p></td>
-</tr>
-<tr class="row-even"><td><p>-c</p></td>
-<td><p>The conference alias (DEMO to join a demo conference)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-t</p></td>
-<td><p>The conference access token</p></td>
-</tr>
-<tr class="row-even"><td><p>-i</p></td>
-<td><p>The conference ID</p></td>
-</tr>
-<tr class="row-odd"><td><p>-l</p></td>
-<td><p>The SDK logging level (0-5)</p></td>
-</tr>
-<tr class="row-even"><td><p>-ml</p></td>
-<td><p>The Media Engine logging level (0-5)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-p</p></td>
-<td><p>The user type (user|listener|rts-listener) (standard mode automatically joins as user)</p></td>
-</tr>
-<tr class="row-even"><td><p>-s</p></td>
-<td><p>The send-only mode</p></td>
-</tr>
-<tr class="row-odd"><td><p>-m &lt;AV&gt;</p></td>
-<td><p>The initial media to send (A || V || AV)</p></td>
-</tr>
-<tr class="row-even"><td><p>-spatial</p></td>
-<td><p>Spatial audio (shared|individual|disabled)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-log_speaker</p></td>
-<td><p>Logs the active speaker changes  (yes|no)</p></td>
-</tr>
-<tr class="row-even"><td><p>-simulcast</p></td>
-<td><p>Join with simulcast enabled</p></td>
-</tr>
-<tr class="row-odd"><td><p>-no-display-video</p></td>
-<td><p>Do not render video incoming video (sampleapp only renders incoming video on macOS)</p></td>
-</tr>
-<tr class="row-even"><td><p>-no-background-render</p></td>
-<td><p>Do not render video when app is in background (only available on macOS)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-enable-media-io</p></td>
-<td><p>Enable the sample applications Media IO features (injection/recording)</p></td>
-</tr>
-<tr class="row-even"><td><p>-d</p></td>
-<td><p>the relative path to outputdirectory (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-v</p></td>
-<td><p>The video format for recording  (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-even"><td><p>-a</p></td>
-<td><p>The audio format for recording   (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-m</p></td>
-<td><p>The initial media to inject  (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-even"><td><p>-f</p></td>
-<td><p>The name of a media file to inject (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-s</p></td>
-<td><p>The send-only mode  (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-even"><td><p>-V, -max_vfs</p></td>
-<td><p>Maximum video forwarding strategy (maximum video streams to receive)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-forwarding-strategy</p></td>
-<td><p>The desired video forwarding strategy (lastSpeaker, closestUser)</p></td>
-</tr>
-<tr class="row-even"><td><p>-loop</p></td>
-<td><p>Play the media injected file in a loop (only considered if Media IO features enabled)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-record</p></td>
-<td><p>Request for conference to be recorded, works if app creates conference in the backend.</p></td>
-</tr>
-<tr class="row-even"><td><p>-opus</p></td>
-<td><p>Create an Opus conference (only taken into account if you create the conference)</p></td>
-</tr>
-<tr class="row-odd"><td><p>-video-codec</p></td>
-<td><p>Create conference with specific codec (H264/VP8) (if you create the conference)</p></td>
-</tr>
-<tr class="row-even"><td><p>-rtcp-mode</p></td>
-<td><p>Set rtcp_mode used in conference (worst/average/max) (if you create the conference)</p></td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./desktop_app<span class="w"> </span>-h
+<span class="gp">$ </span>./desktop_app<span class="w"> </span>--help
+</pre></div>
+</div>
 <p>For example:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./desktop_app<span class="w"> </span>-u<span class="w"> </span>USERNAME<span class="w"> </span>-k<span class="w"> </span>ACCESS_TOKEN<span class="w"> </span>-i<span class="w"> </span>CONF_ID<span class="w"> </span>-l<span class="w"> </span>LOG_LEVEL<span class="w"> </span>-ml<span class="w"> </span>LOG_LEVEL_MEDIA<span class="w"> </span>-p<span class="w"> </span>user<span class="w"> </span>-m<span class="w"> </span>AV<span class="w"> </span>-spatial<span class="w"> </span>shared
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./desktop_app<span class="w"> </span>-u<span class="w"> </span>USERNAME<span class="w"> </span>-k<span class="w"> </span>ACCESS_TOKEN<span class="w"> </span>-i<span class="w"> </span>CONF_ID<span class="w"> </span>-l<span class="w"> </span>LOG_LEVEL<span class="w"> </span>-ld<span class="w"> </span>LOG_DIRECTORY<span class="w"> </span>-lmedia<span class="w"> </span>LOG_LEVEL_MEDIA<span class="w"> </span>-p<span class="w"> </span>user<span class="w"> </span>-m<span class="w"> </span>AV<span class="w"> </span>-spatial<span class="w"> </span>shared
 
 <span class="go">                 or</span>
 
-<span class="gp">$ </span>./desktop_app<span class="w"> </span>-u<span class="w"> </span>USERNAME<span class="w"> </span>-k<span class="w"> </span>ACCESS_TOKEN<span class="w"> </span>-i<span class="w"> </span>CONF_ID<span class="w"> </span>-l<span class="w"> </span>LOG_LEVEL<span class="w"> </span>-ml<span class="w"> </span>LOG_LEVEL_MEDIA<span class="w"> </span>-p<span class="w"> </span>user<span class="w"> </span>-enable-media-io<span class="w"> </span>-d<span class="w"> </span>PATH_TO_DUMP_DIRECTORY<span class="w"> </span>-m<span class="w"> </span>AV<span class="w"> </span>-f<span class="w"> </span>SOME_FILE.mp4<span class="w"> </span>-spatial<span class="w"> </span>shared
+<span class="gp">$ </span>./desktop_app<span class="w"> </span>-u<span class="w"> </span>USERNAME<span class="w"> </span>-k<span class="w"> </span>ACCESS_TOKEN<span class="w"> </span>-i<span class="w"> </span>CONF_ID<span class="w"> </span>-l<span class="w"> </span>LOG_LEVEL<span class="w"> </span>-ld<span class="w"> </span>LOG_DIRECTORY<span class="w"> </span>-lmedia<span class="w"> </span>LOG_LEVEL_MEDIA<span class="w"> </span>-p<span class="w"> </span>user<span class="w"> </span>-enable-media-io<span class="w"> </span>-d<span class="w"> </span>PATH_TO_DUMP_DIRECTORY<span class="w"> </span>-m<span class="w"> </span>AV<span class="w"> </span>-f<span class="w"> </span>SOME_FILE.mp4<span class="w"> </span>-spatial<span class="w"> </span>shared
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Providing the <strong>-i</strong> command line parameter causes that the application joins the specific conference if the conference with the provided ID already exists. Providing <strong>-c</strong> causes that the application joins the specific conference.
-If the requested conference does not exist on the Dolby.io backend the application creates and joins the conference. Providing a <strong>DEMO</strong> value of the <strong>-c</strong> parameter causes that the application creates and joins a demo conference.
-If you do not provide <strong>CONFERENCE_ID</strong> nor <strong>CONFERENCE_ALIAS</strong> when joining, the application will open a session with the Dolby.io backend and wait for interactions. In this scenario, it is possible
-to listen for subscription or invitation events, get invited to conferences and invite others.</p>
-</div>
-<p>3. Interact with the <strong>desktop_app</strong> executable using one of the following command line options, which can be provided whilst the application is running. The application will prompt the user for input and
-explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well.</p>
-<blockquote>
-<div><table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Option</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>q</p></td>
-<td><p>Quits the application</p></td>
-</tr>
-<tr class="row-odd"><td><p>stop-audio</p></td>
-<td><p>Stops the local audio</p></td>
-</tr>
-<tr class="row-even"><td><p>start-audio</p></td>
-<td><p>Starts the local audio</p></td>
-</tr>
-<tr class="row-odd"><td><p>v</p></td>
-<td><p>Stops the local video</p></td>
-</tr>
-<tr class="row-even"><td><p>V</p></td>
-<td><p>Starts the local video</p></td>
-</tr>
-<tr class="row-odd"><td><p>stop-audio-remote</p></td>
-<td><p>Stops remote audio in a Dolby Voice conference</p></td>
-</tr>
-<tr class="row-even"><td><p>start-audio-remote</p></td>
-<td><p>Starts remote audio in a Dolby Voice conference</p></td>
-</tr>
-<tr class="row-odd"><td><p>m</p></td>
-<td><p>Sends a message to a conference</p></td>
-</tr>
-<tr class="row-even"><td><p>P</p></td>
-<td><p>Lists conference participants</p></td>
-</tr>
-<tr class="row-odd"><td><p>S</p></td>
-<td><p>Sets a spatial audio configuration</p></td>
-</tr>
-<tr class="row-even"><td><p>mute</p></td>
-<td><p>Mutes the local participant’s microphone</p></td>
-</tr>
-<tr class="row-odd"><td><p>unmute</p></td>
-<td><p>Un-mutes the local participant’s microphone</p></td>
-</tr>
-<tr class="row-even"><td><p>mute-remote</p></td>
-<td><p>Mutes a remote participant in a non-Dolby Voice conference</p></td>
-</tr>
-<tr class="row-odd"><td><p>unmute-remote</p></td>
-<td><p>Un-mutes a remote participant in a non-Dolby Voice conference</p></td>
-</tr>
-<tr class="row-even"><td><p>k</p></td>
-<td><p>Sets output audio mute</p></td>
-</tr>
-<tr class="row-odd"><td><p>K</p></td>
-<td><p>Sets output audio un-mute</p></td>
-</tr>
-<tr class="row-even"><td><p>invite</p></td>
-<td><p>Invites a participant to a conference</p></td>
-</tr>
-<tr class="row-odd"><td><p>subscribe</p></td>
-<td><p>Subscribes to all conference events</p></td>
-</tr>
-<tr class="row-even"><td><p>unsubscribe</p></td>
-<td><p>Unsubscribes from all conference events</p></td>
-</tr>
-<tr class="row-odd"><td><p>join</p></td>
-<td><p>Joins a conference by providing ID</p></td>
-</tr>
-<tr class="row-even"><td><p>create</p></td>
-<td><p>Creates a conference by providing alias</p></td>
-</tr>
-<tr class="row-odd"><td><p>accept</p></td>
-<td><p>Accepts a conference invitation</p></td>
-</tr>
-<tr class="row-even"><td><p>decline</p></td>
-<td><p>Declines a conference invitation</p></td>
-</tr>
-<tr class="row-odd"><td><p>al+</p></td>
-<td><p>Start getting audio levels event periodically</p></td>
-</tr>
-<tr class="row-even"><td><p>al-</p></td>
-<td><p>Stop getting the audio levels event</p></td>
-</tr>
-<tr class="row-odd"><td><p>set-audio-capture-mode</p></td>
-<td><p>Set the audio capture mode.</p></td>
-</tr>
-<tr class="row-even"><td><p>get-audio-capture-mode</p></td>
-<td><p>Get the current audio capture mode.</p></td>
-</tr>
-<tr class="row-odd"><td><p>sc+</p></td>
-<td><p>Start screen share, or switch share source if already active</p></td>
-</tr>
-<tr class="row-even"><td><p>sc-</p></td>
-<td><p>Stop the screen share</p></td>
-</tr>
-<tr class="row-odd"><td><p>screen-share-type</p></td>
-<td><p>Change the screen share content type hint</p></td>
-</tr>
-<tr class="row-even"><td><p>q</p></td>
-<td><p>Quits the application</p></td>
-</tr>
-<tr class="row-odd"><td><p>f*</p></td>
-<td><p>Sets a new media file to play (if media io enabled)</p></td>
-</tr>
-<tr class="row-even"><td><p>F*</p></td>
-<td><p>Adds a new media file to a playlist (if media io enabled)</p></td>
-</tr>
-<tr class="row-odd"><td><p>p*</p></td>
-<td><p>Pauses the file injection  (if media io enabled)</p></td>
-</tr>
-<tr class="row-even"><td><p>r*</p></td>
-<td><p>Resumes the paused file injection  (if media io enabled)</p></td>
-</tr>
-<tr class="row-odd"><td><p>s*</p></td>
-<td><p>Seeks to time in the file  (if media io enabled)</p></td>
-</tr>
-</tbody>
-</table>
-</div></blockquote>
-<p>Please note that in the media io enabled mode the sample application methods that start and stop audio consist of two parts. For example for starting audio, the first step uses the
+<p>Note that when using the <a class="reference internal" href="#media-io-mode"><span class="std std-ref">media io enabled mode`</span></a> the sample application methods that start and stop audio consist of two parts. For example for starting audio, the first step uses the
 <a class="reference internal" href="../api/sdk/audio.html#_CPPv4N7dolbyio5comms8services11local_audio5startEv" title="dolbyio::comms::services::local_audio::start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">dolbyio::comms::services::local_audio::start()</span></code></a> method, which attaches an audio track to the active PeerConnection. This method resolves once the audio track has been successfully
 added. Once this method is resolved, the injection of audio from the Media Source starts. The following code block presents the entire procedure:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">audio</span><span class="p">().</span><span class="n">local</span><span class="p">()</span>
@@ -504,6 +276,9 @@ added. Once this method is resolved, the injection of audio from the Media Sourc
 <span class="p">});</span>
 </pre></div>
 </div>
+<ol class="arabic simple" start="3">
+<li><p>Interact with the <strong>desktop_app</strong> executable using the available interactive command options. The application will prompt the user for input and explain each of the options. If the chosen option requires more input, the user will be explicitly prompted for this as well.</p></li>
+</ol>
 </section>
 <section id="video-processor">
 <span id="cv-p-example"></span><h3>Video processor<a class="headerlink" href="#video-processor" title="Permalink to this heading"></a></h3>
@@ -544,6 +319,7 @@ provide the processor to the SDK using the <a class="reference internal" href=".
 <span class="w">                </span><span class="p">...</span>
 <span class="w">                </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">video</span><span class="p">().</span><span class="n">local</span><span class="p">().</span><span class="n">start</span><span class="p">({},</span><span class="w"> </span><span class="n">processor</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
 <span class="w">                </span><span class="p">...</span>
+<span class="w">        </span><span class="p">}</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -564,7 +340,7 @@ provide the processor to the SDK using the <a class="reference internal" href=".
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.4.3 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="C++ SDK 2.5.0 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="run_time_deps.html" class="btn btn-neutral float-right" title="Run Time Dependencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

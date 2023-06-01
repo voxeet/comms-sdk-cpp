@@ -3,9 +3,6 @@
 Default Media Injector
 ==========================
 
-.. note::
-  The Default Media Injector is considered to be in Beta phase on MacOS and Windows systems.
-
 The Default Media Injector module provides two different types of injectors: 
 
 - A pass-through injector designed for streaming applications

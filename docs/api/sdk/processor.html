@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Processor Library &mdash; C++ SDK 2.5.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Default Media Recorder" href="recorder.html" />
+    <link rel="prev" title="Plugins" href="../plugins.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            C++ SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/run_time_deps.html">Run Time Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/supported_platforms.html">Supported Platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coresdk.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../media_io.html">Media IO API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">Plugins</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Video Processor Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorder.html">Default Media Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="injector.html">Default Media Injector</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">C++ SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plugins.html">Plugins</a></li>
+      <li class="breadcrumb-item active">Video Processor Library</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/sdk/processor.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="video-processor-library">
+<span id="plugin-video-processor"></span><h1>Video Processor Library<a class="headerlink" href="#video-processor-library" title="Permalink to this heading"></a></h1>
+<p>The Video Processor library, available on Windows and MacOS platforms. For usage please refer to the <strong>sample/utilities/vsl/interactions.cc</strong> and desktop_app sample code.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin15video_processorE">
+<span id="_CPPv3N7dolbyio5comms6plugin15video_processorE"></span><span id="_CPPv2N7dolbyio5comms6plugin15video_processorE"></span><span id="dolbyio::comms::plugin::video_processor"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1video__processor"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_processor</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">enable_shared_from_this</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin15video_processorE" title="dolbyio::comms::plugin::video_processor"><span class="n"><span class="pre">video_processor</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="video.html#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><span class="n"><span class="pre">video_frame_handler</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin15video_processorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Video processor blurs the local participant’s background. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin15video_processorD0Ev">
+<span id="_CPPv3N7dolbyio5comms6plugin15video_processorD0Ev"></span><span id="_CPPv2N7dolbyio5comms6plugin15video_processorD0Ev"></span><span id="dolbyio::comms::plugin::video_processor::~video_processor"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1video__processor_1a40556309f5621eeab806d9c025c7f89f"></span><span class="sig-name descname"><span class="n"><span class="pre">~video_processor</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin15video_processorD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destructor for the video processor. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin15video_processor6createER3sdk">
+<span id="_CPPv3N7dolbyio5comms6plugin15video_processor6createER3sdk"></span><span id="_CPPv2N7dolbyio5comms6plugin15video_processor6createER3sdk"></span><span id="dolbyio::comms::plugin::video_processor::create__sdkR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1video__processor_1a64f873d417b29263c95c9227040b9433"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms6plugin15video_processorE" title="dolbyio::comms::plugin::video_processor"><span class="n"><span class="pre">video_processor</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sdk.html#_CPPv4N7dolbyio5comms3sdkE" title="dolbyio::comms::sdk"><span class="n"><span class="pre">sdk</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sdk_instance</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin15video_processor6createER3sdk" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Creates an instance of the Video Processor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sdk_instance</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result producting the video processor instance asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin15video_processor9exceptionE">
+<span id="_CPPv3N7dolbyio5comms6plugin15video_processor9exceptionE"></span><span id="_CPPv2N7dolbyio5comms6plugin15video_processor9exceptionE"></span><span id="dolbyio::comms::plugin::video_processor::exception"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1video__processor_1_1exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">dolbyio</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">comms</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="common/exception.html#_CPPv4N7dolbyio5comms9exceptionE" title="dolbyio::comms::exception"><span class="n"><span class="pre">exception</span></span></a><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin15video_processor9exceptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms6plugin15video_processor9exception9exceptionERKNSt6stringE">
+<span id="_CPPv3N7dolbyio5comms6plugin15video_processor9exception9exceptionERKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms6plugin15video_processor9exception9exceptionERKNSt6stringE"></span><span id="dolbyio::comms::plugin::video_processor::exception::exception__ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1plugin_1_1video__processor_1_1exception_1aee6c93a5d9f5740298f22cca6e2b39cc"></span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">message</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms6plugin15video_processor9exception9exceptionERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The <a class="reference internal" href="#classdolbyio_1_1comms_1_1plugin_1_1video__processor"><span class="std std-ref">video_processor</span></a> exception constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – A string that describes the error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../plugins.html" class="btn btn-neutral float-left" title="Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="recorder.html" class="btn btn-neutral float-right" title="Default Media Recorder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Dolby Laboratories.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
