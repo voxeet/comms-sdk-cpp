@@ -216,6 +216,9 @@
 <dd><p>Registers the component version for internal telemetry. </p>
 <p>The component name and version are free-form strings, which will be added to the Dolby.io telemetry reports. If a component with given name has already been registered with a different version, this method fails and returns error information asynchronously.</p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">register_component_version</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">sdk</span><span class="o">::</span><span class="n">component_data</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">component_logger_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">logger</span><span class="p">);</span>
+<span class="w">     </span><span class="p">})</span>
 <span class="w">     </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">){</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Failed to register my app to</span>
 <span class="n">telemetry</span><span class="s">&quot; &lt;&lt; std::endl; }); </span>
 </pre></div>
@@ -395,12 +398,14 @@ This method causes the global operators new and delete in the SDK to use the app
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk14component_dataE">
 <span id="_CPPv3N7dolbyio5comms3sdk14component_dataE"></span><span id="_CPPv2N7dolbyio5comms3sdk14component_dataE"></span><span id="dolbyio::comms::sdk::component_data"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1component__data"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">component_data</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk14component_dataE" title="Permalink to this definition"></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Component specific data returned by the SDK when the components is registered. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms3sdk14component_data6loggerE">
 <span id="_CPPv3N7dolbyio5comms3sdk14component_data6loggerE"></span><span id="_CPPv2N7dolbyio5comms3sdk14component_data6loggerE"></span><span id="dolbyio::comms::sdk::component_data::logger__std::shared_ptr:logger_sink:"></span><span class="target" id="structdolbyio_1_1comms_1_1sdk_1_1component__data_1a8592d8ee6aa90f456e4586960e8eac57"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">logger_sink</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">logger</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms3sdk14component_data6loggerE" title="Permalink to this definition"></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Shared pointer to the logger instance created for the component when it is registered with the SDK. This can be used to log using the SDK logger and thus log to the same file as the SDK. </p>
+</dd></dl>
 
 </div>
 </dd></dl>

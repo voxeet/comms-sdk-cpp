@@ -61,6 +61,27 @@ The :ref:`api_conference` events that are emitted by the SDK. You can subscribe 
 .. doxygenenum:: dolbyio::comms::conference_status
         :project: C++ SDK
 
+.. doxygenstruct:: dolbyio::comms::local_participant_updated
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::remote_participant_updated
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::remote_participant_added
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::local_video_track_added
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::local_video_track_removed
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::remote_video_track_added
+        :project: C++ SDK
+
+.. doxygenstruct:: dolbyio::comms::remote_video_track_removed
+        :project: C++ SDK
+
 .. doxygenstruct:: dolbyio::comms::participant_added
         :project: C++ SDK
 

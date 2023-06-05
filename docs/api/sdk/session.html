@@ -191,6 +191,34 @@ are used by and returned by methods of the interface.</p>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session6updateERR9user_info">
+<span id="_CPPv3N7dolbyio5comms8services7session6updateERR9user_info"></span><span id="_CPPv2N7dolbyio5comms8services7session6updateERR9user_info"></span><span id="dolbyio::comms::services::session::update__user_infoRR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1abe1ca221977f2e09ab3b86f8f6a64fbc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="dolbyio::comms::services::session::user_info"><span class="n"><span class="pre">user_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services7session9user_infoE" title="dolbyio::comms::services::session::user_info"><span class="n"><span class="pre">user_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">identification</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session6updateERR9user_info" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Updates the metadata of a logged in user. </p>
+<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Synchronous approach:</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">().</span><span class="n">update</span><span class="p">(</span><span class="n">identification</span><span class="p">));</span>
+
+<span class="c1">// Asynchronous approach:</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">().</span><span class="n">update</span><span class="p">(</span><span class="n">identification</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// The user has been updated.</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// handle exception</span>
+<span class="w">  </span><span class="p">});</span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>identification</strong> – Information about the participant who tries to open a session. Only the name and avatarUrl are updated, other fields of the user identification are ignored.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the new <a class="reference internal" href="#structdolbyio_1_1comms_1_1services_1_1session_1_1user__info"><span class="std std-ref">user_info</span></a> asynchronously.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services7session5closeEv">
 <span id="_CPPv3N7dolbyio5comms8services7session5closeEv"></span><span id="_CPPv2N7dolbyio5comms8services7session5closeEv"></span><span id="dolbyio::comms::services::session::close"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1session_1ac4e0694e4188431d063428857e58a078"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">close</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services7session5closeEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Closes the current session. </p>
