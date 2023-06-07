@@ -118,54 +118,54 @@ to the conference service.</p>
 <span class="cm"> *                Copyright (C) 2022-2023 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/media_engine/media_engine.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dolbyio/comms/sdk.h&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;dolbyio/comms/media_engine/media_engine.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;dolbyio/comms/sdk.h&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">custom_recorder_impl</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_sink</span><span class="p">,</span>
-<span class="w">                             </span><span class="k">private</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="p">,</span>
-<span class="w">                             </span><span class="k">private</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="w"> </span><span class="p">{</span>
-<span class="w"> </span><span class="k">public</span><span class="o">:</span>
-<span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">audio_format</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">NONE</span><span class="p">,</span><span class="w"> </span><span class="n">PCM</span><span class="p">,</span><span class="w"> </span><span class="n">AAC</span><span class="w"> </span><span class="p">};</span>
+<span class="k">class</span> <span class="nc">custom_recorder_impl</span> <span class="o">:</span> <span class="k">private</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_sink</span><span class="p">,</span>
+                             <span class="k">private</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="p">,</span>
+                             <span class="k">private</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">enum</span> <span class="k">class</span> <span class="nc">audio_format</span> <span class="p">{</span> <span class="n">NONE</span><span class="p">,</span> <span class="n">PCM</span><span class="p">,</span> <span class="n">AAC</span> <span class="p">};</span>
 
-<span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">video_format</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">NONE</span><span class="p">,</span><span class="w"> </span><span class="n">ENCODED</span><span class="p">,</span><span class="w"> </span><span class="n">ENCODED_OPTIMIZED</span><span class="p">,</span><span class="w"> </span><span class="n">YUV</span><span class="w"> </span><span class="p">};</span>
+  <span class="k">enum</span> <span class="k">class</span> <span class="nc">video_format</span> <span class="p">{</span> <span class="n">NONE</span><span class="p">,</span> <span class="n">ENCODED</span><span class="p">,</span> <span class="n">ENCODED_OPTIMIZED</span><span class="p">,</span> <span class="n">YUV</span> <span class="p">};</span>
 
-<span class="w">  </span><span class="n">custom_recorder_impl</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sdk</span><span class="p">,</span>
-<span class="w">                       </span><span class="n">video_format</span><span class="w"> </span><span class="n">video</span><span class="p">,</span>
-<span class="w">                       </span><span class="n">audio_format</span><span class="w"> </span><span class="n">audio</span><span class="p">);</span>
-<span class="w">  </span><span class="o">~</span><span class="n">custom_recorder_impl</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+  <span class="n">custom_recorder_impl</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">&amp;</span> <span class="n">sdk</span><span class="p">,</span>
+                       <span class="n">video_format</span> <span class="n">video</span><span class="p">,</span>
+                       <span class="n">audio_format</span> <span class="n">audio</span><span class="p">);</span>
+  <span class="o">~</span><span class="n">custom_recorder_impl</span><span class="p">()</span> <span class="k">override</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="nf">video_raw</span><span class="p">();</span>
+  <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span> <span class="n">video_raw</span><span class="p">();</span>
 
-<span class="w">  </span><span class="c1">// audio_recorder interface</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle_audio</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">                    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">                    </span><span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="o">*</span><span class="p">,</span>
-<span class="w">                    </span><span class="kt">size_t</span><span class="p">,</span>
-<span class="w">                    </span><span class="kt">int</span><span class="p">,</span>
-<span class="w">                    </span><span class="kt">size_t</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+  <span class="c1">// audio_recorder interface</span>
+  <span class="kt">void</span> <span class="nf">handle_audio</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="kt">int16_t</span><span class="o">*</span><span class="p">,</span>
+                    <span class="kt">size_t</span><span class="p">,</span>
+                    <span class="kt">int</span><span class="p">,</span>
+                    <span class="kt">size_t</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
-<span class="w">  </span><span class="c1">// video_recorder_yuv interface</span>
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle_frame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+  <span class="c1">// video_recorder_yuv interface</span>
+  <span class="kt">void</span> <span class="nf">handle_frame</span><span class="p">(</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
-<span class="w">  </span><span class="c1">// video_recorder_encoded interface</span>
-<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="o">::</span><span class="n">decoder_config</span><span class="w"> </span><span class="nf">configure_encoded_sink</span><span class="p">(</span>
-<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+  <span class="c1">// video_recorder_encoded interface</span>
+  <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="o">::</span><span class="n">decoder_config</span> <span class="n">configure_encoded_sink</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
-<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle_frame_encoded</span><span class="p">(</span>
-<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">encoded_video_frame</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">handle_frame_encoded</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">encoded_video_frame</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">decoder_config</span><span class="w"> </span><span class="nf">decoder_configuration</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+  <span class="n">decoder_config</span> <span class="nf">decoder_configuration</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
 
-<span class="w"> </span><span class="k">private</span><span class="o">:</span>
-<span class="w">  </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sdk_</span><span class="p">;</span>
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">&amp;</span> <span class="n">sdk_</span><span class="p">;</span>
 
-<span class="w">  </span><span class="n">audio_format</span><span class="w"> </span><span class="n">af_</span><span class="p">{</span><span class="n">audio_format</span><span class="o">::</span><span class="n">NONE</span><span class="p">};</span>
-<span class="w">  </span><span class="n">video_format</span><span class="w"> </span><span class="n">vf_</span><span class="p">{</span><span class="n">video_format</span><span class="o">::</span><span class="n">NONE</span><span class="p">};</span>
+  <span class="n">audio_format</span> <span class="n">af_</span><span class="p">{</span><span class="n">audio_format</span><span class="o">::</span><span class="n">NONE</span><span class="p">};</span>
+  <span class="n">video_format</span> <span class="n">vf_</span><span class="p">{</span><span class="n">video_format</span><span class="o">::</span><span class="n">NONE</span><span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
 </div>
@@ -181,80 +181,80 @@ to the conference service.</p>
 <span class="cm"> *                Copyright (C) 2022-2023 by Dolby Laboratories.</span>
 <span class="cm"> ***************************************************************************/</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;custom_recorder.h&quot;</span>
+<span class="cp">#include</span> <span class="cpf">&quot;custom_recorder.h&quot;</span><span class="cp"></span>
 
-<span class="k">using</span><span class="w"> </span><span class="n">decoder_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="o">::</span><span class="n">decoder_config</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">decoder_config</span> <span class="o">=</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="o">::</span><span class="n">decoder_config</span><span class="p">;</span>
 
-<span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">custom_recorder_impl</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sdk</span><span class="p">,</span>
-<span class="w">                                           </span><span class="n">video_format</span><span class="w"> </span><span class="n">video</span><span class="p">,</span>
-<span class="w">                                           </span><span class="n">audio_format</span><span class="w"> </span><span class="n">audio</span><span class="p">)</span>
-<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">sdk_</span><span class="p">(</span><span class="n">sdk</span><span class="p">),</span><span class="w"> </span><span class="n">af_</span><span class="p">(</span><span class="n">audio</span><span class="p">),</span><span class="w"> </span><span class="n">vf_</span><span class="p">(</span><span class="n">video</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">vf_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">custom_recorder_impl</span><span class="o">::</span><span class="no">video_format</span><span class="o">::</span><span class="no">YUV</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="c1">// install event handlers for video track added events</span>
-<span class="w">      </span><span class="c1">// create new sinks per video track, and install them on the sdk when</span>
-<span class="w">      </span><span class="c1">// track are added.</span>
-<span class="w">      </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">custom_recorder_impl</span><span class="o">::</span><span class="no">video_format</span><span class="o">::</span><span class="no">ENCODED</span><span class="p">:</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">custom_recorder_impl</span><span class="o">::</span><span class="no">video_format</span><span class="o">::</span><span class="no">ENCODED_OPTIMIZED</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_video_sink</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
-<span class="w">      </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">custom_recorder_impl</span><span class="o">::</span><span class="no">video_format</span><span class="o">::</span><span class="no">NONE</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_video_sink</span><span class="p">(</span><span class="k">nullptr</span><span class="p">));</span>
-<span class="w">      </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">custom_recorder_impl</span><span class="p">(</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">sdk</span><span class="o">&amp;</span> <span class="n">sdk</span><span class="p">,</span>
+                                           <span class="n">video_format</span> <span class="n">video</span><span class="p">,</span>
+                                           <span class="n">audio_format</span> <span class="n">audio</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">sdk_</span><span class="p">(</span><span class="n">sdk</span><span class="p">),</span> <span class="n">af_</span><span class="p">(</span><span class="n">audio</span><span class="p">),</span> <span class="n">vf_</span><span class="p">(</span><span class="n">video</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="n">vf_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">video_format</span><span class="o">::</span><span class="nl">YUV</span><span class="p">:</span> <span class="p">{</span>
+      <span class="c1">// install event handlers for video track added events</span>
+      <span class="c1">// create new sinks per video track, and install them on the sdk when</span>
+      <span class="c1">// track are added.</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">case</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">video_format</span><span class="o">::</span><span class="nl">ENCODED</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">video_format</span><span class="o">::</span><span class="nl">ENCODED_OPTIMIZED</span><span class="p">:</span> <span class="p">{</span>
+      <span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_video_sink</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">case</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">video_format</span><span class="o">::</span><span class="nl">NONE</span><span class="p">:</span> <span class="p">{</span>
+      <span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_video_sink</span><span class="p">(</span><span class="k">nullptr</span><span class="p">));</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">af_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">audio_format</span><span class="o">::</span><span class="n">NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="k">nullptr</span><span class="p">));</span>
-<span class="w">  </span><span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">af_</span> <span class="o">!=</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">audio_format</span><span class="o">::</span><span class="n">NONE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">wait</span><span class="p">(</span><span class="n">sdk_</span><span class="p">.</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="k">nullptr</span><span class="p">));</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">handle_audio</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">                                        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">                                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="o">*</span><span class="p">,</span>
-<span class="w">                                        </span><span class="kt">size_t</span><span class="p">,</span>
-<span class="w">                                        </span><span class="kt">int</span><span class="p">,</span>
-<span class="w">                                        </span><span class="kt">size_t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// handle audio frame</span>
+<span class="kt">void</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">handle_audio</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+                                        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+                                        <span class="k">const</span> <span class="kt">int16_t</span><span class="o">*</span><span class="p">,</span>
+                                        <span class="kt">size_t</span><span class="p">,</span>
+                                        <span class="kt">int</span><span class="p">,</span>
+                                        <span class="kt">size_t</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// handle audio frame</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">handle_frame</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// handle raw video frame</span>
-<span class="p">}</span>
-
-<span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="o">::</span><span class="n">decoder_config</span>
-<span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">configure_encoded_sink</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">                                             </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// set the codec for encoded video frames</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vf_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">video_format</span><span class="o">::</span><span class="n">ENCODED_OPTIMIZED</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">decoder_config</span><span class="o">::</span><span class="n">optimized_decoding</span><span class="p">;</span>
-<span class="w">  </span><span class="k">else</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">decoder_config</span><span class="o">::</span><span class="n">full_decoding</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span><span class="w"> </span><span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">handle_frame_encoded</span><span class="p">(</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">encoded_video_frame</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// handle encoded video frame</span>
+<span class="kt">void</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">handle_frame</span><span class="p">(</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_frame</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// handle raw video frame</span>
 <span class="p">}</span>
 
 <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="o">::</span><span class="n">decoder_config</span>
-<span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">decoder_configuration</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">vf_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">video_format</span><span class="o">::</span><span class="n">ENCODED_OPTIMIZED</span>
-<span class="w">             </span><span class="o">?</span><span class="w"> </span><span class="n">decoder_config</span><span class="o">::</span><span class="n">optimized_decoding</span>
-<span class="w">             </span><span class="o">:</span><span class="w"> </span><span class="n">decoder_config</span><span class="o">::</span><span class="n">full_decoding</span><span class="p">;</span>
+<span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">configure_encoded_sink</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+                                             <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// set the codec for encoded video frames</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">vf_</span> <span class="o">==</span> <span class="n">video_format</span><span class="o">::</span><span class="n">ENCODED_OPTIMIZED</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decoder_config</span><span class="o">::</span><span class="n">optimized_decoding</span><span class="p">;</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="n">decoder_config</span><span class="o">::</span><span class="n">full_decoding</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span><span class="w"> </span><span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">video_raw</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vf_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">video_format</span><span class="o">::</span><span class="n">YUV</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="kt">void</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">handle_frame_encoded</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">encoded_video_frame</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// handle encoded video frame</span>
+<span class="p">}</span>
 
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink_encoded</span><span class="o">::</span><span class="n">decoder_config</span>
+<span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">decoder_configuration</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">vf_</span> <span class="o">==</span> <span class="n">video_format</span><span class="o">::</span><span class="n">ENCODED_OPTIMIZED</span>
+             <span class="o">?</span> <span class="n">decoder_config</span><span class="o">::</span><span class="nl">optimized_decoding</span>
+             <span class="p">:</span> <span class="n">decoder_config</span><span class="o">::</span><span class="n">full_decoding</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_sink</span><span class="o">*</span> <span class="n">custom_recorder_impl</span><span class="o">::</span><span class="n">video_raw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">vf_</span> <span class="o">==</span> <span class="n">video_format</span><span class="o">::</span><span class="n">YUV</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -272,7 +272,7 @@ to the conference service.</p>
 <span class="go">	DolbyioComms::sdk</span>
 <span class="go">)</span>
 
-<span class="gp"># </span>Enable<span class="w"> </span>the<span class="w"> </span>deprecated<span class="w"> </span><span class="nb">wait</span>
+<span class="gp">#</span> Enable the deprecated <span class="nb">wait</span>
 <span class="go">add_compile_definitions(DOLBYIO_COMMS_ENABLE_DEPRECATED_WAIT)</span>
 </pre></div>
 </div>

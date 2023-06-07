@@ -156,12 +156,12 @@
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">set_preferred_input_audio_device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// device is now set</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// device is now set</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
 </p>
@@ -184,12 +184,12 @@
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">set_preferred_output_audio_device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Device is now set</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Device is now set</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
 </p>
@@ -203,17 +203,17 @@
 <dd><p>Gets a list of the currently available audio devices in the system. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The result object producing a vector containing the audio devices asynchronously. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_audio_devices</span><span class="p">());</span>
+<dd class="field-odd"><p>The result object producing a vector containing the audio devices asynchronously. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_audio_devices</span><span class="p">());</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_audio_devices</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">audio_device</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// devices are now available</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">audio_device</span><span class="o">&gt;&amp;&amp;</span> <span class="n">dev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// devices are now available</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
 </p>
@@ -228,18 +228,18 @@
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The result object producing the audio device asynchronously. <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> fails if no audio input device is set. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait device to be set</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span>
+<span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_audio_input_device</span><span class="p">());</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_audio_input_device</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">audio_device</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Devices are now available</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Currently no audio input device set</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">audio_device</span><span class="o">&amp;&amp;</span> <span class="n">dev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Devices are now available</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Currently no audio input device set</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
 </p>
@@ -254,18 +254,18 @@
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The result object producing the audio device asynchronously. <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> fails if no audio output device is set. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait device to be set</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span>
+<span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_audio_output_device</span><span class="p">());</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_audio_output_device</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">audio_device</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Current output device now available</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Currently no audio input device set</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">audio_device</span><span class="o">&amp;&amp;</span> <span class="n">dev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Current output device now available</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Currently no audio input device set</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
 </p>
@@ -309,17 +309,17 @@
 <dd><p>Gets a list of the currently available video devices in the system. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The result object producing a vector containing the audio devices asynchronously. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_video_devices</span><span class="p">());</span>
+<dd class="field-odd"><p>The result object producing a vector containing the audio devices asynchronously. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_video_devices</span><span class="p">());</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_video_devices</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">camera_device</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Devices are now available</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">camera_device</span><span class="o">&gt;&amp;&amp;</span> <span class="n">dev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Devices are now available</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
 </p>
@@ -334,18 +334,18 @@
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The result object producing the video device asynchronously. <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> fails if no video device is set. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait device to be set</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span>
+<span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_video_device</span><span class="p">());</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_video_device</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">camera_device</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Current camera device now available</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Currently no video device set</span>
-<span class="w">  </span><span class="p">})</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">camera_device</span><span class="o">&amp;&amp;</span> <span class="n">dev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Current camera device now available</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Currently no video device set</span>
+  <span class="p">})</span>
 </pre></div>
 </div>
 </p>
@@ -360,17 +360,17 @@
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The result object producing the screen share source list asynchronously.<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait device to be set</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_screen_share_sources</span><span class="p">());</span>
+<span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_screen_share_sources</span><span class="p">());</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_screen_share_sources</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">screen_share_source</span><span class="o">&gt;&amp;&amp;</span><span class="w"> </span><span class="n">sources</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Screen share source list available</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Error occurred getting the list</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">screen_share_source</span><span class="o">&gt;&amp;&amp;</span> <span class="n">sources</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Screen share source list available</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Error occurred getting the list</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
 </p>
@@ -385,18 +385,18 @@
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The result object producing the screen share source asynchronously. <a class="reference internal" href="common/async_ops.html#group__async__ops_1gae7bfd2e8a9f5b44ca8c418f2c03fd36d"><span class="std std-ref">async_result</span></a> fails if no screen share source is set. <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait device to be set</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span>
+<span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span>
 <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_screen_share_sources</span><span class="p">());</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">get_current_screen_share_sources</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">screen_share_source</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Current camera device now available</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Currently no video device set</span>
-<span class="w">  </span><span class="p">})</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">screen_share_source</span><span class="o">&amp;&amp;</span> <span class="n">dev</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Current camera device now available</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Currently no video device set</span>
+  <span class="p">})</span>
 </pre></div>
 </div>
 </p>
@@ -410,22 +410,22 @@
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__added"><span class="std std-ref">audio_device_added</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -445,22 +445,22 @@
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__removed"><span class="std std-ref">audio_device_removed</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -480,22 +480,22 @@
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__changed"><span class="std std-ref">audio_device_changed</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_changed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_changed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -515,22 +515,22 @@
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1video__device__added"><span class="std std-ref">video_device_added</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -550,22 +550,22 @@
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1video__device__removed"><span class="std std-ref">video_device_removed</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_device_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -613,22 +613,22 @@
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__timeout__failure"><span class="std std-ref">audio_device_timeout_failure</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">device_management</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_timeout_failure</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_timeout_failure</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_timeout_failure</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_device_timeout_failure</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>

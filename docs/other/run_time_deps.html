@@ -105,7 +105,7 @@
 <li><p>Ensure that the application has started its mainQueue. This must be done as any UI Rendering of Video Frames or receiving of AVCaptureDevice events relies on the existence of an active mainQueue.</p></li>
 <li><p>In our samples we enable the mainQueue to start processing events as follows (refer to <strong>share/dolbyio/comms/sample/utilities/ui_loop/macos_ui.mm</strong> for more details):</p></li>
 </ul>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">NSApp</span><span class="w"> </span><span class="n">run</span><span class="p">]</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">NSApp</span> <span class="n">run</span><span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -153,19 +153,19 @@
 <li><p>Make sure that the Ubuntu has either system wide PulseAudio running or that an instance of PulseAudio is started by the same user who will run the application.</p></li>
 <li><p>To check if you have pulseaudio installed you can run:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pulseaudio<span class="w"> </span>--version
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pulseaudio --version
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>The Ubuntu machine should already have pulseaudio installed, but if it does not, run the following command. Please note, to use package manager you need to be super user.</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>pulseaudio
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install pulseaudio
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>When it is installed, start pulseaudio for your user as follows:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pulseaudio
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pulseaudio
 </pre></div>
 </div>
 </section>

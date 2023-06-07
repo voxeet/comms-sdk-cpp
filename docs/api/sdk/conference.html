@@ -145,17 +145,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference4demoE19spatial_audio_style"></span><span id="_CPPv2N7dolbyio5comms8services10conference4demoE19spatial_audio_style"></span><span id="dolbyio::comms::services::conference::demo__spatial_audio_style"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1ab616300f6eeb5328c4d4d1f6100aa80e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15conference_infoE" title="dolbyio::comms::conference_info"><span class="n"><span class="pre">conference_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">demo</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference4demoE19spatial_audio_style" title="dolbyio::comms::services::conference::demo::spatial_audio_style"><span class="n"><span class="pre">spatial_audio_style</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">spatial_audio_style</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference4demoE19spatial_audio_style" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Creates a demo conference and joins to it upon completion. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait for the conference creation</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">conf_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">demo</span><span class="p">(</span><span class="n">spatial_audio_style</span><span class="o">::</span><span class="n">shared</span><span class="p">));</span>
+<span class="k">auto</span> <span class="n">conf_info</span> <span class="o">=</span> <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">demo</span><span class="p">(</span><span class="n">spatial_audio_style</span><span class="o">::</span><span class="n">shared</span><span class="p">));</span>
 
-<span class="w"> </span><span class="c1">// Invoking the method directly requires chaining successive operations</span>
-<span class="w"> </span><span class="c1">// via the `then` call</span>
+ <span class="c1">// Invoking the method directly requires chaining successive operations</span>
+ <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">demo</span><span class="p">(</span><span class="n">spatial_audio_style</span><span class="o">::</span><span class="n">shared</span><span class="p">))</span>
-<span class="w">   </span><span class="p">.</span><span class="n">then</span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// Do something with the returned conf info;</span>
-<span class="w">   </span><span class="p">})</span>
-<span class="w">   </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// Handle exception</span>
-<span class="w">   </span><span class="p">});</span>
+   <span class="p">.</span><span class="n">then</span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Do something with the returned conf info;</span>
+   <span class="p">})</span>
+   <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Handle exception</span>
+   <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -174,17 +174,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference6createERK18conference_options"></span><span id="_CPPv2N7dolbyio5comms8services10conference6createERK18conference_options"></span><span id="dolbyio::comms::services::conference::create__conference_optionsCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1ada7ee455c62ea1f5fee20895300f8fef"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15conference_infoE" title="dolbyio::comms::conference_info"><span class="n"><span class="pre">conference_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference18conference_optionsE" title="dolbyio::comms::services::conference::conference_options"><span class="n"><span class="pre">conference_options</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">options</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference6createERK18conference_options" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Creates a conference and returns information about the conference upon completion. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait for the conference creation</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">conf_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">create</span><span class="p">(</span><span class="n">options</span><span class="p">));</span>
+<span class="k">auto</span> <span class="n">conf_info</span> <span class="o">=</span> <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">create</span><span class="p">(</span><span class="n">options</span><span class="p">));</span>
 
-<span class="w"> </span><span class="c1">// Invoking the method directly requires chaining successive operations</span>
-<span class="w"> </span><span class="c1">// via the `then` call</span>
+ <span class="c1">// Invoking the method directly requires chaining successive operations</span>
+ <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">create</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
-<span class="w">   </span><span class="p">.</span><span class="n">then</span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// Do something with the returned conf info;</span>
-<span class="w">   </span><span class="p">})</span>
-<span class="w">   </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// Handle exception</span>
-<span class="w">   </span><span class="p">});</span>
+   <span class="p">.</span><span class="n">then</span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Do something with the returned conf info;</span>
+   <span class="p">})</span>
+   <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Handle exception</span>
+   <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -203,17 +203,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options"></span><span id="_CPPv2N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options"></span><span id="dolbyio::comms::services::conference::join__conference_infoCR.join_optionsCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a17990aced8e7f8060aa8a943fd9f6d5e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15conference_infoE" title="dolbyio::comms::conference_info"><span class="n"><span class="pre">conference_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">join</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15conference_infoE" title="dolbyio::comms::conference_info"><span class="n"><span class="pre">conference_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">conf</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference12join_optionsE" title="dolbyio::comms::services::conference::join_options"><span class="n"><span class="pre">join_options</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">join</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Joins an existing conference as an active user who can both receive media from the conference and inject media into the conference. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Wait for the conference creation</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">conf_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">join</span><span class="p">(</span><span class="n">conf_options</span><span class="p">,</span><span class="w"> </span><span class="n">join_options</span><span class="p">));</span>
+<span class="k">auto</span> <span class="n">conf_info</span> <span class="o">=</span> <span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">join</span><span class="p">(</span><span class="n">conf_options</span><span class="p">,</span> <span class="n">join_options</span><span class="p">));</span>
 
-<span class="w"> </span><span class="c1">// Invoking the method directly requires chaining successive operations</span>
-<span class="w"> </span><span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">join</span><span class="p">(</span><span class="n">conf_options</span><span class="p">,</span><span class="w"> </span><span class="n">join_options</span><span class="p">))</span>
-<span class="w">   </span><span class="p">.</span><span class="n">then</span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// Do something with the returned conf info;</span>
-<span class="w">   </span><span class="p">})</span>
-<span class="w">   </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// Handle exception</span>
-<span class="w">   </span><span class="p">});</span>
+ <span class="c1">// Invoking the method directly requires chaining successive operations</span>
+ <span class="c1">// via the `then` call</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">join</span><span class="p">(</span><span class="n">conf_options</span><span class="p">,</span> <span class="n">join_options</span><span class="p">))</span>
+   <span class="p">.</span><span class="n">then</span><span class="p">[](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Do something with the returned conf info;</span>
+   <span class="p">})</span>
+   <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Handle exception</span>
+   <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -235,17 +235,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference6listenERK15conference_infoRK14listen_options"></span><span id="_CPPv2N7dolbyio5comms8services10conference6listenERK15conference_infoRK14listen_options"></span><span id="dolbyio::comms::services::conference::listen__conference_infoCR.listen_optionsCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a31ad01cf9c617638d2d45c2cc2957b20"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15conference_infoE" title="dolbyio::comms::conference_info"><span class="n"><span class="pre">conference_info</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">listen</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms15conference_infoE" title="dolbyio::comms::conference_info"><span class="n"><span class="pre">conference_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">conf</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms8services10conference14listen_optionsE" title="dolbyio::comms::services::conference::listen_options"><span class="n"><span class="pre">listen_options</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">listen</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference6listenERK15conference_infoRK14listen_options" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Joins an existing conference as a listener who can receive audio and video streams, but cannot send any stream to the conference. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">listen</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span><span class="w"> </span><span class="n">join</span><span class="p">));</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">listen</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">join</span><span class="p">));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">listen</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span><span class="w"> </span><span class="n">join</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">conference_info</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// The user joined the conference</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">listen</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">join</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">conference_info</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The user joined the conference</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -272,12 +272,12 @@ interface can be passed to and returned by the service.</p>
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">leave</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// The user left the conference</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// The user left the conference</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -293,17 +293,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference4sendERKNSt6stringERRNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N7dolbyio5comms8services10conference4sendERKNSt6stringERRNSt6vectorINSt6stringEEE"></span><span id="dolbyio::comms::services::conference::send__ssCR.std::vector:ss:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a5022a29f64769cbecca9762f1e31db68"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">send</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">message</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_ids</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference4sendERKNSt6stringERRNSt6vectorINSt6stringEEE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Sends a message to the current conference. The message size is limited to 16KB. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;some message&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">participant_ids</span><span class="p">)));</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;some message&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">participant_ids</span><span class="p">)));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;some message&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">participant_ids</span><span class="p">))</span>
-<span class="w"> </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// The message was sent</span>
-<span class="w"> </span><span class="p">})</span>
-<span class="w"> </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// Rethrow and handle the exception</span>
-<span class="w"> </span><span class="p">});</span>
+ <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;some message&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">participant_ids</span><span class="p">))</span>
+ <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// The message was sent</span>
+ <span class="p">})</span>
+ <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">){</span>
+    <span class="c1">// Rethrow and handle the exception</span>
+ <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -329,13 +329,13 @@ interface can be passed to and returned by the service.</p>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">mute</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-<span class="w"> </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// The microphone is now muted</span>
-<span class="w"> </span><span class="p">})</span>
-<span class="w"> </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// The operation failed, and microphone is not muted</span>
-<span class="w"> </span><span class="p">});</span>
+ <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">mute</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+ <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// The microphone is now muted</span>
+ <span class="p">})</span>
+ <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">){</span>
+    <span class="c1">// The operation failed, and microphone is not muted</span>
+ <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -354,17 +354,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference11remote_muteEbRKNSt6stringE"></span><span id="_CPPv2N7dolbyio5comms8services10conference11remote_muteEbRKNSt6stringE"></span><span id="dolbyio::comms::services::conference::remote_mute__b.ssCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a31f58b577ae8b9ea75d338c64b1aee04"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remote_mute</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">muted</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference11remote_muteEbRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Mutes and un-mutes a specified remote participant. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">remote_mute</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">participant_id</span><span class="p">));</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">remote_mute</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="n">participant_id</span><span class="p">));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">remote_mute</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">participant_id</span><span class="p">)</span>
-<span class="w"> </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// The remote participant is now muted</span>
-<span class="w"> </span><span class="p">})</span>
-<span class="w"> </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// The operation failed, and remote participant is not muted</span>
-<span class="w"> </span><span class="p">});</span>
+ <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">remote_mute</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="n">participant_id</span><span class="p">)</span>
+ <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// The remote participant is now muted</span>
+ <span class="p">})</span>
+ <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">){</span>
+    <span class="c1">// The operation failed, and remote participant is not muted</span>
+ <span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">
@@ -394,13 +394,13 @@ interface can be passed to and returned by the service.</p>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">mute_output</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-<span class="w"> </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// The output is now muted</span>
-<span class="w"> </span><span class="p">})</span>
-<span class="w"> </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// The operation failed, and output is not muted</span>
-<span class="w"> </span><span class="p">});</span>
+ <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">mute_output</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+ <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// The output is now muted</span>
+ <span class="p">})</span>
+ <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">){</span>
+    <span class="c1">// The operation failed, and output is not muted</span>
+ <span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">
@@ -428,12 +428,12 @@ interface can be passed to and returned by the service.</p>
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">update_spatial_audio_configuration</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Configuration is now updated</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Configuration is now updated</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -452,17 +452,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference20set_spatial_positionERKNSt6stringERK16spatial_position"></span><span id="_CPPv2N7dolbyio5comms8services10conference20set_spatial_positionERKNSt6stringERK16spatial_position"></span><span id="dolbyio::comms::services::conference::set_spatial_position__ssCR.spatial_positionCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a9466a22528b42479c6333e26482d48b9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_spatial_position</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">participant_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16spatial_positionE" title="dolbyio::comms::spatial_position"><span class="n"><span class="pre">spatial_position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">position</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference20set_spatial_positionERKNSt6stringERK16spatial_position" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Updates the spatial audio configuration to enable experiencing spatial audio during a conference. This method contains information about the participant’s location. This method is available only for participants who joined a conference using the join method with the spatial_audio parameter enabled. Depending on the selected spatial_audio_style, the method requires either providing only the position of the local participant or the positions of all participants. When using the individual spatial_audio_style, remote participants’ audio is disabled until the participants are assigned to specific locations and each time new participants join the conference, the positions need to be updated. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_position</span><span class="p">(</span><span class="n">participant_id</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">));</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_position</span><span class="p">(</span><span class="n">participant_id</span><span class="p">,</span> <span class="n">position</span><span class="p">));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_position</span><span class="p">(</span><span class="n">participant_id</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Position is now updated</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_position</span><span class="p">(</span><span class="n">participant_id</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Position is now updated</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -489,12 +489,12 @@ interface can be passed to and returned by the service.</p>
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_direction</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Direction is now updated</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Direction is now updated</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -513,17 +513,17 @@ interface can be passed to and returned by the service.</p>
 <span id="_CPPv3N7dolbyio5comms8services10conference23set_spatial_environmentERK13spatial_scaleRK16spatial_positionRK16spatial_positionRK16spatial_position"></span><span id="_CPPv2N7dolbyio5comms8services10conference23set_spatial_environmentERK13spatial_scaleRK16spatial_positionRK16spatial_positionRK16spatial_position"></span><span id="dolbyio::comms::services::conference::set_spatial_environment__spatial_scaleCR.spatial_positionCR.spatial_positionCR.spatial_positionCR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1aadd949618b6915b00968b9dae536a892"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_spatial_environment</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms13spatial_scaleE" title="dolbyio::comms::spatial_scale"><span class="n"><span class="pre">spatial_scale</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">scale</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16spatial_positionE" title="dolbyio::comms::spatial_position"><span class="n"><span class="pre">spatial_position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">forward</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16spatial_positionE" title="dolbyio::comms::spatial_position"><span class="n"><span class="pre">spatial_position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">up</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N7dolbyio5comms16spatial_positionE" title="dolbyio::comms::spatial_position"><span class="n"><span class="pre">spatial_position</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">right</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference23set_spatial_environmentERK13spatial_scaleRK16spatial_positionRK16spatial_positionRK16spatial_position" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Updates the spatial audio configuration to enable experiencing spatial audio during a conference. This method contains information about a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance. This method is available only for participants who joined a conference using the join method with the spatial_audio parameter enabled. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_environment</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">forward</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">));</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_environment</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">forward</span><span class="p">,</span> <span class="n">up</span><span class="p">,</span> <span class="n">right</span><span class="p">));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_environment</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">forward</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Environment is now updated</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">set_spatial_environment</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">forward</span><span class="p">,</span> <span class="n">up</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Environment is now updated</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -551,13 +551,13 @@ interface can be passed to and returned by the service.</p>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">get_current_conference</span><span class="p">()</span>
-<span class="w"> </span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">conference_info</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process conference information</span>
-<span class="w"> </span><span class="p">})</span>
-<span class="w"> </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
-<span class="w">    </span><span class="c1">// The operation failed, no active conference</span>
-<span class="w"> </span><span class="p">});</span>
+ <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">get_current_conference</span><span class="p">()</span>
+ <span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="n">conference_info</span><span class="o">&amp;&amp;</span> <span class="n">info</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process conference information</span>
+ <span class="p">})</span>
+ <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">){</span>
+    <span class="c1">// The operation failed, no active conference</span>
+ <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -578,12 +578,12 @@ interface can be passed to and returned by the service.</p>
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">decline_invitation</span><span class="p">(</span><span class="n">conf_id</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Invitation declined successfully</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Failed to decline invitation</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Invitation declined successfully</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Failed to decline invitation</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -708,22 +708,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1conference__status__updated"><span class="std std-ref">conference_status_updated</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_status_updated</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_status_updated</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_status_updated</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_status_updated</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -741,24 +741,24 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI24remote_participant_addedE">
 <span id="_CPPv3N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI24remote_participant_addedE"></span><span id="_CPPv2N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI24remote_participant_addedE"></span><span id="dolbyio::comms::services::conference::add_event_handler__event_handler:remote_participant_added:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a53a3c53d1a47be9cdb258d81e83bf296"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4I0EN7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms24remote_participant_addedE" title="dolbyio::comms::remote_participant_added"><span class="n"><span class="pre">remote_participant_added</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI24remote_participant_addedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Adds a listener for the remote participant added events. </p>
-<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">   </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="c1">// Process the event</span>
-<span class="w">   </span><span class="p">})));</span>
+<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+ <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
+   <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// Process the event</span>
+   <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -778,22 +778,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1remote__participant__updated"><span class="std std-ref">remote_participant_updated</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_updated</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_updated</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_updated</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_participant_updated</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -813,22 +813,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1local__participant__updated"><span class="std std-ref">local_participant_updated</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_participant_updated</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_participant_updated</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_participant_updated</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_participant_updated</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -858,22 +858,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1active__speaker__changed"><span class="std std-ref">active_speaker_changed</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">active_speaker_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">active_speaker_changed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">active_speaker_changed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">active_speaker_changed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -907,22 +907,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1local__video__track__added"><span class="std std-ref">local_video_track_added</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_track_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_track_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_video_track_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_video_track_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -942,22 +942,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1remote__video__track__added"><span class="std std-ref">remote_video_track_added</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_track_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">video_track_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_video_track_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_video_track_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -977,22 +977,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1local__video__track__removed"><span class="std std-ref">local_video_track_removed</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_video_track_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_video_track_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_video_track_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">local_video_track_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -1012,22 +1012,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1remote__video__track__removed"><span class="std std-ref">remote_video_track_removed</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_video_track_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_video_track_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_video_track_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">remote_video_track_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -1057,22 +1057,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__track__added"><span class="std std-ref">audio_track_added</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_added</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_added</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -1092,22 +1092,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__track__removed"><span class="std std-ref">audio_track_removed</span></a> events. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_removed</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">audio_track_removed</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -1127,22 +1127,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Uses the add_event_handler method for <a class="reference internal" href="common/exception.html#classdolbyio_1_1comms_1_1dvc__error__exception"><span class="std std-ref">dvc_error_exception</span></a> to handle DVC errors when the media engine encounters an error from the DVC library. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">dvc_error_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">dvc_error_exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">dvc_error_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">dvc_error_exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -1162,22 +1162,22 @@ interface can be passed to and returned by the service.</p>
 <dd><p>Uses the add_event_handler method for <a class="reference internal" href="common/exception.html#classdolbyio_1_1comms_1_1peer__connection__failed__exception"><span class="std std-ref">peer_connection_failed_exception</span></a> to handle errors which are generated when the PeerConnection has entered a failed state. </p>
 <p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
 <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">peer_connection_failed_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">})));</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">peer_connection_failed_exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">  </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">peer_connection_failed_exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Process the event</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">peer_connection_failed_exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Process the event</span>
+  <span class="p">}))</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">));</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -1195,24 +1195,24 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI27conference_message_receivedE">
 <span id="_CPPv3N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI27conference_message_receivedE"></span><span id="_CPPv2N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI27conference_message_receivedE"></span><span id="dolbyio::comms::services::conference::add_event_handler__event_handler:conference_message_received:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a31327d40cc803617fbbcff5cb03829c7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4I0EN7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms27conference_message_receivedE" title="dolbyio::comms::conference_message_received"><span class="n"><span class="pre">conference_message_received</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI27conference_message_receivedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Adds a listener for <a class="reference internal" href="#structdolbyio_1_1comms_1_1conference__message__received"><span class="std std-ref">conference_message_received</span></a> events. </p>
-<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">     </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_message_received</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="c1">// Process the event</span>
-<span class="w">     </span><span class="p">})));</span>
+<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+ <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
+     <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_message_received</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">// Process the event</span>
+     <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">     </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_message_received</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="c1">// Process the event</span>
-<span class="w">     </span><span class="p">})</span>
-<span class="w">     </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span>
-<span class="w">     </span><span class="p">})</span>
-<span class="w">     </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
-<span class="w">       </span><span class="c1">// Handle an exception</span>
-<span class="w">     </span><span class="p">});</span>
+ <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
+     <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_message_received</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">// Process the event</span>
+     <span class="p">})</span>
+     <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span>
+     <span class="p">})</span>
+     <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">){</span>
+       <span class="c1">// Handle an exception</span>
+     <span class="p">});</span>
 </pre></div>
 </div>
  </p>
@@ -1234,24 +1234,24 @@ interface can be passed to and returned by the service.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI30conference_invitation_receivedE">
 <span id="_CPPv3N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI30conference_invitation_receivedE"></span><span id="_CPPv2N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI30conference_invitation_receivedE"></span><span id="dolbyio::comms::services::conference::add_event_handler__event_handler:conference_invitation_received:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1conference_1a6376b417450f8e1cd6296251d83710c8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4I0EN7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms30conference_invitation_receivedE" title="dolbyio::comms::conference_invitation_received"><span class="n"><span class="pre">conference_invitation_received</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services10conference17add_event_handlerERR13event_handlerI30conference_invitation_receivedE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Adds a listener for conference invitation events. </p>
-<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
-<span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">     </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_invitation_received</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="c1">// Process the event</span>
-<span class="w">     </span><span class="p">})));</span>
+<p><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="c1">// Invoke the method via wait blocks until the method succeeds or fails</span>
+ <span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">wait</span><span class="p">(</span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
+     <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_invitation_received</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">// Process the event</span>
+     <span class="p">})));</span>
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="w"> </span><span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
-<span class="w">     </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_invitation_received</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="c1">// Process the event</span>
-<span class="w">     </span><span class="p">})</span>
-<span class="w">     </span><span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">       </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span>
-<span class="w">     </span><span class="p">})</span>
-<span class="w">     </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
-<span class="w">       </span><span class="c1">// Handle an exception</span>
-<span class="w">     </span><span class="p">});</span>
+ <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">conference</span><span class="p">().</span><span class="n">add_event_handler</span><span class="p">(</span>
+     <span class="p">[](</span><span class="k">const</span> <span class="n">dolbyio</span><span class="o">::</span><span class="n">comms</span><span class="o">::</span><span class="n">conference_invitation_received</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">// Process the event</span>
+     <span class="p">})</span>
+     <span class="p">.</span><span class="n">then</span><span class="p">([</span><span class="k">this</span><span class="p">](</span><span class="n">event_handler_id</span><span class="o">&amp;&amp;</span> <span class="n">handler</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">this</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span>
+     <span class="p">})</span>
+     <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">){</span>
+       <span class="c1">// Handle an exception</span>
+     <span class="p">});</span>
 </pre></div>
 </div>
  </p>

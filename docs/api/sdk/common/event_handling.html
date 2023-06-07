@@ -143,12 +143,12 @@
 
 <span class="c1">// Continue in the `then` call</span>
 <span class="n">handler</span><span class="o">-&gt;</span><span class="n">disconnect</span><span class="p">()</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// the handler is disconnected</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// handle the disconnect error</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// the handler is disconnected</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle the disconnect error</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">

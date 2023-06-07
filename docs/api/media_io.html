@@ -124,13 +124,13 @@
 
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
-<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Media capturer is now set</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+<span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_encoded_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Media capturer is now set</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">
@@ -158,12 +158,12 @@
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_sink</span><span class="p">(</span><span class="n">recorder</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// The audio sink is now set</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// The audio sink is now set</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">
@@ -191,12 +191,12 @@
 <span class="c1">// Invoking the method directly requires chaining successive operations</span>
 <span class="c1">// via the `then` call</span>
 <span class="n">sdk</span><span class="o">-&gt;</span><span class="n">media_io</span><span class="p">().</span><span class="n">set_audio_source</span><span class="p">(</span><span class="n">injector</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="n">then</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Audio Source is now set</span>
-<span class="w">  </span><span class="p">})</span>
-<span class="w">  </span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Handle exception</span>
-<span class="w">  </span><span class="p">});</span>
+  <span class="p">.</span><span class="n">then</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Audio Source is now set</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle exception</span>
+  <span class="p">});</span>
 </pre></div>
 </div>
  <dl class="simple">
