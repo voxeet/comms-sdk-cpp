@@ -125,12 +125,7 @@
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>With the addition of Apple silicon support, the macOS package contains two subdirectories inside the unzipped <strong>sdk-release</strong> directory, with libraries for respective platforms. The <strong>sdk-release-arm</strong> packages are designed for Arm architectures, and the <strong>sdk-release-x86</strong> packages are designed for x86 architectures. To simplify this guide, we will mention only the <strong>sdk-release</strong> directory.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>On macOS, it is necessary to unquarantine the prebuilt desktop_app sample binary included in the package. To strip quarantine via terminal and the macOS attribute stripping command line tool do the following:</p>
-<p><strong>xattr -d -r com.apple.quarantine sdk-release/bin/desktop_app</strong></p>
+<p>The macOS package contains two subdirectories inside the unzipped <strong>sdk-release</strong> directory, with libraries for respective platforms. The <strong>sdk-release-arm</strong> packages are designed for Arm architectures, and the <strong>sdk-release-x86</strong> packages are designed for x86 architectures. To simplify this guide, we will mention only the <strong>sdk-release</strong> directory. We also provide a <strong>macos64-universal.zip</strong> for download. This package contains universal binaries (both x86_64/arm64 architecture) and thus can be used on both Intel and Apple Silicon Macbooks.</p>
 </div>
 </section>
 <section id="ca-certificates">

@@ -25,12 +25,7 @@ The following table lists the contents of the C++ SDK package:
  +---------------+-----------------------------------------------------------------------------------+
 
 .. note::
- With the addition of Apple silicon support, the macOS package contains two subdirectories inside the unzipped **sdk-release** directory, with libraries for respective platforms. The **sdk-release-arm** packages are designed for Arm architectures, and the **sdk-release-x86** packages are designed for x86 architectures. To simplify this guide, we will mention only the **sdk-release** directory.
-
-.. note::
- On macOS, it is necessary to unquarantine the prebuilt desktop_app sample binary included in the package. To strip quarantine via terminal and the macOS attribute stripping command line tool do the following:
-
- **xattr -d -r com.apple.quarantine sdk-release/bin/desktop_app**
+ The macOS package contains two subdirectories inside the unzipped **sdk-release** directory, with libraries for respective platforms. The **sdk-release-arm** packages are designed for Arm architectures, and the **sdk-release-x86** packages are designed for x86 architectures. To simplify this guide, we will mention only the **sdk-release** directory. We also provide a **macos64-universal.zip** for download. This package contains universal binaries (both x86_64/arm64 architecture) and thus can be used on both Intel and Apple Silicon Macbooks.
 
 CA certificates
 ---------------
