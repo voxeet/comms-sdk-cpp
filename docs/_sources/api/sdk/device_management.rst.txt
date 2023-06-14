@@ -50,6 +50,9 @@ The :ref:`api_device_management` events that are emitted by the SDK. They can be
 .. doxygenstruct:: dolbyio::comms::video_device_error
 	:project: C++ SDK
 
+.. doxygenstruct:: dolbyio::comms::screen_share_error
+	:project: C++ SDK
+
 .. _devman_models:
 
 Device Structs

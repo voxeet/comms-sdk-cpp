@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Device Management Service &mdash; C++ SDK 2.5.2 documentation</title>
+  <title>Device Management Service &mdash; C++ SDK 2.5.3 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -608,6 +608,20 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18screen_share_errorE">
+<span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18screen_share_errorE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18screen_share_errorE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:screen_share_error:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1ac31a7f946d9b25bd8156bb9172f24ad4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4I0EN7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18screen_share_errorE" title="dolbyio::comms::screen_share_error"><span class="n"><span class="pre">screen_share_error</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI18screen_share_errorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1screen__share__error"><span class="std std-ref">screen_share_error</span></a> events. Upon receiving this event the application should stop screen sharing to ensure remote clients get information that screen share has stopped. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – The function object that is invoked when an screen share capturinge enters error state</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result object producing the <a class="reference internal" href="common/event_handling.html#group__event__handling_1ga9aeb2542ab883743b4c1d666fcc9397b"><span class="std std-ref">event_handler_id</span></a> asynchronously. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE">
 <span id="_CPPv3N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE"></span><span id="_CPPv2N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE"></span><span id="dolbyio::comms::services::device_management::add_event_handler__event_handler:audio_device_timeout_failure:RR"></span><span class="target" id="classdolbyio_1_1comms_1_1services_1_1device__management_1a1b87e0d26e1a0707c31e4e566f1dc956"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="common/async_ops.html#_CPPv4I0EN7dolbyio5comms12async_resultE" title="dolbyio::comms::async_result"><span class="n"><span class="pre">async_result</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="common/event_handling.html#_CPPv4I0EN7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms28audio_device_timeout_failureE" title="dolbyio::comms::audio_device_timeout_failure"><span class="n"><span class="pre">audio_device_timeout_failure</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms8services17device_management17add_event_handlerERR13event_handlerI28audio_device_timeout_failureE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Adds a listener for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1audio__device__timeout__failure"><span class="std std-ref">audio_device_timeout_failure</span></a> events. </p>
@@ -836,6 +850,60 @@
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18video_device_error4typeE">
 <span id="_CPPv3N7dolbyio5comms18video_device_error4typeE"></span><span id="_CPPv2N7dolbyio5comms18video_device_error4typeE"></span><span id="dolbyio::comms::video_device_error::type__error_type"></span><span class="target" id="structdolbyio_1_1comms_1_1video__device__error_1a5dd66614add43cd30e19dd2f97c73fcc"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18video_device_error10error_typeE" title="dolbyio::comms::video_device_error::error_type"><span class="n"><span class="pre">error_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18video_device_error4typeE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Suggestion for possible remedy of the situation, may be empty. Type of video device error. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_errorE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_errorE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_errorE"></span><span id="dolbyio::comms::screen_share_error"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">screen_share_error</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_errorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Emitted when an error is encountered with the current screen capture. Upon receiving this error applications should call the services::conference::stop_screenshare method to inform other partcipants that screen share has stopped. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_error10error_typeE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_error10error_typeE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_error10error_typeE"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error_1a8fd5248ac2077ec73754245155032bed"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">error_type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_error10error_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enum describing the types of screen capture errors. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_error10error_type19continuos_temporaryE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_error10error_type19continuos_temporaryE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_error10error_type19continuos_temporaryE"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error_1a8fd5248ac2077ec73754245155032beda906869b1068582c5a376be742e36e1eb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">continuos_temporary</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_error10error_type19continuos_temporaryE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>10 or more continuous errors occurred each of which was considered a temporary error. Capturing will not be force stopped here, but the application should stop screen sharing. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_error10error_type9permanentE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_error10error_type9permanentE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_error10error_type9permanentE"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error_1a8fd5248ac2077ec73754245155032bedab0b701fff3d01c5b515f9293cb4ede4d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">permanent</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_error10error_type9permanentE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An unrecoverable error occurred with the camera used for capturing. The screen share will already have stopped capturing frames and the application must stop the screen sharing. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_error6sourceE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_error6sourceE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_error6sourceE"></span><span id="dolbyio::comms::screen_share_error::source__screen_share_source"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error_1aec95277f042d4ce51f5623ddf570c5bd"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms19screen_share_sourceE" title="dolbyio::comms::screen_share_source"><span class="n"><span class="pre">screen_share_source</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">source</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_error6sourceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The current screen share source. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_error4typeE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_error4typeE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_error4typeE"></span><span id="dolbyio::comms::screen_share_error::type__error_type"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error_1a356ce7f60f95a5aa1945451bfe218d01"></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms18screen_share_error10error_typeE" title="dolbyio::comms::screen_share_error::error_type"><span class="n"><span class="pre">error_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_error4typeE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_error11descriptionE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_error11descriptionE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_error11descriptionE"></span><span id="dolbyio::comms::screen_share_error::description__ss"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error_1ae52b5e7025436c777d9c45344e3e6ae4"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">description</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_error11descriptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of error encountered. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms18screen_share_error13force_stoppedE">
+<span id="_CPPv3N7dolbyio5comms18screen_share_error13force_stoppedE"></span><span id="_CPPv2N7dolbyio5comms18screen_share_error13force_stoppedE"></span><span id="dolbyio::comms::screen_share_error::force_stopped__b"></span><span class="target" id="structdolbyio_1_1comms_1_1screen__share__error_1aad864787d5c74df8b664f7ed4125a78f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">force_stopped</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms18screen_share_error13force_stoppedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Error describing the issue encountered with screen source. </p>
 </dd></dl>
 
 </div>

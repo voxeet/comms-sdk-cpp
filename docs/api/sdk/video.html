@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Video Service &mdash; C++ SDK 2.5.2 documentation</title>
+  <title>Video Service &mdash; C++ SDK 2.5.3 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
@@ -58,7 +58,10 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Video Service</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#video-interface">Video interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-video">Local video</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#remote-video">Remote video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#remote-video">Remote video</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#video-forwarding-startegy">Video Forwarding Startegy</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#video-frame-handling">Video frame handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#video-frame-api">Video frame API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#video-frame-interface">Video frame interface</a></li>
@@ -111,10 +114,6 @@
              
   <section id="video-service">
 <span id="api-video-service"></span><h1>Video Service<a class="headerlink" href="#video-service" title="Permalink to this heading"></a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The Video Service is considered to be in Beta phase on Linux systems.</p>
-</div>
 <p>The Video Service allows managing the local participant’s video stream as well as attaching a Video Sink to remote video streams.</p>
 <section id="video-interface">
 <h2>Video interface<a class="headerlink" href="#video-interface" title="Permalink to this heading"></a></h2>
@@ -283,9 +282,76 @@
 </div>
 </dd></dl>
 
+<section id="video-forwarding-startegy">
+<span id="vid-frame-handle"></span><h3>Video Forwarding Startegy<a class="headerlink" href="#video-forwarding-startegy" title="Permalink to this heading"></a></h3>
+<p>Using the <a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms25video_forwarding_strategyE" title="dolbyio::comms::video_forwarding_strategy"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Forwarding</span> <span class="pre">Strategy</span></code></a> option when <a class="reference internal" href="conference.html#_CPPv4N7dolbyio5comms8services10conference4joinERK15conference_infoRK12join_options" title="dolbyio::comms::services::conference::join"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">joining</span> <span class="pre">a</span> <span class="pre">conference</span></code></a> applications can set how many video streams they want forwarded to them. They can then <a class="reference internal" href="#_CPPv4N7dolbyio5comms5utils9vfs_event17add_event_handlerER3sdkRR13event_handlerI9vfs_eventE" title="dolbyio::comms::utils::vfs_event::add_event_handler"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">subscribe</span></code></a> to the <a class="reference internal" href="#_CPPv4N7dolbyio5comms5utils9vfs_eventE" title="dolbyio::comms::utils::vfs_event"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">vfs</span> <span class="pre">event</span></code></a> which can be used to know which participants streams are being forwarded to them at a given time and thus which streams to render.</p>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms5utils9vfs_eventE">
+<span id="_CPPv3N7dolbyio5comms5utils9vfs_eventE"></span><span id="_CPPv2N7dolbyio5comms5utils9vfs_eventE"></span><span id="dolbyio::comms::utils::vfs_event"></span><span class="target" id="structdolbyio_1_1comms_1_1utils_1_1vfs__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vfs_event</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms5utils9vfs_eventE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The event notifying about remote video streams which should be presented, and which should be no longer presented. </p>
+<p>The Dolby.io conference can have a limit of the video streams forwarded to the participant. If the limit is lower than a number of video streams in total in the conference, some of the video streams will receive no frames. The application must take care not to show the rendered video frames for such streams, because it would seem like a frozen video.</p>
+<p>This event is a derivative of some other SDK events, namely the video_stream_added, video_stream_removed, and <a class="reference internal" href="conference.html#structdolbyio_1_1comms_1_1video__forwarded__changed"><span class="std std-ref">video_forwarded_changed</span></a> events. The <a class="reference internal" href="#structdolbyio_1_1comms_1_1utils_1_1vfs__event"><span class="std std-ref">vfs_event</span></a> carries information about video tracks which should be enabled, and video tracks which should be disabled since the last change.</p>
+<p>Note that the local video stream (if the application shows a preview) is not a part of this event, as well as the remote screenshare stream, which, if present, should be always shown. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms5utils9vfs_event9vfs_eventERK21participant_track_mapRK21participant_track_map">
+<span id="_CPPv3N7dolbyio5comms5utils9vfs_event9vfs_eventERK21participant_track_mapRK21participant_track_map"></span><span id="_CPPv2N7dolbyio5comms5utils9vfs_event9vfs_eventERK21participant_track_mapRK21participant_track_map"></span><span id="dolbyio::comms::utils::vfs_event::vfs_event__participant_track_mapCR.participant_track_mapCR"></span><span class="target" id="structdolbyio_1_1comms_1_1utils_1_1vfs__event_1a796420408efe8d65625c54e7be145221"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vfs_event</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">participant_track_map</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">new_enabled</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">participant_track_map</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">new_disabled</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms5utils9vfs_event9vfs_eventERK21participant_track_mapRK21participant_track_map" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_enabled</strong> – const reference to the newly enabled video streams collection </p></li>
+<li><p><strong>new_disabled</strong> – const reference to the newly disabled video streams collection </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms5utils9vfs_event11new_enabledE">
+<span id="_CPPv3N7dolbyio5comms5utils9vfs_event11new_enabledE"></span><span id="_CPPv2N7dolbyio5comms5utils9vfs_event11new_enabledE"></span><span id="dolbyio::comms::utils::vfs_event::new_enabled__participant_track_mapCR"></span><span class="target" id="structdolbyio_1_1comms_1_1utils_1_1vfs__event_1a2358d1b39cbbbbc0b755cd9c513bd1f0"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">participant_track_map</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">new_enabled</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms5utils9vfs_event11new_enabledE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Newly enabled video streams collection. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms5utils9vfs_event12new_disabledE">
+<span id="_CPPv3N7dolbyio5comms5utils9vfs_event12new_disabledE"></span><span id="_CPPv2N7dolbyio5comms5utils9vfs_event12new_disabledE"></span><span id="dolbyio::comms::utils::vfs_event::new_disabled__participant_track_mapCR"></span><span class="target" id="structdolbyio_1_1comms_1_1utils_1_1vfs__event_1a6e846b338e8183ad9ca3bbf6ad269186"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">participant_track_map</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">new_disabled</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms5utils9vfs_event12new_disabledE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Newly disabled video streams collection. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms5utils9vfs_event17add_event_handlerER3sdkRR13event_handlerI9vfs_eventE">
+<span id="_CPPv3N7dolbyio5comms5utils9vfs_event17add_event_handlerER3sdkRR13event_handlerI9vfs_eventE"></span><span id="_CPPv2N7dolbyio5comms5utils9vfs_event17add_event_handlerER3sdkRR13event_handlerI9vfs_eventE"></span><span id="dolbyio::comms::utils::vfs_event::add_event_handler__sdkR.event_handler:vfs_event:RR"></span><span class="target" id="structdolbyio_1_1comms_1_1utils_1_1vfs__event_1aba20ea8ad0c8c0158a008d5d1f30701c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="common/event_handling.html#_CPPv4N7dolbyio5comms16event_handler_idE" title="dolbyio::comms::event_handler_id"><span class="n"><span class="pre">event_handler_id</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_event_handler</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sdk.html#_CPPv4N7dolbyio5comms3sdkE" title="dolbyio::comms::sdk"><span class="n"><span class="pre">sdk</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">the_sdk</span></span>, <a class="reference internal" href="common/event_handling.html#_CPPv4I0EN7dolbyio5comms13event_handlerE" title="dolbyio::comms::event_handler"><span class="n"><span class="pre">event_handler</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N7dolbyio5comms5utils9vfs_eventE" title="dolbyio::comms::utils::vfs_event"><span class="n"><span class="pre">vfs_event</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7dolbyio5comms5utils9vfs_event17add_event_handlerER3sdkRR13event_handlerI9vfs_eventE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Installs the event handler for the <a class="reference internal" href="#structdolbyio_1_1comms_1_1utils_1_1vfs__event"><span class="std std-ref">vfs_event</span></a>. </p>
+<p>The <a class="reference internal" href="#structdolbyio_1_1comms_1_1utils_1_1vfs__event"><span class="std std-ref">vfs_event</span></a> is a product of aggregating some other SDK events, and the event handler should be installed before joining the conference. Installing the event handler after joining the conference does not guarantee that the event will be generated correctly.</p>
+<p>The event handler can stay installed across conference joins and leaves.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>the_sdk</strong> – the SDK instance on which the event handler is added </p></li>
+<li><p><strong>callback</strong> – the callback to invoke when the <a class="reference internal" href="#structdolbyio_1_1comms_1_1utils_1_1vfs__event"><span class="std std-ref">vfs_event</span></a> is generated </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the event handler connection. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
 </section>
 <section id="video-frame-handling">
-<span id="vid-frame-handle"></span><h2>Video frame handling<a class="headerlink" href="#video-frame-handling" title="Permalink to this heading"></a></h2>
+<h2>Video frame handling<a class="headerlink" href="#video-frame-handling" title="Permalink to this heading"></a></h2>
 <p>#include &lt;dolbyio/comms/media_engine/media_engine.h&gt;</p>
 <p>The application can use the <a class="reference internal" href="#_CPPv4N7dolbyio5comms19video_frame_handlerE" title="dolbyio::comms::video_frame_handler"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">video</span> <span class="pre">frame</span> <span class="pre">handling</span></code></a> capabilities of the SDK to process captured <a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">VideoFrames</span></code></a>. The frame handler is an interface providing a <a class="reference internal" href="#_CPPv4N7dolbyio5comms10video_sinkE" title="dolbyio::comms::video_sink"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Sink</span></code></a> and a <a class="reference internal" href="#_CPPv4N7dolbyio5comms12video_sourceE" title="dolbyio::comms::video_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code></a>, thus inserting the frame handler into the video capture pipeline allows the application to receive, process, and then inject
 <a class="reference internal" href="#_CPPv4N7dolbyio5comms11video_frameE" title="dolbyio::comms::video_frame"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">VideoFrames</span></code></a> into the SDK. If you want to only provide frames to the SDK, the application only needs to implement the <a class="reference internal" href="#_CPPv4N7dolbyio5comms12video_sourceE" title="dolbyio::comms::video_source"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Video</span> <span class="pre">Source</span></code></a> portion of the handler.</p>

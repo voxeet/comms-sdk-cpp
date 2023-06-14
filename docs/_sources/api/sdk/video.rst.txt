@@ -3,9 +3,6 @@
 Video Service
 =============
 
-.. note::
-  The Video Service is considered to be in Beta phase on Linux systems.
-
 The Video Service allows managing the local participant's video stream as well as attaching a Video Sink to remote video streams.
 
 Video interface
@@ -27,8 +24,14 @@ The remote video API allows attaching a :cpp:class:`Video Sink <dolbyio::comms::
 
 .. _vid_frame_handle:
 
+Video Forwarding Startegy
+_________________________
+Using the :cpp:enum:`Video Forwarding Strategy <dolbyio::comms::video_forwarding_strategy>` option when :cpp:func:`joining a conference <dolbyio::comms::services::conference::join>` applications can set how many video streams they want forwarded to them. They can then :cpp:func:`subscribe <dolbyio::comms::utils::vfs_event::add_event_handler>` to the :cpp:class:`vfs event <dolbyio::comms::utils::vfs_event>` which can be used to know which participants streams are being forwarded to them at a given time and thus which streams to render.
+
+.. doxygenstruct:: dolbyio::comms::utils::vfs_event
+
 Video frame handling
---------------------
+---------------------
 #include <dolbyio/comms/media_engine/media_engine.h>
 
 The application can use the :cpp:class:`video frame handling <dolbyio::comms::video_frame_handler>` capabilities of the SDK to process captured :cpp:class:`VideoFrames <dolbyio::comms::video_frame>`. The frame handler is an interface providing a :cpp:class:`Video Sink <dolbyio::comms::video_sink>` and a :cpp:class:`Video Source <dolbyio::comms::video_source>`, thus inserting the frame handler into the video capture pipeline allows the application to receive, process, and then inject 
