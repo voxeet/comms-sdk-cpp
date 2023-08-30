@@ -1,4 +1,4 @@
-# cppsdk 2.6.0
+# cppsdk 2.5.7
 
 # Disclaimer
 
