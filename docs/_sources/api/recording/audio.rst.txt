@@ -4,9 +4,7 @@ Audio
 ======
 #include <dolbyio/comms/media_engine/media_engine.h>
 
-The interface for handling incoming audio frames. Applications must set listener which override the virtual function. The 
-:cpp:func:`handle_audio <dolbyio::comms::audio_sink::handle_audio>` function is called with the decoded PCM audio data. When inside a conference the 
-C++ SDK will receive a single audio stream which contains the mixed audio of all unmuted participants within that conference. The :cpp:class:`Audio Sink <dolbyio::comms::audio_sink>` must be provided to the SDK using the :cpp:func:`Set Audio Sink <dolbyio::comms::services::media_io::set_audio_sink>` function and this must be done before starting a conference. 
+The interface for handling incoming audio frames. Applications must set listener which override the virtual function. The :cpp:func:`handle_audio <dolbyio::comms::audio_sink::handle_audio>` function is called with the decoded PCM audio data. Inside a conference, the received audio depends on whether or not the conference is using :cpp:var:`Dolby Voice <dolbyio::comms::services::conference::conference_options::params::dolby_voice>`. When Dolby Voice is enabled, the SDK receives a single audio stream containing mixed audio of all unmuted participants. When Dolby Voice is disabled, the SDK receives separate audio streams from all unmuted participants. The :cpp:class:`Audio Sink <dolbyio::comms::audio_sink>` must be provided to the SDK using the :cpp:func:`Set Audio Sink <dolbyio::comms::services::media_io::set_audio_sink>` function and this must be done before starting a conference. 
 
 .. doxygenclass:: dolbyio::comms::audio_sink
         :project: C++ SDK

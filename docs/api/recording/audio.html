@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Audio &mdash; C++ SDK 2.6.1 documentation</title>
@@ -31,15 +31,11 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            C++ SDK
+            <a href="../../index.html" class="icon icon-home"> C++ SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -79,9 +75,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../media_io.html">Media IO API</a></li>
-      <li class="breadcrumb-item active">Audio</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../media_io.html">Media IO API</a> &raquo;</li>
+      <li>Audio</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/api/recording/audio.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,9 +90,7 @@
   <section id="audio">
 <span id="api-record-audio"></span><h1>Audio<a class="headerlink" href="#audio" title="Permalink to this heading"></a></h1>
 <p>#include &lt;dolbyio/comms/media_engine/media_engine.h&gt;</p>
-<p>The interface for handling incoming audio frames. Applications must set listener which override the virtual function. The
-<a class="reference internal" href="#_CPPv4N7dolbyio5comms10audio_sink12handle_audioERKNSt6stringERKNSt6stringEPK7int16_t6size_ti6size_t" title="dolbyio::comms::audio_sink::handle_audio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">handle_audio</span></code></a> function is called with the decoded PCM audio data. When inside a conference the
-C++ SDK will receive a single audio stream which contains the mixed audio of all unmuted participants within that conference. The <a class="reference internal" href="#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Audio</span> <span class="pre">Sink</span></code></a> must be provided to the SDK using the <a class="reference internal" href="../media_io.html#_CPPv4N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink" title="dolbyio::comms::services::media_io::set_audio_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Audio</span> <span class="pre">Sink</span></code></a> function and this must be done before starting a conference.</p>
+<p>The interface for handling incoming audio frames. Applications must set listener which override the virtual function. The <a class="reference internal" href="#_CPPv4N7dolbyio5comms10audio_sink12handle_audioERKNSt6stringERKNSt6stringEPK7int16_t6size_ti6size_t" title="dolbyio::comms::audio_sink::handle_audio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">handle_audio</span></code></a> function is called with the decoded PCM audio data. Inside a conference, the received audio depends on whether or not the conference is using <a class="reference internal" href="../sdk/conference.html#_CPPv4N7dolbyio5comms8services10conference18conference_options6params11dolby_voiceE" title="dolbyio::comms::services::conference::conference_options::params::dolby_voice"><code class="xref cpp cpp-var docutils literal notranslate"><span class="pre">Dolby</span> <span class="pre">Voice</span></code></a>. When Dolby Voice is enabled, the SDK receives a single audio stream containing mixed audio of all unmuted participants. When Dolby Voice is disabled, the SDK receives separate audio streams from all unmuted participants. The <a class="reference internal" href="#_CPPv4N7dolbyio5comms10audio_sinkE" title="dolbyio::comms::audio_sink"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Audio</span> <span class="pre">Sink</span></code></a> must be provided to the SDK using the <a class="reference internal" href="../media_io.html#_CPPv4N7dolbyio5comms8services8media_io14set_audio_sinkEP10audio_sink" title="dolbyio::comms::services::media_io::set_audio_sink"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Audio</span> <span class="pre">Sink</span></code></a> function and this must be done before starting a conference.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N7dolbyio5comms10audio_sinkE">
 <span id="_CPPv3N7dolbyio5comms10audio_sinkE"></span><span id="_CPPv2N7dolbyio5comms10audio_sinkE"></span><span id="dolbyio::comms::audio_sink"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__sink"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">audio_sink</span></span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10audio_sinkE" title="Permalink to this definition"></a><br /></dt>
@@ -109,7 +103,7 @@ C++ SDK will receive a single audio stream which contains the mixed audio of all
 <span id="_CPPv3N7dolbyio5comms10audio_sink12handle_audioERKNSt6stringERKNSt6stringEPK7int16_t6size_ti6size_t"></span><span id="_CPPv2N7dolbyio5comms10audio_sink12handle_audioERKNSt6stringERKNSt6stringEPK7int16_t6size_ti6size_t"></span><span id="dolbyio::comms::audio_sink::handle_audio__ssCR.ssCR.int16_tCP.s.i.s"></span><span class="target" id="classdolbyio_1_1comms_1_1audio__sink_1ab965afe7d6b21141a99900ed63eefb3c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_audio</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">stream_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">track_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_data</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sample_rate</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">channels</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N7dolbyio5comms10audio_sink12handle_audioERKNSt6stringERKNSt6stringEPK7int16_t6size_ti6size_t" title="Permalink to this definition"></a><br /></dt>
 <dd><p>The callback that is invoked when an audio frame is decoded and ready to be processed. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>stream_id</strong> – The media stream ID to which the audio track belongs. </p></li>
 <li><p><strong>track_id</strong> – The ID of the audio track. </p></li>
