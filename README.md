@@ -1,3 +1,5 @@
+# :warning: This repository is no longer maintained :warning:
+
 # Dolby.io Communications C++ SDK
 
 [Reference Documentation](https://api-references.dolby.io/comms-sdk-cpp/index.html)
